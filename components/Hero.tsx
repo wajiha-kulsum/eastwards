@@ -20,6 +20,7 @@ const { props: desktopProps } = getImageProps({
   height: 941,
   quality: 80,
   src: "/images/hero-tiles.png",
+});
 export function Hero() {
   return (
     <div className="mx-auto max-w-[1440px] px-6 pt-3 sm:px-10 lg:px-[5.35%]">
