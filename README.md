@@ -23,7 +23,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ```
 app/
-  layout.tsx        # fonts (Instrument Sans + Inter Display) & metadata
+  layout.tsx        # fonts (Instrument Sans + Inter Display), metadata & shared Footer
   globals.css       # design tokens: colors, fonts, radii
   page.tsx          # assembles the sections
 components/

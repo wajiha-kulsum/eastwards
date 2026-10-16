@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Instrument_Sans } from "next/font/google";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { Footer } from "@/components/Footer";
 import "./globals.css";
 
 /* Inter Display Bold — headlines + footer wordmark
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col">
         <SmoothScroll>{children}</SmoothScroll>
+        <Footer />
       </body>
     </html>
   );

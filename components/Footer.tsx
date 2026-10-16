@@ -1,9 +1,11 @@
 import { footer } from "@/lib/content";
-import { Reveal } from "@/components/ui/Reveal";
 
 export function Footer() {
+  /* w-full: as a flex item with mx-auto, the footer would otherwise
+     shrink-to-fit its own min-content — and the unbreakable wordmark
+     would inflate the page wider than the screen. */
   return (
-    <footer className="mx-auto mt-16 max-w-[1440px] overflow-hidden px-4 md:mt-20 md:px-[17px]">
+    <footer className="mx-auto mt-16 w-full max-w-[1440px] overflow-hidden px-4 md:mt-20 md:px-[17px]">
       <div className="grid grid-cols-2 gap-8 md:grid-cols-5 md:px-[73px]">
         {footer.columns.map((column) => (
           <nav
