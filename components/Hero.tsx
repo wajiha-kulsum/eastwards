@@ -30,7 +30,7 @@ export function Hero() {
           <picture className="absolute inset-0">
             <source media="(max-width: 639px)" srcSet={mobileProps.srcSet} />
             <img
-            fill
+              {...desktopProps}
             priority
             sizes="(min-width: 1440px) 1406px, 100vw"
             className="object-cover object-[72%_center] lg:object-center"
