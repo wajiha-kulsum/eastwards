@@ -17,51 +17,35 @@ export function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState("");
 
-  /* Phase-lock the grey dot field to the blue arrow's own 8px dot grid, so
-     both read as one continuous grid. Re-snap on any layout change —
-     a window resize is not the only thing that moves these elements. */
-  const heroRef = useRef<HTMLElement>(null);
-  const arrowRef = useRef<SVGSVGElement>(null);
+  /* Nudge the blue play mark onto the grey field's 8px lattice so every blue
+     dot lands exactly on a grey one and covers it — never more than one tile
+     of shift. Observes the band and the heading row (never the mark itself:
+     translate moves its box, which would re-trigger the observer forever). */
   const bandRef = useRef<HTMLDivElement>(null);
-  const h1Ref = useRef<HTMLHeadingElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const rowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const hero = heroRef.current;
-    const arrow = arrowRef.current;
     const band = bandRef.current;
-    const h1 = h1Ref.current;
-    if (!hero || !arrow || !band || !h1) return;
+    const logo = logoRef.current;
+    const row = rowRef.current;
+    if (!band || !logo || !row) return;
 
     const mod = (n: number) => ((n % 8) + 8) % 8;
+    /* Blue dots are 4px: their centres sit 2px inside the mark's box while
+       grey centres sit 4px inside a tile, so align centres, not box edges.
+       At 4px the blue fully covers the grey beneath — no fringe. */
+    const DOT_DELTA = 2;
     const snap = () => {
-      const heroBox = hero.getBoundingClientRect();
-      const arrowBox = arrow.getBoundingClientRect();
-      const h1Box = h1.getBoundingClientRect();
-      /* Pin the band's top edge to the arrow's top edge: no grey row may
-         render above the blue arrow's first dot row. */
-      band.style.top = `${arrowBox.top - heroBox.top}px`;
-      const bandTop = band.getBoundingClientRect().top - heroBox.top;
-      const gx = mod(arrowBox.left - heroBox.left);
-      hero.style.setProperty("--gx", `${gx}px`);
-      hero.style.setProperty(
-        "--gy",
-        `${mod(arrowBox.top - heroBox.top - bandTop)}px`
-      );
-      /* The heading's white plate must not chop dots: widen it leftwards so
-         its edge lands exactly between two columns of the dot lattice. */
-      const punch = mod(h1Box.left - heroBox.left - gx);
-      if (punch > 0.25) {
-        h1.style.boxShadow = `${-punch}px 0 0 0 #fff`;
-      } else {
-        h1.style.boxShadow = "none";
-      }
+      const bandBox = band.getBoundingClientRect();
+      const logoBox = logo.getBoundingClientRect();
+      logo.style.translate = `${-mod(logoBox.left - bandBox.left - DOT_DELTA)}px ${-mod(logoBox.top - bandBox.top - DOT_DELTA)}px`;
     };
 
     snap();
     const watch = new ResizeObserver(snap);
-    watch.observe(hero);
-    watch.observe(arrow);
     watch.observe(band);
+    watch.observe(row);
     window.addEventListener("resize", snap);
     return () => {
       watch.disconnect();
@@ -104,11 +88,8 @@ export function ContactPage() {
   return (
     <main className="flex-1 bg-white text-black">
       <div className="mx-auto max-w-[1440px] px-6 pb-16 pt-3 sm:px-10 lg:px-[5.35%]">
-        {/* Hero — grey dot field, phase-locked to the arrow's dot grid */}
-        <section
-          ref={heroRef}
-          className="relative min-h-[120px] overflow-hidden pt-3"
-        >
+        {/* Hero — grey dot field behind the heading */}
+        <section className="relative min-h-[120px] overflow-hidden pt-3">
           <div
             ref={bandRef}
             aria-hidden="true"
@@ -117,43 +98,33 @@ export function ContactPage() {
               backgroundImage:
                 "radial-gradient(circle, #d9dce3 1.2px, transparent 1.6px)",
               backgroundSize: "8px 8px",
-              backgroundPosition: "var(--gx, 0px) var(--gy, 0px)",
             }}
           />
 
-          {/* Heading and blue dotted arrow */}
-          <div className="relative flex items-center py-1.5">
-            <h1
-              ref={h1Ref}
-              className="bg-white pl-2 pr-2 text-[clamp(2.5rem,8vw,4.6rem)] font-bold uppercase leading-none tracking-[-0.03em]"
-            >
+          {/* Heading + blue dotted play mark echoing the eastwards logo */}
+          <div ref={rowRef} className="relative flex items-center py-1.5">
+            <h1 className="bg-white pl-2 pr-4 text-[clamp(2.5rem,8vw,4.6rem)] font-bold uppercase leading-none tracking-[-0.03em]">
               {contact.title}
             </h1>
-
-            <svg
-              ref={arrowRef}
+            <div
+              ref={logoRef}
               aria-hidden="true"
-              viewBox="0 0 24 56"
-              className="h-14 w-6 shrink-0 fill-[#2869ff]"
+              className="grid shrink-0 grid-cols-[repeat(4,4px)] gap-[4px] self-center"
             >
-              <g>
-                <circle cx="4" cy="4" r="1.5" />
-                <circle cx="4" cy="12" r="1.5" />
-                <circle cx="4" cy="20" r="1.5" />
-                <circle cx="4" cy="28" r="1.5" />
-                <circle cx="4" cy="36" r="1.5" />
-                <circle cx="4" cy="44" r="1.5" />
-                <circle cx="4" cy="52" r="1.5" />
-                <circle cx="12" cy="12" r="1.5" />
-                <circle cx="12" cy="20" r="1.5" />
-                <circle cx="12" cy="28" r="1.5" />
-                <circle cx="12" cy="36" r="1.5" />
-                <circle cx="12" cy="44" r="1.5" />
-                <circle cx="20" cy="20" r="1.5" />
-                <circle cx="20" cy="28" r="1.5" />
-                <circle cx="20" cy="36" r="1.5" />
-              </g>
-            </svg>
+              {Array.from({ length: 28 }).map((_, i) => {
+                const col = i % 4;
+                const row = Math.floor(i / 4);
+                const blue = row >= col && row <= 6 - col;
+                return (
+                  <span
+                    key={i}
+                    className={`h-1 w-1 rounded-full ${
+                      blue ? "bg-[#2869ff]" : ""
+                    }`}
+                  />
+                );
+              })}
+            </div>
           </div>
 
           {/* Supporting copy */}
