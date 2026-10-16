@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+/* Eastwards design tokens — extracted from the approved Paper design
+   (file 01M4QVJZFVVKBY7J2CZVAB4GEE) */
+@theme {
+  --color-primary: #2868ff; /* brand blue: CTA, labels, accents */
+  --color-ink: #3c3f44; /* headlines, card text */
+  --color-body: #757575; /* hero subtext, muted */
+  --color-statement: #4b4b4b; /* big statement text */
+  --color-faint: #868686; /* blog secondary text */
+  --color-subtle: #5c5c5c; /* footer small text */
+  --color-surface: #fafafa; /* card backgrounds */
+  --color-line: #eeeeee; /* card borders */
+  --color-line-strong: #d9d9d9; /* panel borders, hairlines */
+
+  --font-sans: var(--font-instrument-sans), system-ui, sans-serif;
+  --font-display: var(--font-inter-display), system-ui, sans-serif;
+
+  --radius-card: 35px; /* service cards */
+  --radius-panel: 30px; /* hero panel, value cards, blog panel */
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  /* lock horizontal wiggle entirely — the page scrolls vertically only */
+  overflow-x: clip;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
