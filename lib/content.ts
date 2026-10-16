@@ -183,3 +183,43 @@ export const footer = {
     "Copyright © 2026 Eastwards Consulting Pte Ltd. All Rights Reserved",
   wordmark: "Eastwards",
 } as const;
+
+export const partners = {
+  title: "Partners",
+  lede: "We collaborate with industry leaders across Cloud, Security, Data, and Emerging Tech.",
+  intro:
+    "At Eastwards, we believe that the best solutions are built on a foundation of world-class technology.",
+  ecosystem:
+    "To deliver “Intelligent Growth”, we have cultivated a robust ecosystem of strategic alliances with global technology leaders. These partnerships allow us to provide our clients with validated architectures, early access to emerging features, and deep technical support that ensures long-term platform resilience.",
+  why: {
+    title: "Why Our Partnerships Matter to You",
+    subtitle:
+      "We don’t just use these tools; we master them. Our alliance network is designed to provide three core advantages",
+    advantages: [
+      {
+        title: "Integrated Solutions",
+        body: "We ensure that different technologies work seamlessly together within your specific environment.",
+      },
+      {
+        title: "Validated Excellence",
+        body: "Our team maintains up-to-date certifications and training directly from our partners, ensuring we implement best practices every time.",
+      },
+      {
+        title: "Accelerated Delivery",
+        body: "Leveraging partner-backed frameworks allows us to move from discovery to production faster, reducing your time-to-market.",
+      },
+    ],
+  },
+  join: {
+    title: "Interested in Partnering with Eastwards?",
+    subtitle:
+      "We are always looking to expand our ecosystem with innovative technology providers and service specialists who share our commitment to engineering rigor and client success.",
+    points: [
+      "Collaborate on complex enterprise transformations.",
+      "Integrate your technology into high-growth digital platforms.",
+      "Expand your reach within the Singapore and global markets.",
+    ],
+    cta: "Join our network",
+    href: "mailto:partners@eastwards.co",
+  },
+} as const;
