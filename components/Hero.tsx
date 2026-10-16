@@ -21,6 +21,7 @@ const { props: desktopProps } = getImageProps({
   quality: 80,
   src: "/images/hero-tiles.png",
 });
+
 export function Hero() {
   return (
     <div className="mx-auto max-w-[1440px] px-6 pt-3 sm:px-10 lg:px-[5.35%]">
@@ -33,8 +34,14 @@ export function Hero() {
               {...desktopProps}
               alt={common.alt}
               style={{
-            className="object-cover object-[72%_center] lg:object-center"
-          />
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center",
+              }}
+            />
+          </picture>
+
           {/* readability gradient on small screens */}
           <div
             className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/40 to-transparent lg:hidden"
