@@ -37,10 +37,10 @@ export function ContactForm() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h3 className="mt-6 font-display text-2xl font-bold text-neutral-900">
+          <h3 className="mt-6 text-[20px] font-semibold text-neutral-900">
             Message Sent Successfully
           </h3>
-          <p className="mt-2 max-w-sm text-[15px] text-neutral-600">
+          <p className="mt-2 max-w-sm text-[14px] text-neutral-600">
             Thank you for reaching out. A member of our leadership or technical team will be in touch within one business day.
           </p>
           <button
@@ -61,7 +61,7 @@ export function ContactForm() {
             <div>
               <label
                 htmlFor="firstName"
-                className="block text-[15px] font-semibold text-neutral-800"
+                className="block text-[14px] font-semibold text-neutral-800"
               >
                 First Name
               </label>
@@ -72,14 +72,14 @@ export function ContactForm() {
                 placeholder="John"
                 value={formData.firstName}
                 onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                className="mt-2 w-full rounded-[14px] bg-[#EFEFF1] px-4 py-3.5 text-[15px] text-neutral-900 placeholder:text-neutral-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/40 transition-colors"
+                className="mt-2 w-full rounded-[14px] bg-[#EFEFF1] px-4 py-3.5 text-[14px] text-neutral-900 placeholder:text-neutral-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/40 transition-colors"
               />
             </div>
 
             <div>
               <label
                 htmlFor="lastName"
-                className="block text-[15px] font-semibold text-neutral-800"
+                className="block text-[14px] font-semibold text-neutral-800"
               >
                 Last Name
               </label>
@@ -90,7 +90,7 @@ export function ContactForm() {
                 placeholder="Doe"
                 value={formData.lastName}
                 onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                className="mt-2 w-full rounded-[14px] bg-[#EFEFF1] px-4 py-3.5 text-[15px] text-neutral-900 placeholder:text-neutral-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/40 transition-colors"
+                className="mt-2 w-full rounded-[14px] bg-[#EFEFF1] px-4 py-3.5 text-[14px] text-neutral-900 placeholder:text-neutral-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/40 transition-colors"
               />
             </div>
           </div>
@@ -100,7 +100,7 @@ export function ContactForm() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-[15px] font-semibold text-neutral-800"
+                className="block text-[14px] font-semibold text-neutral-800"
               >
                 Email
               </label>
@@ -111,14 +111,14 @@ export function ContactForm() {
                 placeholder="yourmail@gmail.com"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="mt-2 w-full rounded-[14px] bg-[#EFEFF1] px-4 py-3.5 text-[15px] text-neutral-900 placeholder:text-neutral-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/40 transition-colors"
+                className="mt-2 w-full rounded-[14px] bg-[#EFEFF1] px-4 py-3.5 text-[14px] text-neutral-900 placeholder:text-neutral-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/40 transition-colors"
               />
             </div>
 
             <div>
               <label
                 htmlFor="company"
-                className="block text-[15px] font-semibold text-neutral-800"
+                className="block text-[14px] font-semibold text-neutral-800"
               >
                 Company
               </label>
@@ -128,7 +128,7 @@ export function ContactForm() {
                 placeholder="Company Name"
                 value={formData.company}
                 onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                className="mt-2 w-full rounded-[14px] bg-[#EFEFF1] px-4 py-3.5 text-[15px] text-neutral-900 placeholder:text-neutral-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/40 transition-colors"
+                className="mt-2 w-full rounded-[14px] bg-[#EFEFF1] px-4 py-3.5 text-[14px] text-neutral-900 placeholder:text-neutral-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/40 transition-colors"
               />
             </div>
           </div>
@@ -148,7 +148,7 @@ export function ContactForm() {
               placeholder="Your Message Here"
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              className="mt-2 w-full resize-y rounded-[14px] bg-[#EFEFF1] px-4 py-3.5 text-[15px] text-neutral-900 placeholder:text-neutral-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/40 transition-colors"
+              className="mt-2 w-full resize-y rounded-[14px] bg-[#EFEFF1] px-4 py-3.5 text-[14px] text-neutral-900 placeholder:text-neutral-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/40 transition-colors"
             />
           </div>
 
@@ -157,7 +157,7 @@ export function ContactForm() {
             <button
               type="submit"
               disabled={status === "submitting"}
-              className="inline-flex h-[52px] items-center gap-2 rounded-full bg-[#333338] px-8 text-[16px] font-semibold text-white shadow-sm transition-all hover:bg-neutral-900 hover:brightness-110 active:scale-[0.98] disabled:opacity-60"
+              className="inline-flex h-[52px] items-center gap-2 rounded-full bg-[#333338] px-8 text-[15px] font-semibold text-white shadow-sm transition-all hover:bg-neutral-900 hover:brightness-110 active:scale-[0.98] disabled:opacity-60"
             >
               {status === "submitting" ? (
                 "Sending..."
