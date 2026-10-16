@@ -44,35 +44,55 @@ function CardCarousel({ progress }: { progress: MotionValue<number> }) {
 
   // re-measure on resize: start anchor + how far one full set must travel
   useEffect(() => {
+    let throttle = false;
     const measure = () => {
-      setMetrics({
-        start: window.innerWidth * START_FRACTION,
-        travel: setWidth,
-      });
+      if (throttle) return;
+      throttle = true;
+      setTimeout(() => {
+        throttle = false;
+        setMetrics({
+          start: window.innerWidth * START_FRACTION,
+          travel: setWidth,
+        });
+      }, 150);
     };
     measure();
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
   }, [setWidth]);
 
-  // gentle auto-drift right-to-left, beginning after the delay
+  // gentle auto-drift right-to-left, beginning after the delay. Runs only
+  // while the carousel is on screen — RGlobal rAF loops keep the smooth
+  // scroll from ever resting.
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
     const startedAt = performance.now();
     let last = 0;
     let raf = 0;
+    let inView = true;
 
     const tick = (t: number) => {
       const dt = last ? Math.min(t - last, 50) : 16;
       last = t;
-      if (!paused.current && t - startedAt > DRIFT_DELAY_MS) {
+      if (inView && !paused.current && t - startedAt > DRIFT_DELAY_MS) {
         drift.set(drift.get() - (0.5 * dt) / 16.67);
       }
-      raf = requestAnimationFrame(tick);
+      raf = inView ? requestAnimationFrame(tick) : 0;
     };
     raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+
+    const observer = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      last = 0;
+      if (inView && raf === 0) raf = requestAnimationFrame(tick);
+    });
+    if (wrapRef.current) observer.observe(wrapRef.current);
+
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(raf);
+    };
   }, [drift]);
 
   // position = mid-screen anchor − scroll traversal − accumulated drift,
@@ -107,7 +127,7 @@ function CardCarousel({ progress }: { progress: MotionValue<number> }) {
       </div>
 
       {/* full-bleed scroll-driven track, first card anchored mid-screen */}
-      <div className="overflow-hidden pb-2">
+      <div ref={wrapRef} className="overflow-hidden pb-2">
         <motion.div
           ref={trackRef}
           style={{ x, gap: GAP }}
@@ -155,7 +175,7 @@ export function Features() {
   return (
     <section
       ref={sectionRef}
-      className="mx-auto mt-16 max-w-[1440px] overflow-hidden px-4 md:mt-[72px] md:px-[17px]"
+      className="mx-auto mt-14 max-w-[1440px] overflow-hidden px-6 sm:px-10 md:mt-16 lg:px-[5.35%]"
     >
       <div className="grid gap-8 md:grid-cols-[46.5%_1fr]">
         <h2 className="text-2xl font-semibold leading-8 tracking-tight text-ink sm:text-[28px]">

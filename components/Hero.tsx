@@ -6,10 +6,10 @@ import { hero } from "@/lib/content";
 
 export function Hero() {
   return (
-    <section className="mx-auto max-w-[1440px] px-4 pb-4 md:px-[17px] md:pb-[18px]">
+    <div className="mx-auto max-w-[1440px] px-6 pt-3 sm:px-10 lg:px-[5.35%]">
       <Reveal>
-        {/* navbar (65px) + funnel gap + hero panel = exactly one viewport */}
-        <div className="relative h-[calc(100svh-81px)] min-h-[420px] overflow-hidden rounded-[28px]">
+        {/* navbar (68px) + hero panel = exactly one viewport */}
+        <div className="relative h-[calc(100svh-88px)] min-h-[420px] overflow-hidden rounded-[28px]">
           <Image
             src={hero.image}
             alt="Glossy blue 3D glass tiles array"
@@ -28,11 +28,11 @@ export function Hero() {
               Technology that moves
               <span className="block text-primary">business forward</span>
             </h1>
-            <p className="mt-4 max-w-[380px] text-[15px] font-semibold leading-[17px] text-body md:mt-6">
+            <p className="mt-4 max-w-[380px] text-[15px] font-semibold leading-[1.15] text-body md:mt-6">
               {hero.subtext}
             </p>
             <PrimaryButton
-              href="#"
+              href="/"
               className="mt-5 h-[36px] gap-2 px-[22px] text-[12px] md:mt-8 md:h-[42px] md:gap-3 md:px-[30px] md:text-[14px]"
             >
               {hero.cta}
@@ -41,6 +41,6 @@ export function Hero() {
           </div>
         </div>
       </Reveal>
-    </section>
+    </div>
   );
 }
