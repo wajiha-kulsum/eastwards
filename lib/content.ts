@@ -3,9 +3,9 @@
    backend/CMS integration seamless. */
 
 export const navLinks = [
+  { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Partners", href: "/partners" },
-  { label: "Insights", href: "/insights" },
   { label: "About", href: "/about" },
   { label: "Contact Us", href: "/contact" },
 ] as const;
@@ -221,5 +221,139 @@ export const partners = {
     ],
     cta: "Join our network",
     href: "mailto:partners@eastwards.co",
+  },
+} as const;
+
+export const about = {
+  title: "About Us",
+  lede: "Guiding Enterprises Toward Intelligent Growth",
+  intro:
+    "At Eastwards, we help enterprises transform digital complexity into measurable advantage. Headquartered in Singapore with a global delivery footprint, we combine strategic insight with hands-on engineering to design, secure, and operate the platforms that power modern business.",
+  promise: {
+    label: "Our promise",
+    points: [
+      "Faster time to market",
+      "Lower operational risk",
+      "Sustained cost efficiency",
+    ],
+    cta: { label: "Contact Us", href: "/contact" },
+  },
+  mission: {
+    title: "Mission",
+    body: "To make digital transformation predictable, secure, and outcome-driven. We view transformation as a continuous capability, not a one-off project. By aligning engineering rigor with business priorities, we deliver measurable ROI and long-term resilience.",
+    link: { label: "Discover now", href: "#solutions" },
+  },
+  foundation: {
+    title: "Our Foundation",
+    body: "Founded by senior IT and delivery leaders with over 20 years of experience, Eastwards bridges legacy operations with future-ready innovation. We blend deep technical expertise with pragmatic delivery practices so clients can reduce risk, scale reliably, and unlock new revenue streams.",
+    link: { label: "Discover now", href: "#solutions" },
+  },
+  solutions: {
+    title: "Comprehensive Digital Solutions",
+    groups: [
+      {
+        title: "Innovation & Engineering",
+        items: [
+          {
+            title: "Application Development & Product Engineering",
+            body: "Cloud-native web and mobile platforms, from discovery to continuous delivery.",
+          },
+          {
+            title: "Quantum Computing Advisory",
+            body: "Feasibility studies and strategic roadmaps for organizations exploring quantum advantage.",
+          },
+          {
+            title: "Data & Artificial Intelligence",
+            body: "Data engineering, analytics, and ML operationalization to turn information into strategic assets.",
+          },
+        ],
+      },
+      {
+        title: "Resilience & Security",
+        items: [
+          {
+            title: "Cybersecurity Services",
+            body: "Risk assessments, security engineering, and compliance built into delivery.",
+          },
+          {
+            title: "Infrastructure & Cloud",
+            body: "Resilient migrations, hybrid architectures, and cost optimization.",
+          },
+          {
+            title: "Modern Device Management",
+            body: "Secure remote work enablement and unified endpoint management.",
+          },
+        ],
+      },
+      {
+        title: "Delivery & Talent",
+        items: [
+          {
+            title: "Projects & Professional Services",
+            body: "Program management and solution architecture to ensure projects land on time and on budget.",
+          },
+          {
+            title: "IT Staffing Services",
+            body: "Flexible access to vetted technical talent for specialized or long-term needs.",
+          },
+          {
+            title: "Digital Support Services",
+            body: "24/7 managed services and UX operations to keep systems reliable and user experiences consistent.",
+          },
+        ],
+      },
+    ],
+  },
+  approach: {
+    title: "Our Approach – Your Partner in Growth",
+    points: [
+      {
+        title: "Client First",
+        body: "Engagements begin with your strategic goals and measurable outcomes.",
+      },
+      {
+        title: "Agile & Iterative",
+        body: "Continuous feedback and incremental delivery keep projects aligned with evolving priorities.",
+      },
+      {
+        title: "Engineering Rigor",
+        body: "Automated testing, CI/CD, and Infrastructure as Code ensure quality and repeatability.",
+      },
+      {
+        title: "Collaborative Partnership",
+        body: "We embed with your teams to transfer knowledge and build long-term capability.",
+      },
+    ],
+  },
+  why: {
+    title: "Why Organizations Choose Eastwards",
+    points: [
+      {
+        title: "Proven Expertise",
+        body: "Decades of leadership in large-scale transformations across industries.",
+      },
+      {
+        title: "Outcome Focused",
+        body: "Success measured by reduced cycle time, improved uptime, and demonstrable ROI.",
+      },
+      {
+        title: "Security by Design",
+        body: "Compliance and security embedded from day one.",
+      },
+      {
+        title: "Global Reach, Local Sensibility",
+        body: "Strategic hub in Singapore with delivery tailored to local markets.",
+      },
+      {
+        title: "Ecosystem Alliances",
+        body: "Partnerships with leading technology vendors for validated, high-performance solutions.",
+      },
+    ],
+  },
+  next: {
+    title: "Take the Next Step",
+    lead: "Book a Quantum Readiness Review",
+    body: "A 30-minute assessment with quick wins and a 90-day roadmap.",
+    cta: { label: "Contact Us", href: "/contact" },
   },
 } as const;

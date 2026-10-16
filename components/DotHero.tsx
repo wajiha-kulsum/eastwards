@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { partners } from "@/lib/content";
 
-/* Hero band + blue dotted play mark, matching the contact page hero.
-   The mark's translate is nudged so its dots land on the field's 8px
-   lattice — blue dots are 4px vs grey centres at +4px, so centres align,
-   not box edges. Never more than one tile of shift. */
-export function PartnersHero() {
+/* The dot-field hero shared by Contact, Partners and About: CSS grey dot
+   lattice behind the heading, plus the blue dotted play mark echoing the
+   eastwards logo. Mark translate is nudged so its dots land on the field's
+   8px lattice — blue dots are 4px vs grey centres at +4px, so centres align,
+   not box edges. Observes the band and heading row (never the mark itself:
+   translate moves its box, which would re-trigger the observer forever). */
+export default function DotHero({ title, lede }: { title: string; lede: string }) {
   const bandRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
   const rowRef = useRef<HTMLDivElement>(null);
@@ -51,7 +52,7 @@ export function PartnersHero() {
 
       <div ref={rowRef} className="relative flex items-center py-1.5">
         <h1 className="bg-white pl-2 pr-4 text-[clamp(2.5rem,8vw,4.6rem)] font-bold uppercase leading-none tracking-[-0.03em]">
-          {partners.title}
+          {title}
         </h1>
         <div
           ref={logoRef}
@@ -65,15 +66,16 @@ export function PartnersHero() {
             return (
               <span
                 key={i}
-                className={`h-1 w-1 rounded-full ${blue ? "bg-primary" : ""}`}
+                className={`h-1 w-1 rounded-full ${blue ? "bg-[#2869ff]" : ""}`}
               />
             );
           })}
         </div>
       </div>
 
+      {/* Supporting copy */}
       <p className="relative mb-3.5 ml-auto mt-7 max-w-[235px] bg-white px-2.5 py-1.5 text-right text-[0.8rem] leading-[1.35] text-[#1a1a1a] max-sm:mt-5 max-sm:max-w-none">
-        {partners.lede}
+        {lede}
       </p>
     </section>
   );

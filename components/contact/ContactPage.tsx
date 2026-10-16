@@ -1,7 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef, type FormEvent } from "react";
+"use client";
+
+import { useState, type FormEvent } from "react";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import DotHero from "@/components/DotHero";
 import { contact } from "@/lib/content";
 
 export function ContactPage() {
@@ -16,42 +19,6 @@ export function ContactPage() {
 
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState("");
-
-  /* Nudge the blue play mark onto the grey field's 8px lattice so every blue
-     dot lands exactly on a grey one and covers it — never more than one tile
-     of shift. Observes the band and the heading row (never the mark itself:
-     translate moves its box, which would re-trigger the observer forever). */
-  const bandRef = useRef<HTMLDivElement>(null);
-  const logoRef = useRef<HTMLDivElement>(null);
-  const rowRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const band = bandRef.current;
-    const logo = logoRef.current;
-    const row = rowRef.current;
-    if (!band || !logo || !row) return;
-
-    const mod = (n: number) => ((n % 8) + 8) % 8;
-    /* Blue dots are 4px: their centres sit 2px inside the mark's box while
-       grey centres sit 4px inside a tile, so align centres, not box edges.
-       At 4px the blue fully covers the grey beneath — no fringe. */
-    const DOT_DELTA = 2;
-    const snap = () => {
-      const bandBox = band.getBoundingClientRect();
-      const logoBox = logo.getBoundingClientRect();
-      logo.style.translate = `${-mod(logoBox.left - bandBox.left - DOT_DELTA)}px ${-mod(logoBox.top - bandBox.top - DOT_DELTA)}px`;
-    };
-
-    snap();
-    const watch = new ResizeObserver(snap);
-    watch.observe(band);
-    watch.observe(row);
-    window.addEventListener("resize", snap);
-    return () => {
-      watch.disconnect();
-      window.removeEventListener("resize", snap);
-    };
-  }, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -89,49 +56,7 @@ export function ContactPage() {
     <main className="flex-1 bg-white text-black">
       <div className="mx-auto max-w-[1440px] px-6 pb-16 pt-3 sm:px-10 lg:px-[5.35%]">
         {/* Hero — grey dot field behind the heading */}
-        <section className="relative min-h-[120px] overflow-hidden pt-3">
-          <div
-            ref={bandRef}
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 bottom-[20px] top-[27px]"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle, #d9dce3 1.2px, transparent 1.6px)",
-              backgroundSize: "8px 8px",
-            }}
-          />
-
-          {/* Heading + blue dotted play mark echoing the eastwards logo */}
-          <div ref={rowRef} className="relative flex items-center py-1.5">
-            <h1 className="bg-white pl-2 pr-4 text-[clamp(2.5rem,8vw,4.6rem)] font-bold uppercase leading-none tracking-[-0.03em]">
-              {contact.title}
-            </h1>
-            <div
-              ref={logoRef}
-              aria-hidden="true"
-              className="grid shrink-0 grid-cols-[repeat(4,4px)] gap-[4px] self-center"
-            >
-              {Array.from({ length: 28 }).map((_, i) => {
-                const col = i % 4;
-                const row = Math.floor(i / 4);
-                const blue = row >= col && row <= 6 - col;
-                return (
-                  <span
-                    key={i}
-                    className={`h-1 w-1 rounded-full ${
-                      blue ? "bg-[#2869ff]" : ""
-                    }`}
-                  />
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Supporting copy */}
-          <p className="relative mb-3.5 ml-auto mt-7 max-w-[235px] bg-white px-2.5 py-1.5 text-right text-[0.8rem] leading-[1.35] text-[#1a1a1a] max-sm:mt-5 max-sm:max-w-none">
-            {contact.subtitle}
-          </p>
-        </section>
+        <DotHero title={contact.title} lede={contact.subtitle} />
 
         {/* Contact information + form */}
         <section className="mt-9 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.06fr]">
