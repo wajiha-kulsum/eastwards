@@ -27,7 +27,7 @@ export function Hero() {
       <Reveal>
         {/* navbar (68px) + hero panel = exactly one viewport */}
         <div className="relative h-[calc(100svh-88px)] min-h-[420px] overflow-hidden rounded-[28px]">
-          <Image
+          <picture className="absolute inset-0">
             src={hero.image}
             alt="Glossy blue 3D glass tiles array"
             fill
