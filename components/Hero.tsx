@@ -16,6 +16,7 @@ const { props: mobileProps } = getImageProps({
 });
 const { props: desktopProps } = getImageProps({
   ...common,
+  width: 1672,
 export function Hero() {
   return (
     <div className="mx-auto max-w-[1440px] px-6 pt-3 sm:px-10 lg:px-[5.35%]">
