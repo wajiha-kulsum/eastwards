@@ -32,7 +32,7 @@ export function Hero() {
             <img
               {...desktopProps}
               alt={common.alt}
-            sizes="(min-width: 1440px) 1406px, 100vw"
+              style={{
             className="object-cover object-[72%_center] lg:object-center"
           />
           {/* readability gradient on small screens */}
