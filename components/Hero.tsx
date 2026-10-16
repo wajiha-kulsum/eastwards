@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { getImageProps } from "next/image";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArrowUpRight } from "@/components/ui/icons";
