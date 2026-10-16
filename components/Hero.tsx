@@ -9,6 +9,7 @@ import { hero } from "@/lib/content";
 const common = { alt: "Glossy blue 3D glass tiles array", sizes: "(max-width: 639px) calc(100vw - 48px), calc(100vw - 152px)" };
 const { props: mobileProps } = getImageProps({
   ...common,
+  width: 941,
 export function Hero() {
   return (
     <div className="mx-auto max-w-[1440px] px-6 pt-3 sm:px-10 lg:px-[5.35%]">
