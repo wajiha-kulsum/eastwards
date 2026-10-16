@@ -145,7 +145,7 @@ export function ContactPage() {
 
             {/* Question and pitch in one text block — same size and weight
                 throughout, one break after the first question mark */}
-            <p className="relative mb-4 max-w-[600px] text-[clamp(19px,4.2vw,30px)] font-medium leading-[1.2] tracking-[-0.04em] text-ink">
+            <p className="relative mb-4 max-w-[600px] text-[clamp(17px,3.6vw,26px)] font-medium leading-[1.2] tracking-[-0.04em] text-ink">
               {contact.headline.split("?")[0]}?
               <br />
               <span className="text-[#777777]">
@@ -211,13 +211,13 @@ export function ContactPage() {
           {/* Contact form */}
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col rounded-[24px] border border-[#e9e9e9] bg-[#fafafa] p-3.5 sm:p-4"
+            className="flex flex-col rounded-[24px] border border-[#e9e9e9] bg-[#fafafa] p-3 sm:p-3.5"
           >
-            <div className="flex-1 grid grid-cols-1 gap-x-4 gap-y-2.5 sm:grid-cols-2">
+            <div className="flex-1 grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
               <div>
                 <label
                   htmlFor="firstName"
-                  className="mb-1 block text-[12px] font-medium tracking-tight"
+                  className="mb-1 block text-[11px] font-medium tracking-tight"
                 >
                   First Name
                 </label>
@@ -228,14 +228,14 @@ export function ContactPage() {
                   autoComplete="given-name"
                   placeholder="John"
                   required
-                  className="h-[30px] w-full rounded-[9px] border border-transparent bg-[#ededed] px-3 text-[11px] outline-none transition placeholder:text-[#858585] focus:border-[#2869ff] focus:bg-white"
+                  className="h-[28px] w-full rounded-[9px] border border-transparent bg-[#ededed] px-3 text-[11px] outline-none transition placeholder:text-[#858585] focus:border-[#2869ff] focus:bg-white"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="lastName"
-                  className="mb-1 block text-[12px] font-medium tracking-tight"
+                  className="mb-1 block text-[11px] font-medium tracking-tight"
                 >
                   Last Name
                 </label>
@@ -246,14 +246,14 @@ export function ContactPage() {
                   autoComplete="family-name"
                   placeholder="Doe"
                   required
-                  className="h-[30px] w-full rounded-[9px] border border-transparent bg-[#ededed] px-3 text-[11px] outline-none transition placeholder:text-[#858585] focus:border-[#2869ff] focus:bg-white"
+                  className="h-[28px] w-full rounded-[9px] border border-transparent bg-[#ededed] px-3 text-[11px] outline-none transition placeholder:text-[#858585] focus:border-[#2869ff] focus:bg-white"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="email"
-                  className="mb-1 block text-[12px] font-medium tracking-tight"
+                  className="mb-1 block text-[11px] font-medium tracking-tight"
                 >
                   Email
                 </label>
@@ -264,14 +264,14 @@ export function ContactPage() {
                   autoComplete="email"
                   placeholder="yourmail@gmail.com"
                   required
-                  className="h-[30px] w-full rounded-[9px] border border-transparent bg-[#ededed] px-3 text-[11px] outline-none transition placeholder:text-[#858585] focus:border-[#2869ff] focus:bg-white"
+                  className="h-[28px] w-full rounded-[9px] border border-transparent bg-[#ededed] px-3 text-[11px] outline-none transition placeholder:text-[#858585] focus:border-[#2869ff] focus:bg-white"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="company"
-                  className="mb-1 block text-[12px] font-medium tracking-tight"
+                  className="mb-1 block text-[11px] font-medium tracking-tight"
                 >
                   Company
                 </label>
@@ -281,14 +281,14 @@ export function ContactPage() {
                   type="text"
                   autoComplete="organization"
                   placeholder="Company Name"
-                  className="h-[30px] w-full rounded-[9px] border border-transparent bg-[#ededed] px-3 text-[11px] outline-none transition placeholder:text-[#858585] focus:border-[#2869ff] focus:bg-white"
+                  className="h-[28px] w-full rounded-[9px] border border-transparent bg-[#ededed] px-3 text-[11px] outline-none transition placeholder:text-[#858585] focus:border-[#2869ff] focus:bg-white"
                 />
               </div>
 
               <div className="sm:col-span-2">
                 <label
                   htmlFor="message"
-                  className="mb-1 block text-[12px] font-medium tracking-tight"
+                  className="mb-1 block text-[11px] font-medium tracking-tight"
                 >
                   Message
                 </label>
@@ -298,7 +298,7 @@ export function ContactPage() {
                   rows={3}
                   placeholder="Your Message Here"
                   required
-                  className="min-h-[70px] w-full resize-y rounded-[9px] border border-transparent bg-[#ededed] px-3 py-2.5 text-[11px] outline-none transition placeholder:text-[#858585] focus:border-[#2869ff] focus:bg-white"
+                  className="min-h-[64px] w-full resize-y rounded-[9px] border border-transparent bg-[#ededed] px-3 py-2.5 text-[11px] outline-none transition placeholder:text-[#858585] focus:border-[#2869ff] focus:bg-white"
                 />
               </div>
             </div>
@@ -315,10 +315,10 @@ export function ContactPage() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="ml-auto inline-flex min-h-[40px] items-center gap-2 rounded-full bg-[#4a4a4a] px-4 py-2 text-[12px] font-semibold text-white transition hover:bg-black disabled:cursor-not-allowed disabled:opacity-60"
+                className="ml-auto inline-flex min-h-[36px] items-center gap-2 rounded-full bg-[#4a4a4a] px-4 py-2 text-[11px] font-semibold text-white transition hover:bg-black disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {submitting ? "Sending..." : "Send Message"}
-                <ArrowUpRight size={15} />
+                <ArrowUpRight size={14} />
               </button>
             </div>
           </form>
