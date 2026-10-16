@@ -5,6 +5,7 @@ import { ArrowUpRight } from "@/components/ui/icons";
 import { hero } from "@/lib/content";
 
 /* Art-directed hero art: the portrait crop below sm, the landscape
+   rendition everywhere else — one optimized rendition set per art. */
 export function Hero() {
   return (
     <div className="mx-auto max-w-[1440px] px-6 pt-3 sm:px-10 lg:px-[5.35%]">
