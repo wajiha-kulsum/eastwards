@@ -29,7 +29,7 @@ export function Hero() {
         <div className="relative h-[calc(100svh-88px)] min-h-[420px] overflow-hidden rounded-[28px]">
           <picture className="absolute inset-0">
             <source media="(max-width: 639px)" srcSet={mobileProps.srcSet} />
-            alt="Glossy blue 3D glass tiles array"
+            <img
             fill
             priority
             sizes="(min-width: 1440px) 1406px, 100vw"
