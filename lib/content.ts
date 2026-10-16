@@ -16,6 +16,7 @@ export const hero = {
     "We help businesses navigate complexity and move forward with the right technology, engineering, and expertise.",
   cta: "Find your solution",
   image: "/images/hero-tiles.png",
+  mobileImage: "/images/hero-mobile.png",
 } as const;
 
 export const features = {
