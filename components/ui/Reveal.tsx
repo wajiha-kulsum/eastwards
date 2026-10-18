@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
 
 type RevealProps = {
@@ -11,11 +11,12 @@ type RevealProps = {
 
 /* Fade-up on scroll into view. Small offset, no bounce — stays quiet. */
 export function Reveal({ children, delay = 0, className }: RevealProps) {
+  const reduce = useReducedMotion();
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={reduce ? { opacity: 1 } : { opacity: 0, y: 10 }}
+      whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.45, delay, ease: "easeOut" }}
     >
