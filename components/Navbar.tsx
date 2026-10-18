@@ -49,7 +49,7 @@ export function Navbar() {
             className="inline-flex h-8 items-center gap-3 rounded-full bg-[#2868ff] py-[3px] pl-[14px] pr-[4px] text-[13px] font-medium text-white transition-colors hover:bg-[#1555ed] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2868ff] lg:h-9 lg:pl-[16px] lg:pr-[5px] lg:text-[14px]"
           >
             Login
-            <span className="flex h-[24px] w-[24px] items-center justify-center rounded-full bg-white">
+            <span className="flex h-[24px] w-[24px] items-center justify-center rounded-full bg-white lg:h-[26px] lg:w-[26px]">
               <svg
                 aria-hidden="true"
                 viewBox="0 0 20 20"
