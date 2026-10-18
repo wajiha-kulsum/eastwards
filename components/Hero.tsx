@@ -35,6 +35,8 @@ export function Hero() {
             <img
               {...desktopProps}
               alt={common.alt}
+              fetchPriority="high"
+              loading="eager"
               style={{
                 width: "100%",
                 height: "100%",
