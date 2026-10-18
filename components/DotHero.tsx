@@ -2,12 +2,13 @@
 
 import { useEffect, useRef } from "react";
 
-/* The dot-field hero shared by Contact, Partners and About: CSS grey dot
-   lattice behind the heading, plus the blue dotted play mark echoing the
-   eastwards logo. Mark translate is nudged so its dots land on the field's
-   8px lattice — blue dots are 4px vs grey centres at +4px, so centres align,
-   not box edges. Observes the band and heading row (never the mark itself:
-   translate moves its box, which would re-trigger the observer forever). */
+/* The dot-field hero shared by Contact, Partners, and About.
+   Geometry, dot matrix grid, spacing, and typography are 100% locked
+   so switching between pages feels completely consistent: only the
+   title and lede text vary. */
+
+const DOT_PITCH = 10; // 10px grid pitch matching the Paper design (5px dot + 5px gap)
+
 export default function DotHero({ title, lede }: { title: string; lede: string }) {
   const bandRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
@@ -19,11 +20,11 @@ export default function DotHero({ title, lede }: { title: string; lede: string }
     const row = rowRef.current;
     if (!band || !logo || !row) return;
 
-    const mod = (n: number) => ((n % 8) + 8) % 8;
+    const mod = (n: number) => ((n % DOT_PITCH) + DOT_PITCH) % DOT_PITCH;
     const snap = () => {
       const bandBox = band.getBoundingClientRect();
       const logoBox = logo.getBoundingClientRect();
-      logo.style.translate = `${-mod(logoBox.left - bandBox.left - 2)}px ${-mod(logoBox.top - bandBox.top - 2)}px`;
+      logo.style.translate = `${-mod(logoBox.left - bandBox.left)}px ${-mod(logoBox.top - bandBox.top)}px`;
     };
 
     snap();
@@ -38,26 +39,30 @@ export default function DotHero({ title, lede }: { title: string; lede: string }
   }, []);
 
   return (
-    <section className="relative flex min-h-[200px] flex-col overflow-hidden pt-3 sm:min-h-[230px] lg:min-h-[268px]">
+    <section className="relative flex h-[220px] flex-col justify-between overflow-hidden pt-3 sm:h-[250px] lg:h-[280px]">
+      {/* Background dot matrix field - 10px pitch with 5px light grey dots */}
       <div
         ref={bandRef}
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-[20px] top-[27px]"
+        className="pointer-events-none absolute inset-x-0 bottom-[14px] top-[26px]"
         style={{
           backgroundImage:
-            "radial-gradient(circle, #d9dce3 1.2px, transparent 1.6px)",
-          backgroundSize: "8px 8px",
+            "radial-gradient(circle, #d9dce3 1.6px, transparent 1.9px)",
+          backgroundSize: `${DOT_PITCH}px ${DOT_PITCH}px`,
         }}
       />
 
-      <div ref={rowRef} className="relative flex items-center py-1.5">
-        <h1 className="bg-white pl-2 pr-4 text-[clamp(2.5rem,8vw,4.6rem)] font-bold uppercase leading-none tracking-[-0.03em]">
+      {/* Title + Blue Dot Matrix Icon */}
+      <div ref={rowRef} className="relative z-10 flex items-center py-1">
+        <h1 className="bg-white pr-4 font-display text-[clamp(2.75rem,5.5vw,5.5rem)] font-bold uppercase leading-none tracking-[-0.03em] text-black">
           {title}
         </h1>
+
+        {/* Play-triangle dot matrix icon: 4 columns x 7 rows on a 10px pitch */}
         <div
           ref={logoRef}
           aria-hidden="true"
-          className="grid shrink-0 grid-cols-[repeat(4,4px)] gap-[4px] self-center"
+          className="grid shrink-0 grid-cols-[repeat(4,5px)] gap-[5px] self-center"
         >
           {Array.from({ length: 28 }).map((_, i) => {
             const col = i % 4;
@@ -66,18 +71,21 @@ export default function DotHero({ title, lede }: { title: string; lede: string }
             return (
               <span
                 key={i}
-                className={`h-1 w-1 rounded-full ${blue ? "bg-[#2869ff]" : ""}`}
+                className={`h-[5px] w-[5px] rounded-full transition-colors ${
+                  blue ? "bg-[#2868ff]" : "bg-[#d9dce3]"
+                }`}
               />
             );
           })}
         </div>
       </div>
 
-      {/* Supporting copy, pinned to the band's bottom-right so the hero is the
-          same shape on every page; only the text changes */}
-      <p className="relative mb-3.5 ml-auto mt-auto max-w-[235px] bg-white px-2.5 py-1.5 text-right text-[0.8rem] leading-[1.35] text-[#1a1a1a] max-sm:max-w-none">
-        {lede}
-      </p>
+      {/* Supporting copy - pinned to bottom right across all sub-pages */}
+      <div className="relative z-10 mt-auto flex justify-end pb-2">
+        <p className="max-w-[420px] bg-white pl-4 pt-1 text-right text-[14px] font-normal leading-[1.3] text-[#111111] sm:text-[16px] md:text-[18px] lg:text-[20px]">
+          {lede}
+        </p>
+      </div>
     </section>
   );
 }
