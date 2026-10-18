@@ -59,6 +59,7 @@ export function Footer() {
       >
         {footer.wordmark}
       </p>
+      <div className="h-24" aria-hidden="true" />
     </footer>
   );
 }
