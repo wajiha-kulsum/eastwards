@@ -39,7 +39,7 @@ export default function DotHero({ title, lede }: { title: string; lede: string }
   }, []);
 
   return (
-    <section className="relative flex h-[220px] flex-col justify-between overflow-hidden pt-3 sm:h-[190px] lg:h-[210px]">
+    <section className="relative flex h-[160px] flex-col justify-between overflow-hidden pt-3 sm:h-[190px] lg:h-[210px]">
       {/* Background dot matrix field - 10px pitch with 5px light grey dots */}
       <div
         ref={bandRef}
