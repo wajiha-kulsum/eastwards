@@ -4,7 +4,7 @@ import { coreValues } from "@/lib/content";
 
 export function CoreValues() {
   return (
-    <section className="mx-auto mt-14 max-w-[1440px] px-6 sm:px-10 md:mt-16 lg:px-[5.35%]">
+    <section className="mx-auto mt-14 max-w-[1720px] px-6 sm:px-10 md:mt-16 lg:px-[5.35%]">
       <div className="flex items-center gap-1 border-b border-line-strong pb-2 text-xs font-medium text-ink">
         {coreValues.kicker} <PlayTriangle className="h-2 w-2 text-primary" />
       </div>
