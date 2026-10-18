@@ -22,7 +22,7 @@ export function Navbar() {
           <svg
             aria-hidden="true"
             viewBox="0 0 12 18"
-            className="ml-[2px] h-[16px] w-[11px]"
+            className="ml-[2px] h-[16px] w-[11px] lg:h-[18px] lg:w-[12px]"
             fill="none"
           >
             <path d="M0 0L12 9L0 18V0Z" fill="#2868FF" />
