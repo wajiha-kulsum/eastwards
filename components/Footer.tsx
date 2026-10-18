@@ -1,5 +1,8 @@
 import { footer } from "@/lib/content";
 
+/* Paper design (footer): columns form a centered ~80.5% block, wordmark
+   centered below, and a full-width white breathing strip closes the page. */
+
 export function Footer() {
   /* w-full: as a flex item with mx-auto, the footer would otherwise
      shrink-to-fit its own min-content — and the unbreakable wordmark
