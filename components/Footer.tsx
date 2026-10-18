@@ -36,16 +36,17 @@ export function Footer() {
           <p className="text-[11px] leading-[18px] sm:text-[15px]">
             {footer.copyright}
           </p>
-        <div className="flex gap-8 text-[12px] font-medium text-neutral-600">
-          {footer.legal.map((item) => (
-            <a
-              key={item}
-              href="#"
-              className="transition-colors hover:text-ink"
-            >
-              {item}
-            </a>
-          ))}
+          <div className="flex gap-6 font-display text-[13px] font-medium text-body md:gap-[50px] md:text-[18px] md:leading-[24px]">
+            {footer.legal.map((item) => (
+              <a
+                key={item}
+                href="#"
+                className="transition-colors hover:text-ink"
+              >
+                {item}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 
