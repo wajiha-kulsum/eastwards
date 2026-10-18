@@ -5,7 +5,7 @@ import { footer } from "@/lib/content";
 
 export function Footer() {
   return (
-    <footer className="mx-auto mt-16 w-full max-w-[1440px] overflow-hidden px-4 md:mt-20 md:px-[17px]">
+    <footer className="relative mx-auto mt-16 max-w-[1720px] px-6 pt-2 sm:px-[25px]">
       <div className="grid grid-cols-2 gap-8 md:grid-cols-5 md:px-[73px]">
         {footer.columns.map((column) => (
           <nav
