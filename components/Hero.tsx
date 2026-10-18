@@ -44,11 +44,11 @@ export function Hero() {
             />
           </picture>
 
-        {/* readability gradient on small screens */}
-        <div
-          className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/40 to-transparent lg:hidden"
-          aria-hidden="true"
-        />
+          {/* readability gradient on small screens */}
+          <div
+            className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/40 to-transparent lg:hidden"
+            aria-hidden="true"
+          />
         <div className="relative mx-auto flex h-full max-w-[1440px] flex-col items-start px-6 pt-12 sm:px-10 sm:pt-16 md:pt-16 lg:px-[5.35%] lg:pt-[72px]">
           <h1 className="text-[40px] font-bold leading-[1.05] tracking-tight text-ink md:text-[52px]">
             Technology that moves
