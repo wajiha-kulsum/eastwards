@@ -13,7 +13,7 @@ export function Footer() {
             <nav
               key={column.title}
               aria-label={column.title}
-              className="text-[13px] leading-[17px]"
+              className="text-[13px] leading-[17px] md:text-[18px] md:leading-[21px]"
             >
               <p className="text-body">{column.title}</p>
               <ul className="mt-0.5 font-display font-semibold text-ink">
