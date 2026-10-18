@@ -61,9 +61,10 @@ export function Hero() {
               href="/"
               className="mt-5 h-[36px] gap-2 px-[22px] text-[12px] md:mt-8 md:h-[42px] md:gap-3 md:px-[30px] md:text-[14px] lg:h-[54px] lg:px-[34px] lg:text-[17px]"
             >
-            {hero.cta}
-            <ArrowUpRight className="h-2.5 w-2.5" />
-          </PrimaryButton>
+              {hero.cta}
+              <ArrowUpRight className="h-2.5 w-2.5 lg:h-3.5 lg:w-3.5" />
+            </PrimaryButton>
+          </div>
         </div>
       </Reveal>
     </section>
