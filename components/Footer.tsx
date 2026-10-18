@@ -50,10 +50,12 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Giant gradient wordmark reflecting into the page edge */}
+      {/* Giant gradient wordmark reflecting into the page edge. Sized to the
+          drawing: "Eastwards" ~= 4.93x the font size, so 17.3vw ~= 86% width
+          (paper: 1480/1728) and it never crops at the viewport edges. */}
       <p
         aria-hidden="true"
-        className="mt-12 select-none bg-gradient-to-b from-body to-white bg-clip-text text-center font-display text-[clamp(4rem,21vw,19rem)] font-bold leading-[0.85] tracking-tight text-transparent"
+        className="mt-12 select-none bg-gradient-to-b from-body to-white bg-clip-text text-center font-display text-[clamp(4rem,17.3vw,18.75rem)] font-bold leading-[0.85] tracking-tight text-transparent"
       >
         {footer.wordmark}
       </p>
