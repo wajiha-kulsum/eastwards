@@ -16,7 +16,7 @@ export function Navbar() {
         {/* Logo */}
         <Link
           href="/"
-          className="flex shrink-0 items-center text-[16px] font-bold tracking-[-0.5px] text-[#111]"
+          className="flex shrink-0 items-center text-[16px] font-bold tracking-[-0.5px] text-[#111] lg:text-[18px]"
         >
           eastwards
           <svg
