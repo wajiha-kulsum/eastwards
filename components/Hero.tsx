@@ -50,10 +50,10 @@ export function Hero() {
             aria-hidden="true"
           />
           <div className="relative flex h-full flex-col items-start px-6 pt-12 sm:px-[50px] sm:pt-16 lg:px-[60px] lg:pt-[96px]">
-          <h1 className="text-[40px] font-bold leading-[1.05] tracking-tight text-ink md:text-[52px]">
-            Technology that moves
-            <span className="block text-primary">business forward</span>
-          </h1>
+            <h1 className="text-[40px] font-bold leading-[1.05] tracking-tight text-ink md:text-[52px] lg:text-[clamp(3.4rem,5.2vw,5.625rem)] lg:leading-[1.1]">
+              Technology that moves
+              <span className="block text-primary">business forward</span>
+            </h1>
           <p className="mt-4 max-w-[380px] text-[15px] font-semibold leading-[1.15] text-body md:mt-6">
             {hero.subtext}
           </p>
