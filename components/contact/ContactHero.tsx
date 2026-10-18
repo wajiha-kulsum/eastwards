@@ -37,7 +37,7 @@ function ContactDotGrid() {
 
 export function ContactHero() {
   return (
-    <section className="relative mx-auto max-w-[1440px] px-4 pt-10 sm:px-8 md:px-[17px] lg:pt-14">
+    <section className="relative mx-auto max-w-[1720px] px-4 pt-10 sm:px-8 md:px-[17px] lg:pt-14">
       <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
         {/* Title + dot matrix graphic, with the field running on to its right */}
         <div className="flex min-w-0 flex-1 items-center gap-[14px]">
