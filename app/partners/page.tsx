@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function PartnersPage() {
   return (
     <main className="bg-white text-black">
-      <div className="mx-auto max-w-[1440px] px-6 pb-16 pt-3 sm:px-10 lg:px-[5.35%]">
+      <div className="mx-auto max-w-[1720px] px-6 pb-16 pt-3 sm:px-10 lg:px-[5.35%]">
         <DotHero title={partners.title} lede={partners.lede} />
 
         {/* Ecosystem intro */}
