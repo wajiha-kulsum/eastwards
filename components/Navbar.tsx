@@ -35,7 +35,7 @@ export function Navbar() {
             <Link
               key={item.label}
               href={item.href}
-              className="text-[13px] font-normal tracking-[0.1px] text-[#171717] transition-colors hover:text-[#2868ff]"
+              className="text-[13px] font-normal tracking-[0.1px] text-[#171717] transition-colors hover:text-[#2868ff] lg:text-[15px] lg:tracking-[0.02em]"
             >
               {item.label}
             </Link>
