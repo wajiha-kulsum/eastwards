@@ -32,8 +32,10 @@ export function Footer() {
           ))}
         </div>
 
-      <div className="mt-12 flex flex-col gap-3 text-[12px] text-subtle md:flex-row md:items-center md:justify-between md:px-[73px]">
-        <p className="text-[10px]">{footer.copyright}</p>
+        <div className="mt-12 flex flex-col gap-3 text-[12px] text-subtle sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-[11px] leading-[18px] sm:text-[15px]">
+            {footer.copyright}
+          </p>
         <div className="flex gap-8 text-[12px] font-medium text-neutral-600">
           {footer.legal.map((item) => (
             <a
