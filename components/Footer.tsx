@@ -16,7 +16,7 @@ export function Footer() {
               className="text-[13px] leading-[17px]"
             >
               <p className="text-body">{column.title}</p>
-              <ul className="mt-0.5 font-semibold text-ink">
+              <ul className="mt-0.5 font-display font-semibold text-ink">
                 {column.links.map((link) => (
                   <li key={link}>
                     <a
