@@ -70,7 +70,7 @@ export default function AboutPage() {
         </section>
 
         {/* Comprehensive Digital Solutions — three groups of three */}
-        <section id="solutions" className="mt-14 sm:mt-16">
+        <section id="solutions" className="mt-14 scroll-mt-24 sm:mt-16">
           <h2 className="text-[25px] font-medium leading-tight tracking-[-0.055em] sm:text-[27px]">
             {about.solutions.title}
           </h2>
