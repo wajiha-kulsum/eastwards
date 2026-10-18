@@ -11,7 +11,7 @@ export function Navbar() {
     <header className="relative w-full bg-white">
       <nav
         aria-label="Main navigation"
-        className="mx-auto flex h-[68px] w-full items-center justify-between px-6 sm:px-10 lg:px-[52px]"
+        className="mx-auto flex h-[68px] w-full max-w-[1720px] items-center justify-between px-6 sm:px-10 lg:px-[52px]"
       >
         {/* Logo */}
         <Link
