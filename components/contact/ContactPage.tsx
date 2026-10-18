@@ -54,7 +54,7 @@ export function ContactPage() {
 
   return (
     <main className="flex-1 bg-white text-black">
-      <div className="mx-auto max-w-[1440px] px-6 pb-4 sm:px-10 lg:px-[5.35%]">
+      <div className="mx-auto max-w-[1720px] px-6 pb-16 sm:px-10 lg:px-[5.35%]">
         {/* Hero — grey dot field behind the heading */}
         <DotHero title={contact.title} lede={contact.subtitle} />
 
