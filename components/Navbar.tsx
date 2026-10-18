@@ -46,7 +46,7 @@ export function Navbar() {
         <div className="flex shrink-0 items-center gap-3">
           <Link
             href="/login"
-            className="inline-flex h-8 items-center gap-3 rounded-full bg-[#2868ff] py-[3px] pl-[14px] pr-[4px] text-[13px] font-medium text-white transition-colors hover:bg-[#1555ed]"
+            className="inline-flex h-8 items-center gap-3 rounded-full bg-[#2868ff] py-[3px] pl-[14px] pr-[4px] text-[13px] font-medium text-white transition-colors hover:bg-[#1555ed] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2868ff]"
           >
             Login
             <span className="flex h-[24px] w-[24px] items-center justify-center rounded-full bg-white">
