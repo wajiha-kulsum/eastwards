@@ -6,7 +6,7 @@ import { hero } from "@/lib/content";
 
 /* Art-directed hero art: the portrait crop below sm, the landscape
    rendition everywhere else — one optimized rendition set per art. */
-const common = { alt: "Glossy blue 3D glass tiles array", sizes: "(max-width: 639px) calc(100vw - 48px), calc(100vw - 152px)" };
+const common = { alt: "Glossy blue 3D glass tiles array", sizes: "(max-width: 639px) calc(100vw - 24px), min(calc(100vw - 50px), 1670px)" };
 const { props: mobileProps } = getImageProps({
   ...common,
   width: 941,
