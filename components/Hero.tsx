@@ -24,7 +24,7 @@ const { props: desktopProps } = getImageProps({
 
 export function Hero() {
   return (
-    <section className="relative h-[calc(100svh-68px)] min-h-[420px] overflow-hidden">
+    <section className="relative mx-auto max-w-[1720px] px-3 pt-3 sm:px-[25px] sm:pt-6">
       <Reveal className="absolute inset-0">
         <picture className="absolute inset-0">
           <source media="(max-width: 639px)" srcSet={mobileProps.srcSet} />
