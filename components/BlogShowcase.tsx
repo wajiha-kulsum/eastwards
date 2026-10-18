@@ -25,7 +25,7 @@ export default function BlogShowcase() {
   const activePost = posts[activeIndex];
 
   return (
-    <section className="mx-auto mt-14 max-w-[1440px] px-6 sm:px-10 md:mt-16 lg:px-[5.35%]">
+    <section className="mx-auto mt-14 max-w-[1720px] px-6 sm:px-10 md:mt-16 lg:px-[5.35%]">
       {/* light bordered panel, palette matched to the reference */}
       <div className="rounded-[24px] border border-[#e8e9f4] bg-[#fcfcfe] px-5 py-10 sm:px-8 md:px-[31px] lg:py-[54px]">
         {/* Heading: dark line + muted line, controls right */}
