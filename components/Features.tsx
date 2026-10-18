@@ -175,7 +175,7 @@ export function Features() {
   return (
     <section
       ref={sectionRef}
-      className="mx-auto mt-14 max-w-[1440px] overflow-hidden px-6 sm:px-10 md:mt-16 lg:px-[5.35%]"
+      className="mx-auto mt-14 max-w-[1720px] overflow-hidden px-6 sm:px-10 md:mt-16 lg:px-[5.35%]"
     >
       <div className="grid gap-8 md:grid-cols-[46.5%_1fr]">
         <h2 className="text-2xl font-semibold leading-8 tracking-tight text-ink sm:text-[28px]">
