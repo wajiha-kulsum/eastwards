@@ -15,7 +15,7 @@ export function Footer() {
               aria-label={column.title}
               className="text-[13px] leading-[17px]"
             >
-              <p className="text-faint">{column.title}</p>
+              <p className="text-body">{column.title}</p>
               <ul className="mt-0.5 font-semibold text-ink">
                 {column.links.map((link) => (
                   <li key={link}>
