@@ -44,7 +44,7 @@ export default function DotHero({ title, lede }: { title: string; lede: string }
       <div
         ref={bandRef}
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-[14px] top-[26px]"
+        className="pointer-events-none absolute inset-x-0 bottom-[12px] top-[22px]"
         style={{
           backgroundImage:
             "radial-gradient(circle, #d9dce3 1.6px, transparent 1.9px)",
