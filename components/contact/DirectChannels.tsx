@@ -3,7 +3,7 @@ import { contact } from "@/lib/content";
 
 export function DirectChannels() {
   return (
-    <section className="mx-auto mt-16 max-w-[1720px] px-4 pb-20 md:mt-24 md:px-[17px]">
+    <section className="mx-auto mt-16 max-w-[1720px] px-6 pb-20 sm:px-10 md:mt-24 lg:px-[5.35%]">
       <div>
         <h2 className="text-[24px] font-semibold leading-[1.32] tracking-[-0.8px] text-neutral-900 sm:text-[28px]">
           {contact.directChannels.title}
