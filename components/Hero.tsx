@@ -25,20 +25,24 @@ const { props: desktopProps } = getImageProps({
 export function Hero() {
   return (
     <section className="relative mx-auto max-w-[1720px] px-3 pt-3 sm:px-[25px] sm:pt-6">
-      <Reveal className="absolute inset-0">
-        <picture className="absolute inset-0">
-          <source media="(max-width: 639px)" srcSet={mobileProps.srcSet} />
-          <img
-            {...desktopProps}
-            alt={common.alt}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center",
-            }}
-          />
-        </picture>
+      <Reveal>
+        {/* Paper: panel 1667x788 @ r30, centered with ~31px insets. From md up the
+            panel is aspect-locked to the drawing (2.12:1, a wide rectangle) and
+            never grows past 84% of the viewport height, so the CTA stays in view. */}
+        <div className="relative h-[73svh] min-h-[420px] overflow-hidden rounded-[30px] md:aspect-[1667/788] md:h-auto md:max-h-[84svh]">
+          <picture className="absolute inset-0">
+            <source media="(max-width: 639px)" srcSet={mobileProps.srcSet} />
+            <img
+              {...desktopProps}
+              alt={common.alt}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center",
+              }}
+            />
+          </picture>
 
         {/* readability gradient on small screens */}
         <div
