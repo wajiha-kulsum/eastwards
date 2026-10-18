@@ -49,7 +49,7 @@ export function Hero() {
             className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/40 to-transparent lg:hidden"
             aria-hidden="true"
           />
-        <div className="relative mx-auto flex h-full max-w-[1440px] flex-col items-start px-6 pt-12 sm:px-10 sm:pt-16 md:pt-16 lg:px-[5.35%] lg:pt-[72px]">
+          <div className="relative flex h-full flex-col items-start px-6 pt-12 sm:px-[50px] sm:pt-16 lg:px-[60px] lg:pt-[96px]">
           <h1 className="text-[40px] font-bold leading-[1.05] tracking-tight text-ink md:text-[52px]">
             Technology that moves
             <span className="block text-primary">business forward</span>
