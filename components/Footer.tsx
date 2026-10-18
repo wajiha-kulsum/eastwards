@@ -6,29 +6,31 @@ import { footer } from "@/lib/content";
 export function Footer() {
   return (
     <footer className="relative mx-auto mt-16 max-w-[1720px] px-6 pt-2 sm:px-[25px]">
-      <div className="grid grid-cols-2 gap-8 md:grid-cols-5 md:px-[73px]">
-        {footer.columns.map((column) => (
-          <nav
-            key={column.title}
-            aria-label={column.title}
-            className="text-[13px] leading-[17px]"
-          >
-            <p className="text-faint">{column.title}</p>
-            <ul className="mt-0.5 font-semibold text-ink">
-              {column.links.map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
-                    className="transition-colors hover:text-primary"
-                  >
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        ))}
-      </div>
+      {/* Paper: columns + bottom row share one centered 1391px (80.5%) band */}
+      <div className="mx-auto w-full max-w-[1391px]">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-5">
+          {footer.columns.map((column) => (
+            <nav
+              key={column.title}
+              aria-label={column.title}
+              className="text-[13px] leading-[17px]"
+            >
+              <p className="text-faint">{column.title}</p>
+              <ul className="mt-0.5 font-semibold text-ink">
+                {column.links.map((link) => (
+                  <li key={link}>
+                    <a
+                      href="#"
+                      className="transition-colors hover:text-primary"
+                    >
+                      {link}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
+        </div>
 
       <div className="mt-12 flex flex-col gap-3 text-[12px] text-subtle md:flex-row md:items-center md:justify-between md:px-[73px]">
         <p className="text-[10px]">{footer.copyright}</p>
