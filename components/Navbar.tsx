@@ -53,7 +53,7 @@ export function Navbar() {
               <svg
                 aria-hidden="true"
                 viewBox="0 0 20 20"
-                className="h-[16px] w-[16px]"
+                className="h-[16px] w-[16px] lg:h-[17px] lg:w-[17px]"
                 fill="none"
               >
                 <path
