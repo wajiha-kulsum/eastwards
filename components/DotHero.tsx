@@ -38,7 +38,7 @@ export default function DotHero({ title, lede }: { title: string; lede: string }
   }, []);
 
   return (
-    <section className="relative min-h-[120px] overflow-hidden pt-3">
+    <section className="relative flex min-h-[200px] flex-col overflow-hidden pt-3 sm:min-h-[230px] lg:min-h-[268px]">
       <div
         ref={bandRef}
         aria-hidden="true"
@@ -73,8 +73,9 @@ export default function DotHero({ title, lede }: { title: string; lede: string }
         </div>
       </div>
 
-      {/* Supporting copy */}
-      <p className="relative mb-3.5 ml-auto mt-7 max-w-[235px] bg-white px-2.5 py-1.5 text-right text-[0.8rem] leading-[1.35] text-[#1a1a1a] max-sm:mt-5 max-sm:max-w-none">
+      {/* Supporting copy, pinned to the band's bottom-right so the hero is the
+          same shape on every page; only the text changes */}
+      <p className="relative mb-3.5 ml-auto mt-auto max-w-[235px] bg-white px-2.5 py-1.5 text-right text-[0.8rem] leading-[1.35] text-[#1a1a1a] max-sm:max-w-none">
         {lede}
       </p>
     </section>
