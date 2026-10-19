@@ -70,6 +70,8 @@ body {
    (bg-popover, md:w-auto, rounded-lg) that class merging cannot outrank. */
 .nav-services-panel {
   width: fit-content;
+  /* submenus overflow the panel itself - never clip them */
+  overflow: visible;
   border-radius: 16px;
   border: 1px solid #e8e8e8;
   border-bottom: 3px solid #2868ff;
