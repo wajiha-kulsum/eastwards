@@ -845,4 +845,58 @@ export const servicePages: readonly ServicePageContent[] = [
       },
     ],
   },
+  {
+    slug: "modern-device-management",
+    title: "Modern Device Management",
+    lede: "The centralized system that secures and manages every device in the firm’s operations.",
+    blocks: [
+      {
+        kind: "lead",
+        body: "Modern Device Management (MDM) is the centralized management system that secures and manages all the IT assets involved in the firm’s operations, including smartphones, laptops, and IoT devices — it helps businesses optimize device configuration, and maintain alignment with security compliances and application distribution.",
+      },
+      {
+        kind: "prose",
+        paragraphs: [
+          "In recent employment scenarios, people still prefer remote work setups and BYOD (bring your own devices) policies, which creates challenges for businesses in terms of cybersecurity. Securing, assessing, and managing critical data across numerous devices from employees’ preferred work locations can be challenging and create potential data breach risks.",
+          "Eastwards helps businesses streamline the latest work culture trends and manage devices worldwide by implementing zero-touch provisioning, a unified endpoint management system, and an alliance to security and compliance standards.",
+          "With the Eastwards Modern Device Management system, businesses can remotely conduct regular risk assessments, analyse threat patterns, and provide rapid resolutions regardless of the employee’s work location, ensuring data protection.",
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "Capabilities",
+        paragraphs: [
+          "As IT work culture is moving from a work-from-office setup to work-from-anywhere, it is vital to implement endpoint management tools with the latest advancements. Our services include:",
+        ],
+      },
+      {
+        kind: "bullets",
+        items: [
+          "Flexible cloud-based management",
+          "Endpoint business intelligence, automation, and real-time error resolution",
+          "Zero-touch device provisioning and enrolment",
+          "Security compliance and application configuration management with publication and distribution",
+          "OS servicing",
+        ],
+      },
+      {
+        kind: "bullets",
+        heading:
+          "Our flexible, cloud-based Modern Device Management services help businesses deliver",
+        items: [
+          "Cost savings from data-informed asset allocation and procurement",
+          "Increased employee satisfaction, productivity, and empowerment through the BYOD approach",
+          "Enhanced employee productivity through optimized device performance",
+          "Quantifiable efficiency in endpoint reliability and performance",
+        ],
+      },
+      {
+        kind: "prose",
+        paragraphs: [
+          "Eastwards Modern Device Management services prioritize the end-user experience by implementing endpoint telemetry and Artificial Intelligence/Machine Learning (AI/ML) analytics to reduce endpoint incidents and proactively enhance device reliability and performance.",
+          "We ensure enhanced productivity, employees’ choice to use their preferred devices, and quantifiable business growth by implementing endpoint reliability and providing remarkable performance.",
+        ],
+      },
+    ],
+  },
 ];
