@@ -61,7 +61,7 @@ export function Navbar() {
                         >
                           <NavigationMenuLink
                             href={service.href}
-                            className="py-2 text-[15px] font-medium text-white transition-colors hover:bg-transparent hover:text-[#9cc0ff] focus:bg-transparent"
+                            className="py-2 text-[15px] font-normal leading-[1.3] text-[#171717] transition-colors line-clamp-2 break-words hover:text-[#2868ff]"
                           >
                             {service.label}
                           </NavigationMenuLink>
@@ -82,16 +82,16 @@ export function Navbar() {
                                 />
                               </svg>
                               <div className="invisible absolute left-full top-0 z-10 pl-3 opacity-0 transition-opacity duration-200 group-hover/row:visible group-hover/row:opacity-100 focus-within:visible focus-within:opacity-100">
-                                <div className="w-[280px] rounded-2xl bg-[#333338] p-5 shadow-xl">
-                                  <p className="text-[15px] font-medium text-white">
+                                <div className="w-[280px] rounded-2xl border border-[#e8e8e8] bg-white p-5 shadow-xl">
+                                  <p className="text-[15px] font-medium text-[#171717]">
                                     {service.detail.title}
                                   </p>
-                                  <p className="mt-2 text-[13px] leading-[1.5] text-white/70">
+                                  <p className="mt-2 text-[13px] leading-[1.5] text-[#757575]">
                                     {service.detail.body}
                                   </p>
                                   <NavigationMenuLink
                                     href="/contact"
-                                    className="mt-3 inline-flex items-center gap-1.5 rounded-lg text-[13px] font-medium text-[#9cc0ff] transition-colors hover:bg-transparent hover:text-white focus:bg-transparent"
+                                    className="mt-3 inline-flex items-center gap-1.5 rounded-lg text-[13px] font-medium text-[#2868ff] transition-colors hover:text-[#1555ed]"
                                   >
                                     Contact us
                                     <svg
