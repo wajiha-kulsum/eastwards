@@ -69,7 +69,7 @@ body {
    group-variant utilities baked into the shadcn navigation-menu content
    (bg-popover, md:w-auto, rounded-lg) that class merging cannot outrank. */
 .nav-services-panel {
-  width: min(600px, calc(100vw - 24px));
+  width: fit-content;
   border-radius: 16px;
   border: 1px solid #e8e8e8;
   border-bottom: 3px solid #2868ff;
@@ -79,8 +79,8 @@ body {
   display: grid;
   grid-auto-flow: column;
   grid-template-rows: repeat(5, auto);
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 4px 20px;
+  grid-template-columns: repeat(2, max-content);
+  gap: 4px 36px;
 }
 
 @theme inline {

@@ -60,7 +60,7 @@ export function Navbar() {
                         >
                           <NavigationMenuLink
                             href={service.href}
-                            className="py-2 text-[15px] font-normal leading-[1.3] text-[#171717] transition-colors line-clamp-2 break-words hover:text-[#2868ff]"
+                            className="py-2 text-[15px] font-normal leading-[1.3] text-[#171717] transition-colors hover:text-[#2868ff]"
                           >
                             {service.label}
                           </NavigationMenuLink>
@@ -81,7 +81,7 @@ export function Navbar() {
                                 />
                               </svg>
                               <div className="invisible absolute left-full top-0 z-10 pl-3 opacity-0 transition-opacity duration-200 group-hover/row:visible group-hover/row:opacity-100 focus-within:visible focus-within:opacity-100">
-                                <div className="w-[280px] rounded-2xl border border-[#e8e8e8] bg-white p-5 shadow-xl">
+                                <div className="w-max max-w-[280px] rounded-2xl border border-[#e8e8e8] bg-white p-5 shadow-xl">
                                   <p className="text-[15px] font-medium text-[#171717]">
                                     {service.detail.title}
                                   </p>
