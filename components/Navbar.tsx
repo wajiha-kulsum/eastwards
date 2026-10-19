@@ -2,7 +2,15 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { navLinks } from "@/lib/content";
+import { navLinks, navServices } from "@/lib/content";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -30,17 +38,43 @@ export function Navbar() {
         </Link>
 
         {/* Desktop navigation */}
-        <div className="hidden items-center gap-7 sm:gap-8 lg:gap-9 md:flex">
-          {navLinks.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="text-[13px] font-normal tracking-[0.1px] text-[#171717] transition-colors hover:text-[#2868ff] lg:text-[15px] lg:tracking-[0.02em]"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </div>
+        <NavigationMenu viewport={false} className="hidden md:block">
+          <NavigationMenuList className="items-center gap-7 sm:gap-8 lg:gap-9">
+            {navLinks.map((item) =>
+              item.label === "Services" ? (
+                <NavigationMenuItem key={item.label}>
+                  <NavigationMenuTrigger className="h-auto bg-white px-0 py-0 text-[13px] font-normal tracking-[0.1px] text-[#171717] hover:bg-white hover:text-[#2868ff] focus:bg-white data-popup-open:bg-white data-popup-open:text-[#2868ff] lg:text-[15px] lg:tracking-[0.02em] [&_svg]:size-3">
+                    {item.label}
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="w-[540px] border-[#e8e8e8] p-2 shadow-xl">
+                    <div className="grid grid-cols-2 gap-1">
+                      {navServices.map((service) => (
+                        <NavigationMenuLink
+                          key={service.label}
+                          href={service.href}
+                          className="rounded-[10px] p-3 text-[13px] font-normal text-[#171717] transition-colors hover:bg-[#fafafa] hover:text-[#2868ff]"
+                        >
+                          {service.label}
+                        </NavigationMenuLink>
+                      ))}
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              ) : (
+                <NavigationMenuItem key={item.label}>
+                  <NavigationMenuLink asChild>
+                    <Link
+                      href={item.href}
+                      className="text-[13px] font-normal tracking-[0.1px] text-[#171717] transition-colors hover:text-[#2868ff] lg:text-[15px] lg:tracking-[0.02em]"
+                    >
+                      {item.label}
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              ),
+            )}
+          </NavigationMenuList>
+        </NavigationMenu>
 
         {/* Login button + mobile toggle */}
         <div className="flex shrink-0 items-center gap-3">

@@ -10,6 +10,22 @@ export const navLinks = [
   { label: "Contact Us", href: "/contact" },
 ] as const;
 
+/* Services nav dropdown — same nine offerings as the /about solutions grid. */
+export const navServices = [
+  {
+    label: "Application Development & Product Engineering",
+    href: "/services",
+  },
+  { label: "Quantum Computing Advisory", href: "/services" },
+  { label: "Data & Artificial Intelligence", href: "/services" },
+  { label: "Cybersecurity Services", href: "/services" },
+  { label: "Infrastructure & Cloud", href: "/services" },
+  { label: "Modern Device Management", href: "/services" },
+  { label: "Projects & Professional Services", href: "/services" },
+  { label: "IT Staffing Services", href: "/services" },
+  { label: "Digital Support Services", href: "/services" },
+] as const;
+
 export const hero = {
   headline: "Technology that moves business forward",
   subtext:
