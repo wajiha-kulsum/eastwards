@@ -197,10 +197,11 @@ export default function ServicePage({ service }: { service: ServicePageContent }
             <Block key={index} block={block} />
           ))}
         </div>
-
-        {/* Related Blogs — the common blog showcase shared by every service page */}
-        <BlogShowcase />
       </div>
+
+      {/* Related Blogs — the common blog showcase, rendered outside the lane
+          div so it carries the exact homepage width, not a nested lane */}
+      <BlogShowcase />
     </main>
   );
 }
