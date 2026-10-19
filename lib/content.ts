@@ -1216,4 +1216,231 @@ export const servicePages: readonly ServicePageContent[] = [
       },
     ],
   },
+  {
+    slug: "application-security",
+    title: "Application Security & DevSecOps",
+    lede: "Shift-left security, integrated early in the software development lifecycle.",
+    blocks: [
+      {
+        kind: "lead",
+        body: "With the rapid expansion of application transformation from on-premises to cloud computing or hybrid environments, the rate of potential risks and security breaches has increased multiple fold. This transition also induces breaches across the application layer. Integrating security measures early in the software development lifecycle in conjunction with DevOps helps organizations reduce costs, identify and mitigate potential risks in the early stages, and minimize impact during production rollouts. Additionally, application security provides an element of security through the Shift-left DevOps process.",
+      },
+      {
+        kind: "prose",
+        heading: "Solution",
+        paragraphs: [
+          "Eastwards application security services help organizations establish a holistic security ecosystem by implementing the latest innovations and technological changes. We enhance the security within DevOps using automation, helping reduce false detections and ensuring rapid countermeasures. We follow a three-step process that begins with threat modeling, followed by vulnerability assessment and intrusion testing on the application attack surface across all the firm’s devices. We map the maturity curve on the current blueprint of the organization and help assess the areas of improvement in the organization’s security ecosystem. Eastwards helps design the application security governance framework and modify the existing application landscape to establish DevSecOps. Our security framework helps organizations implement collaboration, automation, and agility within DevOps lifecycle phases.",
+        ],
+      },
+      {
+        kind: "panels",
+        heading: "DevSecOps Services",
+        groups: [
+          {
+            title: "Threat Modeling",
+            body: "We help assess the digital landscape to identify potential risks and integrate security models within the design phases to shift left early in the SDLC process, which includes:",
+            items: [
+              {
+                title:
+                  "Using the STRIDE, VAST, or PASTA methodologies to identify potential threats",
+              },
+              { title: "Leveraging the DREAD model for severity ratings" },
+              {
+                title:
+                  "Integrating threat models into the development lifecycle",
+              },
+            ],
+          },
+          {
+            title: "Software Composition Analysis",
+            body: "We help organizations manage open-source components and analyze threat patterns and vulnerabilities. Our service includes:",
+            items: [
+              { title: "Open-source governance" },
+              { title: "Integration of SCA (Software Composition Analysis)" },
+              { title: "Software bill of materials (BOM)" },
+            ],
+          },
+          {
+            title: "Static & Dynamic Application Security Testing",
+            body: "We facilitate static development lifecycle testing with automated and comprehensive testing to shift-left security. Our service includes:",
+            items: [
+              { title: "AST tool integration into the IDE and CI/CD pipeline" },
+              { title: "Mobile and API testing" },
+              { title: "False detection analysis" },
+              { title: "Intrusion testing" },
+            ],
+          },
+          {
+            title: "Application Vulnerability Management",
+            body: "We help organizations draw the correlation between all vulnerabilities and automate and customize risk assessments, including:",
+            items: [
+              { title: "Vulnerability correlation" },
+              { title: "De-duplication" },
+              { title: "False positive analysis" },
+              { title: "Dashboards and reporting" },
+            ],
+          },
+        ],
+      },
+      {
+        kind: "bullets",
+        heading: "Benefits",
+        items: [
+          "Integrated agile methodology within the application security model",
+          "Facilitates business scalability in the security validation process by mitigating manual inspection bottlenecks without compromising organizations’ data",
+          "Develop self-service by facilitating automated security inspections as part of the deployment pipeline",
+          "Maximized value at a lower cost for our clients without the need to invest in and own offshore assets",
+          "Service delivered from a physically and logically secure (ISO 27001, SOC Type 2) facility",
+          "Accelerated maturity, improvement, and faster response to incidents",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "ai-security",
+    title: "AI Security",
+    lede: "Building trust in the digital era — securing AI end-to-end.",
+    blocks: [
+      {
+        kind: "lead",
+        body: "Artificial Intelligence (AI) is transforming industries — from healthcare and finance to retail and manufacturing. Yet, as organizations embrace AI to drive innovation and efficiency, they face a critical challenge: how to secure AI systems against evolving cyber threats.",
+      },
+      {
+        kind: "prose",
+        paragraphs: [
+          "At Eastwards, we believe that protecting AI is not just about safeguarding technology — it’s about preserving trust, compliance, and business resilience.",
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "Why AI Security Matters",
+        paragraphs: [
+          "AI systems thrive on data, and that makes them prime targets for attackers. From adversarial inputs that trick algorithms into making wrong decisions, to poisoned training datasets that corrupt models at their core, the risks are real. Left unchecked, these vulnerabilities can lead to:",
+        ],
+      },
+      {
+        kind: "bullets",
+        items: [
+          "Data breaches exposing sensitive customer or patient information",
+          "Model manipulation that undermines decision accuracy",
+          "Compliance failures with regulations such as GDPR or HIPAA",
+          "Loss of trust among customers, partners, and stakeholders",
+        ],
+      },
+      {
+        kind: "prose",
+        paragraphs: [
+          "Securing AI is therefore not optional — it is a strategic necessity for every modern enterprise.",
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "Common Threats Facing AI Systems",
+        paragraphs: [
+          "Organizations deploying AI must be aware of the most pressing risks:",
+        ],
+      },
+      {
+        kind: "cards",
+        columns: 2,
+        items: [
+          {
+            title: "Adversarial Attacks",
+            body: "Subtle changes to inputs (images, text, or audio) that cause misclassification.",
+          },
+          {
+            title: "Poisoning Attacks",
+            body: "Corrupted training data that biases or destabilizes models.",
+          },
+          {
+            title: "Model Extraction",
+            body: "Reverse-engineering AI models to steal intellectual property or exploit sensitive outputs.",
+          },
+          {
+            title: "Prompt Manipulation",
+            body: "Tricking generative AI into producing harmful or misleading content.",
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "Our Approach to Securing AI",
+        paragraphs: [
+          "Eastwards offers a comprehensive AI security framework designed to protect models, data, and infrastructure across the entire lifecycle:",
+        ],
+      },
+      {
+        kind: "cards",
+        columns: 2,
+        items: [
+          {
+            title: "Adversarial Training & Testing",
+            body: "We harden models by exposing them to manipulated inputs during training, ensuring resilience against real-world attacks.",
+          },
+          {
+            title: "Data Integrity & Validation",
+            body: "Our teams implement strict input validation, anomaly detection, and continuous monitoring to prevent poisoning attempts.",
+          },
+          {
+            title: "Model Protection & Access Control",
+            body: "We safeguard proprietary models with encryption, role-based access, and multi-factor authentication to prevent theft or misuse.",
+          },
+          {
+            title: "Explainable AI",
+            body: "Transparency builds trust. We integrate explainability tools that allow stakeholders to understand and verify AI decisions.",
+          },
+          {
+            title: "Regular Security Audits",
+            body: "Through penetration testing, vulnerability assessments, and compliance checks, we ensure AI systems remain secure and aligned with regulations.",
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "Emerging Trends We Address",
+        paragraphs: [
+          "AI security is a moving target. Our services anticipate and mitigate new risks such as:",
+        ],
+      },
+      {
+        kind: "cards",
+        items: [
+          {
+            title: "Federated Learning",
+            body: "Protecting data privacy without centralizing sensitive information.",
+          },
+          {
+            title: "Supply Chain Security",
+            body: "Ensuring third-party datasets and pre-trained models are verified and trustworthy.",
+          },
+          {
+            title: "Ethical AI Governance",
+            body: "Embedding fairness, accountability, and compliance into every deployment.",
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "Why Partner with Eastwards",
+        paragraphs: [
+          "By choosing Eastwards, organizations gain more than technical safeguards — they gain a strategic partner committed to ensuring AI delivers value securely. Our expertise helps businesses:",
+        ],
+      },
+      {
+        kind: "bullets",
+        items: [
+          "Protect intellectual property",
+          "Maintain compliance with global standards",
+          "Build customer trust through secure, ethical AI practices",
+          "Enable innovation without compromising resilience",
+        ],
+      },
+      {
+        kind: "prose",
+        paragraphs: [
+          "AI is the future of business, but without robust security, its promise can quickly turn into risk. At Eastwards, we help enterprises secure their AI systems end-to-end, ensuring they remain reliable, compliant, and future-ready.",
+        ],
+      },
+    ],
+  },
 ];
