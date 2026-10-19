@@ -10,7 +10,7 @@ export default function DotHero({ title, lede }: { title: string; lede: string }
     <section className="relative flex min-h-[160px] flex-col overflow-hidden pt-2 sm:min-h-[190px] lg:min-h-[210px]">
       <DotField className="bottom-[12px] top-[22px]" />
 
-      <h1 className="relative z-10 py-1 font-display text-[clamp(2.75rem,5.5vw,5.5rem)] font-bold uppercase leading-none tracking-[-0.03em] text-black">
+      <h1 className="relative z-10 bg-white py-1 font-display text-[clamp(2.75rem,5.5vw,5.5rem)] font-bold uppercase leading-none tracking-[-0.03em] text-black">
         {title}
       </h1>
 
