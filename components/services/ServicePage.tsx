@@ -4,7 +4,8 @@ import type { ServiceBlock, ServicePageContent } from "@/lib/content";
 
 /* Sub-page renderer for /services/[slug]. Same lane system and visual
    language as the About page: dot-matrix hero, big statement lead, then
-   the page body as generic blocks. The blog showcase is shared. */
+   the page body as generic blocks. The blog showcase renders after the
+   lane div so its width matches the homepage exactly. */
 
 function Prose({
   heading,
