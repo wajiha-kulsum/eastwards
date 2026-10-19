@@ -8,7 +8,6 @@ import {
   useTransform,
   useMotionValue,
   useMotionValueEvent,
-  type MotionValue,
 } from "motion/react";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import { SectionLabel } from "@/components/ui/SectionLabel";
@@ -18,7 +17,7 @@ import { features } from "@/lib/content";
 const CARD_W = 300;
 const GAP = 14;
 const DOTS = 9;
-const START_FRACTION = 0.465; // first card anchors to the copy column line
+const START_FRACTION = 0.465; // first card aligns to the copy-column line
 const DRIFT_DELAY_MS = 2500; // auto-scroll starts after a short pause
 
 function DotMatrix() {
@@ -31,13 +30,17 @@ function DotMatrix() {
   );
 }
 
-function CardCarousel({ progress }: { progress: MotionValue<number> }) {
+function CardCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const paused = useRef(false);
   const drift = useMotionValue(0);
   const [metrics, setMetrics] = useState({ start: 0, travel: 0 });
   const [active, setActive] = useState(2);
+  const { scrollYProgress: progress } = useScroll({
+    target: wrapRef,
+    offset: ["start end", "end start"],
+  });
 
   const cards = features.services;
   const setWidth = cards.length * (CARD_W + GAP);
@@ -95,11 +98,11 @@ function CardCarousel({ progress }: { progress: MotionValue<number> }) {
     };
   }, [drift]);
 
-  // position = mid-screen anchor − scroll traversal − accumulated drift,
-  // wrapped into one set width so the four copies always cover the strip
+  // One repeated set starts at the copy-column anchor; earlier cards fill left.
+  // Wrap into one set width so all four copies keep covering the strip.
   const x = useTransform([progress, drift], ([p, d]: number[]) => {
     if (typeof window === "undefined") return -metrics.start;
-    const raw = -metrics.start - p * metrics.travel - d;
+    const raw = metrics.start - p * metrics.travel - d;
     const m = raw % setWidth;
     return m > 0 ? m - setWidth : m;
   });
@@ -165,17 +168,9 @@ function CardCarousel({ progress }: { progress: MotionValue<number> }) {
 }
 
 export function Features() {
-  const sectionRef = useRef<HTMLElement>(null);
-  // cards slide as the section traverses the viewport (in at bottom → out at top)
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
   return (
     <section
-      ref={sectionRef}
-      className="mx-auto mt-14 max-w-[1720px] overflow-hidden px-6 sm:px-10 md:mt-16 lg:px-[5.35%]"
+      className="mx-auto mt-14 max-w-[1720px] px-6 sm:px-10 md:mt-16 lg:px-[5.35%]"
     >
       <div className="grid gap-8 md:grid-cols-[46.5%_1fr]">
         <h2 className="text-2xl font-semibold leading-8 tracking-tight text-ink sm:text-[28px]">
@@ -186,16 +181,16 @@ export function Features() {
         </h2>
 
         <div>
-          <SectionLabel>{features.label}</SectionLabel>
-          <div className="relative mt-2 flex max-w-[360px] gap-[18px]">
+          <SectionLabel className="text-[15px] sm:text-[16px]">{features.label}</SectionLabel>
+          <div className="relative mt-2 flex max-w-[500px] gap-4">
             <DotMatrix />
-            <p className="text-[14px] font-medium leading-[16.5px] text-statement">
+            <p className="text-[15px] font-medium leading-[1.4] text-statement sm:text-[17px]">
               {features.body}
             </p>
           </div>
           <PrimaryButton
             href="#"
-            className="mt-5 h-8 gap-2 px-6 text-[12px]"
+            className="mt-5 h-10 gap-2 px-7 text-[14px]"
           >
             {features.cta}
             <svg
@@ -205,7 +200,7 @@ export function Features() {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="h-3 w-3"
+              className="h-3.5 w-3.5"
               aria-hidden="true"
             >
               <path d="M3 6l5 5 5-5" />
@@ -215,8 +210,8 @@ export function Features() {
       </div>
 
       {/* full-bleed scroll-driven carousel — escapes the container padding */}
-      <div className="-mx-4 mt-9 md:-mx-[17px]">
-        <CardCarousel progress={scrollYProgress} />
+      <div className="relative left-1/2 mt-9 w-screen -translate-x-1/2">
+        <CardCarousel />
       </div>
     </section>
   );
