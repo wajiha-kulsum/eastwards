@@ -64,7 +64,7 @@ export function Navbar() {
                           >
                             {service.label}
                           </NavigationMenuLink>
-                          {service.detail ? (
+                          {service.detail || service.items ? (
                             <>
                               <svg
                                 aria-hidden="true"
@@ -81,12 +81,27 @@ export function Navbar() {
                                 />
                               </svg>
                               <div className="invisible absolute left-full top-0 z-10 pl-3 opacity-0 transition-opacity duration-200 group-hover/row:visible group-hover/row:opacity-100 focus-within:visible focus-within:opacity-100">
+                                {service.items ? (
+                                <div className="min-w-[280px] rounded-2xl border border-[#e8e8e8] bg-white p-3 shadow-xl">
+                                  <div className="flex flex-col">
+                                    {service.items.map((item) => (
+                                      <NavigationMenuLink
+                                        key={item.label}
+                                        href={item.href}
+                                        className="px-3 py-2 text-[15px] font-normal text-[#171717] transition-colors rounded-[10px] hover:bg-[#fafafa] hover:text-[#2868ff]"
+                                      >
+                                        {item.label}
+                                      </NavigationMenuLink>
+                                    ))}
+                                  </div>
+                                </div>
+                              ) : (
                                 <div className="w-max max-w-[280px] rounded-2xl border border-[#e8e8e8] bg-white p-5 shadow-xl">
                                   <p className="text-[15px] font-medium text-[#171717]">
-                                    {service.detail.title}
+                                    {service.detail?.title}
                                   </p>
                                   <p className="mt-2 text-[13px] leading-[1.5] text-[#757575]">
-                                    {service.detail.body}
+                                    {service.detail?.body}
                                   </p>
                                   <NavigationMenuLink
                                     href="/contact"
@@ -109,6 +124,7 @@ export function Navbar() {
                                     </svg>
                                   </NavigationMenuLink>
                                 </div>
+                              )}
                               </div>
                             </>
                           ) : (

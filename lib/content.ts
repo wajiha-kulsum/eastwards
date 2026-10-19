@@ -17,16 +17,28 @@ export type NavService = {
   label: string;
   href: string;
   detail?: { title: string; body: string };
+  items?: { label: string; href: string }[];
 };
 
 export const navServices: readonly NavService[] = [
   {
     label: "Application Services",
     href: "/services/application-services",
-    detail: {
-      title: "Application Services",
-      body: "Cloud-native web and mobile platforms, from discovery to continuous delivery.",
-    },
+    items: [
+      {
+        label: "Application Lifecycle Management",
+        href: "/services/application-services",
+      },
+      {
+        label: "Enterprise Change Management",
+        href: "/services/application-services",
+      },
+      { label: "Quality Engineering", href: "/services/application-services" },
+      {
+        label: "Workflow Automation Services",
+        href: "/services/application-services",
+      },
+    ],
   },
   {
     label: "Data and Artificial Intelligence",
