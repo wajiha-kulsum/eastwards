@@ -1124,4 +1124,96 @@ export const servicePages: readonly ServicePageContent[] = [
       },
     ],
   },
+  {
+    slug: "governance-risk-and-compliance",
+    title: "Governance Risk and Compliance",
+    lede: "Regulatory compliance and risk mitigation with Eastwards GRC services.",
+    blocks: [
+      {
+        kind: "lead",
+        body: "With ever-evolving technologies, security definitions are evolving at a disruptive pace. A robust governance, risk, and compliance (GRC) program helps firms maintain overall security and protect their data from advanced and evolving threats. The GRC security system helps organizations detect and mitigate potential threats, comply with essential regulatory standards, and protect IT infrastructure while maintaining stakeholders’ trust.",
+      },
+      {
+        kind: "prose",
+        heading: "Governance Risk and Compliance Services",
+        paragraphs: [
+          "With Eastwards’ comprehensive view of GRC, we understand that governance, risk management, and compliance are interrelated disciplines. We build integration between the security models and GRC systems to ensure the firm is aligned with the GRC framework to create a robust and cohesive system. Our diverse range of GRC services helps organizations improve their GRC postures. Our services include:",
+        ],
+      },
+      {
+        kind: "bullets",
+        items: [
+          "Cybersecurity strategy and roadmap",
+          "Policy development and management",
+          "IT security risk management and IT resiliency assessment",
+          "Regular technology assessments",
+          "Alignment with regulatory compliance requirements",
+          "Compliance consulting and internal audit",
+          "Third-party security posture & compliance",
+          "CISO as a Service",
+        ],
+      },
+      {
+        kind: "bullets",
+        heading: "Our USPs",
+        items: [
+          "Leading-edge GRC technology solutions to streamline processes and enhance efficiency",
+          "AI-driven solutions to enhance the effectiveness of the operations",
+          "Flexible service offerings tailored to meet unique customer needs",
+          "User-focused solutions to foster security awareness and spread awareness within the organizations",
+          "Firm grasp of the latest GRC trends and best practices",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "cloud-security",
+    title: "Cloud Security",
+    lede: "Security should never be a blocker in business transformation — the cloud works as an accelerator.",
+    blocks: [
+      {
+        kind: "lead",
+        body: "Cloud computing facilitates evolution and business growth by providing on-demand self-service and broad network access. Cloud computing offers scalability and flexibility, allowing resource pooling to serve clients dynamically and optimizing resources by measuring various parameters that aid resource capabilities. Along with the numerous benefits, cloud computing also introduces several risks in the security realm.",
+      },
+      {
+        kind: "prose",
+        paragraphs: [
+          "Cloud security must cater to business agility, scalability, and growth in the cloud environment. Security should never be a blocker in business transformation — the cloud should work as an accelerator. Secure cloud platforms facilitate an IT ecosystem that can defend against a highly dynamic threat landscape, align with ever-evolving compliance requirements, and meet business requirements.",
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "Microsoft Solutions Partners",
+        paragraphs: [
+          "Eastwards is a Microsoft Solutions Partner in global security services. Eastwards provides best-in-class capability within a Microsoft solution area. Our expertise, proven methods, and creative approach aid in our clients’ cloud migration journey.",
+          "Our Microsoft Cloud Security Solutions are based on some cardinal principles: they are tech-based, focused on prevention using threat intelligence and automation, and leverage the potential of AI/ML and other latest technologies, to deliver effective outcomes at a reasonable cost. Our solutions facilitate hybrid environments, empowering our client ecosystem on a multi-cloud landscape.",
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "Solution",
+        paragraphs: [
+          "We differentiate the uniqueness of every organization’s cloud journey and digital transformation needs and identify the common potential cloud-based security threats every organization exposes itself to. Eastwards implements a ZERO TRUST security model as the base framework to establish a unified security program to facilitate seamless migration to Azure. Additionally, Eastwards helps develop a systematic approach to secure data transfer across all devices and modernize the workplace. By aligning with NIST 800-207 standards for Zero Trust, we meet the clients’ requirements and create a tailored roadmap to achieve the target ecosystem. Through the strategized implementation of Microsoft’s native security capabilities, third-party solutions, and Eastwards frameworks, we ensure the optimal deployment of the Zero Trust model for your business growth and scalability. Eastwards solutions work in conjunction with AI/ML technology, essential security intelligence, and automation to deliver effective and long-term solutions at a reasonable price.",
+        ],
+      },
+      {
+        kind: "bullets",
+        heading: "Benefits",
+        items: [
+          "Partner with Microsoft for cloud security services",
+          "Have a global perspective of the compliance state of your Azure environment with our Zero Trust security model",
+          "Enhance compliance with industry standards",
+          "Supports secure collaboration and remote work environments and provides flexibility in engagement models",
+          "Maintain and protect all cloud resources and facilitate multiple end-to-end cloud adoption and migration engagements",
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "Stay Ahead of Cyber Threats with Eastwards",
+        paragraphs: [
+          "Empowering your business with AI-driven visibility, rapid detection, and swift incident response.",
+        ],
+      },
+    ],
+  },
 ];
