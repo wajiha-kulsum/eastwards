@@ -899,4 +899,64 @@ export const servicePages: readonly ServicePageContent[] = [
       },
     ],
   },
+  {
+    slug: "threat-monitoring-incident-response",
+    title: "Threat Monitoring & Incident Response",
+    lede: "Security threat management with advanced technology — visibility without blind spots.",
+    blocks: [
+      {
+        kind: "lead",
+        body: "With ever-evolving strategies employed to gain access to the firm’s digital assets, it is challenging to identify potential risks. This calls for establishing a security solution with visibility to eliminate blind spots by implementing the latest technologies. To exponentially reduce the growing risk of cyber threats, businesses need next-gen security threat management solutions integrated with robust technologies, tailored strategies, agile methodologies, rapid threat detection, and quick response capabilities.",
+      },
+      {
+        kind: "panels",
+        groups: [
+          {
+            title: "Threat Visibility Assurance",
+            body: "We eliminate blind spots, and design and incorporate relevant logs at the appropriate level, which includes:",
+            items: [
+              {
+                title:
+                  "Around-the-clock attack surface monitoring and integration for overall security visibility",
+              },
+              {
+                title:
+                  "Targeted threat mitigation for customer-specific analytics",
+              },
+              { title: "High-fidelity telemetry" },
+            ],
+          },
+          {
+            title: "Threat Detection",
+            body: "We help firms conduct risk assessments and identify internal and external threats via next-gen techniques to provide:",
+            items: [
+              { title: "Overall risk prediction" },
+              { title: "AI/ML-based threat and risk detection" },
+              { title: "Dark and deep web surveillance" },
+            ],
+          },
+          {
+            title: "Threat Prevention, Response & Compliance",
+            body: "We help firms monitor, prevent, and respond to potential threats through:",
+            items: [
+              { title: "Engineered response" },
+              { title: "Risk-based threat prioritization" },
+              { title: "Security breach investigation and reporting" },
+            ],
+          },
+        ],
+      },
+      {
+        kind: "bullets",
+        heading: "Benefits",
+        items: [
+          "Modular security model with stack features",
+          "Flexible, consumption-based payment models",
+          "Enhanced threat visibility through customer-contextualized intelligence, alert elimination, and automation",
+          "Prevention and detection at speed with dark, deep, and surface web surveillance, and advanced external and internal threat identification",
+          "Automated and engineered risk response, on-demand deep investigation, and forensics",
+        ],
+      },
+    ],
+  },
 ];
