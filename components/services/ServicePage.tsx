@@ -35,12 +35,14 @@ function Prose({
   );
 }
 
-function Bullets({ heading, items }: { heading: string; items: string[] }) {
+function Bullets({ heading, items }: { heading?: string; items: string[] }) {
   return (
     <section>
-      <h2 className="max-w-[720px] text-[25px] font-medium leading-tight tracking-[-0.055em] text-ink sm:text-[27px]">
-        {heading}
-      </h2>
+      {heading ? (
+        <h2 className="max-w-[720px] text-[25px] font-medium leading-tight tracking-[-0.055em] text-ink sm:text-[27px]">
+          {heading}
+        </h2>
+      ) : null}
       <ul className="mt-4 grid max-w-[860px] gap-x-10 gap-y-2.5 sm:grid-cols-2">
         {items.map((item) => (
           <li key={item} className="flex items-start gap-2.5">
@@ -143,9 +145,11 @@ function Panels({
                     <p className="text-[13px] font-semibold text-[#292929]">
                       {item.title}
                     </p>
-                    <p className="mt-0.5 text-[12px] leading-[1.5] text-[#7a7a7a]">
-                      {item.body}
-                    </p>
+                    {item.body ? (
+                      <p className="mt-0.5 text-[12px] leading-[1.5] text-[#7a7a7a]">
+                        {item.body}
+                      </p>
+                    ) : null}
                   </div>
                 ))}
               </div>

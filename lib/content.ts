@@ -428,7 +428,7 @@ export const about = {
 export type ServiceBlock =
   | { kind: "lead"; body: string }
   | { kind: "prose"; heading?: string; paragraphs: string[] }
-  | { kind: "bullets"; heading: string; items: string[] }
+  | { kind: "bullets"; heading?: string; items: string[] }
   | {
       kind: "cards";
       heading?: string;
@@ -441,7 +441,7 @@ export type ServiceBlock =
       groups: {
         title: string;
         body?: string;
-        items: { title: string; body: string }[];
+        items: { title: string; body?: string }[];
       }[];
     };
 
