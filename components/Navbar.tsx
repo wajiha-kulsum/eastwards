@@ -53,8 +53,7 @@ export function Navbar() {
                       sideways flyout (hover the row to its right edge - the
                       12px pl on the flyout keeps the hover bridge gapless). */}
                   <NavigationMenuContent className="nav-services-panel">
-                    <div className="flex flex-col">
-                      {navServices.map((service) => (
+                    {navServices.map((service) => (
                         <div
                           key={service.label}
                           className="group/row relative flex items-center justify-between gap-6 px-3"
@@ -117,7 +116,6 @@ export function Navbar() {
                           )}
                         </div>
                       ))}
-                    </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
               ) : (
