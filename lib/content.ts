@@ -1060,4 +1060,68 @@ export const servicePages: readonly ServicePageContent[] = [
       },
     ],
   },
+  {
+    slug: "identity-and-access-management",
+    title: "Identity and Access Management",
+    lede: "A modern, robust identity ecosystem — agile IAM tailored to your needs.",
+    blocks: [
+      {
+        kind: "lead",
+        body: "Digital adoption and cloud computing facilitate evolution and business growth, but they also expose the firm to the potential risks of data breaches, insider threats, compliance, and service outage issues. Dealing with identity security requirements using traditional methods is risky when managing diverse identities. With Eastwards’ innovative and agile methods, you can transform your business, protect your identity ecosystem, and manage all identities associated with your firm.",
+      },
+      {
+        kind: "prose",
+        heading: "Solution",
+        paragraphs: [
+          "Eastwards IAM services provide a modern ecosystem with effective, reliable, robust, and scalable identity access management tailored to your needs. Eastwards helps prevent data breaches and facilitates integrated data delivery. Our team of experts curates tailored solutions, develops transformation roadmaps, and generates service outcomes by implementing AI/ML and integrating essential security intelligence and automation. Eastwards helps strengthen the firm’s identity security, ensuring regulatory compliance.",
+          "Eastwards’ best-in-class Azure Active Directory and Microsoft Entra ID Premium consulting services help minimize unauthorized access by assisting in configuring phishing-resistant passwordless credentials and managing external identities efficiently. Our IAM service helps businesses deploy a unified identity authentication mechanism, ensuring onboarding, offboarding, and segregation of responsibilities.",
+        ],
+      },
+      {
+        kind: "panels",
+        heading: "IAM Portfolio",
+        groups: [
+          {
+            title: "Workplace IAM",
+            body: "Eastwards helps businesses modernize identity management using identity intelligence. We help you design, configure greenfield/transform legacy setups, and integrate with business applications to secure sensitive data and minimize potential security breaches and data theft risks. Eastwards helps businesses align to the following regulatory compliance standards:",
+            items: [
+              { title: "Identity lifecycle management" },
+              { title: "Connector development & integration" },
+              { title: "Role-based access control" },
+              { title: "IAM governance" },
+            ],
+          },
+          {
+            title: "Authentication",
+            body: "Eastwards helps you integrate IAM into cloud security, deploying robust user access to cloud resources. We build a secure unified platform that supports identity protocols, geographical controls, and a Zero Trust security model by implementing the following services:",
+            items: [
+              { title: "Identity federation" },
+              { title: "Credential management" },
+              { title: "MFA/adaptive authentication" },
+            ],
+          },
+          {
+            title: "Privilege Access Management",
+            body: "Eastwards deploys, secures, manages, and audits privileged access across various devices of the platform by implementing the following services:",
+            items: [
+              { title: "Privilege account discovery" },
+              { title: "Solution design & configuration" },
+              { title: "Solution administration" },
+              { title: "Auditing & reporting" },
+            ],
+          },
+          {
+            title: "Customer IAM",
+            body: "Eastwards manages customer identity management solutions by using security aspects of IAM in conjunction with digital customer experiences and curating tailored integrations.",
+            items: [
+              { title: "User lifecycle management" },
+              { title: "Customer self-service" },
+              { title: "Third-party service integration" },
+              { title: "Consent & preference management" },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 ];
