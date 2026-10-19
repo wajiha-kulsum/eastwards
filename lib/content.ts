@@ -43,10 +43,12 @@ export const navServices: readonly NavService[] = [
   {
     label: "Data and Artificial Intelligence",
     href: "/services",
-    detail: {
-      title: "Data and Artificial Intelligence",
-      body: "Data engineering, analytics, and ML operationalization to turn information into strategic assets.",
-    },
+    items: [
+      { label: "Data Engineering", href: "/services" },
+      { label: "Data Modernization", href: "/services" },
+      { label: "Enterprise Agentic AI", href: "/services" },
+      { label: "Enterprise Generative AI Solutions", href: "/services" },
+    ],
   },
   { label: "Digital Support Services", href: "/services/digital-support-services" },
   { label: "IT staffing services", href: "/services/it-staffing-services" },
@@ -55,10 +57,15 @@ export const navServices: readonly NavService[] = [
   {
     label: "Cybersecurity",
     href: "/services",
-    detail: {
-      title: "Cybersecurity",
-      body: "Risk assessments, security engineering, and compliance built into delivery.",
-    },
+    items: [
+      { label: "Threat Monitoring & Incident Response", href: "/services" },
+      { label: "Infrastructure Security", href: "/services" },
+      { label: "Identity and Access Management", href: "/services" },
+      { label: "Governance Risk and Compliance", href: "/services" },
+      { label: "Cloud Security", href: "/services" },
+      { label: "Application Security", href: "/services" },
+      { label: "AI Security", href: "/services" },
+    ],
   },
   { label: "Infrastructure and Cloud services", href: "/services" },
   { label: "Modern Device Management", href: "/services" },
