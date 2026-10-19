@@ -16,7 +16,7 @@ export default function DotHero({ title, lede }: { title: string; lede: string }
 
       {/* Supporting copy - pinned to bottom right across all sub-pages */}
       <div className="relative z-10 mt-auto flex justify-end pb-2">
-        <p className="max-w-[420px] bg-white text-right text-[14px] font-normal leading-[1.3] text-[#111111] sm:text-[16px] md:text-[18px] lg:text-[20px]">
+        <p className="max-w-[420px] bg-white px-3 py-1 text-right text-[14px] font-normal leading-[1.3] text-[#111111] shadow-[0_0_24px_16px_#fff] sm:text-[16px] md:text-[18px] lg:text-[20px]">
           {lede}
         </p>
       </div>
