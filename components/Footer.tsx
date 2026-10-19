@@ -22,7 +22,7 @@ export function Footer() {
                 <li key={link}>
                   <a
                     href="#"
-                    className="transition-colors hover:text-primary"
+                    className="link-underline-sweep transition-colors hover:text-primary"
                   >
                     {link}
                   </a>
@@ -42,7 +42,7 @@ export function Footer() {
             <a
               key={item}
               href="#"
-              className="transition-colors hover:text-ink"
+              className="link-underline-sweep transition-colors hover:text-ink"
             >
               {item}
             </a>

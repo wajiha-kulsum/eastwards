@@ -41,6 +41,30 @@ body {
   }
 }
 
+/* Footer link underline that sweeps out from the left on hover.
+   Soft = current color at reduced opacity, 1px hairline. */
+.link-underline-sweep {
+  display: inline-block;
+  position: relative;
+}
+
+.link-underline-sweep::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 1px;
+  background: color-mix(in srgb, currentColor 55%, transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-out;
+}
+
+.link-underline-sweep:hover::after {
+  transform: scaleX(1);
+}
+
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);
