@@ -58,17 +58,35 @@ export const navServices: readonly NavService[] = [
     label: "Cybersecurity",
     href: "/services",
     items: [
-      { label: "Threat Monitoring & Incident Response", href: "/services" },
-      { label: "Infrastructure Security", href: "/services" },
-      { label: "Identity and Access Management", href: "/services" },
-      { label: "Governance Risk and Compliance", href: "/services" },
-      { label: "Cloud Security", href: "/services" },
-      { label: "Application Security", href: "/services" },
-      { label: "AI Security", href: "/services" },
+      {
+        label: "Threat Monitoring & Incident Response",
+        href: "/services/threat-monitoring-incident-response",
+      },
+      {
+        label: "Infrastructure Security",
+        href: "/services/infrastructure-security",
+      },
+      {
+        label: "Identity and Access Management",
+        href: "/services/identity-and-access-management",
+      },
+      {
+        label: "Governance Risk and Compliance",
+        href: "/services/governance-risk-and-compliance",
+      },
+      { label: "Cloud Security", href: "/services/cloud-security" },
+      { label: "Application Security", href: "/services/application-security" },
+      { label: "AI Security", href: "/services/ai-security" },
     ],
   },
-  { label: "Infrastructure and Cloud services", href: "/services" },
-  { label: "Modern Device Management", href: "/services" },
+  {
+    label: "Infrastructure and Cloud services",
+    href: "/services",
+  },
+  {
+    label: "Modern Device Management",
+    href: "/services/modern-device-management",
+  },
 ];
 
 export const hero = {

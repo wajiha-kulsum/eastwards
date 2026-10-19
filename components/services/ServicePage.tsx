@@ -117,7 +117,7 @@ function Panels({
   groups: {
     title: string;
     body?: string;
-    items: { title: string; body: string }[];
+    items: { title: string; body?: string }[];
   }[];
 }) {
   return (
