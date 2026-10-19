@@ -52,10 +52,13 @@ export function Footer() {
 
       {/* Giant gradient wordmark reflecting into the page edge. Sized to the
           drawing: "Eastwards" ~= 4.93x the font size, so 17.3vw ~= 86% width
-          (paper: 1480/1728) and it never crops at the viewport edges. */}
+          (paper: 1480/1728) and it never crops at the viewport edges.
+          text-box trims the line box to the alphabetic baseline - "Eastwards"
+          has no descenders, so the page ends exactly at the glyph bottoms
+          instead of at the font's hidden descent space. */}
       <p
         aria-hidden="true"
-        className="mt-16 select-none bg-gradient-to-b from-body to-white bg-clip-text text-center font-display text-[clamp(4rem,17.3vw,18.75rem)] font-bold leading-[0.85] tracking-tight text-transparent sm:mt-24"
+        className="mt-16 select-none bg-gradient-to-b from-body to-white bg-clip-text text-center font-display text-[clamp(4rem,17.3vw,18.75rem)] font-bold leading-[0.85] [text-box:trim-end_cap_alphabetic] tracking-tight text-transparent sm:mt-24"
       >
         {footer.wordmark}
       </p>
