@@ -2,8 +2,9 @@ import DotField from "@/components/ui/DotField";
 
 /* The dot-field hero shared by Contact, Partners, About and the service
    pages. Geometry is locked so switching pages feels consistent: the dot
-   field (DotField) runs clean behind the copy, and only the title and lede
-   text vary between pages. */
+   field (DotField) runs behind the copy, and the title and lede each carry
+   a white backing with a feathered shadow so the text dissolves into the
+   field. Only the title and lede text vary between pages. */
 
 export default function DotHero({ title, lede }: { title: string; lede: string }) {
   return (
