@@ -43,19 +43,77 @@ export function Navbar() {
             {navLinks.map((item) =>
               item.label === "Services" ? (
                 <NavigationMenuItem key={item.label}>
-                  <NavigationMenuTrigger className="h-auto bg-white px-0 py-0 text-[13px] font-normal tracking-[0.1px] text-[#171717] hover:bg-white hover:text-[#2868ff] focus:bg-white data-popup-open:bg-white data-popup-open:text-[#2868ff] lg:text-[15px] lg:tracking-[0.02em] [&_svg]:size-3">
+                  <NavigationMenuTrigger className="h-auto bg-white px-0 py-0 text-[13px] font-medium tracking-[0.1px] text-[#171717] hover:bg-white hover:text-[#2868ff] focus:bg-white data-popup-open:bg-white data-popup-open:text-[#2868ff] lg:text-[15px] lg:tracking-[0.02em]">
                     {item.label}
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="w-[540px] border-[#e8e8e8] p-2 shadow-xl">
-                    <div className="grid grid-cols-2 gap-1">
+                  {/* Dark single-column menu per the dropdown mock. Rows for
+                      items with `detail` carry a blue chevron and reveal a
+                      sideways flyout (hover the row to its right edge - the
+                      12px pl on the flyout keeps the hover bridge gapless). */}
+                  <NavigationMenuContent className="w-[320px] rounded-2xl border-0 border-b-[3px] border-[#2868ff] bg-[#333338] p-4 shadow-xl ring-0">
+                    <div className="flex flex-col">
                       {navServices.map((service) => (
-                        <NavigationMenuLink
+                        <div
                           key={service.label}
-                          href={service.href}
-                          className="rounded-[10px] p-3 text-[13px] font-normal text-[#171717] transition-colors hover:bg-[#fafafa] hover:text-[#2868ff]"
+                          className="group/row relative flex items-center justify-between gap-6 px-3"
                         >
-                          {service.label}
-                        </NavigationMenuLink>
+                          <NavigationMenuLink
+                            href={service.href}
+                            className="py-2 text-[15px] font-medium text-white transition-colors hover:bg-transparent hover:text-[#9cc0ff] focus:bg-transparent"
+                          >
+                            {service.label}
+                          </NavigationMenuLink>
+                          {service.detail ? (
+                            <>
+                              <svg
+                                aria-hidden="true"
+                                viewBox="0 0 20 20"
+                                fill="none"
+                                className="h-3 w-3 shrink-0 transition-transform duration-200 group-hover/row:translate-x-0.5"
+                              >
+                                <path
+                                  d="M7 4.5L12.5 10L7 15.5"
+                                  stroke="#2868FF"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                              <div className="invisible absolute left-full top-0 z-10 pl-3 opacity-0 transition-opacity duration-200 group-hover/row:visible group-hover/row:opacity-100 focus-within:visible focus-within:opacity-100">
+                                <div className="w-[280px] rounded-2xl bg-[#333338] p-5 shadow-xl">
+                                  <p className="text-[15px] font-medium text-white">
+                                    {service.detail.title}
+                                  </p>
+                                  <p className="mt-2 text-[13px] leading-[1.5] text-white/70">
+                                    {service.detail.body}
+                                  </p>
+                                  <NavigationMenuLink
+                                    href="/contact"
+                                    className="mt-3 inline-flex items-center gap-1.5 rounded-lg text-[13px] font-medium text-[#9cc0ff] transition-colors hover:bg-transparent hover:text-white focus:bg-transparent"
+                                  >
+                                    Contact us
+                                    <svg
+                                      aria-hidden="true"
+                                      viewBox="0 0 20 20"
+                                      fill="none"
+                                      className="h-3 w-3"
+                                    >
+                                      <path
+                                        d="M7 4.5L12.5 10L7 15.5"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                      />
+                                    </svg>
+                                  </NavigationMenuLink>
+                                </div>
+                              </div>
+                            </>
+                          ) : (
+                            <span className="w-3 shrink-0" aria-hidden="true" />
+                          )}
+                        </div>
                       ))}
                     </div>
                   </NavigationMenuContent>
@@ -65,7 +123,7 @@ export function Navbar() {
                   <NavigationMenuLink asChild>
                     <Link
                       href={item.href}
-                      className="text-[13px] font-normal tracking-[0.1px] text-[#171717] transition-colors hover:text-[#2868ff] lg:text-[15px] lg:tracking-[0.02em]"
+                      className="text-[13px] font-medium tracking-[0.1px] text-[#171717] transition-colors hover:text-[#2868ff] lg:text-[15px] lg:tracking-[0.02em]"
                     >
                       {item.label}
                     </Link>

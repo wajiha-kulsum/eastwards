@@ -10,21 +10,47 @@ export const navLinks = [
   { label: "Contact Us", href: "/contact" },
 ] as const;
 
-/* Services nav dropdown — same nine offerings as the /about solutions grid. */
-export const navServices = [
+/* Services nav dropdown — labels and order from the approved dropdown mock.
+   Items 1, 2 and 7 carry `detail`: hovering them opens a sideways flyout.
+   detail.body is the verbatim service description from the /about grid. */
+export type NavService = {
+  label: string;
+  href: string;
+  detail?: { title: string; body: string };
+};
+
+export const navServices: readonly NavService[] = [
   {
-    label: "Application Development & Product Engineering",
+    label: "Application Services",
     href: "/services",
+    detail: {
+      title: "Application Services",
+      body: "Cloud-native web and mobile platforms, from discovery to continuous delivery.",
+    },
   },
-  { label: "Quantum Computing Advisory", href: "/services" },
-  { label: "Data & Artificial Intelligence", href: "/services" },
-  { label: "Cybersecurity Services", href: "/services" },
-  { label: "Infrastructure & Cloud", href: "/services" },
-  { label: "Modern Device Management", href: "/services" },
-  { label: "Projects & Professional Services", href: "/services" },
-  { label: "IT Staffing Services", href: "/services" },
+  {
+    label: "Data and Artificial Intelligence",
+    href: "/services",
+    detail: {
+      title: "Data and Artificial Intelligence",
+      body: "Data engineering, analytics, and ML operationalization to turn information into strategic assets.",
+    },
+  },
   { label: "Digital Support Services", href: "/services" },
-] as const;
+  { label: "IT staffing services", href: "/services" },
+  { label: "Projects and Professional Services", href: "/services" },
+  { label: "Quantum Computing", href: "/services" },
+  {
+    label: "Cybersecurity",
+    href: "/services",
+    detail: {
+      title: "Cybersecurity",
+      body: "Risk assessments, security engineering, and compliance built into delivery.",
+    },
+  },
+  { label: "Infrastructure and Cloud services", href: "/services" },
+  { label: "Modern Device Management", href: "/services" },
+];
 
 export const hero = {
   headline: "Technology that moves business forward",
