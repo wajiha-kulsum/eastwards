@@ -65,6 +65,24 @@ body {
   transform: scaleX(1);
 }
 
+/* Services dropdown panel. Unlayered on purpose: it must outrank the
+   group-variant utilities baked into the shadcn navigation-menu content
+   (bg-popover, md:w-auto, rounded-lg) that class merging cannot outrank. */
+.nav-services-panel {
+  width: min(600px, calc(100vw - 24px));
+  border-radius: 16px;
+  border: 0;
+  border-bottom: 3px solid #2868ff;
+  background: #333338;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
+  padding: 16px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(5, auto);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 20px;
+}
+
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);

@@ -43,14 +43,16 @@ export function Navbar() {
             {navLinks.map((item) =>
               item.label === "Services" ? (
                 <NavigationMenuItem key={item.label}>
-                  <NavigationMenuTrigger className="h-auto bg-white px-0 py-0 text-[13px] font-medium tracking-[0.1px] text-[#171717] hover:bg-white hover:text-[#2868ff] focus:bg-white data-popup-open:bg-white data-popup-open:text-[#2868ff] lg:text-[15px] lg:tracking-[0.02em]">
+                  <NavigationMenuTrigger className="h-auto bg-white px-0 py-0 text-[14px] font-medium tracking-[0.1px] text-[#171717] hover:bg-white hover:text-[#2868ff] focus:bg-white data-popup-open:bg-white data-popup-open:text-[#2868ff] lg:text-[16px] lg:tracking-[0.02em]">
                     {item.label}
                   </NavigationMenuTrigger>
-                  {/* Dark single-column menu per the dropdown mock. Rows for
+                  {/* Dark two-column panel driven by .nav-services-panel
+                      (globals) — unlayered CSS outranks the group-variant
+                      utilities in the shadcn content defaults. Rows for
                       items with `detail` carry a blue chevron and reveal a
                       sideways flyout (hover the row to its right edge - the
                       12px pl on the flyout keeps the hover bridge gapless). */}
-                  <NavigationMenuContent className="w-[320px] rounded-2xl border-0 border-b-[3px] border-[#2868ff] bg-[#333338] p-4 shadow-xl ring-0">
+                  <NavigationMenuContent className="nav-services-panel">
                     <div className="flex flex-col">
                       {navServices.map((service) => (
                         <div
@@ -123,7 +125,7 @@ export function Navbar() {
                   <NavigationMenuLink asChild>
                     <Link
                       href={item.href}
-                      className="text-[13px] font-medium tracking-[0.1px] text-[#171717] transition-colors hover:text-[#2868ff] lg:text-[15px] lg:tracking-[0.02em]"
+                      className="text-[14px] font-medium tracking-[0.1px] text-[#171717] transition-colors hover:text-[#2868ff] lg:text-[16px] lg:tracking-[0.02em]"
                     >
                       {item.label}
                     </Link>
