@@ -11,6 +11,10 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    // The browser replays the previous scroll offset on reload/back AFTER
+    // our reset runs - taking over restores every visit to the top.
+    history.scrollRestoration = "manual";
+
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     // anchors: true routes hash links (#main, #solutions) through Lenis so
