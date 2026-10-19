@@ -8,8 +8,8 @@ import { footer } from "@/lib/content";
 
 export function Footer() {
   return (
-    <footer className="relative mx-auto mt-16 w-full max-w-[1720px] px-6 pt-2 sm:px-10 lg:px-[5.35%]">
-      <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-5">
+    <footer className="relative mx-auto mt-16 w-full max-w-[1720px] px-6 pt-4 sm:px-10 lg:px-[5.35%]">
+      <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 sm:gap-x-10 md:grid-cols-5 md:gap-x-8">
         {footer.columns.map((column) => (
           <nav
             key={column.title}
@@ -17,7 +17,7 @@ export function Footer() {
             className="text-[13px] leading-[17px] md:text-[18px] md:leading-[21px]"
           >
             <p className="text-body">{column.title}</p>
-            <ul className="mt-0.5 font-display font-semibold text-ink">
+            <ul className="mt-3 space-y-2.5 font-display font-semibold text-ink md:mt-4 md:space-y-3">
               {column.links.map((link) => (
                 <li key={link}>
                   <a
@@ -33,7 +33,7 @@ export function Footer() {
         ))}
       </div>
 
-      <div className="mt-12 flex flex-col gap-3 text-[12px] text-subtle sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-16 flex flex-col gap-3 text-[12px] text-subtle sm:flex-row sm:items-center sm:justify-between sm:mt-20">
         <p className="text-[11px] leading-[18px] sm:text-[15px]">
           {footer.copyright}
         </p>
@@ -55,7 +55,7 @@ export function Footer() {
           (paper: 1480/1728) and it never crops at the viewport edges. */}
       <p
         aria-hidden="true"
-        className="mt-12 select-none bg-gradient-to-b from-body to-white bg-clip-text text-center font-display text-[clamp(4rem,17.3vw,18.75rem)] font-bold leading-[0.85] tracking-tight text-transparent"
+        className="mt-16 select-none bg-gradient-to-b from-body to-white bg-clip-text text-center font-display text-[clamp(4rem,17.3vw,18.75rem)] font-bold leading-[0.85] tracking-tight text-transparent sm:mt-24"
       >
         {footer.wordmark}
       </p>
