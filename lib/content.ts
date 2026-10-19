@@ -959,4 +959,105 @@ export const servicePages: readonly ServicePageContent[] = [
       },
     ],
   },
+  {
+    slug: "infrastructure-security",
+    title: "Infrastructure Security",
+    lede: "Safeguarding the core with advanced platforms and the latest threat detection.",
+    blocks: [
+      {
+        kind: "lead",
+        body: "In recent scenarios where cyber threats across the ecosystem are evolving, one shouldn’t overlook the significance of infrastructure security integrated with advanced security platforms and the latest cyber threat detection technologies. With ever-evolving technologies, security definitions are evolving at a disruptive pace, which requires taking preventive measures to secure IT infrastructure.",
+      },
+      {
+        kind: "prose",
+        heading: "Infrastructure Security Solution",
+        paragraphs: [
+          "Eastwards infrastructure security services help organizations assess the deployed controls and landscape blueprints before implementing advanced measures to protect the core. Our infrastructure security service methodologies are aligned with NIST and ISO standards. The Eastwards team of experts helps businesses improve scalability, agility, and cost effectiveness of the overall firm security in alignment with compliance and regulatory standards, including:",
+        ],
+      },
+      {
+        kind: "bullets",
+        items: [
+          "24X7 comprehensive, integrated operations (infrastructure and security)",
+          "CARTA-based approach to infrastructure security management",
+          "Integrated security management with continuous monitoring",
+          "Regular assessing and managing risk and trust — through reactive and proactive approaches",
+          "Rapid detection and resolution by implementing business intelligence, AI, automation, and orchestration-enabled delivery",
+        ],
+      },
+      {
+        kind: "panels",
+        groups: [
+          {
+            title: "Endpoint Protection",
+            body: "Eastwards helps businesses conduct regular risk assessments, design and implement comprehensive security models, and secure endpoints including IT assets and core IT infrastructure. Our service includes:",
+            items: [
+              { title: "Real-time risk detection" },
+              { title: "Intrusion testing" },
+              { title: "File integrity monitoring" },
+              { title: "Encryption and behaviour analytics" },
+              { title: "Rapid resolution" },
+              { title: "Assessing and reinforcing" },
+            ],
+          },
+          {
+            title: "Vulnerability Management",
+            body: "Eastwards vulnerability management is based on a risk-sensitive approach, which includes:",
+            items: [
+              { title: "Vulnerability detection" },
+              {
+                title:
+                  "Risk profiling, prioritizing, and regular harness assessment",
+              },
+              { title: "Resolution and consolidation services" },
+              { title: "Cyber incident loss computation" },
+            ],
+          },
+          {
+            title: "Network Protection",
+            body: "Eastwards helps businesses assess firewall standards, design and modify the existing digital perimeter, and support the ecosystem using orchestration and automation for rapid resolution. Our service includes:",
+            items: [
+              {
+                title:
+                  "Firewall management across network, web applications, and cloud devices",
+              },
+              { title: "DDOS" },
+              { title: "SSL, VPN" },
+              { title: "SDN security" },
+            ],
+          },
+          {
+            title: "Email Security",
+            body: "We help firms design, implement, and maintain external and internal email threat and data protection to facilitate the following:",
+            items: [
+              { title: "Mailbox security" },
+              { title: "Email gateway protection" },
+              { title: "Mobile device management" },
+              { title: "Anti-phishing services, VPN" },
+            ],
+          },
+          {
+            title: "Internet Security",
+            body: "We design, deploy, and manage browser content for business and support units and include necessary controls to reduce the attack landscape. Our service includes:",
+            items: [
+              { title: "URL filtering" },
+              { title: "Content filtering" },
+              { title: "Application safelisting" },
+              { title: "Web application firewall" },
+            ],
+          },
+        ],
+      },
+      {
+        kind: "bullets",
+        heading: "Benefits",
+        items: [
+          "Regular supervision of critical patch releases through a surveillance and alerting framework to proactively initiate resolution workflows",
+          "Automated reporting and tracking of resolution progress by integrating vulnerability assessment and service management tools",
+          "Maintain compliance in core infrastructure components",
+          "Real-time tailored business intelligence through reporting dashboards",
+        ],
+      },
+    ],
+  },
 ];
