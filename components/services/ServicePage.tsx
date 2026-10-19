@@ -204,7 +204,7 @@ export default function ServicePage({ service }: { service: ServicePageContent }
         </div>
       </div>
 
-      {/* Related Blogs — the common blog showcase, rendered outside the lane
+      {/* Related Blogs, the common blog showcase, rendered outside the lane
           div so it carries the exact homepage width, not a nested lane */}
       <BlogShowcase />
     </main>

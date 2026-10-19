@@ -4,7 +4,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 
-/* Inertial smooth scrolling — wheel input glides instead of stepping.
+/* Inertial smooth scrolling, wheel input glides instead of stepping.
    Also pins every load to the top: browser scroll restoration is switched
    off so refreshing or coming back never lands mid-page.
    Skipped entirely for users who prefer reduced motion. */

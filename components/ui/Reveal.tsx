@@ -9,7 +9,7 @@ type RevealProps = {
   className?: string;
 };
 
-/* Fade-up on scroll into view. Small offset, no bounce — stays quiet. */
+/* Fade-up on scroll into view. Small offset, no bounce, stays quiet. */
 export function Reveal({ children, delay = 0, className }: RevealProps) {
   const reduce = useReducedMotion();
   return (

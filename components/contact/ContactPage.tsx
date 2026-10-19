@@ -6,7 +6,7 @@ import DotHero from "@/components/DotHero";
 import { contact } from "@/lib/content";
 
 export function ContactPage() {
-  // shortcut: duplicates lib/content.ts (directChannels/location/call) — keep
+  // shortcut: duplicates lib/content.ts (directChannels/location/call), keep
   // the two in sync or pick one source when the contact API lands
   const channels = [
     { title: "General Inquiries", email: "info@eastwards.co" },
@@ -53,12 +53,12 @@ export function ContactPage() {
   return (
     <main id="main" className="flex-1 bg-white text-black">
       <div className="mx-auto max-w-[1720px] px-6 pb-16 pt-3 sm:px-10 lg:px-[5.35%]">
-        {/* Hero — grey dot field behind the heading */}
+        {/* Hero, grey dot field behind the heading */}
         <DotHero title={contact.title} lede={contact.subtitle} />
 
         {/* Contact information + form */}
         <section className="mt-9 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.06fr]">
-          {/* Left column — mirrors the form's padding so the top row of copy
+          {/* Left column, mirrors the form's padding so the top row of copy
               sits level with the form's first field; flex + mt-auto keeps the
               card row and the Send button finishing on the same line */}
           <div className="flex flex-col pt-4 sm:pt-5">
@@ -66,7 +66,7 @@ export function ContactPage() {
               / get in touch /
             </p>
 
-            {/* Question and pitch in one text block — same size and weight
+            {/* Question and pitch in one text block, same size and weight
                 throughout, one break after the first question mark */}
             <p className="relative mb-4 max-w-[600px] text-[clamp(17px,3.6vw,26px)] font-medium leading-[1.2] tracking-[-0.04em] text-ink">
               {contact.headline.split("?")[0]}?

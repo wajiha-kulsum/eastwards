@@ -1,4 +1,4 @@
-/* "/ Label /" — brand-blue section eyebrow, quiet size */
+/* "/ Label /", brand-blue section eyebrow, quiet size */
 export function SectionLabel({
   children,
   className = "",

@@ -10,7 +10,7 @@ export const navLinks = [
   { label: "Contact Us", href: "/contact" },
 ] as const;
 
-/* Services nav dropdown — labels and order from the approved dropdown mock.
+/* Services nav dropdown, labels and order from the approved dropdown mock.
    Items 1, 2 and 7 carry `detail`: hovering them opens a sideways flyout.
    detail.body is the verbatim service description from the /about grid. */
 export type NavService = {
@@ -385,7 +385,7 @@ export const about = {
     ],
   },
   approach: {
-    title: "Our Approach – Your Partner in Growth",
+    title: "Our Approach, Your Partner in Growth",
     points: [
       {
         title: "Client First",
@@ -474,11 +474,11 @@ export const servicePages: readonly ServicePageContent[] = [
   {
     slug: "application-services",
     title: "Application Services",
-    lede: "Applications modernized, managed, and enhanced — powerful engines of growth.",
+    lede: "Applications modernized, managed, and enhanced, powerful engines of growth.",
     blocks: [
       {
         kind: "lead",
-        body: "At Eastwards, we help businesses unlock the full potential of their applications by modernizing, managing, and enhancing them to function as powerful engines of growth. Our approach goes beyond routine support — we deliver end-to-end transformation, from initial assessment and design to development, testing, and optimization.",
+        body: "At Eastwards, we help businesses unlock the full potential of their applications by modernizing, managing, and enhancing them to function as powerful engines of growth. Our approach goes beyond routine support, we deliver end-to-end transformation, from initial assessment and design to development, testing, and optimization.",
       },
       {
         kind: "prose",
@@ -655,7 +655,7 @@ export const servicePages: readonly ServicePageContent[] = [
   {
     slug: "projects-professional-services",
     title: "Projects & Professional Services",
-    lede: "Roadmaps aligned with your digital transformation goals — and the best ROI.",
+    lede: "Roadmaps aligned with your digital transformation goals, and the best ROI.",
     blocks: [
       {
         kind: "lead",
@@ -731,7 +731,7 @@ export const servicePages: readonly ServicePageContent[] = [
     blocks: [
       {
         kind: "lead",
-        body: "The shift to quantum computing is not just an upgrade in speed — it is a fundamental change in how businesses solve the “unsolvable.” At Eastwards, we provide a comprehensive transition framework designed to make your organization Quantum Ready.",
+        body: "The shift to quantum computing is not just an upgrade in speed, it is a fundamental change in how businesses solve the “unsolvable.” At Eastwards, we provide a comprehensive transition framework designed to make your organization Quantum Ready.",
       },
       {
         kind: "prose",
@@ -767,7 +767,7 @@ export const servicePages: readonly ServicePageContent[] = [
             items: [
               {
                 title: "Use Case Prioritization",
-                body: "Deep-dive analysis to select the “low-hanging fruit” projects — such as portfolio optimization, molecular docking, or supply chain scheduling.",
+                body: "Deep-dive analysis to select the “low-hanging fruit” projects, such as portfolio optimization, molecular docking, or supply chain scheduling.",
               },
               {
                 title: "Custom Algorithm Development",
@@ -793,7 +793,7 @@ export const servicePages: readonly ServicePageContent[] = [
               },
               {
                 title: "Custom Curriculum Design",
-                body: "We build industry-specific training modules — whether it’s quantum chemistry for Pharma or quantum risk modeling for Banking.",
+                body: "We build industry-specific training modules, whether it’s quantum chemistry for Pharma or quantum risk modeling for Banking.",
               },
             ],
           },
@@ -870,7 +870,7 @@ export const servicePages: readonly ServicePageContent[] = [
     blocks: [
       {
         kind: "lead",
-        body: "Modern Device Management (MDM) is the centralized management system that secures and manages all the IT assets involved in the firm’s operations, including smartphones, laptops, and IoT devices — it helps businesses optimize device configuration, and maintain alignment with security compliances and application distribution.",
+        body: "Modern Device Management (MDM) is the centralized management system that secures and manages all the IT assets involved in the firm’s operations, including smartphones, laptops, and IoT devices, it helps businesses optimize device configuration, and maintain alignment with security compliances and application distribution.",
       },
       {
         kind: "prose",
@@ -920,7 +920,7 @@ export const servicePages: readonly ServicePageContent[] = [
   {
     slug: "threat-monitoring-incident-response",
     title: "Threat Monitoring & Incident Response",
-    lede: "Security threat management with advanced technology — visibility without blind spots.",
+    lede: "Security threat management with advanced technology, visibility without blind spots.",
     blocks: [
       {
         kind: "lead",
@@ -999,7 +999,7 @@ export const servicePages: readonly ServicePageContent[] = [
           "24X7 comprehensive, integrated operations (infrastructure and security)",
           "CARTA-based approach to infrastructure security management",
           "Integrated security management with continuous monitoring",
-          "Regular assessing and managing risk and trust — through reactive and proactive approaches",
+          "Regular assessing and managing risk and trust, through reactive and proactive approaches",
           "Rapid detection and resolution by implementing business intelligence, AI, automation, and orchestration-enabled delivery",
         ],
       },
@@ -1081,7 +1081,7 @@ export const servicePages: readonly ServicePageContent[] = [
   {
     slug: "identity-and-access-management",
     title: "Identity and Access Management",
-    lede: "A modern, robust identity ecosystem — agile IAM tailored to your needs.",
+    lede: "A modern, robust identity ecosystem, agile IAM tailored to your needs.",
     blocks: [
       {
         kind: "lead",
@@ -1187,7 +1187,7 @@ export const servicePages: readonly ServicePageContent[] = [
   {
     slug: "cloud-security",
     title: "Cloud Security",
-    lede: "Security should never be a blocker in business transformation — the cloud works as an accelerator.",
+    lede: "Security should never be a blocker in business transformation, the cloud works as an accelerator.",
     blocks: [
       {
         kind: "lead",
@@ -1196,7 +1196,7 @@ export const servicePages: readonly ServicePageContent[] = [
       {
         kind: "prose",
         paragraphs: [
-          "Cloud security must cater to business agility, scalability, and growth in the cloud environment. Security should never be a blocker in business transformation — the cloud should work as an accelerator. Secure cloud platforms facilitate an IT ecosystem that can defend against a highly dynamic threat landscape, align with ever-evolving compliance requirements, and meet business requirements.",
+          "Cloud security must cater to business agility, scalability, and growth in the cloud environment. Security should never be a blocker in business transformation, the cloud should work as an accelerator. Secure cloud platforms facilitate an IT ecosystem that can defend against a highly dynamic threat landscape, align with ever-evolving compliance requirements, and meet business requirements.",
         ],
       },
       {
@@ -1317,16 +1317,16 @@ export const servicePages: readonly ServicePageContent[] = [
   {
     slug: "ai-security",
     title: "AI Security",
-    lede: "Building trust in the digital era — securing AI end-to-end.",
+    lede: "Building trust in the digital era, securing AI end-to-end.",
     blocks: [
       {
         kind: "lead",
-        body: "Artificial Intelligence (AI) is transforming industries — from healthcare and finance to retail and manufacturing. Yet, as organizations embrace AI to drive innovation and efficiency, they face a critical challenge: how to secure AI systems against evolving cyber threats.",
+        body: "Artificial Intelligence (AI) is transforming industries, from healthcare and finance to retail and manufacturing. Yet, as organizations embrace AI to drive innovation and efficiency, they face a critical challenge: how to secure AI systems against evolving cyber threats.",
       },
       {
         kind: "prose",
         paragraphs: [
-          "At Eastwards, we believe that protecting AI is not just about safeguarding technology — it’s about preserving trust, compliance, and business resilience.",
+          "At Eastwards, we believe that protecting AI is not just about safeguarding technology, it’s about preserving trust, compliance, and business resilience.",
         ],
       },
       {
@@ -1348,7 +1348,7 @@ export const servicePages: readonly ServicePageContent[] = [
       {
         kind: "prose",
         paragraphs: [
-          "Securing AI is therefore not optional — it is a strategic necessity for every modern enterprise.",
+          "Securing AI is therefore not optional, it is a strategic necessity for every modern enterprise.",
         ],
       },
       {
@@ -1441,7 +1441,7 @@ export const servicePages: readonly ServicePageContent[] = [
         kind: "prose",
         heading: "Why Partner with Eastwards",
         paragraphs: [
-          "By choosing Eastwards, organizations gain more than technical safeguards — they gain a strategic partner committed to ensuring AI delivers value securely. Our expertise helps businesses:",
+          "By choosing Eastwards, organizations gain more than technical safeguards, they gain a strategic partner committed to ensuring AI delivers value securely. Our expertise helps businesses:",
         ],
       },
       {

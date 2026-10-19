@@ -47,7 +47,7 @@ export function Navbar() {
                     {item.label}
                   </NavigationMenuTrigger>
                   {/* Dark two-column panel driven by .nav-services-panel
-                      (globals) — unlayered CSS outranks the group-variant
+                      (globals), unlayered CSS outranks the group-variant
                       utilities in the shadcn content defaults. Rows for
                       items with `detail` carry a blue chevron and reveal a
                       sideways flyout (hover the row to its right edge - the
@@ -207,7 +207,7 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile dropdown (kept from previous navbar — the spec above is desktop-only) */}
+      {/* Mobile dropdown (kept from previous navbar, the spec above is desktop-only) */}
       {open && (
         <div className="absolute inset-x-4 top-[64px] z-20 rounded-2xl border border-[#e8e8e8] bg-white p-6 shadow-xl md:hidden">
           <ul className="space-y-4">

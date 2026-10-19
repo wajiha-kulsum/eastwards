@@ -5,7 +5,7 @@ import { ArrowUpRight } from "@/components/ui/icons";
 import { about } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "About Us — Eastwards Consulting",
+  title: "About Us | Eastwards Consulting",
   description: about.lede,
 };
 
@@ -24,7 +24,7 @@ export default function AboutPage() {
           {/* Promise: three blue-tinted pills + jump to contact */}
           <div className="mt-5 flex flex-wrap items-center gap-2">
             <p className="text-[13px] font-semibold text-[#4a4a4a]">
-              {about.promise.label} —
+              {about.promise.label}
             </p>
             {about.promise.points.map((point) => (
               <p
@@ -69,7 +69,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Comprehensive Digital Solutions — three groups of three */}
+        {/* Comprehensive Digital Solutions, three groups of three */}
         <section id="solutions" className="mt-14 scroll-mt-24 sm:mt-16">
           <h2 className="text-[25px] font-medium leading-tight tracking-[-0.055em] sm:text-[27px]">
             {about.solutions.title}
@@ -123,7 +123,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Why organizations choose — solid blue moment */}
+        {/* Why organizations choose, solid blue moment */}
         <section className="mt-14 sm:mt-16">
           <div className="rounded-[23px] bg-[#4868ff] p-6 text-white sm:p-8">
             <h2 className="max-w-[640px] text-[25px] font-medium leading-tight tracking-[-0.055em] sm:text-[27px]">

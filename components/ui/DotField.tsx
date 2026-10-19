@@ -1,6 +1,6 @@
 /* Layer-1 dot field shared by the sub-page heroes: a radial-gradient dot
    matrix on a 10px pitch (5px dot + 5px gap). It is positioned by the
-   caller — pass className for the inset/height, or override the pitch and
+   caller, pass className for the inset/height, or override the pitch and
    tint with your own backgroundImage/backgroundSize. */
 export default function DotField({ className = "" }: { className?: string }) {
   return (

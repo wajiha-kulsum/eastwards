@@ -4,7 +4,7 @@ import { ArrowUpRight, PlayTriangle } from "@/components/ui/icons";
 import { partners } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Partners — Eastwards Consulting",
+  title: "Partners | Eastwards Consulting",
   description: partners.lede,
 };
 
@@ -24,7 +24,7 @@ export default function PartnersPage() {
           </p>
         </section>
 
-        {/* Why partnerships matter — three core advantages */}
+        {/* Why partnerships matter, three core advantages */}
         <section className="mt-14 sm:mt-16">
           <h2 className="text-[25px] font-medium leading-tight tracking-[-0.055em] sm:text-[27px]">
             {partners.why.title}
@@ -69,7 +69,7 @@ export default function PartnersPage() {
           </div>
         </section>
 
-        {/* Join the network — solid blue close */}
+        {/* Join the network, solid blue close */}
         <section className="mt-14 sm:mt-16">
           <div className="rounded-[23px] bg-[#4868ff] p-6 text-white sm:p-8">
             <h2 className="max-w-[640px] text-[25px] font-medium leading-tight tracking-[-0.055em] sm:text-[27px]">

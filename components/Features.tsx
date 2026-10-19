@@ -65,7 +65,7 @@ function CardCarousel() {
   }, [setWidth]);
 
   // gentle auto-drift right-to-left, beginning after the delay. Runs only
-  // while the carousel is on screen — RGlobal rAF loops keep the smooth
+  // while the carousel is on screen, RGlobal rAF loops keep the smooth
   // scroll from ever resting.
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -209,7 +209,7 @@ export function Features() {
         </div>
       </div>
 
-      {/* full-bleed scroll-driven carousel — escapes the container padding */}
+      {/* full-bleed scroll-driven carousel, escapes the container padding */}
       <div className="relative left-1/2 mt-9 w-screen -translate-x-1/2">
         <CardCarousel />
       </div>

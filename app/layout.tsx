@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import "./globals.css";
 
-/* Inter Display Bold — headlines + footer wordmark
+/* Inter Display Bold, headlines + footer wordmark
    (stands in for the design's commercial Neue Haas Grotesk Display Pro) */
 const interDisplay = localFont({
   src: "./fonts/InterDisplay-Bold.woff2",
@@ -21,7 +21,7 @@ const instrumentSans = Instrument_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Eastwards Consulting — Technology that moves business forward",
+  title: "Eastwards Consulting | Technology that moves business forward",
   description:
     "We help businesses navigate complexity and move forward with the right technology, engineering, and expertise.",
 };

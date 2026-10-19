@@ -6,7 +6,7 @@ type PrimaryButtonProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
 };
 
 /**
- * Solid brand-blue pill — #2970ff, fully rounded, semibold.
+ * Solid brand-blue pill, #2970ff, fully rounded, semibold.
  * Size-agnostic: callers set height/width/text-size via className.
  * Hover: brightness bump only (subtle, no movement).
  */

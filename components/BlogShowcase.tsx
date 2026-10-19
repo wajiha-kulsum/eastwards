@@ -18,7 +18,7 @@ const growFor = (distance: number) => {
 
 export default function BlogShowcase() {
   const count = posts.length;
-  // unbounded index — arrows wrap infinitely in both directions
+  // unbounded index, arrows wrap infinitely in both directions
   const [cursor, setCursor] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const activeIndex = ((cursor % count) + count) % count;

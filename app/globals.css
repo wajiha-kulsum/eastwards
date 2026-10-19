@@ -4,7 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Eastwards design tokens — extracted from the approved Paper design
+/* Eastwards design tokens, extracted from the approved Paper design
    (file 01M4QVJZFVVKBY7J2CZVAB4GEE) */
 @theme {
   --color-primary: #2868ff; /* brand blue: CTA, labels, accents */
@@ -25,7 +25,7 @@ body {
   background: #ffffff;
   color: var(--color-ink);
   font-family: var(--font-sans);
-  /* lock horizontal wiggle entirely — the page scrolls vertically only */
+  /* lock horizontal wiggle entirely, the page scrolls vertically only */
   overflow-x: clip;
 }
 
@@ -209,7 +209,7 @@ body {
   }
 }
 
-/* Eastwards overrides — re-declared last so they beat the shadcn blocks in
+/* Eastwards overrides, re-declared last so they beat the shadcn blocks in
    the theme merge. Without this, --color-primary resolves near-black and
    the radius scale drifts (contact inputs, cards, menus). */
 @theme {
