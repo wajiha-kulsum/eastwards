@@ -14,7 +14,7 @@ export function Footer() {
           <nav
             key={column.title}
             aria-label={column.title}
-            className="text-[13px] leading-[17px] md:text-[18px] md:leading-[21px]"
+            className="text-small"
           >
             <p className="text-body">{column.title}</p>
             <ul className="mt-3 space-y-2.5 font-display font-semibold text-ink md:mt-4 md:space-y-3">
@@ -33,11 +33,11 @@ export function Footer() {
         ))}
       </div>
 
-      <div className="mt-16 flex flex-col gap-3 text-[12px] text-subtle sm:flex-row sm:items-center sm:justify-between sm:mt-20">
-        <p className="text-[11px] leading-[18px] sm:text-[15px]">
+      <div className="mt-16 flex flex-col gap-3 text-small text-subtle sm:flex-row sm:items-center sm:justify-between sm:mt-20">
+        <p className="text-small">
           {footer.copyright}
         </p>
-        <div className="flex gap-6 font-display text-[13px] font-medium text-body md:gap-[50px] md:text-[18px] md:leading-[24px]">
+        <div className="flex gap-6 font-display text-small font-medium text-body md:gap-[50px]">
           {footer.legal.map((item) => (
             <a
               key={item}
