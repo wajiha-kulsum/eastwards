@@ -7,9 +7,10 @@ import TextBlur from "@/components/ui/TextBlur";
 /* The dot-field hero shared by Contact, Partners, About and the service
    pages. Geometry is locked so switching pages feels consistent: the dot
    field (DotField) runs behind the copy, every text block wears the shared
-   TextBlur chip, and the 4x7 logo triangle sits at the end of the title,
-   snapped onto the field's 10px pitch so it reads as part of layer 1.
-   Only the title and lede text vary between pages. */
+   TextBlur chip, and the 4x7 logo triangle flows inline right after the
+   title text (hugging it with no empty lane) before the snap shifts it a
+   few pixels onto the field's 10px lattice. Only the title and lede text
+   vary between pages. */
 
 const DOT_PITCH = 10; // 5px dot + 5px gap, same as DotField
 
@@ -24,7 +25,7 @@ function DotMark({ markRef }: { markRef: Ref<HTMLDivElement> }) {
     <div
       ref={markRef}
       aria-hidden="true"
-      className="pointer-events-none grid shrink-0 grid-cols-[repeat(4,10px)] grid-rows-[repeat(7,10px)]"
+      className="pointer-events-none relative inline-grid shrink-0 align-middle ml-[4px] grid grid-cols-[repeat(4,10px)] grid-rows-[repeat(7,10px)]"
     >
       {Array.from({ length: 28 }).map((_, i) => {
         const col = i % 4;
@@ -48,30 +49,41 @@ function DotMark({ markRef }: { markRef: Ref<HTMLDivElement> }) {
 export default function DotHero({ title, lede }: { title: string; lede: string }) {
   const fieldRef = useRef<HTMLDivElement>(null);
   const markRef = useRef<HTMLDivElement>(null);
-  const rowRef = useRef<HTMLDivElement>(null);
+  const chipRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const field = fieldRef.current;
     const mark = markRef.current;
-    const row = rowRef.current;
-    if (!field || !mark || !row) return;
+    const chip = chipRef.current;
+    if (!field || !mark || !chip) return;
 
     // Both grids are 10px lattices with the dot at the tile center, so the
     // mark only needs shifting by the negative remainder of its offset
     // against the field: every blue dot then lands exactly on a field dot.
-    // Translate is zeroed before measuring so it never feeds back in.
+    // Translate is zeroed before measuring so it never feeds back in, and
+    // whole-pitch shifts pull the mark back left so it never drifts off the
+    // title text: measured on the chip's widest wrapped line.
     const mod = (n: number) => ((n % DOT_PITCH) + DOT_PITCH) % DOT_PITCH;
+    let chipRight = NaN;
     const snap = () => {
       mark.style.translate = "0px 0px";
       const fieldBox = field.getBoundingClientRect();
       const markBox = mark.getBoundingClientRect();
-      mark.style.translate = `${mod(fieldBox.left - markBox.left)}px ${mod(fieldBox.top - markBox.top)}px`;
+      let dx = mod(fieldBox.left - markBox.left);
+      for (const rect of chip.getClientRects()) {
+        if (rect.right > chipRight) chipRight = rect.right;
+      }
+      if (!Number.isNaN(chipRight)) {
+        const gap = markBox.left + dx - chipRight;
+        const pitches = Math.ceil((gap - 12) / DOT_PITCH);
+        if (pitches > 0) dx -= pitches * DOT_PITCH;
+      }
+      mark.style.translate = `${dx}px 0px`;
     };
 
     snap();
     const watch = new ResizeObserver(snap);
     watch.observe(field);
-    watch.observe(row);
     window.addEventListener("resize", snap);
     return () => {
       watch.disconnect();
@@ -83,11 +95,11 @@ export default function DotHero({ title, lede }: { title: string; lede: string }
     <section className="relative flex min-h-[160px] flex-col overflow-hidden pt-2 sm:min-h-[190px] lg:min-h-[210px]">
       <DotField className="bottom-[12px] top-[22px]" fieldRef={fieldRef} />
 
-      <div ref={rowRef} className="relative z-10 flex items-center gap-3 py-1">
-        <h1 className="min-w-0 font-display text-[clamp(2.75rem,5.5vw,5.5rem)] font-bold uppercase leading-none tracking-[-0.03em] text-black">
-          <TextBlur>{title}</TextBlur>
+      <div className="relative z-10 py-1">
+        <h1 className="font-display text-[clamp(2.75rem,5.5vw,5.5rem)] font-bold uppercase leading-none tracking-[-0.03em] text-black">
+          <TextBlur spanRef={chipRef}>{title}</TextBlur>
+          <DotMark markRef={markRef} />
         </h1>
-        <DotMark markRef={markRef} />
       </div>
 
       {/* Supporting copy - pinned to bottom right across all sub-pages */}
