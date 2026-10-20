@@ -24,7 +24,7 @@ export function Navbar() {
         {/* Logo */}
         <Link
           href="/"
-          className="flex shrink-0 items-center text-[16px] font-bold tracking-[-0.5px] text-[#111] lg:text-[18px]"
+          className="flex shrink-0 items-center text-small font-bold tracking-[-0.5px] text-[#111]"
         >
           eastwards
           <svg
@@ -43,7 +43,7 @@ export function Navbar() {
             {navLinks.map((item) =>
               item.label === "Services" ? (
                 <NavigationMenuItem key={item.label}>
-                  <NavigationMenuTrigger className="h-auto bg-white px-0 py-0 text-[14px] font-medium tracking-[0.1px] text-[#171717] hover:bg-white hover:text-[#2868ff] focus:bg-white data-popup-open:bg-white data-popup-open:text-[#2868ff] lg:text-[16px] lg:tracking-[0.02em]">
+                  <NavigationMenuTrigger className="h-auto bg-white px-0 py-0 text-small font-medium tracking-[0.1px] text-[#171717] hover:bg-white hover:text-[#2868ff] focus:bg-white data-popup-open:bg-white data-popup-open:text-[#2868ff] lg:tracking-[0.02em]">
                     {item.label}
                   </NavigationMenuTrigger>
                   {/* Dark two-column panel driven by .nav-services-panel
@@ -60,7 +60,7 @@ export function Navbar() {
                         >
                           <NavigationMenuLink
                             href={service.href}
-                            className="py-2 text-[15px] font-normal leading-[1.3] text-[#171717] transition-colors hover:text-[#2868ff]"
+                            className="py-2 text-small font-normal text-[#171717] transition-colors hover:text-[#2868ff]"
                           >
                             {service.label}
                           </NavigationMenuLink>
@@ -88,7 +88,7 @@ export function Navbar() {
                                       <NavigationMenuLink
                                         key={item.label}
                                         href={item.href}
-                                        className="px-3 py-2 text-[15px] font-normal text-[#171717] transition-colors rounded-[10px] hover:bg-[#fafafa] hover:text-[#2868ff]"
+                                        className="px-3 py-2 text-small font-normal text-[#171717] transition-colors rounded-[10px] hover:bg-[#fafafa] hover:text-[#2868ff]"
                                       >
                                         {item.label}
                                       </NavigationMenuLink>
@@ -97,15 +97,15 @@ export function Navbar() {
                                 </div>
                               ) : (
                                 <div className="w-max max-w-[280px] rounded-2xl border border-[#e8e8e8] bg-white p-5 shadow-xl">
-                                  <p className="text-[15px] font-medium text-[#171717]">
+                                  <p className="text-small font-medium text-[#171717]">
                                     {service.detail?.title}
                                   </p>
-                                  <p className="mt-2 text-[13px] leading-[1.5] text-[#757575]">
+                                  <p className="mt-2 text-small text-[#757575]">
                                     {service.detail?.body}
                                   </p>
                                   <NavigationMenuLink
                                     href="/contact"
-                                    className="mt-3 inline-flex items-center gap-1.5 rounded-lg text-[13px] font-medium text-[#2868ff] transition-colors hover:text-[#1555ed]"
+                                    className="mt-3 inline-flex items-center gap-1.5 rounded-lg text-small font-medium text-[#2868ff] transition-colors hover:text-[#1555ed]"
                                   >
                                     Contact us
                                     <svg
@@ -139,7 +139,7 @@ export function Navbar() {
                   <NavigationMenuLink asChild>
                     <Link
                       href={item.href}
-                      className="text-[14px] font-medium tracking-[0.1px] text-[#171717] transition-colors hover:text-[#2868ff] lg:text-[16px] lg:tracking-[0.02em]"
+                      className="text-small font-medium tracking-[0.1px] text-[#171717] transition-colors hover:text-[#2868ff] lg:tracking-[0.02em]"
                     >
                       {item.label}
                     </Link>
@@ -154,7 +154,7 @@ export function Navbar() {
         <div className="flex shrink-0 items-center gap-3">
           <Link
             href="/login"
-            className="inline-flex h-8 items-center gap-3 rounded-full bg-[#2868ff] py-[3px] pl-[14px] pr-[4px] text-[13px] font-medium text-white transition-colors hover:bg-[#1555ed] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2868ff] lg:h-9 lg:pl-[16px] lg:pr-[5px] lg:text-[14px]"
+            className="inline-flex h-9 items-center gap-3 rounded-full bg-[#2868ff] py-[3px] pl-[14px] pr-[4px] text-small font-medium text-white transition-colors hover:bg-[#1555ed] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2868ff] lg:h-11 lg:pl-[16px] lg:pr-[5px]"
           >
             Login
             <span className="flex h-[24px] w-[24px] items-center justify-center rounded-full bg-white lg:h-[26px] lg:w-[26px]">
@@ -216,7 +216,7 @@ export function Navbar() {
                 <Link
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="block text-[15px] font-medium text-[#171717]"
+                  className="block text-small font-medium text-[#171717]"
                 >
                   {item.label}
                 </Link>
