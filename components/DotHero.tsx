@@ -13,8 +13,9 @@ import TextBlur from "@/components/ui/TextBlur";
 
 const DOT_PITCH = 10; // 5px dot + 5px gap, same as DotField
 
-/* Blue play-triangle on the logo's 4x7 grid. Its non-blue cells reuse the
-   field grey, so on the field it disappears into the grid. */
+/* Blue play-triangle on the logo's 4x7 grid, painted as the FIELD's own
+   dots recolored: blue cells draw a field-sized dot, empty cells draw
+   nothing so the field's dots show through. No second grid stacks on top. */
 function DotMark({ markRef }: { markRef: Ref<HTMLDivElement> }) {
   return (
     <div
@@ -29,8 +30,10 @@ function DotMark({ markRef }: { markRef: Ref<HTMLDivElement> }) {
         return (
           <span
             key={i}
-            className={`h-[5px] w-[5px] rounded-full ${
-              blue ? "bg-[#2868ff]" : "bg-[#d9dce3]"
+            className={`h-[5px] w-[5px] ${
+              blue
+                ? "bg-[radial-gradient(circle,#2868ff_1.6px,transparent_1.9px)]"
+                : ""
             }`}
           />
         );
@@ -50,14 +53,19 @@ export default function DotHero({ title, lede }: { title: string; lede: string }
     const row = rowRef.current;
     if (!field || !mark || !row) return;
 
-    // snap the mark onto the field grid: shift by the negative remainder
-    // of the offset against the 10px pitch, so its dots share the field's
-    // lanes at any viewport width
+    // snap the mark onto the field grid: the field's dots sit at the CENTER
+    // of each 10px tile (lattice 5 + 10k), the mark's dots at 2.5 inside
+    // each 5px cell, so shift by the remainder that lands a mark dot on a
+    // field dot. Translate is zeroed before measuring so it never feeds
+    // back into the offset.
     const mod = (n: number) => ((n % DOT_PITCH) + DOT_PITCH) % DOT_PITCH;
     const snap = () => {
+      mark.style.translate = "0px 0px";
       const fieldBox = field.getBoundingClientRect();
       const markBox = mark.getBoundingClientRect();
-      mark.style.translate = `${-mod(markBox.left - fieldBox.left)}px ${-mod(markBox.top - fieldBox.top)}px`;
+      const dx = mod(DOT_PITCH / 2 - (markBox.left - fieldBox.left));
+      const dy = mod(DOT_PITCH / 2 - (markBox.top - fieldBox.top));
+      mark.style.translate = `${dx}px ${dy}px`;
     };
 
     snap();
