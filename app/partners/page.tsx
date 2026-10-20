@@ -47,24 +47,40 @@ export default function PartnersPage() {
             <img
               src="/images/partnerhip.svg"
               alt=""
-              className="w-full"
+              className="absolute inset-x-0 top-0 w-full"
             />
             <div className="relative mt-[36px] grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-[repeat(3,425px)] lg:justify-end lg:gap-[74px]">
               {partners.why.advantages.map((advantage, index) => (
                 <article
                   key={advantage.title}
-                  className="flex min-h-[320px] flex-col rounded-[30px] bg-[#496EFD] p-7 text-white lg:h-[383px]"
+                  className="relative flex min-h-[320px] flex-col overflow-hidden rounded-[30px] bg-[#496EFD] p-7 text-white lg:h-[383px]"
                 >
-                  <p className="font-display text-[clamp(64px,5.8vw,100px)] font-extrabold leading-[1.2] text-[#4062E0]">
-                    0{index + 1}
-                  </p>
-                  <div className="mt-auto">
-                    <h3 className="font-display text-[clamp(22px,1.9vw,30px)] font-bold leading-[1.2] text-white">
-                      {advantage.title}
-                    </h3>
-                    <p className="mt-3 max-w-[290px] text-[clamp(15px,1.2vw,20px)] leading-[1.2] text-white">
-                      {advantage.body}
+                  {/* masked polygon face, a different one per card (bottom
+                      right, top right, bottom left) like the Paper mask */}
+                  <img
+                    src="/images/polygon-6.svg"
+                    alt=""
+                    aria-hidden="true"
+                    className={`pointer-events-none absolute h-[95%] max-w-none ${
+                      index === 0
+                        ? "bottom-[-6%] right-[-4%]"
+                        : index === 1
+                          ? "-top-[8%] right-[-10%] h-[75%]"
+                          : "bottom-[-12%] left-[35%]"
+                    }`}
+                  />
+                  <div className="relative z-10 flex flex-1 flex-col text-white">
+                    <p className="font-display text-[clamp(64px,5.8vw,100px)] font-extrabold leading-[1.2] text-[#4062E0]">
+                      0{index + 1}
                     </p>
+                    <div className="mt-auto">
+                      <h3 className="font-display text-[clamp(22px,1.9vw,30px)] font-bold leading-[1.2] text-white">
+                        {advantage.title}
+                      </h3>
+                      <p className="mt-3 max-w-[290px] text-[clamp(15px,1.2vw,20px)] leading-[1.2] text-white">
+                        {advantage.body}
+                      </p>
+                    </div>
                   </div>
                 </article>
               ))}
