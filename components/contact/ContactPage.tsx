@@ -62,13 +62,13 @@ export function ContactPage() {
               sits level with the form's first field; flex + mt-auto keeps the
               card row and the Send button finishing on the same line */}
           <div className="flex flex-col pt-4 sm:pt-5">
-            <p className="mb-4 text-[15px] font-semibold tracking-[-0.04em] text-[#2869ff]">
+            <p className="mb-4 text-small font-semibold tracking-[-0.04em] text-[#2869ff]">
               / get in touch /
             </p>
 
             {/* Question and pitch in one text block, same size and weight
                 throughout, one break after the first question mark */}
-            <p className="relative mb-4 max-w-[600px] text-[clamp(17px,3.6vw,26px)] font-medium leading-[1.2] tracking-[-0.04em] text-ink">
+            <p className="relative mb-4 max-w-[600px] text-body font-medium tracking-[-0.04em] text-ink">
               {contact.headline.split("?")[0]}?
               <br />
               <span className="text-[#777777]">
@@ -86,11 +86,11 @@ export function ContactPage() {
                   className="mb-3 text-[#4868ff]"
                 />
 
-                <h3 className="mb-2 text-[18px] font-semibold tracking-[-0.04em]">
+                <h3 className="mb-2 text-small font-semibold tracking-[-0.04em]">
                   Our Location
                 </h3>
 
-                <address className="text-[14px] not-italic leading-[1.45] text-white/95">
+                <address className="text-small not-italic text-white/95">
                   Singapore Headquarters
                   <br />
                   Eastwards Consulting Pte Ltd
@@ -109,11 +109,11 @@ export function ContactPage() {
                   className="mb-3 text-[#3971ff]"
                 />
 
-                <h3 className="mb-2 text-[18px] font-semibold tracking-[-0.04em] text-[#2869ff]">
+                <h3 className="mb-2 text-small font-semibold tracking-[-0.04em] text-[#2869ff]">
                   Call Us
                 </h3>
 
-                <div className="space-y-1 text-[14px] leading-relaxed text-[#858585]">
+                <div className="space-y-1 text-small text-[#858585]">
                   <a
                     href="tel:+6593756413513"
                     className="block transition hover:text-[#2869ff]"
@@ -140,7 +140,7 @@ export function ContactPage() {
               <div>
                 <label
                   htmlFor="firstName"
-                  className="mb-1.5 block text-[14px] font-medium tracking-tight text-ink"
+                  className="mb-1.5 block text-small font-medium tracking-tight text-ink"
                 >
                   First Name
                 </label>
@@ -151,14 +151,14 @@ export function ContactPage() {
                   autoComplete="given-name"
                   placeholder="John"
                   required
-                  className="h-12 w-full rounded-[12px] border border-transparent bg-[#ededed] px-3.5 text-[15px] text-ink outline-none transition placeholder:text-[#6b6b6b] focus:border-[#2869ff] focus:bg-white focus:ring-2 focus:ring-[#2869ff]/20"
+                  className="h-12 w-full rounded-[12px] border border-transparent bg-[#ededed] px-3.5 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] focus:border-[#2869ff] focus:bg-white focus:ring-2 focus:ring-[#2869ff]/20"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="lastName"
-                  className="mb-1.5 block text-[14px] font-medium tracking-tight text-ink"
+                  className="mb-1.5 block text-small font-medium tracking-tight text-ink"
                 >
                   Last Name
                 </label>
@@ -169,14 +169,14 @@ export function ContactPage() {
                   autoComplete="family-name"
                   placeholder="Doe"
                   required
-                  className="h-12 w-full rounded-[12px] border border-transparent bg-[#ededed] px-3.5 text-[15px] text-ink outline-none transition placeholder:text-[#6b6b6b] focus:border-[#2869ff] focus:bg-white focus:ring-2 focus:ring-[#2869ff]/20"
+                  className="h-12 w-full rounded-[12px] border border-transparent bg-[#ededed] px-3.5 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] focus:border-[#2869ff] focus:bg-white focus:ring-2 focus:ring-[#2869ff]/20"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="email"
-                  className="mb-1.5 block text-[14px] font-medium tracking-tight text-ink"
+                  className="mb-1.5 block text-small font-medium tracking-tight text-ink"
                 >
                   Email
                 </label>
@@ -187,14 +187,14 @@ export function ContactPage() {
                   autoComplete="email"
                   placeholder="yourmail@gmail.com"
                   required
-                  className="h-12 w-full rounded-[12px] border border-transparent bg-[#ededed] px-3.5 text-[15px] text-ink outline-none transition placeholder:text-[#6b6b6b] focus:border-[#2869ff] focus:bg-white focus:ring-2 focus:ring-[#2869ff]/20"
+                  className="h-12 w-full rounded-[12px] border border-transparent bg-[#ededed] px-3.5 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] focus:border-[#2869ff] focus:bg-white focus:ring-2 focus:ring-[#2869ff]/20"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="company"
-                  className="mb-1.5 block text-[14px] font-medium tracking-tight text-ink"
+                  className="mb-1.5 block text-small font-medium tracking-tight text-ink"
                 >
                   Company
                 </label>
@@ -204,14 +204,14 @@ export function ContactPage() {
                   type="text"
                   autoComplete="organization"
                   placeholder="Company Name"
-                  className="h-12 w-full rounded-[12px] border border-transparent bg-[#ededed] px-3.5 text-[15px] text-ink outline-none transition placeholder:text-[#6b6b6b] focus:border-[#2869ff] focus:bg-white focus:ring-2 focus:ring-[#2869ff]/20"
+                  className="h-12 w-full rounded-[12px] border border-transparent bg-[#ededed] px-3.5 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] focus:border-[#2869ff] focus:bg-white focus:ring-2 focus:ring-[#2869ff]/20"
                 />
               </div>
 
               <div className="sm:col-span-2">
                 <label
                   htmlFor="message"
-                  className="mb-1.5 block text-[14px] font-medium tracking-tight text-ink"
+                  className="mb-1.5 block text-small font-medium tracking-tight text-ink"
                 >
                   Message
                 </label>
@@ -221,7 +221,7 @@ export function ContactPage() {
                   rows={5}
                   placeholder="Your Message Here"
                   required
-                  className="min-h-[140px] w-full resize-y rounded-[12px] border border-transparent bg-[#ededed] px-3.5 py-3 text-[15px] leading-relaxed text-ink outline-none transition placeholder:text-[#6b6b6b] focus:border-[#2869ff] focus:bg-white focus:ring-2 focus:ring-[#2869ff]/20"
+                  className="min-h-[140px] w-full resize-y rounded-[12px] border border-transparent bg-[#ededed] px-3.5 py-3 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] focus:border-[#2869ff] focus:bg-white focus:ring-2 focus:ring-[#2869ff]/20"
                 />
               </div>
             </div>
@@ -230,7 +230,7 @@ export function ContactPage() {
               <p
                 role="status"
                 aria-live="polite"
-                className="max-w-[320px] text-sm leading-relaxed text-neutral-700"
+                className="max-w-[320px] text-small text-neutral-700"
               >
                 {status}
               </p>
@@ -238,7 +238,7 @@ export function ContactPage() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="ml-auto inline-flex min-h-11 items-center gap-2 rounded-full bg-[#2868ff] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#1555ed] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2868ff] disabled:cursor-not-allowed disabled:opacity-60"
+                className="ml-auto inline-flex min-h-11 items-center gap-2 rounded-full bg-[#2868ff] px-5 py-2.5 text-small font-semibold text-white transition hover:bg-[#1555ed] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2868ff] disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {submitting ? "Sending..." : "Send Message"}
                 <ArrowUpRight size={14} />
@@ -249,11 +249,11 @@ export function ContactPage() {
 
         {/* Direct channels */}
         <section className="mt-14 sm:mt-16">
-          <h2 className="text-[25px] font-medium tracking-[-0.055em] sm:text-[27px]">
+          <h2 className="text-lead font-medium tracking-[-0.02em]">
             Direct Channels
           </h2>
 
-          <p className="mt-1 text-[14px] leading-relaxed text-[#7a7a7a] sm:text-[15px]">
+          <p className="mt-1 text-small text-[#7a7a7a]">
             Need to reach a specific department? Use the direct lines below
             for a faster response.
           </p>
@@ -261,13 +261,13 @@ export function ContactPage() {
           <div className="mt-5 grid grid-cols-1 gap-5 rounded-[9px] border border-[#ededed] bg-[#fafafa] px-5 py-7 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:py-8">
             {channels.map((channel) => (
               <div key={channel.email} className="min-w-0 text-center">
-                <h3 className="mb-2 text-[14px] font-semibold text-[#4a4a4a]">
+                <h3 className="mb-2 text-small font-semibold text-[#4a4a4a]">
                   {channel.title}
                 </h3>
 
                 <a
                   href={`mailto:${channel.email}`}
-                  className="inline-flex max-w-full items-center justify-center gap-2 text-[13px] text-[#292929] transition hover:text-[#2869ff] sm:text-[14px]"
+                  className="inline-flex max-w-full items-center justify-center gap-2 text-small text-[#292929] transition hover:text-[#2869ff]"
                 >
                   <Mail
                     size={18}
