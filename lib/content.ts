@@ -265,16 +265,14 @@ export const footer = {
 } as const;
 
 export const partners = {
-  title: "Partners",
-  lede: "We collaborate with industry leaders across Cloud, Security, Data, and Emerging Tech.",
-  intro:
-    "At Eastwards, we believe that the best solutions are built on a foundation of world-class technology.",
-  ecosystem:
-    "To deliver “Intelligent Growth”, we have cultivated a robust ecosystem of strategic alliances with global technology leaders. These partnerships allow us to provide our clients with validated architectures, early access to emerging features, and deep technical support that ensures long-term platform resilience.",
+  title: "Partnership",
+  lede: "Nobody builds alone. It takes the right people, a fresh perspective, and a shared idea to make something click.",
+  eyebrow: "/ Let’s work together /",
+  statement: "Navigating Success :\nYour Strategic\nPartner",
+  statementBody:
+    "At Eastwards, we believe in building relationships with technology providers, industry experts, and businesses that share our approach to solving problems. Across cloud, security, data, and emerging technologies, we look for ways to combine our strengths and deliver solutions that make a real difference.",
   why: {
-    title: "Why Our Partnerships Matter to You",
-    subtitle:
-      "We don’t just use these tools; we master them. Our alliance network is designed to provide three core advantages",
+    title: "Why team up with us?",
     advantages: [
       {
         title: "Integrated Solutions",
@@ -289,18 +287,6 @@ export const partners = {
         body: "Leveraging partner-backed frameworks allows us to move from discovery to production faster, reducing your time-to-market.",
       },
     ],
-  },
-  join: {
-    title: "Interested in Partnering with Eastwards?",
-    subtitle:
-      "We are always looking to expand our ecosystem with innovative technology providers and service specialists who share our commitment to engineering rigor and client success.",
-    points: [
-      "Collaborate on complex enterprise transformations.",
-      "Integrate your technology into high-growth digital platforms.",
-      "Expand your reach within the Singapore and global markets.",
-    ],
-    cta: "Join our network",
-    href: "mailto:partners@eastwards.co",
   },
 } as const;
 

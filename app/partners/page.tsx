@@ -1,103 +1,108 @@
 import type { Metadata } from "next";
+import { Mail } from "lucide-react";
 import DotHero from "@/components/DotHero";
-import { ArrowUpRight, PlayTriangle } from "@/components/ui/icons";
-import { partners } from "@/lib/content";
+import { contact, partners } from "@/lib/content";
+
+/* Replicates the "MacBook Pro 16\" - 12" Paper artboard for the partnership
+   page: hero chip + dot grid, split intro, number-on-blue advantage cards
+   over a gradient strip, and the direct channels row. Sizes follow the
+   Paper values at 1728 and scale down through the site tokens. */
 
 export const metadata: Metadata = {
-  title: "Partners | Eastwards Consulting",
+  title: "Partnership | Eastwards Consulting",
   description: partners.lede,
 };
 
 export default function PartnersPage() {
   return (
     <main id="main" className="bg-white text-black">
-      <div className="mx-auto max-w-[1720px] px-6 pb-16 pt-3 sm:px-10 lg:px-[5.35%]">
+      <div className="mx-auto max-w-[1720px] px-6 pb-20 pt-3 sm:px-10 lg:px-[5.35%]">
         <DotHero title={partners.title} lede={partners.lede} />
 
-        {/* Ecosystem intro */}
-        <section className="mt-9">
-          <p className="max-w-[700px] text-[clamp(17px,3.6vw,26px)] font-medium leading-[1.25] tracking-[-0.03em] text-ink">
-            {partners.intro}
-          </p>
-          <p className="mt-5 max-w-[640px] text-[15px] leading-[1.6] text-[#7a7a7a]">
-            {partners.ecosystem}
+        {/* Split intro: eyebrow + muted statement left, relationship copy right.
+            Paper: eyebrow 25px y418, statement 60px y461, body 35px/775px y441. */}
+        <section className="mt-14 md:grid md:grid-cols-2 md:gap-8">
+          <div>
+            <p className="text-[clamp(17px,1.7vw,25px)] font-medium leading-[1.2] text-primary">
+              {partners.eyebrow}
+            </p>
+            <p className="mt-5 whitespace-pre-line text-[clamp(38px,3.5vw,60px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#0000008A]">
+              {partners.statement}
+            </p>
+          </div>
+          <p className="mt-8 text-[clamp(20px,2.2vw,35px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#252525] md:mt-6">
+            {partners.statementBody}
           </p>
         </section>
 
-        {/* Why partnerships matter, three core advantages */}
-        <section className="mt-14 sm:mt-16">
-          <h2 className="text-[25px] font-medium leading-tight tracking-[-0.055em] sm:text-[27px]">
+        {/* Why team up: three blue cards over a gradient strip. Paper: strip
+            y920-1132, cards 425x383 r30 from y962, numbers 100px #4062E0. */}
+        <section className="mt-16 sm:mt-20">
+          <h2 className="font-display text-[clamp(30px,3.5vw,60px)] font-semibold leading-[1.2] tracking-[-0.02em] text-[#272727]">
             {partners.why.title}
           </h2>
-          <p className="mt-1 max-w-[640px] text-[14px] leading-relaxed text-[#7a7a7a] sm:text-[15px]">
-            {partners.why.subtitle}
-          </p>
 
-          <div className="mt-5 grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
-            {partners.why.advantages.map((advantage, index) =>
-              index === 1 ? (
-                /* Blue moment: the middle card echoes the location card */
-                <div
+          <div className="relative mt-10">
+            {/* gradient art strip behind the top of the cards */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-0 top-0 h-[120px] rounded-[30px] bg-gradient-to-r from-blue-950 via-violet-800 to-blue-950 sm:h-[160px] lg:h-[212px]"
+            />
+            <div className="relative mt-[36px] grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-[repeat(3,425px)] lg:justify-end lg:gap-[74px]">
+              {partners.why.advantages.map((advantage, index) => (
+                <article
                   key={advantage.title}
-                  className="flex min-h-[220px] flex-col rounded-[23px] bg-[#4868ff] p-6 text-white sm:p-7"
+                  className="flex min-h-[320px] flex-col rounded-[30px] bg-[#496EFD] p-7 text-white lg:h-[383px]"
                 >
-                  <p className="text-[14px] font-semibold text-white/80">02</p>
-                  <h3 className="mb-2 mt-4 text-[18px] font-semibold tracking-[-0.04em]">
-                    {advantage.title}
-                  </h3>
-                  <p className="text-[14px] leading-[1.45] text-white/95">
-                    {advantage.body}
-                  </p>
-                </div>
-              ) : (
-                <div
-                  key={advantage.title}
-                  className="min-h-[220px] rounded-[23px] border border-[#e9e9e9] bg-[#fafafa] p-6 sm:p-7"
-                >
-                  <p className="text-[14px] font-semibold text-[#2869ff]">
+                  <p className="font-display text-[clamp(64px,5.8vw,100px)] font-extrabold leading-[1.2] text-[#4062E0]">
                     0{index + 1}
                   </p>
-                  <h3 className="mb-2 mt-4 text-[18px] font-semibold tracking-[-0.04em]">
-                    {advantage.title}
-                  </h3>
-                  <p className="text-[14px] leading-[1.45] text-[#7a7a7a]">
-                    {advantage.body}
-                  </p>
-                </div>
-              )
-            )}
+                  <div className="mt-auto">
+                    <h3 className="font-display text-[clamp(22px,1.9vw,30px)] font-bold leading-[1.2] text-white">
+                      {advantage.title}
+                    </h3>
+                    <p className="mt-3 max-w-[290px] text-[clamp(15px,1.2vw,20px)] leading-[1.2] text-white">
+                      {advantage.body}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* Join the network, solid blue close */}
-        <section className="mt-14 sm:mt-16">
-          <div className="rounded-[23px] bg-[#4868ff] p-6 text-white sm:p-8">
-            <h2 className="max-w-[640px] text-[25px] font-medium leading-tight tracking-[-0.055em] sm:text-[27px]">
-              {partners.join.title}
-            </h2>
-            <p className="mt-2 max-w-[640px] text-[14px] leading-relaxed text-white/90 sm:text-[15px]">
-              {partners.join.subtitle}
-            </p>
-
-            <ul className="mt-6 grid gap-2 sm:grid-cols-3 sm:gap-6">
-              {partners.join.points.map((point) => (
-                <li
-                  key={point}
-                  className="flex items-start gap-2 text-[14px] text-white/95"
-                >
-                  <PlayTriangle className="mt-1 h-2 w-2 shrink-0 fill-white text-white" />
-                  {point}
-                </li>
+        {/* Direct channels row from the same artboard */}
+        <section className="mt-16 sm:mt-20">
+          <h2 className="font-display text-[clamp(22px,2vw,35px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#272727]">
+            Direct Channels
+          </h2>
+          <p className="mt-3 text-[clamp(14px,1.2vw,20px)] leading-[1.2] text-[#757575]">
+            Need to reach a specific department? Use the direct lines below for
+            a faster response.
+          </p>
+          <div className="mt-8 border border-[#EEEEEE] bg-[#FAFAFA] lg:h-[150px]">
+            <div className="grid grid-cols-1 gap-8 py-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-2 lg:px-8 lg:py-7">
+              {contact.directChannels.channels.map((channel) => (
+                <div key={channel.department}>
+                  <p className="text-[clamp(15px,1.2vw,20px)] font-semibold text-[#45484D]">
+                    {channel.department}
+                  </p>
+                  <div className="mt-2 flex items-center gap-2">
+                    <Mail
+                      className="h-[20px] w-[25px] shrink-0 text-[#4E4E4E]"
+                      fill="currentColor"
+                      strokeWidth={0}
+                    />
+                    <a
+                      href={`mailto:${channel.email}`}
+                      className="truncate text-[clamp(15px,1.2vw,20px)] font-light text-black"
+                    >
+                      {channel.email}
+                    </a>
+                  </div>
+                </div>
               ))}
-            </ul>
-
-            <a
-              href={partners.join.href}
-              className="mt-7 inline-flex min-h-[36px] items-center gap-2 rounded-full border border-white/70 px-5 py-2 text-[12px] font-semibold text-white transition hover:bg-white/10"
-            >
-              {partners.join.cta}
-              <ArrowUpRight className="h-3 w-3 shrink-0" />
-            </a>
+            </div>
           </div>
         </section>
       </div>
