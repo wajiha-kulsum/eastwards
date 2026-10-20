@@ -13,15 +13,18 @@ import TextBlur from "@/components/ui/TextBlur";
 
 const DOT_PITCH = 10; // 5px dot + 5px gap, same as DotField
 
-/* Blue play-triangle on the logo's 4x7 grid, painted as the FIELD's own
-   dots recolored: blue cells draw a field-sized dot, empty cells draw
-   nothing so the field's dots show through. No second grid stacks on top. */
+/* Blue play-triangle on the logo's 4x7 grid. The cells are 10px tiles, the
+   exact geometry of the field, and a blue cell paints the same dot recipe
+   the field uses (1.6px dot at the tile center) in blue. Snapped onto the
+   field's lattice, each blue dot sits precisely on an existing field dot:
+   the older dot turns blue, nothing new is added. Empty cells draw nothing,
+   so the field's grey dots continue through the gaps. */
 function DotMark({ markRef }: { markRef: Ref<HTMLDivElement> }) {
   return (
     <div
       ref={markRef}
       aria-hidden="true"
-      className="pointer-events-none grid shrink-0 grid-cols-[repeat(4,5px)] gap-[5px] self-center"
+      className="pointer-events-none grid shrink-0 grid-cols-[repeat(4,10px)] grid-rows-[repeat(7,10px)]"
     >
       {Array.from({ length: 28 }).map((_, i) => {
         const col = i % 4;
@@ -30,11 +33,11 @@ function DotMark({ markRef }: { markRef: Ref<HTMLDivElement> }) {
         return (
           <span
             key={i}
-            className={`h-[5px] w-[5px] ${
+            className={
               blue
                 ? "bg-[radial-gradient(circle,#2868ff_1.6px,transparent_1.9px)]"
                 : ""
-            }`}
+            }
           />
         );
       })}
@@ -53,19 +56,16 @@ export default function DotHero({ title, lede }: { title: string; lede: string }
     const row = rowRef.current;
     if (!field || !mark || !row) return;
 
-    // snap the mark onto the field grid: the field's dots sit at the CENTER
-    // of each 10px tile (lattice 5 + 10k), the mark's dots at 2.5 inside
-    // each 5px cell, so shift by the remainder that lands a mark dot on a
-    // field dot. Translate is zeroed before measuring so it never feeds
-    // back into the offset.
+    // Both grids are 10px lattices with the dot at the tile center, so the
+    // mark only needs shifting by the negative remainder of its offset
+    // against the field: every blue dot then lands exactly on a field dot.
+    // Translate is zeroed before measuring so it never feeds back in.
     const mod = (n: number) => ((n % DOT_PITCH) + DOT_PITCH) % DOT_PITCH;
     const snap = () => {
       mark.style.translate = "0px 0px";
       const fieldBox = field.getBoundingClientRect();
       const markBox = mark.getBoundingClientRect();
-      const dx = mod(DOT_PITCH / 2 - (markBox.left - fieldBox.left));
-      const dy = mod(DOT_PITCH / 2 - (markBox.top - fieldBox.top));
-      mark.style.translate = `${dx}px ${dy}px`;
+      mark.style.translate = `${mod(fieldBox.left - markBox.left)}px ${mod(fieldBox.top - markBox.top)}px`;
     };
 
     snap();
