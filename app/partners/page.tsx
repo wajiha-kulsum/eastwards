@@ -49,7 +49,7 @@ export default function PartnersPage() {
               alt=""
               className="absolute inset-x-0 top-0 w-full"
             />
-            <div className="relative mt-[48px] grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-6 lg:grid-cols-[repeat(3,390px)] lg:justify-center lg:gap-[74px]">
+            <div className="relative mt-[76px] grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-6 lg:grid-cols-[repeat(3,390px)] lg:justify-center lg:gap-[74px]">
               {partners.why.advantages.map((advantage, index) => (
                 <article
                   key={advantage.title}
