@@ -43,10 +43,11 @@ export default function PartnersPage() {
           </h2>
 
           <div className="relative mt-10">
-            {/* gradient art strip behind the top of the cards */}
-            <div
-              aria-hidden="true"
-              className="absolute inset-x-0 top-0 h-[120px] rounded-[30px] bg-gradient-to-r from-blue-950 via-violet-800 to-blue-950 sm:h-[160px] lg:h-[212px]"
+            {/* partnership artwork strip behind the top of the cards */}
+            <img
+              src="/images/partnerhip.svg"
+              alt=""
+              className="w-full"
             />
             <div className="relative mt-[36px] grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-[repeat(3,425px)] lg:justify-end lg:gap-[74px]">
               {partners.why.advantages.map((advantage, index) => (
