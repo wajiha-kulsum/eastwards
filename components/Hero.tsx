@@ -52,16 +52,16 @@ export function Hero() {
             aria-hidden="true"
           />
           <div className="relative flex h-full flex-col items-start px-6 pt-12 sm:px-[50px] sm:pt-16 lg:px-[60px] lg:pt-[96px]">
-            <h1 className="text-[40px] font-bold leading-[1.05] tracking-tight text-ink md:text-[52px] lg:text-[clamp(3.4rem,5.2vw,5.625rem)] lg:leading-[1.1]">
+            <h1 className="text-display font-bold tracking-tight text-ink">
               Technology that moves
               <span className="block text-primary">business forward</span>
             </h1>
-            <p className="mt-4 max-w-[380px] text-[15px] font-semibold leading-[1.15] text-body md:mt-6 lg:max-w-[min(692px,41.5vw)] lg:text-[clamp(17px,1.45vw,25px)] lg:leading-[1.2]">
+            <p className="mt-4 max-w-[380px] text-copy font-semibold text-body md:mt-6 lg:max-w-[min(692px,41.5vw)] lg:leading-[1.2]">
               {hero.subtext}
             </p>
             <PrimaryButton
               href="/"
-              className="mt-5 h-[36px] gap-2 px-[22px] text-[12px] md:mt-8 md:h-[42px] md:gap-3 md:px-[30px] md:text-[14px] lg:h-[54px] lg:px-[34px] lg:text-[17px]"
+              className="mt-5 h-[36px] gap-2 px-[22px] text-small md:mt-8 md:h-[42px] md:gap-3 md:px-[30px] lg:h-[54px] lg:px-[34px]"
             >
               {hero.cta}
               <ArrowUpRight className="h-2.5 w-2.5 lg:h-3.5 lg:w-3.5" />
