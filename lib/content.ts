@@ -292,7 +292,15 @@ export const partners = {
 
 export const about = {
   title: "About Us",
-  lede: "Guiding Enterprises Toward Intelligent Growth",
+  lede: "Nobody builds alone. It takes the right people, a fresh perspective, and a shared idea to make something click.",
+  banner: {
+    eyebrow: "/ Let's work together /",
+    line: "We provide solutions",
+    follow: "that drive",
+    highlight: "business",
+    body: "At Eastwards, we help enterprises transform digital complexity into measurable advantage. Headquartered in Singapore with a global delivery footprint, we combine strategic insight with hands-on engineering to design, secure, and operate the platforms that power modern business.\nOur promise: faster time to market, lower operational risk, and sustained cost efficiency.",
+    alt: "Eastwards team working together around a table",
+  },
   intro:
     "At Eastwards, we help enterprises transform digital complexity into measurable advantage. Headquartered in Singapore with a global delivery footprint, we combine strategic insight with hands-on engineering to design, secure, and operate the platforms that power modern business.",
   promise: {
@@ -322,15 +330,15 @@ export const about = {
         items: [
           {
             title: "Application Development & Product Engineering",
-            body: "Cloud-native web and mobile platforms, from discovery to continuous delivery.",
+            body: "Web and mobile products built to grow with your business.",
           },
           {
             title: "Quantum Computing Advisory",
-            body: "Feasibility studies and strategic roadmaps for organizations exploring quantum advantage.",
+            body: "Explore quantum possibilities and find where they fit.",
           },
           {
             title: "Data & Artificial Intelligence",
-            body: "Data engineering, analytics, and ML operationalization to turn information into strategic assets.",
+            body: "Turn data into insights and AI into real value.",
           },
         ],
       },
@@ -339,15 +347,15 @@ export const about = {
         items: [
           {
             title: "Cybersecurity Services",
-            body: "Risk assessments, security engineering, and compliance built into delivery.",
+            body: "Spot risks early and protect what matters.",
           },
           {
             title: "Infrastructure & Cloud",
-            body: "Resilient migrations, hybrid architectures, and cost optimization.",
+            body: "Build smarter, more flexible cloud infrastructure.",
           },
           {
             title: "Modern Device Management",
-            body: "Secure remote work enablement and unified endpoint management.",
+            body: "Keep devices secure and teams connected.",
           },
         ],
       },
@@ -356,15 +364,49 @@ export const about = {
         items: [
           {
             title: "Projects & Professional Services",
-            body: "Program management and solution architecture to ensure projects land on time and on budget.",
+            body: "Bring clarity, expertise, and momentum to every project.",
           },
           {
             title: "IT Staffing Services",
-            body: "Flexible access to vetted technical talent for specialized or long-term needs.",
+            body: "Find the right technical talent for your team.",
           },
           {
             title: "Digital Support Services",
-            body: "24/7 managed services and UX operations to keep systems reliable and user experiences consistent.",
+            body: "Keep your systems running and your users supported.",
+          },
+        ],
+      },
+      {
+        title: "Your Partner in Growth",
+        items: [
+          {
+            title: "We Listen First",
+            body: "We understand your needs before jumping into solutions.",
+          },
+          {
+            title: "We Build Together",
+            body: "We share progress, adapt quickly, and keep you involved.",
+          },
+          {
+            title: "We Grow Together",
+            body: "We share knowledge and build lasting partnerships.",
+          },
+        ],
+      },
+      {
+        title: "Why Choose Eastwards",
+        items: [
+          {
+            title: "Experience That Counts",
+            body: "Technical expertise focused on your challenges.",
+          },
+          {
+            title: "Results That Matter",
+            body: "Solutions built around meaningful business outcomes.",
+          },
+          {
+            title: "Better Together",
+            body: "The right people and expertise, working as one.",
           },
         ],
       },
