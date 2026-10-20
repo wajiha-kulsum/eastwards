@@ -30,7 +30,7 @@ export default function BlogShowcase() {
       <div className="rounded-[24px] border border-[#e8e9f4] bg-[#fcfcfe] px-5 py-10 sm:px-8 md:px-[31px] lg:py-[54px]">
         {/* Heading: dark line + muted line, controls right */}
         <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
-          <h2 className="text-[24px] font-semibold leading-[1.32] tracking-[-0.8px] text-neutral-900 sm:text-[28px]">
+          <h2 className="text-title font-semibold tracking-[-0.02em] text-neutral-900">
             <span className="block">{blog.heading}</span>
             <span className="block text-body">{blog.subtext}</span>
           </h2>
@@ -116,7 +116,7 @@ export default function BlogShowcase() {
         <div className="mt-9 flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
           <p
             key={activePost.id}
-            className="max-w-[640px] animate-[fade-in_250ms_ease-out] text-[15px] leading-[1.5] sm:text-[17px]"
+            className="max-w-[640px] animate-[fade-in_250ms_ease-out] text-small"
             aria-live="polite"
           >
             <span className="font-semibold text-neutral-900">
@@ -127,7 +127,7 @@ export default function BlogShowcase() {
 
           <Link
             href={activePost.href}
-            className="inline-flex h-11 shrink-0 items-center justify-center gap-2 self-start rounded-lg border border-[#e8e9f4] bg-white px-5 text-[15px] font-medium text-primary transition-colors duration-200 hover:border-primary/40 hover:bg-primary/5"
+            className="inline-flex h-11 shrink-0 items-center justify-center gap-2 self-start rounded-lg border border-[#e8e9f4] bg-white px-5 text-small font-medium text-primary transition-colors duration-200 hover:border-primary/40 hover:bg-primary/5"
           >
             Read More
             <ChevronRight className="h-3.5 w-3.5" />
