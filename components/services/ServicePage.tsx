@@ -17,7 +17,7 @@ function Prose({
   return (
     <section>
       {heading ? (
-        <h2 className="max-w-[720px] text-[25px] font-medium leading-tight tracking-[-0.055em] text-ink sm:text-[27px]">
+        <h2 className="max-w-[720px] text-lead font-medium tracking-[-0.02em] text-ink">
           {heading}
         </h2>
       ) : null}
@@ -25,7 +25,7 @@ function Prose({
         {paragraphs.map((paragraph) => (
           <p
             key={paragraph.slice(0, 32)}
-            className="mt-3 max-w-[720px] text-[14px] leading-[1.55] text-[#7a7a7a]"
+            className="mt-3 max-w-[720px] text-small text-[#7a7a7a]"
           >
             {paragraph}
           </p>
@@ -39,7 +39,7 @@ function Bullets({ heading, items }: { heading?: string; items: string[] }) {
   return (
     <section>
       {heading ? (
-        <h2 className="max-w-[720px] text-[25px] font-medium leading-tight tracking-[-0.055em] text-ink sm:text-[27px]">
+        <h2 className="max-w-[720px] text-lead font-medium tracking-[-0.02em] text-ink">
           {heading}
         </h2>
       ) : null}
@@ -50,7 +50,7 @@ function Bullets({ heading, items }: { heading?: string; items: string[] }) {
               aria-hidden="true"
               className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
             />
-            <span className="text-[14px] leading-[1.55] text-[#7a7a7a]">
+            <span className="text-small text-[#7a7a7a]">
               {item}
             </span>
           </li>
@@ -78,7 +78,7 @@ function Cards({
   return (
     <section>
       {heading ? (
-        <h2 className="max-w-[720px] text-[25px] font-medium leading-tight tracking-[-0.055em] text-ink sm:text-[27px]">
+        <h2 className="max-w-[720px] text-lead font-medium tracking-[-0.02em] text-ink">
           {heading}
         </h2>
       ) : null}
@@ -87,18 +87,18 @@ function Cards({
           {items.map((item) => (
             <div key={item.title}>
               {item.n ? (
-                <p className="text-[13px] font-semibold text-[#2869ff]">
+                <p className="text-small font-semibold text-[#2869ff]">
                   {item.n}
                 </p>
               ) : null}
               <p
-                className={`text-[15px] font-semibold text-[#292929] ${
+                className={`text-small font-semibold text-[#292929] ${
                   item.n ? "mt-1" : ""
                 }`}
               >
                 {item.title}
               </p>
-              <p className="mt-1 text-[13px] leading-[1.55] text-[#7a7a7a]">
+              <p className="mt-1 text-small text-[#7a7a7a]">
                 {item.body}
               </p>
             </div>
@@ -123,7 +123,7 @@ function Panels({
   return (
     <section>
       {heading ? (
-        <h2 className="max-w-[720px] text-[25px] font-medium leading-tight tracking-[-0.055em] text-ink sm:text-[27px]">
+        <h2 className="max-w-[720px] text-lead font-medium tracking-[-0.02em] text-ink">
           {heading}
         </h2>
       ) : null}
@@ -131,22 +131,22 @@ function Panels({
         <div className="grid grid-cols-1 gap-x-8 gap-y-8 lg:grid-cols-2">
           {groups.map((group) => (
             <div key={group.title}>
-              <h3 className="text-[15px] font-semibold text-ink">
+              <h3 className="text-small font-semibold text-ink">
                 {group.title}
               </h3>
               {group.body ? (
-                <p className="mt-1 text-[12px] leading-[1.5] text-[#8a8a8a]">
+                <p className="mt-1 text-small text-[#8a8a8a]">
                   {group.body}
                 </p>
               ) : null}
               <div className="mt-4 grid gap-4">
                 {group.items.map((item) => (
                   <div key={item.title}>
-                    <p className="text-[13px] font-semibold text-[#292929]">
+                    <p className="text-small font-semibold text-[#292929]">
                       {item.title}
                     </p>
                     {item.body ? (
-                      <p className="mt-0.5 text-[12px] leading-[1.5] text-[#7a7a7a]">
+                      <p className="mt-0.5 text-small text-[#7a7a7a]">
                         {item.body}
                       </p>
                     ) : null}
@@ -191,7 +191,7 @@ export default function ServicePage({ service }: { service: ServicePageContent }
 
         {lead.kind === "lead" ? (
           <section className="mt-9">
-            <p className="max-w-[720px] text-[clamp(17px,3.6vw,26px)] font-medium leading-[1.3] tracking-[-0.03em] text-ink">
+            <p className="max-w-[720px] text-body font-medium tracking-[-0.03em] text-ink">
               {lead.body}
             </p>
           </section>
