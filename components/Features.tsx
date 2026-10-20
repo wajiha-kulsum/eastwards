@@ -155,7 +155,7 @@ function CardCarousel() {
                   className="object-cover"
                 />
               </div>
-              <div className="flex items-center gap-3 px-3 py-[14px] text-[19px] font-semibold text-statement">
+              <div className="flex items-center gap-3 px-3 py-[14px] text-small font-semibold text-statement">
                 {service.title}
                 <ArrowUpRight className="h-4 w-4" />
               </div>
@@ -173,24 +173,24 @@ export function Features() {
       className="mx-auto mt-14 max-w-[1720px] px-6 sm:px-10 md:mt-16 lg:px-[5.35%]"
     >
       <div className="grid gap-8 md:grid-cols-[46.5%_1fr]">
-        <h2 className="text-2xl font-semibold leading-8 tracking-tight text-ink sm:text-[28px]">
+        <h2 className="text-title font-semibold tracking-tight text-ink">
           For crafting truly
-          <span className="block text-[22px] font-bold text-primary sm:text-[25px]">
+          <span className="block text-copy font-bold text-primary">
             prominent IT solutions
           </span>
         </h2>
 
         <div>
-          <SectionLabel className="text-[15px] sm:text-[16px]">{features.label}</SectionLabel>
+          <SectionLabel>{features.label}</SectionLabel>
           <div className="relative mt-2 flex max-w-[500px] gap-4">
             <DotMatrix />
-            <p className="text-[15px] font-medium leading-[1.4] text-statement sm:text-[17px]">
+            <p className="text-small font-medium text-statement">
               {features.body}
             </p>
           </div>
           <PrimaryButton
             href="#"
-            className="mt-5 h-10 gap-2 px-7 text-[14px]"
+            className="mt-5 h-10 gap-2 px-7 text-small"
           >
             {features.cta}
             <svg
