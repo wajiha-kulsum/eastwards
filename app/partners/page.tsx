@@ -49,25 +49,24 @@ export default function PartnersPage() {
               alt=""
               className="absolute inset-x-0 top-0 w-full"
             />
-            <div className="relative mt-[36px] grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-[repeat(3,390px)] lg:justify-end lg:gap-[74px]">
+            <div className="relative mt-[36px] grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-6 lg:grid-cols-[repeat(3,390px)] lg:justify-center lg:gap-[74px]">
               {partners.why.advantages.map((advantage, index) => (
                 <article
                   key={advantage.title}
                   className="relative flex min-h-[300px] flex-col overflow-hidden rounded-[30px] bg-[#496EFD] p-6 text-white lg:h-[350px]"
                 >
-                  {/* masked polygon face, just below the card border line:
-                      a different face per card (bottom right, top right,
-                      top left), 3-6px down from the top edge */}
+                  {/* masked polygon near a corner, one per card, never
+                      against the top-left number zone */}
                   <img
                     src="/images/polygon-6.svg"
                     alt=""
                     aria-hidden="true"
-                    className={`pointer-events-none absolute h-[80%] max-w-none ${
+                    className={`pointer-events-none absolute h-[55%] max-w-none ${
                       index === 0
-                        ? "bottom-[-14px] right-[10px]"
+                        ? "top-[6px] right-[12px]"
                         : index === 1
-                          ? "top-[5px] right-[10px]"
-                          : "top-[5px] left-[12px]"
+                          ? "bottom-[6px] right-[12px]"
+                          : "bottom-[6px] right-[28px]"
                     }`}
                   />
                   <div className="relative z-10 flex flex-1 flex-col text-white">
