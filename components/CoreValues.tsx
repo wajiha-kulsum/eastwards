@@ -5,11 +5,11 @@ import { coreValues } from "@/lib/content";
 export function CoreValues() {
   return (
     <section className="mx-auto mt-14 max-w-[1720px] px-6 sm:px-10 md:mt-16 lg:px-[5.35%]">
-      <div className="flex items-center gap-1 border-b border-line-strong pb-2 text-xs font-medium text-ink">
+      <div className="flex items-center gap-1 border-b border-line-strong pb-2 text-small font-medium text-ink">
         {coreValues.kicker} <PlayTriangle className="h-2 w-2 text-primary" />
       </div>
 
-      <p className="mt-9 max-w-[540px] text-[22px] font-semibold leading-[23px] tracking-tight text-body">
+      <p className="mt-9 max-w-[540px] text-copy font-semibold tracking-tight text-body">
         <span className="text-statement">
           Heavyweight experience, new approach. Eastwards brings 20+ years of IT
           engineering and product design expertise together.
@@ -33,8 +33,8 @@ export function CoreValues() {
                 className="h-[150px] w-auto object-contain drop-shadow-sm"
               />
             </div>
-            <p className="text-[13px] font-medium text-primary">/ {value.label} /</p>
-            <p className="mt-1 max-w-[210px] text-[14px] font-semibold leading-4 text-ink">
+            <p className="text-small font-medium text-primary">/ {value.label} /</p>
+            <p className="mt-1 max-w-[210px] text-small font-semibold text-ink">
               {value.caption}
             </p>
           </li>
