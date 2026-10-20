@@ -96,7 +96,7 @@ export default function DotHero({ title, lede }: { title: string; lede: string }
       <DotField className="bottom-[12px] top-[22px]" fieldRef={fieldRef} />
 
       <div className="relative z-10 py-1">
-        <h1 className="font-display text-[clamp(2.75rem,5.5vw,5.5rem)] font-bold uppercase leading-none tracking-[-0.03em] text-black">
+        <h1 className="font-display text-display font-bold uppercase leading-none tracking-[-0.03em] text-black">
           <TextBlur spanRef={chipRef}>{title}</TextBlur>
           <DotMark markRef={markRef} />
         </h1>
@@ -104,7 +104,7 @@ export default function DotHero({ title, lede }: { title: string; lede: string }
 
       {/* Supporting copy - pinned to bottom right across all sub-pages */}
       <div className="relative z-10 mt-auto flex justify-end pb-2">
-        <p className="max-w-[420px] text-right text-[14px] font-normal leading-[1.3] text-[#111111] sm:text-[16px] md:text-[18px] lg:text-[20px]">
+        <p className="max-w-[420px] text-right text-small font-normal text-[#111111]">
           <TextBlur>{lede}</TextBlur>
         </p>
       </div>
