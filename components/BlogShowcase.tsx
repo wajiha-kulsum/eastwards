@@ -30,7 +30,7 @@ export default function BlogShowcase() {
       <div className="rounded-[24px] border border-[#e8e9f4] bg-[#fcfcfe] px-5 py-10 sm:px-8 md:px-[31px] lg:py-[54px]">
         {/* Heading: dark line + muted line, controls right */}
         <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
-          <h2 className="text-title font-semibold tracking-[-0.02em] text-neutral-900">
+          <h2 className="text-title font-semibold tracking-[-0.02em] text-ink">
             <span className="block">{blog.heading}</span>
             <span className="block text-body">{blog.subtext}</span>
           </h2>
@@ -119,10 +119,10 @@ export default function BlogShowcase() {
             className="max-w-[640px] animate-[fade-in_250ms_ease-out] text-small"
             aria-live="polite"
           >
-            <span className="font-semibold text-neutral-900">
+            <span className="font-semibold text-ink">
               {activePost.title}
             </span>{" "}
-            <span className="text-[#5d6b8a]">{activePost.description} …</span>
+            <span className="text-body">{activePost.description} …</span>
           </p>
 
           <Link
