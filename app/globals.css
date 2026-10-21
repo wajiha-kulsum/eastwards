@@ -22,7 +22,7 @@
 }
 
 body {
-  background: #ffffff;
+  background: var(--color-page);
   color: var(--color-ink);
   font-family: var(--font-sans);
   /* lock horizontal wiggle entirely, the page scrolls vertically only */
@@ -222,6 +222,8 @@ body {
   --color-surface: #fafafa; /* card backgrounds */
   --color-line: #eeeeee; /* card borders */
   --color-line-strong: #d9d9d9; /* panel borders, hairlines */
+  --color-page: #ffffff; /* page/chip background */
+  --color-card: #ffffff; /* white cards, panels, buttons on the page */
 
   --font-sans: var(--font-instrument-sans), system-ui, sans-serif;
   --font-display: var(--font-inter-display), system-ui, sans-serif;
@@ -261,4 +263,37 @@ body {
     --text-lead: 22px;
     --text-small: 16px;
   }
+}
+
+/* Dark mode rebinds the brand tokens; token-painted colors resolve through
+   them at render time, so components need no dark: variant for their paint.
+   Literal-adjacent pieces (dot lattice, services panel) get explicit rules
+   here. The bootstrap script in layout.tsx sets .dark before first paint. */
+.dark {
+  --color-ink: #f2f2f2;
+  --color-body: #8f8f8f;
+  --color-statement: #f2f2f2;
+  --color-faint: #8f8f8f;
+  --color-subtle: #8f8f8f;
+  --color-surface: #141518;
+  --color-line: #26282c;
+  --color-line-strong: #383b41;
+  --color-page: #0f0f0f;
+  --color-card: #1a1c20;
+}
+
+/* Dot lattice: grey in light, faint blue-grey after dark. */
+.dot-field {
+  background-image: radial-gradient(circle, #d9dce3 1.6px, transparent 1.9px);
+  background-size: 10px 10px;
+}
+.dark .dot-field {
+  background-image: radial-gradient(circle, #2e3036 1.6px, transparent 1.9px);
+}
+
+.dark .nav-services-panel {
+  background: #15161a;
+  border-color: #26282c;
+  border-bottom-color: #2868ff;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
 }

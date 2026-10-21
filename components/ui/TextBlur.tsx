@@ -16,7 +16,7 @@ export default function TextBlur({
   return (
     <span
       ref={spanRef}
-      className="rounded-md bg-white px-2 [-webkit-box-decoration-break:clone] [box-decoration-break:clone]"
+      className="rounded-md bg-page px-2 [-webkit-box-decoration-break:clone] [box-decoration-break:clone]"
     >
       {children}
     </span>

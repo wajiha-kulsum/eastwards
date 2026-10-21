@@ -210,7 +210,7 @@ function intoSections(blocks: ServiceBlock[]): ServiceBlock[][] {
 export default function ServicePage({ service }: { service: ServicePageContent }) {
   const [lead, ...rest] = service.blocks;
   return (
-    <main id="main" className="bg-white text-ink">
+    <main id="main" className="bg-page text-ink">
       <div className="mx-auto max-w-[1720px] px-6 pt-3 sm:px-10 lg:px-[5.35%]">
         <ServiceHero title={service.title} lede={service.lede} />
 

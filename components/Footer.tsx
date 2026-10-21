@@ -58,7 +58,7 @@ export function Footer() {
           instead of at the font's hidden descent space. */}
       <p
         aria-hidden="true"
-        className="mt-16 select-none bg-gradient-to-b from-body to-white bg-clip-text text-center font-display text-[clamp(4rem,17.3vw,18.75rem)] font-bold leading-[0.85] [text-box:trim-end_cap_alphabetic] tracking-tight text-transparent sm:mt-24"
+        className="mt-16 select-none bg-gradient-to-b from-body to-white bg-clip-text text-center font-display text-[clamp(4rem,17.3vw,18.75rem)] font-bold leading-[0.85] [text-box:trim-end_cap_alphabetic] tracking-tight text-transparent sm:mt-24 dark:to-[#0f0f0f]"
       >
         {footer.wordmark}
       </p>

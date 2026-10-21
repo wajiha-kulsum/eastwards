@@ -27,7 +27,7 @@ export default function BlogShowcase() {
   return (
     <section className="mx-auto mt-14 max-w-[1720px] px-6 sm:px-10 md:mt-16 lg:px-[5.35%]">
       {/* light bordered panel, palette matched to the reference */}
-      <div className="rounded-[24px] border border-[#e8e9f4] bg-[#fcfcfe] px-5 py-10 sm:px-8 md:px-[31px] lg:py-[54px]">
+      <div className="rounded-[24px] border border-line bg-card px-5 py-10 sm:px-8 md:px-[31px] lg:py-[54px]">
         {/* Heading: dark line + muted line, controls right */}
         <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
           <h2 className="text-title font-semibold tracking-[-0.02em] text-ink">
@@ -41,7 +41,7 @@ export default function BlogShowcase() {
               type="button"
               aria-label="Previous article"
               onClick={() => setCursor((i) => i - 1)}
-              className="grid h-9 w-9 place-items-center rounded-[10px] bg-[#eceefb] text-primary transition-colors hover:bg-[#dfe3fa]"
+              className="grid h-9 w-9 place-items-center rounded-[10px] bg-[#eceefb] text-primary transition-colors hover:bg-[#dfe3fa] dark:bg-[#232733] dark:hover:bg-[#2a3040]"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
@@ -49,7 +49,7 @@ export default function BlogShowcase() {
               type="button"
               aria-label="Next article"
               onClick={() => setCursor((i) => i + 1)}
-              className="grid h-9 w-9 place-items-center rounded-[10px] bg-[#eceefb] text-primary transition-colors hover:bg-[#dfe3fa]"
+              className="grid h-9 w-9 place-items-center rounded-[10px] bg-[#eceefb] text-primary transition-colors hover:bg-[#dfe3fa] dark:bg-[#232733] dark:hover:bg-[#2a3040]"
             >
               <ChevronRight className="h-4 w-4" />
             </button>
@@ -127,7 +127,7 @@ export default function BlogShowcase() {
 
           <Link
             href={activePost.href}
-            className="inline-flex h-11 shrink-0 items-center justify-center gap-2 self-start rounded-lg border border-[#e8e9f4] bg-white px-5 text-small font-medium text-primary transition-colors duration-200 hover:border-primary/40 hover:bg-primary/5"
+            className="inline-flex h-11 shrink-0 items-center justify-center gap-2 self-start rounded-lg border border-line bg-card px-5 text-small font-medium text-primary transition-colors duration-200 hover:border-primary/40 hover:bg-primary/5"
           >
             Read More
             <ChevronRight className="h-3.5 w-3.5" />

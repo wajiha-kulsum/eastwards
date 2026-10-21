@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { navLinks, navServices } from "@/lib/content";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -16,7 +17,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="relative z-50 w-full bg-white">
+    <header className="relative z-50 w-full bg-page">
       <nav
         aria-label="Main navigation"
         className="mx-auto flex h-[60px] w-full max-w-[1720px] items-center justify-between px-6 sm:px-10 sm:h-[68px] lg:h-[72px] lg:px-[5.35%]"
@@ -111,7 +112,7 @@ export function Navbar() {
                               </svg>
                               <div className="invisible absolute left-full top-0 z-10 pl-3 opacity-0 transition-opacity duration-200 group-hover/row:visible group-hover/row:opacity-100 focus-within:visible focus-within:opacity-100">
                                 {service.items ? (
-                                <div className="min-w-[280px] rounded-2xl border border-[#e8e8e8] bg-white p-3 shadow-xl">
+                                <div className="min-w-[280px] rounded-2xl border border-line bg-card p-3 shadow-xl">
                                   <div className="flex flex-col">
                                     {service.items.map((item) => (
                                       <NavigationMenuLink
@@ -125,7 +126,7 @@ export function Navbar() {
                                   </div>
                                 </div>
                               ) : (
-                                <div className="w-max max-w-[280px] rounded-2xl border border-[#e8e8e8] bg-white p-5 shadow-xl">
+                                <div className="w-max max-w-[280px] rounded-2xl border border-line bg-card p-5 shadow-xl">
                                   <p className="text-small font-medium text-ink">
                                     {service.detail?.title}
                                   </p>
@@ -179,36 +180,15 @@ export function Navbar() {
           </NavigationMenuList>
         </NavigationMenu>
 
-        {/* Login button + mobile toggle */}
+        {/* Theme toggle + mobile menu toggle */}
         <div className="flex shrink-0 items-center gap-3">
-          <Link
-            href="/login"
-            className="inline-flex h-9 items-center gap-3 rounded-full bg-primary py-[3px] pl-[14px] pr-[4px] text-small font-medium text-white transition-colors hover:bg-[#1555ed] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:h-11 lg:pl-[16px] lg:pr-[5px]"
-          >
-            Login
-            <span className="flex h-[24px] w-[24px] items-center justify-center rounded-full bg-white lg:h-[26px] lg:w-[26px]">
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 20 20"
-                className="h-[16px] w-[16px] lg:h-[17px] lg:w-[17px]"
-                fill="none"
-              >
-                <path
-                  d="M7 4.5L12.5 10L7 15.5"
-                  stroke="#2868FF"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-          </Link>
+          <ThemeToggle />
 
           <button
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
             aria-expanded={open}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-[#e8e8e8] text-ink md:hidden"
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-line text-ink md:hidden"
           >
             <svg
               viewBox="0 0 20 20"
@@ -238,7 +218,7 @@ export function Navbar() {
 
       {/* Mobile dropdown (kept from previous navbar, the spec above is desktop-only) */}
       {open && (
-        <div className="absolute inset-x-4 top-[64px] z-20 rounded-2xl border border-[#e8e8e8] bg-white p-6 shadow-xl md:hidden">
+        <div className="absolute inset-x-4 top-[64px] z-20 rounded-2xl border border-line bg-card p-6 shadow-xl md:hidden">
           <ul className="space-y-4">
             {navLinks.map((item) => (
               <li key={item.label}>

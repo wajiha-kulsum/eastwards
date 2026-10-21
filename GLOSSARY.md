@@ -51,7 +51,11 @@ Updated lazily when terms or decisions actually get resolved.
   two-color text system: `primary #2868ff` (accents, links, numbers),
   `ink`/`statement` `#1e1e1e` (black text), `body`/`faint`/`subtle`
   `#7e7e7e` (grey text), plus `surface #fafafa`, `line #eeeeee`,
-  `line-strong #d9d9d9`. Components must not
+  `line-strong #d9d9d9`, plus the surface tokens `page` (page/chip
+  background; dark `#0f0f0f`) and `card` (white cards/panels; dark
+  `#1a1c20`). In the `.dark` block these rebind to the dark palette,
+  curated via `components/ui/ThemeToggle.tsx` (persisted as `theme` in
+  localStorage; bootstrap script in layout.tsx). Components must not
   carry raw hex literals except inside locked-geometry components
   (DotField/DotHero) and `nav-services-panel` CSS in globals.css.
 - **Paper design** — the approved design source for the site's look (the canvas

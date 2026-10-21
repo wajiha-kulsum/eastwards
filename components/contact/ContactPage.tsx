@@ -51,7 +51,7 @@ export function ContactPage() {
   }
 
   return (
-    <main id="main" className="flex-1 bg-white text-ink">
+    <main id="main" className="flex-1 bg-page text-ink">
       <div className="mx-auto max-w-[1720px] px-6 pb-16 pt-3 sm:px-10 lg:px-[5.35%]">
         {/* Hero, grey dot field behind the heading */}
         <DotHero title={contact.title} lede={contact.subtitle} />
@@ -134,7 +134,7 @@ export function ContactPage() {
           {/* Contact form */}
           <form
             onSubmit={handleSubmit}
-            className="flex min-w-0 flex-col rounded-[24px] border border-[#e9e9e9] bg-[#fafafa] p-5 sm:p-6 lg:p-7"
+            className="flex min-w-0 flex-col rounded-[24px] border border-line bg-surface p-5 sm:p-6 lg:p-7"
           >
             <div className="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2 lg:gap-y-5">
               <div>
@@ -151,7 +151,7 @@ export function ContactPage() {
                   autoComplete="given-name"
                   placeholder="John"
                   required
-                  className="h-12 w-full rounded-[12px] border border-transparent bg-[#ededed] px-3.5 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] focus:border-[#2869ff] focus:bg-white focus:ring-2 focus:ring-[#2869ff]/20"
+                  className="h-12 w-full rounded-[12px] border border-transparent bg-[#ededed] dark:bg-[#1a1c20] px-3.5 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] dark:placeholder:text-[#6d6d6d] focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20"
                 />
               </div>
 
@@ -169,7 +169,7 @@ export function ContactPage() {
                   autoComplete="family-name"
                   placeholder="Doe"
                   required
-                  className="h-12 w-full rounded-[12px] border border-transparent bg-[#ededed] px-3.5 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] focus:border-[#2869ff] focus:bg-white focus:ring-2 focus:ring-[#2869ff]/20"
+                  className="h-12 w-full rounded-[12px] border border-transparent bg-[#ededed] dark:bg-[#1a1c20] px-3.5 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] dark:placeholder:text-[#6d6d6d] focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20"
                 />
               </div>
 
@@ -187,7 +187,7 @@ export function ContactPage() {
                   autoComplete="email"
                   placeholder="yourmail@gmail.com"
                   required
-                  className="h-12 w-full rounded-[12px] border border-transparent bg-[#ededed] px-3.5 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] focus:border-[#2869ff] focus:bg-white focus:ring-2 focus:ring-[#2869ff]/20"
+                  className="h-12 w-full rounded-[12px] border border-transparent bg-[#ededed] dark:bg-[#1a1c20] px-3.5 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] dark:placeholder:text-[#6d6d6d] focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20"
                 />
               </div>
 
@@ -204,7 +204,7 @@ export function ContactPage() {
                   type="text"
                   autoComplete="organization"
                   placeholder="Company Name"
-                  className="h-12 w-full rounded-[12px] border border-transparent bg-[#ededed] px-3.5 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] focus:border-[#2869ff] focus:bg-white focus:ring-2 focus:ring-[#2869ff]/20"
+                  className="h-12 w-full rounded-[12px] border border-transparent bg-[#ededed] dark:bg-[#1a1c20] px-3.5 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] dark:placeholder:text-[#6d6d6d] focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20"
                 />
               </div>
 
@@ -221,7 +221,7 @@ export function ContactPage() {
                   rows={5}
                   placeholder="Your Message Here"
                   required
-                  className="min-h-[140px] w-full resize-y rounded-[12px] border border-transparent bg-[#ededed] px-3.5 py-3 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] focus:border-[#2869ff] focus:bg-white focus:ring-2 focus:ring-[#2869ff]/20"
+                  className="min-h-[140px] w-full resize-y rounded-[12px] border border-transparent bg-[#ededed] px-3.5 py-3 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] dark:placeholder:text-[#6d6d6d] focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20"
                 />
               </div>
             </div>
@@ -258,7 +258,7 @@ export function ContactPage() {
             for a faster response.
           </p>
 
-          <div className="mt-5 grid grid-cols-1 gap-5 rounded-[9px] border border-[#ededed] bg-[#fafafa] px-5 py-7 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:py-8">
+          <div className="mt-5 grid grid-cols-1 gap-5 rounded-[9px] border border-line bg-surface px-5 py-7 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:py-8">
             {channels.map((channel) => (
               <div key={channel.email} className="min-w-0 text-center">
                 <h3 className="mb-2 text-small font-semibold text-ink">
