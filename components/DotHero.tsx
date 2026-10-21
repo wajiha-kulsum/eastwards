@@ -1,16 +1,17 @@
 "use client";
 
-import { useEffect, useRef, type Ref } from "react";
+import { useEffect, useRef, type Ref, type RefObject } from "react";
 import DotField from "@/components/ui/DotField";
 import TextBlur from "@/components/ui/TextBlur";
 
-/* The dot-field hero shared by Contact, Partners, About and the service
-   pages. Geometry is locked so switching pages feels consistent: the dot
-   field (DotField) runs behind the copy, every text block wears the shared
-   TextBlur chip, and the 4x7 logo triangle flows inline right after the
-   title text (hugging it with no empty lane) before the snap shifts it a
-   few pixels onto the field's 10px lattice. Only the title and lede text
-   vary between pages. */
+/* The dot-field hero shared by Contact, Partners, About. Geometry is locked
+   so switching pages feels consistent: the dot field (DotField) runs behind
+   the copy, every text block wears the shared TextBlur chip, and the 4x7
+   logo triangle flows inline right after the title text (hugging it with no
+   empty lane) before the snap shifts it a few pixels onto the field's 10px
+   lattice. Only the title and lede text vary between pages.
+   Service pages use ServiceHero instead, which re-exports the mark and the
+   snap. */
 
 const DOT_PITCH = 10; // 5px dot + 5px gap, same as DotField
 
@@ -46,23 +47,24 @@ export function DotMark({ markRef }: { markRef: Ref<HTMLDivElement> }) {
   );
 }
 
-export default function DotHero({ title, lede }: { title: string; lede: string }) {
-  const fieldRef = useRef<HTMLDivElement>(null);
-  const markRef = useRef<HTMLDivElement>(null);
-  const chipRef = useRef<HTMLSpanElement>(null);
-
+/* The lattice snap, shared with ServiceHero: both grids are 10px lattices
+   with the dot at the tile center, so the mark only needs shifting by the
+   negative remainder of its offset against the field: every blue dot then
+   lands exactly on a field dot. Translate is zeroed before measuring so it
+   never feeds back in, and whole-pitch shifts pull the mark back left so it
+   never drifts off the title text: measured on the chip's widest wrapped
+   line. */
+export function useDotSnap(
+  fieldRef: RefObject<HTMLDivElement | null>,
+  markRef: RefObject<HTMLDivElement | null>,
+  chipRef: RefObject<HTMLSpanElement | null>,
+) {
   useEffect(() => {
     const field = fieldRef.current;
     const mark = markRef.current;
     const chip = chipRef.current;
     if (!field || !mark || !chip) return;
 
-    // Both grids are 10px lattices with the dot at the tile center, so the
-    // mark only needs shifting by the negative remainder of its offset
-    // against the field: every blue dot then lands exactly on a field dot.
-    // Translate is zeroed before measuring so it never feeds back in, and
-    // whole-pitch shifts pull the mark back left so it never drifts off the
-    // title text: measured on the chip's widest wrapped line.
     const mod = (n: number) => ((n % DOT_PITCH) + DOT_PITCH) % DOT_PITCH;
     let chipRight = NaN;
     const snap = () => {
@@ -89,14 +91,22 @@ export default function DotHero({ title, lede }: { title: string; lede: string }
       watch.disconnect();
       window.removeEventListener("resize", snap);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+}
+
+export default function DotHero({ title, lede }: { title: string; lede: string }) {
+  const fieldRef = useRef<HTMLDivElement>(null);
+  const markRef = useRef<HTMLDivElement>(null);
+  const chipRef = useRef<HTMLSpanElement>(null);
+  useDotSnap(fieldRef, markRef, chipRef);
 
   return (
     <section className="relative flex min-h-[160px] flex-col overflow-hidden pt-2 sm:min-h-[190px] lg:min-h-[210px]">
       <DotField className="bottom-[12px] top-[22px]" fieldRef={fieldRef} />
 
       <div className="relative z-10 py-1">
-        <h1 className="font-display text-display font-bold uppercase leading-none tracking-[-0.03em] text-black">
+        <h1 className="font-display text-display font-bold uppercase leading-none tracking-[-0.03em] text-ink">
           <TextBlur spanRef={chipRef}>{title}</TextBlur>
           <DotMark markRef={markRef} />
         </h1>
@@ -104,7 +114,7 @@ export default function DotHero({ title, lede }: { title: string; lede: string }
 
       {/* Supporting copy - pinned to bottom right across all sub-pages */}
       <div className="relative z-10 mt-auto flex justify-end pb-2">
-        <p className="max-w-[420px] text-right text-small font-normal text-[#111111]">
+        <p className="max-w-[420px] text-right text-small font-normal text-body">
           <TextBlur>{lede}</TextBlur>
         </p>
       </div>
