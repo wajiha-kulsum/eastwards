@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, MapPin, Phone } from "lucide-react";
+import { MailIcon } from "@/components/ui/icons";
 import DotHero from "@/components/DotHero";
 import { contact } from "@/lib/content";
 
@@ -269,11 +270,7 @@ export function ContactPage() {
                   href={`mailto:${channel.email}`}
                   className="inline-flex max-w-full items-center justify-center gap-2 text-small text-ink transition hover:text-primary"
                 >
-                  <Mail
-                    size={18}
-                    fill="#55585e"
-                    className="shrink-0 text-white"
-                  />
+                  <MailIcon className="h-[18px] w-[18px] shrink-0" />
                   <span className="break-all">{channel.email}</span>
                 </a>
               </div>

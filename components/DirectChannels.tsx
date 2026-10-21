@@ -1,4 +1,4 @@
-import { Mail } from "lucide-react";
+import { MailIcon } from "@/components/ui/icons";
 import { contact } from "@/lib/content";
 
 /* Direct Channels band shared by the About and Partnership artboards:
@@ -21,12 +21,7 @@ export default function DirectChannels() {
                 {channel.department}
               </p>
               <div className="mt-2 flex items-center gap-2">
-                <Mail
-                  className="h-[20px] w-[25px] shrink-0 text-ink"
-                  fill="currentColor"
-                  strokeWidth={1.2}
-                  stroke="#FAFAFA"
-                />
+                <MailIcon className="h-[18px] w-[18px] shrink-0 text-ink" />
                 <a
                   href={`mailto:${channel.email}`}
                   className="truncate text-small font-light text-ink"

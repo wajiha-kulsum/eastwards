@@ -26,7 +26,7 @@ export function DotMark({ markRef }: { markRef: Ref<HTMLDivElement> }) {
     <div
       ref={markRef}
       aria-hidden="true"
-      className="pointer-events-none relative inline-grid shrink-0 align-middle ml-[4px] grid grid-cols-[repeat(4,10px)] grid-rows-[repeat(7,10px)]"
+      className="pointer-events-none relative hidden shrink-0 align-middle ml-[4px] sm:inline-grid grid grid-cols-[repeat(4,10px)] grid-rows-[repeat(7,10px)]"
     >
       {Array.from({ length: 28 }).map((_, i) => {
         const col = i % 4;
@@ -108,6 +108,13 @@ export default function DotHero({ title, lede }: { title: string; lede: string }
       <div className="relative z-10 py-1">
         <h1 className="font-display text-display font-bold uppercase leading-none tracking-[-0.03em] text-ink">
           <TextBlur spanRef={chipRef}>{title}</TextBlur>
+          {/* Mobile: the actual wordmark-beside-title; desktop keeps the dot mark */}
+          <span className="inline-flex items-center gap-[3px] lowercase font-bold tracking-[-0.5px] text-ink sm:hidden">
+            eastwards
+            <svg aria-hidden="true" viewBox="0 0 12 18" className="h-[19px] w-[13px]" fill="none">
+              <path d="M0 0L12 9L0 18V0Z" fill="#2868FF" />
+            </svg>
+          </span>
           <DotMark markRef={markRef} />
         </h1>
       </div>
