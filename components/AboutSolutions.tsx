@@ -11,12 +11,12 @@ import { about } from "@/lib/content";
 
 function ListRows({ items }: { items: readonly { title: string; body: string }[] }) {
   return (
-    <ul className="mt-6 flex flex-col gap-3 text-copy tracking-[-0.01em] lg:mt-4 lg:ml-[45.4%]">
+    <ul className="mt-6 flex flex-col gap-3 text-small tracking-[-0.01em] lg:mt-4 lg:ml-[45.4%]">
       {items.map((item) => (
         <li key={item.title}>
-          <span className="font-semibold text-[#121212]">{item.title}</span>
+          <span className="font-semibold text-ink">{item.title}</span>
           <br />
-          <span className="text-[#8A8A8A]">{item.body}</span>
+          <span className="text-body">{item.body}</span>
         </li>
       ))}
     </ul>
@@ -28,17 +28,17 @@ function Rail({ active }: { active: number }) {
     <ol className="relative grid grid-cols-1 gap-y-7 sm:grid-cols-2 lg:grid-cols-5 lg:gap-y-0">
       <span
         aria-hidden="true"
-        className="absolute inset-x-0 top-[11.5px] hidden h-px bg-[#d9d9d9] lg:block"
+        className="absolute inset-x-0 top-[11.5px] hidden h-px bg-line-strong lg:block"
       />
       {about.solutions.groups.map((group, index) => (
         <li key={group.title} className="relative pt-[30px]">
           <span
             aria-hidden="true"
             className={`absolute left-0 top-0 h-[23px] w-[23px] rounded-full ${
-              index === active ? "bg-primary ring-[7px] ring-primary/40" : "bg-[#868686]"
+              index === active ? "bg-primary ring-[7px] ring-primary/40" : "bg-[#7e7e7e]"
             }`}
           />
-          <p className="text-lead tracking-[-0.02em] text-[#494949] lg:max-w-[12.4vw]">
+          <p className="text-lead tracking-[-0.02em] text-ink lg:max-w-[12.4vw]">
             {group.title}
           </p>
         </li>
@@ -81,7 +81,7 @@ export default function AboutSolutions() {
     <div ref={runwayRef} className="relative lg:h-[300svh]">
       <div className="lg:hidden">
         <section>
-          <h2 className="font-display text-title font-semibold tracking-[-0.02em] text-[#252525]">
+          <h2 className="font-display text-title font-semibold tracking-[-0.02em] text-ink">
             {about.solutions.title}
           </h2>
           <div className="mt-8 flex flex-col gap-10">
@@ -97,7 +97,7 @@ export default function AboutSolutions() {
 
       <div className="sticky top-0 hidden lg:flex h-[100svh] flex-col justify-center gap-y-14">
         <section>
-          <h2 className="font-display text-title font-semibold tracking-[-0.02em] text-[#252525] lg:max-w-[38vw]">
+          <h2 className="font-display text-title font-semibold tracking-[-0.02em] text-ink lg:max-w-[38vw]">
             {about.solutions.title}
           </h2>
           <div key={phase} className="animate-[fade-in_250ms_ease-out]">
