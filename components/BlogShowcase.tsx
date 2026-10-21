@@ -27,12 +27,12 @@ export default function BlogShowcase() {
   return (
     <section className="mx-auto mt-14 max-w-[1720px] px-6 sm:px-10 md:mt-16 lg:px-[5.35%]">
       {/* light bordered panel, palette matched to the reference */}
-      <div className="rounded-[24px] border border-line bg-card px-5 py-10 sm:px-8 md:px-[31px] lg:py-[54px]">
+      <div className="rounded-[24px] border border-line bg-card px-5 py-8 sm:px-8 md:px-[31px] lg:py-[44px]">
         {/* Heading: dark line + muted line, controls right */}
         <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
-          <h2 className="text-title font-semibold tracking-[-0.02em] text-ink">
+          <h2 className="text-lead font-semibold tracking-[-0.02em] text-ink">
             <span className="block">{blog.heading}</span>
-            <span className="block text-body">{blog.subtext}</span>
+            <span className="block text-small text-body">{blog.subtext}</span>
           </h2>
 
           {/* manual paging controls */}
@@ -58,7 +58,7 @@ export default function BlogShowcase() {
 
         {/* Accordion gallery: active tile dominates, widths stagger away from it */}
         <div
-          className="mt-10 flex h-[220px] gap-2 sm:h-[300px] lg:h-[430px]"
+          className="mt-10 flex h-[190px] gap-2 sm:h-[260px] lg:h-[370px]"
           aria-label="Featured blog articles"
         >
           {posts.map((post, index) => {
