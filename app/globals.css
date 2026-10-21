@@ -236,21 +236,29 @@ body {
   --radius-3xl: 1.5rem;
   --radius-4xl: 2rem;
 
-  /* Type scale, the only sizes the site uses at the 1728 artboard:
-     display 88 / title 60 / lead 35 / copy 25 / small 18, plus the micro
-     label size (11) behind the boxed eyebrow chips of the services mock.
-     The 25px step is "copy", not "body", because --color-body already
-     owns the name and Tailwind resolves text-body to the colour. */
-  --text-display: clamp(2.5rem, 5.2vw, 88px);
+  /* Type scale — the site uses exactly four sizes, fixed pixels on every
+     page: display 88 / title 60 / lead 35 / small 18 (one smaller step per
+     size below 768px). text-copy (25) and text-label were retired; chips
+     render at text-small. The 18px step is "small", not "body", because
+     --color-body already owns the name and Tailwind resolves text-body to
+     the colour. */
+  --text-display: 88px;
   --text-display--line-height: 1.05;
-  --text-title: clamp(1.6rem, 3.5vw, 60px);
+  --text-title: 60px;
   --text-title--line-height: 1.2;
-  --text-lead: clamp(1.05rem, 2.03vw, 35px);
+  --text-lead: 35px;
   --text-lead--line-height: 1.25;
-  --text-copy: clamp(0.95rem, 1.45vw, 25px);
-  --text-copy--line-height: 1.3;
-  --text-small: clamp(0.8rem, 1.05vw, 18px);
+  --text-small: 18px;
   --text-small--line-height: 1.4;
-  --text-label: 11px;
-  --text-label--line-height: 1.2;
+}
+/* One mobile step per size: the same four sizes, smaller, so every page
+   shows identical numbers within a breakpoint instead of scaling with the
+   viewport. */
+@media (max-width: 767px) {
+  :root {
+    --text-display: 44px;
+    --text-title: 34px;
+    --text-lead: 22px;
+    --text-small: 16px;
+  }
 }
