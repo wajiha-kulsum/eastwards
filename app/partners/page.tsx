@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function PartnersPage() {
   return (
-    <main id="main" className="bg-white text-black">
+    <main id="main" className="bg-white text-ink">
       <div className="mx-auto max-w-[1720px] px-6 pb-20 pt-3 sm:px-10 lg:px-[5.35%]">
         <DotHero title={partners.title} lede={partners.lede} />
 
@@ -26,11 +26,11 @@ export default function PartnersPage() {
             <p className="text-body font-medium text-primary">
               {partners.eyebrow}
             </p>
-            <p className="mt-5 whitespace-pre-line text-title font-medium tracking-[-0.02em] text-[#0000008A]">
+            <p className="mt-5 whitespace-pre-line text-title font-medium tracking-[-0.02em] text-body">
               {partners.statement}
             </p>
           </div>
-          <p className="mt-8 text-lead font-medium tracking-[-0.02em] text-[#252525] md:mt-6">
+          <p className="mt-8 text-lead font-medium tracking-[-0.02em] text-ink md:mt-6">
             {partners.statementBody}
           </p>
         </section>
@@ -38,7 +38,7 @@ export default function PartnersPage() {
         {/* Why team up: three blue cards over a gradient strip. Paper: strip
             y920-1132, cards 425x383 r30 from y962, numbers 100px #4062E0. */}
         <section className="mt-16 sm:mt-20">
-          <h2 className="font-display text-title font-semibold tracking-[-0.02em] text-[#272727]">
+          <h2 className="font-display text-title font-semibold tracking-[-0.02em] text-ink">
             {partners.why.title}
           </h2>
 
@@ -74,7 +74,7 @@ export default function PartnersPage() {
                       0{index + 1}
                     </p>
                     <div className="mt-auto">
-                      <h3 className="font-display text-body font-bold text-white">
+                      <h3 className="font-display text-small font-bold text-white">
                         {advantage.title}
                       </h3>
                       <p className="mt-3 max-w-[290px] text-small text-white">
@@ -90,18 +90,18 @@ export default function PartnersPage() {
 
         {/* Direct channels row from the same artboard */}
         <section className="mt-16 sm:mt-20">
-          <h2 className="font-display text-lead font-medium tracking-[-0.02em] text-[#272727]">
+          <h2 className="font-display text-lead font-medium tracking-[-0.02em] text-ink">
             Direct Channels
           </h2>
-          <p className="mt-3 text-small text-[#757575]">
+          <p className="mt-3 text-small text-body">
             Need to reach a specific department? Use the direct lines below for
             a faster response.
           </p>
-          <div className="mt-8 border border-[#EEEEEE] bg-[#FAFAFA] lg:h-[150px]">
+          <div className="mt-8 border border-line bg-surface lg:h-[150px]">
             <div className="grid grid-cols-1 gap-8 py-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-2 lg:px-8 lg:py-7">
               {contact.directChannels.channels.map((channel) => (
                 <div key={channel.department}>
-                  <p className="text-small font-semibold text-[#45484D]">
+                  <p className="text-small font-semibold text-ink">
                     {channel.department}
                   </p>
                   <div className="mt-2 flex items-center gap-2">
@@ -112,7 +112,7 @@ export default function PartnersPage() {
                     />
                     <a
                       href={`mailto:${channel.email}`}
-                      className="truncate text-small font-light text-black"
+                      className="truncate text-small font-light text-ink"
                     >
                       {channel.email}
                     </a>
