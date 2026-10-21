@@ -1,21 +1,37 @@
 import { MailIcon } from "@/components/ui/icons";
 import { contact } from "@/lib/content";
 
-/* Direct Channels band shared by the About and Partnership artboards:
-   heading, one-line intro, then the department inboxes on a light panel. */
-export default function DirectChannels() {
+/* Direct Channels band shared by the About, Partnership and Contact
+   artboards: heading, one-line intro, then the department inboxes on a
+   light panel. Defaults come from contact.directChannels; every prop can
+   be overridden when a page needs its own set. */
+type DirectChannel = { department: string; email: string };
+
+export default function DirectChannels({
+  title = contact.directChannels.title,
+  subtitle = contact.directChannels.subtitle,
+  channels = contact.directChannels.channels,
+  hideIntro = false,
+}: {
+  title?: string;
+  subtitle?: string;
+  channels?: readonly DirectChannel[];
+  hideIntro?: boolean;
+}) {
   return (
     <section className="mt-16 sm:mt-20">
       <h2 className="font-display text-lead font-medium tracking-[-0.02em] text-ink">
-        {contact.directChannels.title}
+        {title}
       </h2>
-      <p className="mt-3 text-small text-body">
-        {contact.directChannels.subtitle}
-      </p>
+      {hideIntro ? null : (
+        <p className="mt-3 text-small text-body">
+          {subtitle}
+        </p>
+      )}
 
       <div className="mt-8 rounded-[10px] border border-line bg-surface lg:h-[150px]">
         <div className="grid grid-cols-1 gap-8 py-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-2 lg:px-[6.8%] lg:py-7">
-          {contact.directChannels.channels.map((channel) => (
+          {channels.map((channel) => (
             <div key={channel.department}>
               <p className="text-small font-semibold text-ink">
                 {channel.department}
