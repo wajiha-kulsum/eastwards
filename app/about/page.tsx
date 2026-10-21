@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main id="main" className="bg-white text-black">
+    <main id="main" className="bg-white text-ink">
       <div className="mx-auto max-w-[1720px] px-6 pb-20 pt-3 sm:px-10 lg:px-[5.35%]">
         {/* The whole hero + banner owns the first screen: hero pinned top,
             banner pinned to its bottom edge. Height subtracts the in-flow
@@ -33,17 +33,17 @@ export default function AboutPage() {
             <p className="text-small font-semibold tracking-[-0.04em] text-primary">
               {about.banner.eyebrow}
             </p>
-            <h2 className="mt-4 font-display text-title font-medium tracking-[-0.02em] text-[#252525]">
+            <h2 className="mt-4 font-display text-lead font-medium tracking-[-0.02em] text-ink">
               {about.banner.line}
               <span className="flex items-center gap-[0.17em]">
                 <PlayTriangle className="h-[0.79em] w-[0.92em] shrink-0 text-primary" />
                 <span>
                   {about.banner.follow}{" "}
-                  <span className="bg-[#2AB0FC]">{about.banner.highlight}</span>
+                  <span className="bg-primary">{about.banner.highlight}</span>
                 </span>
               </span>
             </h2>
-            <p className="mt-6 whitespace-pre-line text-copy text-statement">
+            <p className="mt-6 whitespace-pre-line text-small leading-[1.6] text-body">
               {about.banner.body}
             </p>
           </div>
