@@ -175,7 +175,7 @@ export function Features() {
       <div className="grid gap-8 md:grid-cols-[46.5%_1fr]">
         <h2 className="text-title font-semibold tracking-tight text-ink">
           For crafting truly
-          <span className="block text-copy font-bold text-primary">
+          <span className="block text-lead font-bold text-primary">
             prominent IT solutions
           </span>
         </h2>
