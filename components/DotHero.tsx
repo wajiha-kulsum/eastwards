@@ -20,7 +20,7 @@ const DOT_PITCH = 10; // 5px dot + 5px gap, same as DotField
    field's lattice, each blue dot sits precisely on an existing field dot:
    the older dot turns blue, nothing new is added. Empty cells draw nothing,
    so the field's grey dots continue through the gaps. */
-function DotMark({ markRef }: { markRef: Ref<HTMLDivElement> }) {
+export function DotMark({ markRef }: { markRef: Ref<HTMLDivElement> }) {
   return (
     <div
       ref={markRef}
