@@ -2,20 +2,11 @@
 
 import { useState, type FormEvent } from "react";
 import { ArrowUpRight, MapPin, Phone } from "lucide-react";
-import { MailIcon } from "@/components/ui/icons";
 import DotHero from "@/components/DotHero";
+import DirectChannels from "@/components/DirectChannels";
 import { contact } from "@/lib/content";
 
 export function ContactPage() {
-  // shortcut: duplicates lib/content.ts (directChannels/location/call), keep
-  // the two in sync or pick one source when the contact API lands
-  const channels = [
-    { title: "General Inquiries", email: "info@eastwards.co" },
-    { title: "Business & Partnerships", email: "partners@eastwards.co" },
-    { title: "Careers & Talent", email: "careers@eastwards.co" },
-    { title: "Media & Press", email: "media@eastwards.co" },
-  ];
-
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState("");
 
@@ -248,35 +239,7 @@ export function ContactPage() {
           </form>
         </section>
 
-        {/* Direct channels */}
-        <section className="mt-14 sm:mt-16">
-          <h2 className="text-lead font-medium tracking-[-0.02em]">
-            Direct Channels
-          </h2>
-
-          <p className="mt-1 text-small text-body">
-            Need to reach a specific department? Use the direct lines below
-            for a faster response.
-          </p>
-
-          <div className="mt-5 grid grid-cols-1 gap-5 rounded-[9px] border border-line bg-surface px-5 py-7 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:py-8">
-            {channels.map((channel) => (
-              <div key={channel.email} className="min-w-0 text-center">
-                <h3 className="mb-2 text-small font-semibold text-ink">
-                  {channel.title}
-                </h3>
-
-                <a
-                  href={`mailto:${channel.email}`}
-                  className="inline-flex max-w-full items-center justify-center gap-2 text-small text-ink transition hover:text-primary"
-                >
-                  <MailIcon className="h-[18px] w-[18px] shrink-0" />
-                  <span className="break-all">{channel.email}</span>
-                </a>
-              </div>
-            ))}
-          </div>
-        </section>
+        <DirectChannels />
       </div>
     </main>
   );
