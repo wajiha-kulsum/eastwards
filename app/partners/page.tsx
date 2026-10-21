@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function PartnersPage() {
   return (
-    <main id="main" className="bg-white text-ink">
+    <main id="main" className="bg-page text-ink">
       <div className="mx-auto max-w-[1720px] px-6 pb-20 pt-3 sm:px-10 lg:px-[5.35%]">
         <DotHero title={partners.title} lede={partners.lede} />
 
@@ -23,14 +23,14 @@ export default function PartnersPage() {
             Paper: eyebrow 25px y418, statement 60px y461, body 35px/775px y441. */}
         <section className="mt-14 md:grid md:grid-cols-2 md:gap-8">
           <div>
-            <p className="text-body font-medium text-primary">
+            <p className="text-small font-semibold tracking-[-0.04em] text-primary">
               {partners.eyebrow}
             </p>
-            <p className="mt-5 whitespace-pre-line text-title font-medium tracking-[-0.02em] text-body">
+            <p className="mt-5 whitespace-pre-line font-display text-lead font-medium tracking-[-0.02em] text-ink">
               {partners.statement}
             </p>
           </div>
-          <p className="mt-8 text-lead font-medium tracking-[-0.02em] text-ink md:mt-6">
+          <p className="mt-8 text-small leading-[1.6] text-body md:mt-6">
             {partners.statementBody}
           </p>
         </section>
@@ -47,9 +47,9 @@ export default function PartnersPage() {
             <img
               src="/images/partnerhip.svg"
               alt=""
-              className="absolute inset-x-0 top-0 w-full"
+              className="block w-full"
             />
-            <div className="relative mt-[76px] grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-6 lg:grid-cols-[repeat(3,390px)] lg:justify-center lg:gap-[74px]">
+            <div className="relative -mt-[150px] grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-6 lg:grid-cols-[repeat(3,390px)] lg:justify-center lg:gap-[74px]">
               {partners.why.advantages.map((advantage, index) => (
                 <article
                   key={advantage.title}

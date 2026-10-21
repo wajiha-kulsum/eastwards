@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main id="main" className="bg-white text-ink">
+    <main id="main" className="bg-page text-ink">
       <div className="mx-auto max-w-[1720px] px-6 pb-20 pt-3 sm:px-10 lg:px-[5.35%]">
         {/* The whole hero + banner owns the first screen: hero pinned top,
             banner pinned to its bottom edge. Height subtracts the in-flow
