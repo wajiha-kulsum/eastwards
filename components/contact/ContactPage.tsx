@@ -213,7 +213,7 @@ export function ContactPage() {
                   rows={5}
                   placeholder="Your Message Here"
                   required
-                  className="min-h-[140px] w-full resize-y rounded-[12px] border border-transparent bg-[#ededed] px-3.5 py-3 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] dark:placeholder:text-[#6d6d6d] focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20"
+                  className="min-h-[140px] w-full resize-y rounded-[12px] border border-transparent bg-[#ededed] dark:bg-[#1a1c20] px-3.5 py-3 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] dark:placeholder:text-[#6d6d6d] focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20"
                 />
               </div>
             </div>
