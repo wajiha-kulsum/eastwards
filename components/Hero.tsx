@@ -56,7 +56,7 @@ export function Hero() {
               Technology that moves
               <span className="block text-primary">business forward</span>
             </h1>
-            <p className="mt-4 max-w-[380px] text-copy font-semibold text-body md:mt-6 lg:max-w-[min(692px,41.5vw)] lg:leading-[1.2]">
+            <p className="mt-4 max-w-[380px] text-small font-semibold text-body md:mt-6 lg:max-w-[min(692px,41.5vw)]">
               {hero.subtext}
             </p>
             <PrimaryButton
