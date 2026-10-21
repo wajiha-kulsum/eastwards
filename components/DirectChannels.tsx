@@ -30,7 +30,7 @@ export default function DirectChannels({
       )}
 
       <div className="mt-8 rounded-[10px] border border-line bg-surface lg:h-[150px]">
-        <div className="grid grid-cols-1 gap-8 py-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-2 lg:px-[6.8%] lg:py-7">
+        <div className="grid grid-cols-1 gap-8 px-5 py-8 sm:px-6 lg:grid-cols-4 lg:gap-2 lg:px-[6.8%] lg:py-7">
           {channels.map((channel) => (
             <div key={channel.department}>
               <p className="text-small font-semibold text-ink">
