@@ -24,7 +24,7 @@ export function Navbar() {
         {/* Logo */}
         <Link
           href="/"
-          className="flex shrink-0 items-center text-small font-bold tracking-[-0.5px] text-[#111]"
+          className="flex shrink-0 items-center text-small font-bold tracking-[-0.5px] text-ink"
         >
           eastwards
           <svg
@@ -43,8 +43,28 @@ export function Navbar() {
             {navLinks.map((item) =>
               item.label === "Services" ? (
                 <NavigationMenuItem key={item.label}>
-                  <NavigationMenuTrigger className="h-auto bg-white px-0 py-0 text-small font-medium tracking-[0.1px] text-[#171717] hover:bg-white hover:text-[#2868ff] focus:bg-white data-popup-open:bg-white data-popup-open:text-[#2868ff] lg:tracking-[0.02em]">
-                    {item.label}
+                  <NavigationMenuTrigger className="h-auto px-0 py-0 text-ink hover:text-primary data-popup-open:text-primary [&>svg:last-child]:hidden">
+                    {/* Label wears the exact sibling-link classes so the
+                        button base styling can't shift size/weight/tracking;
+                        chevron follows currentColor so it tints with the
+                        text on hover/open */}
+                    <span className="inline-flex items-center text-small font-medium tracking-[0.1px] text-ink transition-colors group-hover/navigation-menu-trigger:text-primary group-data-popup-open/navigation-menu-trigger:text-primary lg:tracking-[0.02em]">
+                      {item.label}
+                      <svg
+                        aria-hidden="true"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        className="ml-1 h-3 w-3 shrink-0 transition-transform duration-300 group-data-popup-open/navigation-menu-trigger:rotate-180 group-data-open/navigation-menu-trigger:rotate-180"
+                      >
+                        <path
+                          d="M7 4.5L12.5 10L7 15.5"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </span>
                   </NavigationMenuTrigger>
                   {/* Dark two-column panel driven by .nav-services-panel
                       (globals), unlayered CSS outranks the group-variant
@@ -58,12 +78,21 @@ export function Navbar() {
                           key={service.label}
                           className="group/row relative flex items-center justify-between gap-6 px-3"
                         >
-                          <NavigationMenuLink
-                            href={service.href}
-                            className="py-2 text-small font-normal text-[#171717] transition-colors hover:text-[#2868ff]"
-                          >
-                            {service.label}
-                          </NavigationMenuLink>
+                          {/* Category hub rows (carry `items`) are hover-only:
+                              text, not a link - the flyout's children are the
+                              clickable targets. Plain rows stay links. */}
+                          {service.items ? (
+                            <span className="pointer-events-none py-2 text-small font-normal text-ink transition-colors group-hover/row:text-primary">
+                              {service.label}
+                            </span>
+                          ) : (
+                            <NavigationMenuLink
+                              href={service.href}
+                              className="py-2 text-small font-normal text-ink transition-colors hover:text-primary group-hover/row:text-primary"
+                            >
+                              {service.label}
+                            </NavigationMenuLink>
+                          )}
                           {service.detail || service.items ? (
                             <>
                               <svg
@@ -88,7 +117,7 @@ export function Navbar() {
                                       <NavigationMenuLink
                                         key={item.label}
                                         href={item.href}
-                                        className="px-3 py-2 text-small font-normal text-[#171717] transition-colors rounded-[10px] hover:bg-[#fafafa] hover:text-[#2868ff]"
+                                        className="px-3 py-2 text-small font-normal text-ink transition-colors hover:text-primary"
                                       >
                                         {item.label}
                                       </NavigationMenuLink>
@@ -97,15 +126,15 @@ export function Navbar() {
                                 </div>
                               ) : (
                                 <div className="w-max max-w-[280px] rounded-2xl border border-[#e8e8e8] bg-white p-5 shadow-xl">
-                                  <p className="text-small font-medium text-[#171717]">
+                                  <p className="text-small font-medium text-ink">
                                     {service.detail?.title}
                                   </p>
-                                  <p className="mt-2 text-small text-[#757575]">
+                                  <p className="mt-2 text-small text-body">
                                     {service.detail?.body}
                                   </p>
                                   <NavigationMenuLink
                                     href="/contact"
-                                    className="mt-3 inline-flex items-center gap-1.5 rounded-lg text-small font-medium text-[#2868ff] transition-colors hover:text-[#1555ed]"
+                                    className="mt-3 inline-flex items-center gap-1.5 rounded-lg text-small font-medium text-primary transition-colors hover:text-[#1555ed]"
                                   >
                                     Contact us
                                     <svg
@@ -139,7 +168,7 @@ export function Navbar() {
                   <NavigationMenuLink asChild>
                     <Link
                       href={item.href}
-                      className="text-small font-medium tracking-[0.1px] text-[#171717] transition-colors hover:text-[#2868ff] lg:tracking-[0.02em]"
+                      className="text-small font-medium tracking-[0.1px] text-ink transition-colors hover:text-primary lg:tracking-[0.02em]"
                     >
                       {item.label}
                     </Link>
@@ -154,7 +183,7 @@ export function Navbar() {
         <div className="flex shrink-0 items-center gap-3">
           <Link
             href="/login"
-            className="inline-flex h-9 items-center gap-3 rounded-full bg-[#2868ff] py-[3px] pl-[14px] pr-[4px] text-small font-medium text-white transition-colors hover:bg-[#1555ed] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2868ff] lg:h-11 lg:pl-[16px] lg:pr-[5px]"
+            className="inline-flex h-9 items-center gap-3 rounded-full bg-primary py-[3px] pl-[14px] pr-[4px] text-small font-medium text-white transition-colors hover:bg-[#1555ed] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:h-11 lg:pl-[16px] lg:pr-[5px]"
           >
             Login
             <span className="flex h-[24px] w-[24px] items-center justify-center rounded-full bg-white lg:h-[26px] lg:w-[26px]">
@@ -179,7 +208,7 @@ export function Navbar() {
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
             aria-expanded={open}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-[#e8e8e8] text-[#171717] md:hidden"
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-[#e8e8e8] text-ink md:hidden"
           >
             <svg
               viewBox="0 0 20 20"
@@ -216,7 +245,7 @@ export function Navbar() {
                 <Link
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="block text-small font-medium text-[#171717]"
+                  className="block text-small font-medium text-ink"
                 >
                   {item.label}
                 </Link>
