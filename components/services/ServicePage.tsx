@@ -1,6 +1,7 @@
 import ServiceHero from "@/components/services/ServiceHero";
 import BlogShowcase from "@/components/BlogShowcase";
 import { LABEL_CHIP } from "@/components/services/label-chip";
+import { InkText } from "@/components/ui/InkText";
 import type { ServiceBlock, ServicePageContent } from "@/lib/content";
 
 /* Sub-page renderer for /services/[slug]. The mock's look applied to the
@@ -32,12 +33,13 @@ function Prose({ block }: { block: ProseBlock }) {
       <SectionHeading heading={block.heading} />
       <div className={block.heading ? "mt-3" : ""}>
         {block.paragraphs.map((paragraph) => (
-          <p
+          <InkText
             key={paragraph.slice(0, 32)}
-            className="mt-3 max-w-[720px] text-small leading-[1.6] text-body"
+            as="p"
+            className="mt-3 max-w-[720px] text-small leading-[1.6]"
           >
             {paragraph}
-          </p>
+          </InkText>
         ))}
       </div>
     </div>
@@ -48,7 +50,8 @@ function Bullets({ block }: { block: BulletsBlock }) {
   return (
     <div>
       <SectionHeading heading={block.heading} />
-      <ul
+      <InkText
+        as="ul"
         className={`grid max-w-[860px] gap-x-10 gap-y-3 sm:grid-cols-2 ${
           block.heading ? "mt-5" : ""
         }`}
@@ -59,10 +62,10 @@ function Bullets({ block }: { block: BulletsBlock }) {
               aria-hidden="true"
               className="mt-[10px] h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
             />
-            <span className="text-small text-body">{item}</span>
+            <span className="text-small">{item}</span>
           </li>
         ))}
-      </ul>
+      </InkText>
     </div>
   );
 }
@@ -147,9 +150,9 @@ function Panels({ block }: { block: PanelsBlock }) {
                     {item.title}
                   </p>
                   {item.body ? (
-                    <p className="mt-0.5 text-small leading-[1.6] text-body">
+                    <InkText as="p" className="mt-0.5 text-small leading-[1.6]">
                       {item.body}
-                    </p>
+                    </InkText>
                   ) : null}
                 </div>
               ))}
@@ -213,9 +216,9 @@ export default function ServicePage({ service }: { service: ServicePageContent }
 
         {lead?.kind === "lead" ? (
           <section className="mt-10">
-            <p className="max-w-[900px] text-body font-medium tracking-[-0.03em] text-ink">
+            <InkText as="p" className="max-w-[900px] font-medium tracking-[-0.03em]">
               {lead.body}
-            </p>
+            </InkText>
           </section>
         ) : null}
 
