@@ -30,7 +30,7 @@ export default function AboutPage() {
         {/* Banner: copy left, photo right at its natural shape (no crop) */}
         <section className="mt-6 grid grid-cols-1 items-start gap-y-8 sm:mt-8 lg:grid-cols-[42%_1fr] lg:gap-x-[5.6%]">
           <div>
-            <p className="text-copy font-medium text-primary">
+            <p className="text-small font-semibold tracking-[-0.04em] text-primary">
               {about.banner.eyebrow}
             </p>
             <h2 className="mt-4 font-display text-title font-medium tracking-[-0.02em] text-[#252525]">
