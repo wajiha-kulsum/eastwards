@@ -9,7 +9,7 @@ export function CoreValues() {
         {coreValues.kicker} <PlayTriangle className="h-2 w-2 text-primary" />
       </div>
 
-      <p className="mt-9 max-w-[540px] text-copy font-semibold tracking-tight text-body">
+      <p className="mt-9 max-w-[540px] text-small font-semibold tracking-tight text-body">
         <span className="text-statement">
           Heavyweight experience, new approach. Eastwards brings 20+ years of IT
           engineering and product design expertise together.
