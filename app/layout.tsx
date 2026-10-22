@@ -32,7 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
       className={`${interDisplay.variable} ${instrumentSans.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">
+      <body className="flex min-h-full flex-col transition-colors duration-300">
         {/* Runs before paint: stored theme wins, else system preference.
             Toggle component flips the class and mirrors it to storage. */}
         <script

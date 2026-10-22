@@ -90,7 +90,6 @@ export const navServices: readonly NavService[] = [
 ];
 
 export const hero = {
-  headline: "Technology that moves business forward",
   subtext:
     "We help businesses navigate complexity and move forward with the right technology, engineering, and expertise.",
   cta: "Find your solution",
@@ -99,24 +98,21 @@ export const hero = {
 } as const;
 
 export const features = {
-  headline: "For crafting truly prominent IT solutions",
   label: "Build for what’s next",
   body: "We bring together AI, data, cloud, and digital engineering to solve complex challenges, modernize businesses, and create lasting impact.",
   cta: "More",
   services: [
-    { id: 1, title: "Application Security", image: "/images/service-1-exact.jpg" },
-    { id: 2, title: "Application Security", image: "/images/service-2-exact.jpg" },
-    { id: 3, title: "Application Security", image: "/images/service-3-exact.jpg" },
-    { id: 4, title: "Application Security", image: "/images/service-1-exact.jpg" },
-    { id: 5, title: "Application Security", image: "/images/service-2-exact.jpg" },
-    { id: 6, title: "Application Security", image: "/images/service-3-exact.jpg" },
+    { title: "Application Security", href: "/services/application-security", image: "/images/service-1-exact.jpg" },
+    { title: "Cloud Security", href: "/services/cloud-security", image: "/images/service-2-exact.jpg" },
+    { title: "Quantum Computing", href: "/services/quantum-computing", image: "/images/service-3-exact.jpg" },
+    { title: "IT Staffing Services", href: "/services/it-staffing-services", image: "/images/service-1-exact.jpg" },
+    { title: "Modern Device Management", href: "/services/modern-device-management", image: "/images/service-2-exact.jpg" },
+    { title: "Application Services", href: "/services/application-services", image: "/images/service-3-exact.jpg" },
   ],
 } as const;
 
 export const coreValues = {
   kicker: "The Future, Engineered",
-  statement:
-    "Heavyweight experience, new approach. Eastwards brings 20+ years of IT engineering and product design expertise together. To help teams untangle complex tech, modernize their systems, and build for what’s next.",
   values: [
     {
       label: "Experience",

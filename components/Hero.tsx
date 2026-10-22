@@ -2,9 +2,9 @@
 
 import { getImageProps } from "next/image";
 import { useEffect, useState } from "react";
-import PrimaryButton from "@/components/ui/PrimaryButton";
+import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
-import { ArrowUpRight } from "@/components/ui/icons";
+import PrimaryButton from "@/components/ui/PrimaryButton";
 import { hero } from "@/lib/content";
 
 /* Art-directed hero art: the portrait crop below sm, the landscape
@@ -64,39 +64,28 @@ export function Hero() {
             panel is aspect-locked to the drawing (2.12:1, a wide rectangle) and
             never grows past 84% of the viewport height, so the CTA stays in view. */}
         <div className="relative h-[73svh] min-h-[420px] overflow-hidden rounded-[30px] md:aspect-[1667/788] md:h-auto md:max-h-[84svh]">
-          {dark ? (
-            <picture className="absolute inset-0">
-              <source media="(max-width: 639px)" srcSet={mobileDarkProps.srcSet} />
-              <img
-                {...desktopDarkProps}
-                alt={common.alt}
-                fetchPriority="high"
-                loading="eager"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  objectPosition: "center",
-                }}
-              />
-            </picture>
-          ) : (
-            <picture className="absolute inset-0">
-              <source media="(max-width: 639px)" srcSet={mobileProps.srcSet} />
-              <img
-                {...desktopProps}
-                alt={common.alt}
-                fetchPriority="high"
-                loading="eager"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  objectPosition: "center",
-                }}
-              />
-            </picture>
-          )}
+          {/* both renditions pick by theme; one <picture> renders either */}
+          {(() => {
+            const mobile = dark ? mobileDarkProps : mobileProps;
+            const desktop = dark ? desktopDarkProps : desktopProps;
+            return (
+              <picture className="absolute inset-0">
+                <source media="(max-width: 639px)" srcSet={mobile.srcSet} />
+                <img
+                  {...desktop}
+                  alt={common.alt}
+                  fetchPriority="high"
+                  loading="eager"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center",
+                  }}
+                />
+              </picture>
+            );
+          })()}
 
           {/* readability gradient on small screens */}
           <div
@@ -112,11 +101,11 @@ export function Hero() {
               {hero.subtext}
             </p>
             <PrimaryButton
-              href="/"
+              href="/services"
               className="mt-5 h-[36px] gap-2 px-[22px] text-small md:mt-8 md:h-[42px] md:gap-3 md:px-[30px] lg:h-[54px] lg:px-[34px]"
             >
               {hero.cta}
-              <ArrowUpRight className="h-2.5 w-2.5 lg:h-3.5 lg:w-3.5" />
+              <ArrowUpRight className="h-2.5 w-2.5 transition-transform duration-200 group-hover:translate-x-0.5 lg:h-3.5 lg:w-3.5" />
             </PrimaryButton>
           </div>
         </div>

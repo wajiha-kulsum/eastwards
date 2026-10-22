@@ -4,7 +4,15 @@ import { useState, type FormEvent } from "react";
 import { ArrowUpRight, MapPin, Phone } from "lucide-react";
 import DotHero from "@/components/DotHero";
 import DirectChannels from "@/components/DirectChannels";
+import PageShell from "@/components/ui/PageShell";
 import { contact } from "@/lib/content";
+
+/* Shared form furniture: label + field styles in one place so the six
+   fields can't drift apart. */
+const LABEL_CLASS =
+  "mb-1.5 block text-small font-medium tracking-tight text-ink";
+const FIELD_CLASS =
+  "w-full rounded-[12px] border border-transparent bg-[#ededed] dark:bg-[#1a1c20] px-3.5 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] dark:placeholder:text-[#6d6d6d] focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20";
 
 export function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
@@ -43,8 +51,7 @@ export function ContactPage() {
   }
 
   return (
-    <main id="main" className="flex-1 bg-page text-ink">
-      <div className="mx-auto max-w-[1720px] px-6 pb-16 pt-3 sm:px-10 lg:px-[5.35%]">
+    <PageShell pb="pb-16">
         {/* Hero, grey dot field behind the heading */}
         <DotHero title={contact.title} lede={contact.subtitle} />
 
@@ -55,7 +62,7 @@ export function ContactPage() {
               card row and the Send button finishing on the same line */}
           <div className="flex flex-col pt-4 sm:pt-5">
             <p className="mb-4 text-small font-semibold tracking-[-0.04em] text-primary">
-              / get in touch /
+              / {contact.eyebrow} /
             </p>
 
             {/* Question and pitch in one text block, same size and weight
@@ -79,17 +86,20 @@ export function ContactPage() {
                 />
 
                 <h3 className="mb-2 text-small font-semibold tracking-[-0.04em]">
-                  Our Location
+                  {contact.location.title}
                 </h3>
 
                 <address className="text-small not-italic text-white/95">
-                  Singapore Headquarters
-                  <br />
-                  Eastwards Consulting Pte Ltd
-                  <br />
-                  Chinatown Point
-                  <br />
-                  Singapore 059 413
+                  {[
+                    contact.location.headquarters,
+                    contact.location.company,
+                    contact.location.building,
+                    contact.location.postalCode,
+                  ].map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
                 </address>
               </article>
 
@@ -102,22 +112,19 @@ export function ContactPage() {
                 />
 
                 <h3 className="mb-2 text-small font-semibold tracking-[-0.04em] text-primary">
-                  Call Us
+                  {contact.call.title}
                 </h3>
 
                 <div className="space-y-1 text-small text-body">
-                  <a
-                    href="tel:+6593756413513"
-                    className="block transition hover:text-primary"
-                  >
-                    +65 93756 413513
-                  </a>
-                  <a
-                    href="tel:+919912596699"
-                    className="block transition hover:text-primary"
-                  >
-                    +91 99125 96699
-                  </a>
+                  {contact.call.phones.map((phone) => (
+                    <a
+                      key={phone}
+                      href={`tel:${phone.replace(/\s/g, "")}`}
+                      className="block transition hover:text-primary"
+                    >
+                      {phone}
+                    </a>
+                  ))}
                 </div>
               </article>
             </div>
@@ -132,7 +139,7 @@ export function ContactPage() {
               <div>
                 <label
                   htmlFor="firstName"
-                  className="mb-1.5 block text-small font-medium tracking-tight text-ink"
+                  className={LABEL_CLASS}
                 >
                   First Name
                 </label>
@@ -143,14 +150,14 @@ export function ContactPage() {
                   autoComplete="given-name"
                   placeholder="John"
                   required
-                  className="h-12 w-full rounded-[12px] border border-transparent bg-[#ededed] dark:bg-[#1a1c20] px-3.5 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] dark:placeholder:text-[#6d6d6d] focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20"
+                  className={`${FIELD_CLASS} h-12`}
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="lastName"
-                  className="mb-1.5 block text-small font-medium tracking-tight text-ink"
+                  className={LABEL_CLASS}
                 >
                   Last Name
                 </label>
@@ -161,14 +168,14 @@ export function ContactPage() {
                   autoComplete="family-name"
                   placeholder="Doe"
                   required
-                  className="h-12 w-full rounded-[12px] border border-transparent bg-[#ededed] dark:bg-[#1a1c20] px-3.5 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] dark:placeholder:text-[#6d6d6d] focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20"
+                  className={`${FIELD_CLASS} h-12`}
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="email"
-                  className="mb-1.5 block text-small font-medium tracking-tight text-ink"
+                  className={LABEL_CLASS}
                 >
                   Email
                 </label>
@@ -179,14 +186,14 @@ export function ContactPage() {
                   autoComplete="email"
                   placeholder="yourmail@gmail.com"
                   required
-                  className="h-12 w-full rounded-[12px] border border-transparent bg-[#ededed] dark:bg-[#1a1c20] px-3.5 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] dark:placeholder:text-[#6d6d6d] focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20"
+                  className={`${FIELD_CLASS} h-12`}
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="company"
-                  className="mb-1.5 block text-small font-medium tracking-tight text-ink"
+                  className={LABEL_CLASS}
                 >
                   Company
                 </label>
@@ -196,14 +203,14 @@ export function ContactPage() {
                   type="text"
                   autoComplete="organization"
                   placeholder="Company Name"
-                  className="h-12 w-full rounded-[12px] border border-transparent bg-[#ededed] dark:bg-[#1a1c20] px-3.5 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] dark:placeholder:text-[#6d6d6d] focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20"
+                  className={`${FIELD_CLASS} h-12`}
                 />
               </div>
 
               <div className="sm:col-span-2">
                 <label
                   htmlFor="message"
-                  className="mb-1.5 block text-small font-medium tracking-tight text-ink"
+                  className={LABEL_CLASS}
                 >
                   Message
                 </label>
@@ -213,7 +220,7 @@ export function ContactPage() {
                   rows={5}
                   placeholder="Your Message Here"
                   required
-                  className="min-h-[140px] w-full resize-y rounded-[12px] border border-transparent bg-[#ededed] dark:bg-[#1a1c20] px-3.5 py-3 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] dark:placeholder:text-[#6d6d6d] focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20"
+                  className={`${FIELD_CLASS} min-h-[140px] resize-y py-3`}
                 />
               </div>
             </div>
@@ -232,7 +239,7 @@ export function ContactPage() {
                 disabled={submitting}
                 className="ml-auto inline-flex min-h-11 items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-small font-semibold text-white transition hover:bg-[#1555ed] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2868ff] disabled:cursor-not-allowed disabled:opacity-60"
               >
-                {submitting ? "Sending..." : "Send Message"}
+                {submitting ? "Sending..." : contact.form.submitText}
                 <ArrowUpRight size={14} />
               </button>
             </div>
@@ -240,7 +247,6 @@ export function ContactPage() {
         </section>
 
         <DirectChannels />
-      </div>
-    </main>
+      </PageShell>
   );
 }

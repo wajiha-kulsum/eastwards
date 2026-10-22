@@ -19,7 +19,7 @@ export default function PrimaryButton({
   return (
     <a
       href={href}
-      className={`inline-flex items-center justify-center rounded-full bg-primary font-semibold text-white transition-[filter] duration-200 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 active:brightness-95 ${className}`}
+      className={`group inline-flex items-center justify-center rounded-full bg-primary font-semibold text-white transition-[filter] duration-200 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 active:brightness-95 ${className}`}
       {...props}
     >
       {children}

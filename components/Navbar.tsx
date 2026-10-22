@@ -15,9 +15,35 @@ import {
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+
+  /* The nav's own 20-viewBox chevron: trigger + contact arrows carry the
+      text color, the flyout row arrows pin the brand blue. */
+  const Chevron = ({
+    className,
+    stroke = "currentColor",
+  }: {
+    className?: string;
+    stroke?: string;
+  }) => (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 20 20"
+      fill="none"
+      className={className}
+    >
+      <path
+        d="M7 4.5L12.5 10L7 15.5"
+        stroke={stroke}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
 
   return (
-    <header className="relative z-50 w-full bg-page">
+    <header className="relative z-50 w-full bg-page transition-colors duration-300">
       <nav
         aria-label="Main navigation"
         className="mx-auto flex h-[60px] w-full max-w-[1720px] items-center justify-between px-6 sm:px-10 sm:h-[68px] lg:h-[72px] lg:px-[5.35%]"
@@ -51,20 +77,7 @@ export function Navbar() {
                         text on hover/open */}
                     <span className="inline-flex items-center text-small font-medium tracking-[0.1px] text-ink transition-colors group-hover/navigation-menu-trigger:text-primary group-data-popup-open/navigation-menu-trigger:text-primary lg:tracking-[0.02em]">
                       {item.label}
-                      <svg
-                        aria-hidden="true"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        className="ml-1 h-3 w-3 shrink-0 transition-transform duration-300 group-data-popup-open/navigation-menu-trigger:rotate-180 group-data-open/navigation-menu-trigger:rotate-180"
-                      >
-                        <path
-                          d="M7 4.5L12.5 10L7 15.5"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
+                      <Chevron className="ml-1 h-3 w-3 shrink-0 transition-transform duration-300 group-data-popup-open/navigation-menu-trigger:rotate-180 group-data-open/navigation-menu-trigger:rotate-180" />
                     </span>
                   </NavigationMenuTrigger>
                   {/* Dark two-column panel driven by .nav-services-panel
@@ -96,20 +109,10 @@ export function Navbar() {
                           )}
                           {service.detail || service.items ? (
                             <>
-                              <svg
-                                aria-hidden="true"
-                                viewBox="0 0 20 20"
-                                fill="none"
+                              <Chevron
                                 className="h-3 w-3 shrink-0 transition-transform duration-200 group-hover/row:translate-x-0.5"
-                              >
-                                <path
-                                  d="M7 4.5L12.5 10L7 15.5"
-                                  stroke="#2868FF"
-                                  strokeWidth="2"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
+                                stroke="#2868FF"
+                              />
                               <div className="invisible absolute left-full top-0 z-10 pl-3 opacity-0 transition-opacity duration-200 group-hover/row:visible group-hover/row:opacity-100 focus-within:visible focus-within:opacity-100">
                                 {service.items ? (
                                 <div className="min-w-[280px] rounded-2xl border border-line bg-card p-3 shadow-xl">
@@ -138,20 +141,7 @@ export function Navbar() {
                                     className="mt-3 inline-flex items-center gap-1.5 rounded-lg text-small font-medium text-primary transition-colors hover:text-[#1555ed]"
                                   >
                                     Contact us
-                                    <svg
-                                      aria-hidden="true"
-                                      viewBox="0 0 20 20"
-                                      fill="none"
-                                      className="h-3 w-3"
-                                    >
-                                      <path
-                                        d="M7 4.5L12.5 10L7 15.5"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                      />
-                                    </svg>
+                                    <Chevron className="h-3 w-3" />
                                   </NavigationMenuLink>
                                 </div>
                               )}
@@ -169,7 +159,7 @@ export function Navbar() {
                   <NavigationMenuLink asChild>
                     <Link
                       href={item.href}
-                      className="text-small font-medium tracking-[0.1px] text-ink transition-colors hover:text-primary lg:tracking-[0.02em]"
+                      className="link-underline-sweep text-small font-medium tracking-[0.1px] text-ink transition-colors hover:text-primary lg:tracking-[0.02em]"
                     >
                       {item.label}
                     </Link>
@@ -216,21 +206,81 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile dropdown (kept from previous navbar, the spec above is desktop-only) */}
+      {/* Mobile dropdown; Services expands into the same navServices rows
+          the desktop panel uses (one flat level, category labels muted). */}
       {open && (
         <div className="absolute inset-x-4 top-[64px] z-20 rounded-2xl border border-line bg-card p-6 shadow-xl md:hidden">
           <ul className="space-y-4">
-            {navLinks.map((item) => (
-              <li key={item.label}>
-                <Link
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="block text-small font-medium text-ink"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {navLinks.map((item) =>
+              item.label === "Services" ? (
+                <li key={item.label}>
+                  <button
+                    onClick={() => setServicesOpen(!servicesOpen)}
+                    aria-expanded={servicesOpen}
+                    className="flex w-full items-center gap-1 text-small font-medium text-ink"
+                  >
+                    {item.label}
+                    <Chevron
+                      className={`h-3 w-3 transition-transform duration-200${
+                        servicesOpen ? " rotate-90" : ""
+                      }`}
+                    />
+                  </button>
+                  {servicesOpen && (
+                    <ul className="mt-3 space-y-2.5 border-l border-line pl-3">
+                      {navServices.map((service) =>
+                        service.items ? (
+                          <li key={service.label}>
+                            <p className="py-1 text-small text-body">
+                              {service.label}
+                            </p>
+                            <ul className="ml-3 space-y-2.5">
+                              {service.items.map((child) => (
+                                <li key={child.label}>
+                                  <Link
+                                    href={child.href}
+                                    onClick={() => {
+                                      setOpen(false);
+                                      setServicesOpen(false);
+                                    }}
+                                    className="block py-1 text-small font-medium text-ink"
+                                  >
+                                    {child.label}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </li>
+                        ) : (
+                          <li key={service.label}>
+                            <Link
+                              href={service.href}
+                              onClick={() => {
+                                setOpen(false);
+                                setServicesOpen(false);
+                              }}
+                              className="block py-1 text-small font-medium text-ink"
+                            >
+                              {service.label}
+                            </Link>
+                          </li>
+                        ),
+                      )}
+                    </ul>
+                  )}
+                </li>
+              ) : (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="block text-small font-medium text-ink"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ),
+            )}
           </ul>
         </div>
       )}
