@@ -291,6 +291,27 @@ body {
   background-image: radial-gradient(circle, #2e3036 1.6px, transparent 1.9px);
 }
 
+/* Services hero lattice drifts downwards: the one ambient effect on the
+   site. Only fields with no logo mark snapped onto them (the mark must
+   stay pinned to the static lattice). 40px = whole lattice periods, so
+   the loop is seamless. */
+@keyframes dot-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 40px;
+  }
+}
+.dot-drift {
+  animation: dot-drift 40s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dot-drift {
+    animation: none;
+  }
+}
+
 .dark .nav-services-panel {
   background: #15161a;
   border-color: #26282c;

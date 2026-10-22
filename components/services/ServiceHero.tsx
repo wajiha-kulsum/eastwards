@@ -17,7 +17,7 @@ export default function ServiceHero({
 }) {
   return (
     <section className="relative overflow-hidden">
-      <DotField className="bottom-0 top-0 [-webkit-mask-image:radial-gradient(85%_115%_at_50%_40%,black_45%,transparent_100%)] [mask-image:radial-gradient(85%_115%_at_50%_40%,black_45%,transparent_100%)]" />
+      <DotField className="dot-drift bottom-0 top-0 [-webkit-mask-image:radial-gradient(85%_115%_at_50%_40%,black_45%,transparent_100%)] [mask-image:radial-gradient(85%_115%_at_50%_40%,black_45%,transparent_100%)]" />
 
       <div className="relative z-10 flex flex-col items-center py-16 text-center sm:py-20 lg:py-24">
         <h1 className="font-display text-display font-bold uppercase leading-none tracking-[-0.03em] text-ink">
