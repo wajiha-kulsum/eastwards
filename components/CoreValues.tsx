@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { PlayTriangle } from "@/components/ui/icons";
+import { SECTION_LANE } from "@/components/ui/lane";
 import { coreValues } from "@/lib/content";
 
 export function CoreValues() {
   return (
-    <section className="mx-auto mt-14 max-w-[1720px] px-6 sm:px-10 md:mt-16 lg:px-[5.35%]">
+    <section className={SECTION_LANE}>
       <div className="flex items-center gap-1 border-b border-line-strong pb-2 text-small font-medium text-ink">
         {coreValues.kicker} <PlayTriangle className="h-2 w-2 text-primary" />
       </div>
