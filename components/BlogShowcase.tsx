@@ -11,7 +11,7 @@ const posts = blog.posts;
 /* Inactive-tile width falloff, measured from the reference layout:
    the tile right after the active one is widest, then it decays to slivers. */
 const growFor = (distance: number) => {
-  if (distance === 0) return 62.8;
+  if (distance === 0) return 64;
   if (distance === 1) return 15.3;
   if (distance === 2) return 7.7;
   return 1.14;
