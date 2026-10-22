@@ -32,6 +32,7 @@ function CardCarousel() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const paused = useRef(false);
   const drift = useMotionValue(0);
+  const drag = useMotionValue(0); // finger travel, folded into the same wrap
   const [metrics, setMetrics] = useState({ start: 0, travel: 0 });
   const [active, setActive] = useState(2);
   const { scrollYProgress: progress } = useScroll({
@@ -97,9 +98,11 @@ function CardCarousel() {
 
   // One repeated set starts at the copy-column anchor; earlier cards fill left.
   // Wrap into one set width so all four copies keep covering the strip.
-  const x = useTransform([progress, drift], ([p, d]: number[]) => {
+  // The drag term rides underneath the scroll + drift terms: panning left
+  // grows it, so the strip follows the finger and the modulo keeps looping.
+  const x = useTransform([progress, drift, drag], ([p, d, gv]: number[]) => {
     if (typeof window === "undefined") return -metrics.start;
-    const raw = metrics.start - p * metrics.travel - d;
+    const raw = metrics.start - p * metrics.travel - d - gv;
     const m = raw % setWidth;
     return m > 0 ? m - setWidth : m;
   });
@@ -130,8 +133,18 @@ function CardCarousel() {
       <div ref={wrapRef} className="overflow-hidden pb-2">
         <motion.div
           ref={trackRef}
+          // Hand-pans pause the auto-drift and ride into the same wrap:
+          // 3px gesture threshold keeps plain taps working as card links,
+          // pan-y hands vertical swipes to the page scroller untouched.
+          onPanStart={() => {
+            paused.current = true;
+          }}
+          onPan={(_event, info) => drag.set(drag.get() - info.delta.x)}
+          onPanEnd={() => {
+            paused.current = false;
+          }}
           style={{ x, gap: GAP }}
-          className="flex will-change-transform"
+          className="flex will-change-transform [touch-action:pan-y]"
         >
           {[...cards, ...cards, ...cards, ...cards].map((service, i) => (
             <Link
