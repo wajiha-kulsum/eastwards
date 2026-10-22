@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
     // and features CTAs) land on the flagship service instead of a 404.
     { source: "/services", destination: "/services/application-services", permanent: false },
   ],
+  experimental: {
+    agentUpgrade: "security",
+  },
 };
 
 export default nextConfig;
