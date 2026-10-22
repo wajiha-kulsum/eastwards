@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import { ArrowUpRight, MapPin, Phone } from "lucide-react";
 import DotHero from "@/components/DotHero";
 import DirectChannels from "@/components/DirectChannels";
+import PageShell from "@/components/ui/PageShell";
 import { contact } from "@/lib/content";
 
 export function ContactPage() {
@@ -43,8 +44,7 @@ export function ContactPage() {
   }
 
   return (
-    <main id="main" className="flex-1 bg-page text-ink">
-      <div className="mx-auto max-w-[1720px] px-6 pb-16 pt-3 sm:px-10 lg:px-[5.35%]">
+    <PageShell pb="pb-16">
         {/* Hero, grey dot field behind the heading */}
         <DotHero title={contact.title} lede={contact.subtitle} />
 
@@ -55,7 +55,7 @@ export function ContactPage() {
               card row and the Send button finishing on the same line */}
           <div className="flex flex-col pt-4 sm:pt-5">
             <p className="mb-4 text-small font-semibold tracking-[-0.04em] text-primary">
-              / get in touch /
+              / {contact.eyebrow} /
             </p>
 
             {/* Question and pitch in one text block, same size and weight
@@ -79,17 +79,20 @@ export function ContactPage() {
                 />
 
                 <h3 className="mb-2 text-small font-semibold tracking-[-0.04em]">
-                  Our Location
+                  {contact.location.title}
                 </h3>
 
                 <address className="text-small not-italic text-white/95">
-                  Singapore Headquarters
-                  <br />
-                  Eastwards Consulting Pte Ltd
-                  <br />
-                  Chinatown Point
-                  <br />
-                  Singapore 059 413
+                  {[
+                    contact.location.headquarters,
+                    contact.location.company,
+                    contact.location.building,
+                    contact.location.postalCode,
+                  ].map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
                 </address>
               </article>
 
@@ -102,22 +105,19 @@ export function ContactPage() {
                 />
 
                 <h3 className="mb-2 text-small font-semibold tracking-[-0.04em] text-primary">
-                  Call Us
+                  {contact.call.title}
                 </h3>
 
                 <div className="space-y-1 text-small text-body">
-                  <a
-                    href="tel:+6593756413513"
-                    className="block transition hover:text-primary"
-                  >
-                    +65 93756 413513
-                  </a>
-                  <a
-                    href="tel:+919912596699"
-                    className="block transition hover:text-primary"
-                  >
-                    +91 99125 96699
-                  </a>
+                  {contact.call.phones.map((phone) => (
+                    <a
+                      key={phone}
+                      href={`tel:${phone.replace(/\s/g, "")}`}
+                      className="block transition hover:text-primary"
+                    >
+                      {phone}
+                    </a>
+                  ))}
                 </div>
               </article>
             </div>
@@ -240,7 +240,6 @@ export function ContactPage() {
         </section>
 
         <DirectChannels />
-      </div>
-    </main>
+      </PageShell>
   );
 }
