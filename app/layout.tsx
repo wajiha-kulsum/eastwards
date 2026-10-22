@@ -20,6 +20,7 @@ const instrumentSans = Instrument_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://eastwards.co"),
   title: "Eastwards Consulting | Technology that moves business forward",
   description:
     "We help businesses navigate complexity and move forward with the right technology, engineering, and expertise.",
