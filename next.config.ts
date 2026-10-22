@@ -9,14 +9,6 @@ const nextConfig: NextConfig = {
     // and features CTAs) land on the flagship service instead of a 404.
     { source: "/services", destination: "/services/application-services", permanent: false },
   ],
-  turbopack: {
-    rules: {
-      "*.css": {
-        loaders: ["@tailwindcss/turbopack"],
-        as: "*.css",
-      },
-    },
-  },
 };
 
 export default nextConfig;
