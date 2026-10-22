@@ -108,11 +108,12 @@ export default function DotHero({ title, lede }: { title: string; lede: string }
       <div className="relative z-10 py-1">
         <h1 className="font-display text-display font-bold uppercase leading-none tracking-[-0.03em] text-ink">
           <TextBlur spanRef={chipRef}>{title}</TextBlur>
-          {/* Mobile: the actual wordmark-beside-title; desktop keeps the dot mark */}
-          <span className="inline-flex items-center gap-[3px] lowercase font-bold tracking-[-0.5px] text-ink sm:hidden">
-            eastwards
-            <svg aria-hidden="true" viewBox="0 0 12 18" className="h-[19px] w-[13px]" fill="none">
-              <path d="M0 0L12 9L0 18V0Z" fill="#2868FF" />
+          {/* Mobile: the solid logo triangle beside the title, sized to the
+              title's own text (em) with a page-bg chip so no field dots show
+              behind it; desktop keeps the lattice mark (DotMark). */}
+          <span className="inline-flex items-center bg-page px-[3px] sm:hidden">
+            <svg aria-hidden="true" viewBox="0 0 27 32" className="h-[0.79em] w-[0.67em]" fill="none">
+              <path d="M27 15.5884L0 31.1768L0 -7.82013e-05L27 15.5884Z" fill="#236FFB" />
             </svg>
           </span>
           <DotMark markRef={markRef} />
