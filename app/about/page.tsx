@@ -3,6 +3,7 @@ import Image from "next/image";
 import DirectChannels from "@/components/DirectChannels";
 import AboutSolutions from "@/components/AboutSolutions";
 import DotHero from "@/components/DotHero";
+import PageShell from "@/components/ui/PageShell";
 import { about } from "@/lib/content";
 import { PlayTriangle } from "@/components/ui/icons";
 
@@ -19,8 +20,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main id="main" className="bg-page text-ink">
-      <div className="mx-auto max-w-[1720px] px-6 pb-20 pt-3 sm:px-10 lg:px-[5.35%]">
+    <PageShell>
         {/* The whole hero + banner owns the first screen: hero pinned top,
             banner pinned to its bottom edge. Height subtracts the in-flow
             navbar (60/68/72) and the wrapper's pt-3. */}
@@ -63,7 +63,6 @@ export default function AboutPage() {
         <AboutSolutions />
 
         <DirectChannels />
-      </div>
-    </main>
+    </PageShell>
   );
 }
