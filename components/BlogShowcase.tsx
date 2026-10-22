@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { blog } from "@/lib/content";
 import { SECTION_LANE } from "@/components/ui/lane";
@@ -22,6 +22,7 @@ export default function BlogShowcase() {
   // unbounded index, arrows wrap infinitely in both directions
   const [cursor, setCursor] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
   const activeIndex = ((cursor % count) + count) % count;
   const activePost = posts[activeIndex];
 
@@ -57,10 +58,28 @@ export default function BlogShowcase() {
           </div>
         </div>
 
-        {/* Accordion gallery: active tile dominates, widths stagger away from it */}
+        {/* Accordion gallery: active tile dominates, widths stagger away from
+            it. Swipe advances on touch (the flex row reads the gesture, a
+            horizontal drag past 40px wins over vertical page scroll). */}
         <div
           className="mt-10 flex h-[190px] gap-2 sm:h-[260px] lg:h-[370px]"
           aria-label="Featured blog articles"
+          onTouchStart={(e) => {
+            touchStart.current = {
+              x: e.touches[0].clientX,
+              y: e.touches[0].clientY,
+            };
+          }}
+          onTouchEnd={(e) => {
+            const start = touchStart.current;
+            if (!start) return;
+            touchStart.current = null;
+            const dx = e.changedTouches[0].clientX - start.x;
+            const dy = e.changedTouches[0].clientY - start.y;
+            if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+              setCursor((i) => i + (dx < 0 ? 1 : -1));
+            }
+          }}
         >
           {posts.map((post, index) => {
             const isActive = index === activeIndex;
@@ -74,7 +93,7 @@ export default function BlogShowcase() {
               <button
                 key={post.id}
                 type="button"
-                onClick={() => setCursor(index)}
+                onClick={() => setCursor(isActive ? cursor + 1 : index)}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 aria-label={`Feature article: ${post.title}`}
@@ -82,7 +101,9 @@ export default function BlogShowcase() {
                 style={{ flexGrow: grow }}
                 className={[
                   "group relative min-w-0 basis-0 overflow-hidden rounded-lg text-left",
-                  "transition-[flex] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                  "min-w-[44px] lg:min-w-0",
+                  // flex-grow longhand: the flex shorthand never interpolates on WebKit
+                  "transition-[flex-grow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
                   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
                   !isActive ? "opacity-95 hover:opacity-100" : "",
                 ].join(" ")}
