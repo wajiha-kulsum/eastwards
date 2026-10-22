@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { blog } from "@/lib/content";
+import { SECTION_LANE } from "@/components/ui/lane";
 import { ChevronLeft, ChevronRight } from "@/components/ui/icons";
 
 const posts = blog.posts;
@@ -25,7 +26,7 @@ export default function BlogShowcase() {
   const activePost = posts[activeIndex];
 
   return (
-    <section className="mx-auto mt-14 max-w-[1720px] px-6 sm:px-10 md:mt-16 lg:px-[5.35%]">
+    <section className={SECTION_LANE}>
       {/* light bordered panel, palette matched to the reference */}
       <div className="rounded-[24px] border border-line bg-card px-5 py-8 sm:px-8 md:px-[31px] lg:py-[44px]">
         {/* Heading: dark line + muted line, controls right */}
