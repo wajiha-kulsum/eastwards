@@ -15,6 +15,7 @@ import {
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
 
   /* The nav's own 20-viewBox chevron: trigger + contact arrows carry the
       text color, the flyout row arrows pin the brand blue. */
@@ -205,21 +206,81 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile dropdown (kept from previous navbar, the spec above is desktop-only) */}
+      {/* Mobile dropdown; Services expands into the same navServices rows
+          the desktop panel uses (one flat level, category labels muted). */}
       {open && (
         <div className="absolute inset-x-4 top-[64px] z-20 rounded-2xl border border-line bg-card p-6 shadow-xl md:hidden">
           <ul className="space-y-4">
-            {navLinks.map((item) => (
-              <li key={item.label}>
-                <Link
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="block text-small font-medium text-ink"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {navLinks.map((item) =>
+              item.label === "Services" ? (
+                <li key={item.label}>
+                  <button
+                    onClick={() => setServicesOpen(!servicesOpen)}
+                    aria-expanded={servicesOpen}
+                    className="flex w-full items-center gap-1 text-small font-medium text-ink"
+                  >
+                    {item.label}
+                    <Chevron
+                      className={`h-3 w-3 transition-transform duration-200${
+                        servicesOpen ? " rotate-90" : ""
+                      }`}
+                    />
+                  </button>
+                  {servicesOpen && (
+                    <ul className="mt-3 space-y-2.5 border-l border-line pl-3">
+                      {navServices.map((service) =>
+                        service.items ? (
+                          <li key={service.label}>
+                            <p className="py-1 text-small text-body">
+                              {service.label}
+                            </p>
+                            <ul className="ml-3 space-y-2.5">
+                              {service.items.map((child) => (
+                                <li key={child.label}>
+                                  <Link
+                                    href={child.href}
+                                    onClick={() => {
+                                      setOpen(false);
+                                      setServicesOpen(false);
+                                    }}
+                                    className="block py-1 text-small font-medium text-ink"
+                                  >
+                                    {child.label}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </li>
+                        ) : (
+                          <li key={service.label}>
+                            <Link
+                              href={service.href}
+                              onClick={() => {
+                                setOpen(false);
+                                setServicesOpen(false);
+                              }}
+                              className="block py-1 text-small font-medium text-ink"
+                            >
+                              {service.label}
+                            </Link>
+                          </li>
+                        ),
+                      )}
+                    </ul>
+                  )}
+                </li>
+              ) : (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="block text-small font-medium text-ink"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ),
+            )}
           </ul>
         </div>
       )}
