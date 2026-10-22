@@ -2,16 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValue,
-  useMotionValueEvent,
-} from "motion/react";
+import { motion, useScroll, useTransform, useMotionValue, useMotionValueEvent } from "motion/react";
+import Link from "next/link";
 import PrimaryButton from "@/components/ui/PrimaryButton";
+import { SECTION_LANE } from "@/components/ui/lane";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { ArrowUpRight } from "@/components/ui/icons";
+import { ArrowUpRight } from "lucide-react";
+import { ChevronDown } from "@/components/ui/icons";
 import { features } from "@/lib/content";
 
 const CARD_W = 300;
@@ -137,9 +134,9 @@ function CardCarousel() {
           className="flex will-change-transform"
         >
           {[...cards, ...cards, ...cards, ...cards].map((service, i) => (
-            <a
+            <Link
               key={i}
-              href="#"
+              href={service.href}
               draggable={false}
               tabIndex={i >= cards.length ? -1 : undefined}
               className="shrink-0 rounded-[26px] border border-line bg-surface p-[6px] transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
@@ -159,7 +156,7 @@ function CardCarousel() {
                 {service.title}
                 <ArrowUpRight className="h-4 w-4" />
               </div>
-            </a>
+            </Link>
           ))}
         </motion.div>
       </div>
@@ -169,9 +166,7 @@ function CardCarousel() {
 
 export function Features() {
   return (
-    <section
-      className="mx-auto mt-14 max-w-[1720px] px-6 sm:px-10 md:mt-16 lg:px-[5.35%]"
-    >
+    <section className={SECTION_LANE}>
       <div className="grid gap-8 md:grid-cols-[46.5%_1fr]">
         <h2 className="text-title font-semibold tracking-tight text-ink">
           For crafting truly
@@ -189,22 +184,11 @@ export function Features() {
             </p>
           </div>
           <PrimaryButton
-            href="#"
+            href="/services"
             className="mt-5 h-10 gap-2 px-7 text-small"
           >
             {features.cta}
-            <svg
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-3.5 w-3.5"
-              aria-hidden="true"
-            >
-              <path d="M3 6l5 5 5-5" />
-            </svg>
+            <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-y-0.5" aria-hidden="true" />
           </PrimaryButton>
         </div>
       </div>
