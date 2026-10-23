@@ -97,3 +97,12 @@ altered beyond what their existing code already does.
 - **Don't** put raw hex colors in components; use the tokens (colors live only in
   `app/globals.css` and locked geometry like DotField/DotHero/ServiceHero's
   reused lattice pieces).
+
+## 6. Dark mode (shipped system note)
+
+The dark pass follows this study's rules translated to night: the same
+token set, re-priced (near-white text on `#0f0f0f` pages, `#1a1c20` cards,
+`#26282c` lines) — tokens only, one `.dark` rebind in `globals.css`, the
+toggle lives in the navbar (`components/ui/ThemeToggle.tsx`). The carried
+exception: hero copy sits on the photo panel, so it stays contrast-correct
+in both modes rather than flipping with the page (see `components/Hero.tsx`).
