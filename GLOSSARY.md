@@ -58,5 +58,12 @@ Updated lazily when terms or decisions actually get resolved.
   localStorage; bootstrap script in layout.tsx). Components must not
   carry raw hex literals except inside locked-geometry components
   (DotField/DotHero) and `nav-services-panel` CSS in globals.css.
+- **Tab icon** — `app/icon.svg`: the blue eastwards triangle on a blank
+  canvas (the old Next.js `favicon.ico` was removed); home-screen
+  bookmarks use `app/apple-icon.svg`.
+- **Mobile browser chrome** — `viewport.themeColor` (light `#ffffff`,
+  dark `#0f0f0f`) + `colorScheme` in `app/layout.tsx`, so the address bar
+  follows the active theme; input autofill is dark-corrected in
+  `app/globals.css`.
 - **Paper design** — the approved design source for the site's look (the canvas
   file referenced in `app/globals.css` comments).
