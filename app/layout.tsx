@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Instrument_Sans } from "next/font/google";
 import { Footer } from "@/components/Footer";
@@ -24,6 +24,14 @@ export const metadata: Metadata = {
   title: "Eastwards Consulting | Technology that moves business forward",
   description:
     "We help businesses navigate complexity and move forward with the right technology, engineering, and expertise.",
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f0f0f" },
+  ],
+  colorScheme: "light dark",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
