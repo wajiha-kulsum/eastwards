@@ -19,6 +19,22 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+## Deploy
+
+Production deploys via Vercel. The repeatable path:
+
+```bash
+bash scripts/vercel-deploy-wizard.sh
+```
+
+Four stages: authenticate the Vercel CLI with GitHub → link the project → `--prod` deploy (the live URL is written to `.env` as `VERCEL_PRODUCTION_URL`) → connect `wajiha-kulsum/eastwards` in the dashboard so every `git push` ships automatically.
+
+## House rules
+
+- Four fixed type sizes — `display 88 / title 60 / lead 35 / small 18` — plus token-only colors in components; canon in `GLOSSARY.md`
+- Dark mode: `components/ui/ThemeToggle.tsx` flips `.dark` on `<html>`; the bootstrap script in `app/layout.tsx` applies it before first paint
+- Services content is data in `lib/content.ts`; the hairline block renderer applies it (rationale in `docs/attio-ui-study.md`)
+
 ## Project structure
 
 ```
