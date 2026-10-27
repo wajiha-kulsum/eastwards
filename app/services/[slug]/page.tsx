@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ServicePage from "@/components/services/ServicePage";
-import { servicePages } from "@/lib/content";
+import { JsonLd } from "@/components/SeoJsonLd";
+import { features, servicePages } from "@/lib/content";
+import { pageMetadata, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 const services = servicePages;
 
@@ -16,10 +18,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const service = services.find((item) => item.slug === slug);
-  return {
-    title: service ? `${service.title} | Eastwards Consulting` : "Services",
-    description: service?.lede,
-  };
+  return pageMetadata({
+    title: service ? service.title : "Services",
+    description: service ? service.lede : features.body,
+    path: service ? `/services/${service.slug}` : "/services",
+  });
 }
 
 export default async function ServiceRoute({
@@ -30,5 +33,19 @@ export default async function ServiceRoute({
   const { slug } = await params;
   const service = services.find((item) => item.slug === slug);
   if (!service) notFound();
-  return <ServicePage service={service} />;
+  return (
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: service.title,
+          description: service.lede,
+          url: `${SITE_URL}/services/${service.slug}`,
+          provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+        }}
+      />
+      <ServicePage service={service} />
+    </>
+  );
 }
