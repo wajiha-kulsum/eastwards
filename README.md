@@ -34,6 +34,7 @@ Four stages: authenticate the Vercel CLI with GitHub → link the project → `-
 - Four fixed type sizes — `display 88 / title 60 / lead 35 / small 18` — plus token-only colors in components; canon in `GLOSSARY.md`
 - Dark mode: `components/ui/ThemeToggle.tsx` flips `.dark` on `<html>`; the bootstrap script in `app/layout.tsx` applies it before first paint
 - Services content is data in `lib/content.ts`; the hairline block renderer applies it (rationale in `docs/attio-ui-study.md`)
+- New pages take their metadata from `pageMetadata()` in `lib/seo.ts` — one `openGraph` per page (the layout's is replaced, not merged), then `npm run seo:check <url>` after a deploy
 
 ## Project structure
 
