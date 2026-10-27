@@ -238,21 +238,45 @@ export const contact = {
 } as const;
 
 export const footer = {
+  /* Label + optional href: entries without a destination render as plain
+     text, never as a dead link. */
   columns: [
     {
       title: "Engineering & Core",
-      links: ["Application Services", "Product Engineering", "Quantum Computing"],
+      links: [
+        { label: "Application Services", href: "/services/application-services" },
+        { label: "Product Engineering", href: "/services" },
+        { label: "Quantum Computing", href: "/services/quantum-computing" },
+      ],
     },
     {
       title: "Cloud & Intelligence",
-      links: ["Data & AI", "Infrastructure & Cloud", "Modern Device Management"],
+      links: [
+        { label: "Data & AI", href: "/services" },
+        { label: "Infrastructure & Cloud", href: "/services" },
+        { label: "Modern Device Management", href: "/services/modern-device-management" },
+      ],
     },
     {
       title: "Advisory & Operations",
-      links: ["Cybersecurity", "IT Staffing Services", "Projects & Professional"],
+      links: [
+        { label: "Cybersecurity", href: "/services" },
+        { label: "IT Staffing Services", href: "/services/it-staffing-services" },
+        { label: "Projects & Professional", href: "/services/projects-professional-services" },
+      ],
     },
-    { title: "Socials", links: ["Instagram", "Twitter X", "LinkedIn"] },
-    { title: "About Us", links: ["Careers", "Corporate Social Responsibility"] },
+    {
+      title: "Socials",
+      links: [
+        { label: "Instagram" },
+        { label: "Twitter X" },
+        { label: "LinkedIn" },
+      ],
+    },
+    {
+      title: "About Us",
+      links: [{ label: "Careers" }, { label: "Corporate Social Responsibility" }],
+    },
   ],
   legal: ["Privacy Policy", "Cookie Policy", "Terms of Use"],
   copyright:

@@ -1,4 +1,5 @@
 import { footer } from "@/lib/content";
+import Link from "next/link";
 
 /* Footer shares the site's one lane system with every section: the same
    1720px container and 5.35% side lanes. The gradient wordmark is the last
@@ -19,13 +20,18 @@ export function Footer() {
             <p className="text-body">{column.title}</p>
             <ul className="mt-3 space-y-2.5 font-display font-semibold text-ink md:mt-4 md:space-y-3">
               {column.links.map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
-                    className="link-underline-sweep transition-colors hover:text-primary"
-                  >
-                    {link}
-                  </a>
+                <li key={link.label}>
+                  {"href" in link ? (
+                    <Link
+                      href={link.href}
+                      className="link-underline-sweep transition-colors hover:text-primary"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    /* No destination yet: text, not a dead link. */
+                    <span>{link.label}</span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -38,14 +44,9 @@ export function Footer() {
           {footer.copyright}
         </p>
         <div className="flex gap-6 font-display text-small font-medium text-body md:gap-[50px]">
+          {/* Legal pages don't exist yet — plain text until they do. */}
           {footer.legal.map((item) => (
-            <a
-              key={item}
-              href="#"
-              className="link-underline-sweep transition-colors hover:text-ink"
-            >
-              {item}
-            </a>
+            <span key={item}>{item}</span>
           ))}
         </div>
       </div>
