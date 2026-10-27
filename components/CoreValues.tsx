@@ -35,9 +35,9 @@ export function CoreValues() {
               />
             </div>
             <p className="text-small font-medium text-primary">/ {value.label} /</p>
-            <p className="mt-1 max-w-[210px] text-small font-semibold text-ink">
+            <h3 className="mt-1 max-w-[210px] text-small font-semibold text-ink">
               {value.caption}
-            </p>
+            </h3>
           </li>
         ))}
       </ul>
