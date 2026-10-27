@@ -3,6 +3,14 @@ import localFont from "next/font/local";
 import { Instrument_Sans } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
+import { JsonLd } from "@/components/SeoJsonLd";
+import {
+  organizationJsonLd,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_TITLE,
+  SITE_URL,
+} from "@/lib/seo";
 import "./globals.css";
 
 /* Inter Display Bold, headlines + footer wordmark
@@ -20,11 +28,20 @@ const instrumentSans = Instrument_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://eastwards.co"),
+  metadataBase: new URL(SITE_URL),
   formatDetection: { telephone: false },
-  title: "Eastwards Consulting | Technology that moves business forward",
-  description:
-    "We help businesses navigate complexity and move forward with the right technology, engineering, and expertise.",
+  /* Pages set bare titles; this appends the brand suffix. The default is the
+     homepage title (and the fallback for any route without its own). */
+  title: { default: SITE_TITLE, template: `%s | ${SITE_NAME}` },
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    locale: "en_SG",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {
@@ -43,6 +60,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${interDisplay.variable} ${instrumentSans.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col transition-colors duration-300">
+        <JsonLd data={organizationJsonLd} />
         {/* Runs before paint: stored theme wins, else system preference.
             Toggle component flips the class and mirrors it to storage. */}
         <script
