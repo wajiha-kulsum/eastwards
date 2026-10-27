@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import Link from "next/link";
+import Image from "next/image";
 import { blog } from "@/lib/content";
 import { SECTION_LANE } from "@/components/ui/lane";
 import { ChevronLeft, ChevronRight } from "@/components/ui/icons";
@@ -32,10 +32,12 @@ export default function BlogShowcase() {
       <div className="rounded-[24px] border border-line bg-card px-5 py-8 sm:px-8 md:px-[31px] lg:py-[44px]">
         {/* Heading: dark line + muted line, controls right */}
         <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
-          <h2 className="text-lead font-semibold tracking-[-0.02em] text-ink">
-            <span className="block">{blog.heading}</span>
-            <span className="block text-small text-body">{blog.subtext}</span>
-          </h2>
+          <div>
+            <h2 className="text-lead font-semibold tracking-[-0.02em] text-ink">
+              {blog.heading}
+            </h2>
+            <p className="text-small text-body">{blog.subtext}</p>
+          </div>
 
           {/* manual paging controls */}
           <div className="flex items-center gap-2.5">
@@ -116,16 +118,17 @@ export default function BlogShowcase() {
                     "transition-transform duration-700 ease-out",
                     isActive ? "scale-100" : "scale-105",
                   ].join(" ")}
-                  style={
-                    post.image
-                      ? {
-                          backgroundImage: `url("${post.image}")`,
-                          backgroundSize: "cover",
-                          backgroundPosition: "center",
-                        }
-                      : undefined
-                  }
-                />
+                >
+                  {post.image ? (
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      sizes="(max-width: 1023px) 60vw, 700px"
+                      className="object-cover"
+                    />
+                  ) : null}
+                </div>
 
                 {/* subtle hover lift */}
                 <div className="absolute inset-0 bg-black/5 transition-colors duration-300 group-hover:bg-black/0" />
@@ -134,8 +137,9 @@ export default function BlogShowcase() {
           })}
         </div>
 
-        {/* Featured article details + CTA */}
-        <div className="mt-9 flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+        {/* Featured article details. No CTA: the article routes don't exist
+            yet, and a link would 404 from every page that shows this band. */}
+        <div className="mt-9">
           <p
             key={activePost.id}
             className="max-w-[640px] animate-[fade-in_250ms_ease-out] text-small"
@@ -146,14 +150,6 @@ export default function BlogShowcase() {
             </span>{" "}
             <span className="text-body">{activePost.description} …</span>
           </p>
-
-          <Link
-            href={activePost.href}
-            className="inline-flex h-11 shrink-0 items-center justify-center gap-2 self-start rounded-lg border border-line bg-card px-5 text-small font-medium text-primary transition-colors duration-200 hover:border-primary/40 hover:bg-primary/5"
-          >
-            Read More
-            <ChevronRight className="h-3.5 w-3.5" />
-          </Link>
         </div>
       </div>
     </section>
