@@ -5,9 +5,14 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   redirects: async () => [
-    // No services index yet; all href="/services" gateways (nav items, hero
-    // and features CTAs) land on the flagship service instead of a 404.
-    { source: "/services", destination: "/services/application-services", permanent: false },
+    // Both hosts serve the site; keep one indexable. (A Vercel domain-level
+    // redirect would do this at the edge — this keeps it in the repo.)
+    {
+      source: "/:path*",
+      has: [{ type: "host", value: "www.eastwards.co" }],
+      destination: "https://eastwards.co/:path*",
+      permanent: true,
+    },
   ],
 };
 
