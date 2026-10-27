@@ -98,13 +98,13 @@ function Cards({ block }: { block: CardsBlock }) {
             className="border-b border-r border-line p-6 transition-colors hover:border-line-strong sm:p-8"
           >
             {item.n ? <span className={LABEL_CHIP}>{item.n}</span> : null}
-            <p
+            <h3
               className={`text-small font-semibold text-ink ${
                 item.n ? "mt-4" : ""
               }`}
             >
               {item.title}
-            </p>
+            </h3>
             <p className="mt-2 text-small leading-[1.6] text-body">
               {item.body}
             </p>
@@ -146,9 +146,9 @@ function Panels({ block }: { block: PanelsBlock }) {
             <div className="mt-5 grid gap-4">
               {group.items.map((item) => (
                 <div key={item.title}>
-                  <p className="text-small font-semibold text-ink">
+                  <h3 className="text-small font-semibold text-ink">
                     {item.title}
-                  </p>
+                  </h3>
                   {item.body ? (
                     <InkText as="p" className="mt-0.5 text-small leading-[1.6]">
                       {item.body}
