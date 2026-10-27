@@ -5,6 +5,7 @@ import AboutSolutions from "@/components/AboutSolutions";
 import DotHero from "@/components/DotHero";
 import PageShell from "@/components/ui/PageShell";
 import { about } from "@/lib/content";
+import { pageMetadata } from "@/lib/seo";
 import { PlayTriangle } from "@/components/ui/icons";
 
 /* Built to the approved About Us artboard: two-column banner with the
@@ -13,10 +14,11 @@ import { PlayTriangle } from "@/components/ui/icons";
    hairline running through 23px markers (37px 40% halo on the active
    one) with 35/42 labels hanging 19px under the line. */
 
-export const metadata: Metadata = {
-  title: "About Us | Eastwards Consulting",
+export const metadata: Metadata = pageMetadata({
+  title: "About Us",
   description: about.lede,
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

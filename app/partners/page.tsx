@@ -3,16 +3,18 @@ import DotHero from "@/components/DotHero";
 import DirectChannels from "@/components/DirectChannels";
 import PageShell from "@/components/ui/PageShell";
 import { partners } from "@/lib/content";
+import { pageMetadata } from "@/lib/seo";
 
 /* Replicates the "MacBook Pro 16\" - 12" Paper artboard for the partnership
    page: hero chip + dot grid, split intro, number-on-blue advantage cards
    over a gradient strip, and the direct channels row. Sizes follow the
    Paper values at 1728 and scale down through the site tokens. */
 
-export const metadata: Metadata = {
-  title: "Partnership | Eastwards Consulting",
+export const metadata: Metadata = pageMetadata({
+  title: "Partnership",
   description: partners.lede,
-};
+  path: "/partners",
+});
 
 export default function PartnersPage() {
   return (
