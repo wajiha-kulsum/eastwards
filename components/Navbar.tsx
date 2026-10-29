@@ -46,7 +46,7 @@ export function Navbar() {
     <header className="relative z-50 w-full bg-page transition-colors duration-300">
       <nav
         aria-label="Main navigation"
-        className="mx-auto flex h-[60px] w-full max-w-[1720px] items-center justify-between px-6 sm:px-10 sm:h-[68px] lg:h-[72px] lg:px-[5.35%]"
+        className="flex h-[60px] w-full items-center justify-between px-[36px] sm:h-[68px] lg:h-[72px]"
       >
         {/* Logo */}
         <Link
