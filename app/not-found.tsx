@@ -4,7 +4,7 @@ export default function NotFound() {
   return (
     <main
       id="main"
-      className="grid min-h-[calc(100svh-72px)] place-items-center bg-page text-ink"
+      className="grid min-h-[calc(100svh-60px)] place-items-center bg-page text-ink sm:min-h-[calc(100svh-68px)] lg:min-h-[calc(100svh-72px)]"
     >
       <div className="flex flex-col items-center gap-6 px-6 text-center">
         <svg
