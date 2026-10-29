@@ -5,7 +5,7 @@ Marketing site for Eastwards Consulting, built from the approved Paper design
 
 ## Stack
 
-- **Next.js 16** (App Router, Turbopack) + **TypeScript**
+- **Next.js 16** (App Router, webpack build) + **TypeScript**
 - **Tailwind CSS v4** — design tokens live in `app/globals.css` (`@theme`)
 - **Motion** (`motion`) — scroll reveal animations (`components/ui/Reveal.tsx`)
 
