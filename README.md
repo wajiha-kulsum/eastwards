@@ -18,6 +18,8 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+Before pushing: `npm run lint` and `npm run build`.
+
 ## Deploy
 
 Production runs at [eastwards.co](https://eastwards.co) on Hostinger and deploys
