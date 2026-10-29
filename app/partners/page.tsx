@@ -50,6 +50,8 @@ export default function PartnersPage() {
           <img
             src="/images/partnerhip.svg"
             alt=""
+            loading="lazy"
+            decoding="async"
             className="hidden w-full lg:block"
           />
           <div className="relative grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-6 lg:-mt-[150px] lg:grid-cols-[repeat(3,390px)] lg:justify-center lg:gap-[74px]">
