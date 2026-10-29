@@ -66,6 +66,8 @@ export default function PartnersPage() {
                   src="/images/polygon-6.svg"
                   alt=""
                   aria-hidden="true"
+                  loading="lazy"
+                  decoding="async"
                   className={`pointer-events-none absolute h-[55%] max-w-none ${
                     index === 0
                       ? "top-[6px] right-[12px]"
