@@ -178,6 +178,7 @@ export function Navbar() {
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
             aria-expanded={open}
+            aria-controls="mobile-menu"
             className="flex h-8 w-8 items-center justify-center rounded-full border border-line text-ink md:hidden"
           >
             <svg
@@ -209,7 +210,10 @@ export function Navbar() {
       {/* Mobile dropdown; Services expands into the same navServices rows
           the desktop panel uses (one flat level, category labels muted). */}
       {open && (
-        <div className="absolute inset-x-4 top-[64px] z-20 rounded-2xl border border-line bg-card p-6 shadow-xl md:hidden">
+        <div
+          id="mobile-menu"
+          className="absolute inset-x-4 top-[64px] z-20 rounded-2xl border border-line bg-card p-6 shadow-xl md:hidden"
+        >
           <ul className="space-y-4">
             {navLinks.map((item) =>
               item.label === "Services" ? (
