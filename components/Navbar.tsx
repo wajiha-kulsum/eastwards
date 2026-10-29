@@ -46,14 +46,14 @@ export function Navbar() {
     <header className="relative z-50 w-full bg-page transition-colors duration-300">
       <nav
         aria-label="Main navigation"
-        className="flex h-[60px] w-full items-center justify-between px-[36px] sm:h-[68px] lg:h-[72px]"
+        className="flex h-[60px] w-full items-center gap-7 px-[48px] sm:h-[68px] sm:gap-8 lg:h-[72px] lg:gap-9"
       >
         {/* Logo */}
         <Link
           href="/"
           className="flex shrink-0 items-center text-small font-bold tracking-[-0.5px] text-ink"
         >
-          eastwards
+          Eastwards
           <svg
             aria-hidden="true"
             viewBox="0 0 12 18"
@@ -65,7 +65,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop navigation */}
-        <NavigationMenu viewport={false} className="hidden md:block">
+        <NavigationMenu viewport={false} className="ml-auto hidden md:block">
           <NavigationMenuList className="items-center gap-7 sm:gap-8 lg:gap-9">
             {navLinks.map((item) =>
               item.label === "Services" ? (
@@ -171,7 +171,7 @@ export function Navbar() {
         </NavigationMenu>
 
         {/* Theme toggle + mobile menu toggle */}
-        <div className="flex shrink-0 items-center gap-3">
+        <div className="ml-auto flex shrink-0 items-center gap-3 md:ml-0">
           <ThemeToggle />
 
           <button

@@ -36,7 +36,7 @@ export default function Image() {
               clipPath: "polygon(0% 0%, 100% 50%, 0% 100%)",
             }}
           />
-          <div style={{ fontSize: 44 }}>eastwards</div>
+          <div style={{ fontSize: 44 }}>Eastwards</div>
         </div>
 
         <div
