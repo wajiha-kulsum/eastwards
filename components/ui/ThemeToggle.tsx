@@ -43,6 +43,9 @@ export function ThemeToggle() {
   const [dark, setDark] = useState(false);
 
   useEffect(() => {
+    // `dark` lives on <html> and is set before paint by layout.tsx, so the
+    // DOM class is the only hydration-safe source after mount.
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing from an external system, not derived state
     setDark(document.documentElement.classList.contains("dark"));
   }, []);
 
