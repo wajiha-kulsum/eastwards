@@ -2,11 +2,10 @@
 
 import { useEffect, useState } from "react";
 
-/* Dark/light switch in the navbar. Same pill physics as the old Login
-   button: h-9 -> lg:h-11, rounded-full, same slot. A white knob slides
-   inside a bordered track and carries the icon of the mode you're leaving:
-   sun on light, moon on dark. 2px-stroke SVGs keep the site's icon system.
-   State lives on <html class="dark">; layout.tsx persists it. */
+/* Dark/light switch in the navbar: one circular button, one click flips
+   the theme. The icon shows the current mode - sun on light, moon on dark.
+   2px-stroke SVGs keep the site's icon system. State lives on
+   <html class="dark">; layout.tsx persists it. */
 const SUN = (
   <svg
     viewBox="0 0 20 20"
@@ -61,20 +60,12 @@ export function ThemeToggle() {
   return (
     <button
       type="button"
-      role="switch"
-      aria-checked={dark}
+      aria-pressed={dark}
       aria-label="Toggle dark mode"
       onClick={toggle}
-      className="relative inline-flex h-9 w-[64px] shrink-0 items-center rounded-full border border-line bg-card px-[5px] transition-colors duration-200 hover:border-line-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:h-11 lg:w-[76px]"
+      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line bg-card text-ink transition-colors duration-200 hover:border-line-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
     >
-      <span
-        aria-hidden="true"
-        className={`absolute z-10 flex h-[24px] w-[24px] items-center justify-center rounded-full bg-white text-[#1e1e1e] shadow-[0_1px_3px_rgba(0,0,0,0.18)] transition-transform duration-300 lg:h-[26px] lg:w-[26px] ${
-          dark ? "translate-x-[30px] lg:translate-x-[40px]" : "translate-x-0"
-        }`}
-      >
-        {dark ? MOON : SUN}
-      </span>
+      {dark ? MOON : SUN}
     </button>
   );
 }
