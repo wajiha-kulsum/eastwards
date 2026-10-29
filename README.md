@@ -43,7 +43,7 @@ app/
   globals.css       # design tokens: colors, fonts, radii
   page.tsx          # assembles the sections
 components/
-  Navbar.tsx        # nav (desktop links + mobile menu) + login pill
+  Navbar.tsx        # nav (desktop links + mobile menu) + theme toggle
   Hero.tsx          # two-tone headline over the blue tile artwork
   Features.tsx      # intro + auto-scrolling service marquee
   CoreValues.tsx    # two-tone statement + value pillars
