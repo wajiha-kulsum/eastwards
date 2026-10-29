@@ -20,13 +20,10 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Deploy
 
-Production deploys via Vercel. The repeatable path:
-
-```bash
-bash scripts/vercel-deploy-wizard.sh
-```
-
-Four stages: authenticate the Vercel CLI with GitHub → link the project → `--prod` deploy (the live URL is written to `.env` as `VERCEL_PRODUCTION_URL`) → connect `wajiha-kulsum/eastwards` in the dashboard so every `git push` ships automatically.
+Production runs at [eastwards.co](https://eastwards.co) on Hostinger and deploys
+from `main`: merge a PR and the host rebuilds in a couple of minutes, no hPanel
+step. `scripts/vercel-deploy-wizard.sh` is a leftover from the earlier Vercel
+setup and is no longer the production path.
 
 ## House rules
 
