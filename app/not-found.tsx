@@ -22,7 +22,7 @@ export default function NotFound() {
           This page does not exist.
         </h1>
         <p className="text-small text-body">
-          The link you followed is old or mistyped - the rest of the site is
+          The link you followed is old or mistyped — the rest of the site is
           still where you left it.
         </p>
         <Link
