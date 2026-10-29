@@ -57,7 +57,7 @@ public/images/      # real assets exported from the Paper design file
 ## Editing content
 
 - **What it says** → `lib/content.ts`
-- **How big it is** → breakpoint classes in the components (`text-4xl md:text-6xl xl:text-[90px]`)
+- **How big it is** → the `text-*` size tokens in `app/globals.css` (`text-display`, `text-title`, `text-lead`, `text-small`)
 - **Colors / fonts / radii** → `@theme` in `app/globals.css`
 
 ## Design source of truth
