@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { navLinks, navServices } from "@/lib/content";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
@@ -54,14 +55,14 @@ export function Navbar() {
           className="flex shrink-0 items-center text-small font-bold tracking-[-0.5px] text-ink"
         >
           Eastwards
-          <svg
+          <Image
+            src="/images/logo.svg"
+            alt=""
             aria-hidden="true"
-            viewBox="0 0 12 18"
-            className="ml-[2px] h-[16px] w-[11px] lg:h-[18px] lg:w-[12px]"
-            fill="none"
-          >
-            <path d="M0 0L12 9L0 18V0Z" fill="#2868FF" />
-          </svg>
+            width={27}
+            height={32}
+            className="ml-2 h-[16px] w-auto lg:h-[18px]"
+          />
         </Link>
 
         {/* Desktop navigation */}
