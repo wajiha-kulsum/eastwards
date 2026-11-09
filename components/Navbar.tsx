@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { navLinks, navServices } from "@/lib/content";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { ThemeSwitch } from "@/components/ui/ThemeSwitch";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -173,7 +173,7 @@ export function Navbar() {
 
         {/* Theme toggle + mobile menu toggle */}
         <div className="ml-auto flex shrink-0 items-center gap-3 md:ml-0">
-          <ThemeToggle />
+          <ThemeSwitch />
 
           <button
             onClick={() => setOpen(!open)}
