@@ -231,6 +231,19 @@ export const contact = {
       { country: "UK", code: "+44" },
       { country: "AE", code: "+971" },
     ],
+    /* The requirement menu mirrors the footer's service lines one to one. */
+    requirements: [
+      "Application Services",
+      "Product Engineering",
+      "Quantum Computing",
+      "Data & AI",
+      "Infrastructure & Cloud",
+      "Modern Device Management",
+      "Cybersecurity",
+      "IT Staffing Services",
+      "Projects & Professional",
+      "Other",
+    ],
   },
   directChannels: {
     title: "Direct Channels",
