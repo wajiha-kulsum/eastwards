@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import Link from "next/link";
 import { ArrowUpRight, MapPin, Phone } from "lucide-react";
 import DotHero from "@/components/DotHero";
 import DotTerrain from "@/components/ui/DotTerrain";
@@ -301,6 +302,48 @@ export function ContactPage() {
               />
             </div>
           </div>
+
+          <div className="mt-5 flex items-start gap-2.5">
+            <input
+              id="smsConsent"
+              name="smsConsent"
+              type="checkbox"
+              required
+              className="mt-1 size-4 shrink-0 rounded-[4px] border border-line-strong bg-surface accent-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            />
+            <label htmlFor="smsConsent" className="text-small text-body">
+              By providing a telephone number and submitting the form, you are
+              consenting to be contacted by SMS text message and agreeing to
+              our{" "}
+              <Link
+                href="/privacy"
+                className="text-ink transition-colors hover:text-primary"
+              >
+                Privacy Policy
+              </Link>
+              . Message frequency may vary. Message and data rates may apply.
+              Reply STOP to opt out of further messaging. Reply HELP for more
+              information.
+            </label>
+          </div>
+
+          <p className="mt-3 text-small text-body">
+            I agree to the{" "}
+            <Link
+              href="/privacy"
+              className="text-ink transition-colors hover:text-primary"
+            >
+              Privacy Policy
+            </Link>{" "}
+            and{" "}
+            <Link
+              href="/terms"
+              className="text-ink transition-colors hover:text-primary"
+            >
+              Terms of Use
+            </Link>
+            .
+          </p>
 
           <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
             <p
