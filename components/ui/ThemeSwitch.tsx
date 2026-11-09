@@ -11,6 +11,10 @@ export function ThemeSwitch() {
 
   return (
     <SwitchButton
+      size="sm"
+      showLabel={false}
+      className="rounded-full"
+      aria-label="Toggle dark mode"
       onThemeChange={setTheme}
       theme={resolvedTheme === "dark" ? "dark" : "light"}
     />
