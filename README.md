@@ -48,7 +48,8 @@ components/
   CoreValues.tsx    # two-tone statement + value pillars
   BlogShowcase.tsx  # Stripe-style accordion gallery + featured article
   Footer.tsx        # link columns + gradient wordmark
-  ui/               # ThemeToggle, PrimaryButton, SectionLabel, Reveal, icons
+  ui/               # ThemeSwitch, PrimaryButton, SectionLabel, Reveal, icons
+  kokonutui/        # vendored kokonutui components (dot-field, switch-button)
 lib/
   content.ts        # single source of truth for all page content —
                     # swap for API/CMS fetches when the backend lands;
