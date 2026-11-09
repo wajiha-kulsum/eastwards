@@ -54,8 +54,9 @@ Updated lazily when terms or decisions actually get resolved.
   `line-strong #d9d9d9`, plus the surface tokens `page` (page/chip
   background; dark `#0f0f0f`) and `card` (white cards/panels; dark
   `#1a1c20`). In the `.dark` block these rebind to the dark palette,
-  curated via `components/ui/ThemeToggle.tsx` (persisted as `theme` in
-  localStorage; bootstrap script in layout.tsx). Components must not
+  owned by `next-themes` in `layout.tsx` and switched by
+  `components/ui/ThemeSwitch.tsx` (persisted as `theme` in
+  localStorage). Components must not
   carry raw hex literals except inside locked-geometry components
   (DotField/DotHero) and `nav-services-panel` CSS in globals.css.
 - **Tab icon** — `app/icon.svg`: the blue eastwards triangle on a blank
