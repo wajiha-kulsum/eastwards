@@ -205,6 +205,50 @@ export function ContactPage() {
               />
             </div>
 
+            <div>
+              <label htmlFor="jobTitle" className={LABEL_CLASS}>
+                Job Title
+              </label>
+              <input
+                id="jobTitle"
+                name="jobTitle"
+                type="text"
+                autoComplete="organization-title"
+                placeholder="Job Title"
+                className={`${FIELD_CLASS} h-12`}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="phone" className={LABEL_CLASS}>
+                Phone
+              </label>
+              <div className="flex gap-2">
+                <select
+                  id="phoneCode"
+                  name="phoneCode"
+                  defaultValue="+65"
+                  aria-label="Country code"
+                  className={`${FIELD_CLASS} h-12 w-[104px] shrink-0`}
+                >
+                  {contact.form.phoneCodes.map(({ country, code }) => (
+                    <option key={code} value={code}>
+                      {country} {code}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  placeholder="9123 4567"
+                  className={`${FIELD_CLASS} h-12 min-w-0`}
+                />
+              </div>
+            </div>
+
             <div className="sm:col-span-2">
               <label htmlFor="message" className={LABEL_CLASS}>
                 Message
