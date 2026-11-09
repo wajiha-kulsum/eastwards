@@ -223,6 +223,14 @@ export const contact = {
   },
   form: {
     submitText: "Send Message",
+    /* Dial codes: HQ first, then the India office and the common markets. */
+    phoneCodes: [
+      { country: "SG", code: "+65" },
+      { country: "IN", code: "+91" },
+      { country: "US", code: "+1" },
+      { country: "UK", code: "+44" },
+      { country: "AE", code: "+971" },
+    ],
   },
   directChannels: {
     title: "Direct Channels",
