@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { navLinks, navServices } from "@/lib/content";
 import { ThemeSwitch } from "@/components/ui/ThemeSwitch";
 import {
@@ -17,6 +18,18 @@ import {
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  /* Logo lockup: a little larger at the top of the page, back to normal
+     once the page scrolls. Transform-only, so nothing reflows. Re-synced on
+     route change because navigation resets the scroll. */
+  useEffect(() => {
+    const sync = () => setScrolled(window.scrollY > 10);
+    sync();
+    window.addEventListener("scroll", sync, { passive: true });
+    return () => window.removeEventListener("scroll", sync);
+  }, [pathname]);
 
   /* The nav's own 20-viewBox chevron: trigger + contact arrows carry the
       text color, the flyout row arrows pin the brand blue. */
@@ -52,7 +65,9 @@ export function Navbar() {
         {/* Logo */}
         <Link
           href="/"
-          className="flex shrink-0 items-center text-small font-bold tracking-[-0.5px] text-ink"
+          className={`flex shrink-0 origin-left items-center text-small font-bold tracking-[-0.5px] text-ink transition-transform duration-200 ease-out ${
+            scrolled ? "scale-100" : "scale-[1.25]"
+          }`}
         >
           Eastwards
           <Image
