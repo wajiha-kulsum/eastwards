@@ -705,7 +705,7 @@ export default function DotField({
   return (
     <div
       className={cn(
-        "relative flex min-h-[560px] w-full items-center justify-center overflow-hidden bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100",
+        "relative flex min-h-[560px] w-full items-center justify-center overflow-hidden bg-page text-ink",
         className
       )}
       ref={rootRef}
