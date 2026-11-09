@@ -61,6 +61,13 @@ const SHOCK_LIFE = 1.3;
 const COMPRESSION_GAIN = 3;
 // Dot sizes are snapped to this many steps; each step is one path.
 const BUCKETS = 10;
+// The smallest dot bands wear the site's brand blue instead of grey. This is
+// --color-primary in app/globals.css, the same value in light and dark; the
+// alpha lifts it off both page backgrounds at its sub-pixel radius. Two
+// bands, not one: the very smallest band alone reads as a single smudge.
+const ACCENT = "#2868ff";
+const ACCENT_ALPHA = 0.55;
+const ACCENT_BUCKETS = 2;
 // Below these the field counts as settled and the physics sleeps.
 const REST_SPEED = 2;
 const REST_OFFSET = 0.15;
@@ -445,10 +452,18 @@ function draw(
   }
   ctx.clearRect(0, 0, size.width, size.height);
   ctx.fillStyle = size.color;
-  for (let b = 1; b < BUCKETS; b++) {
+  for (let b = ACCENT_BUCKETS + 1; b < BUCKETS; b++) {
     if (filled[b]) {
       // Larger dots are a touch more opaque, which deepens the tone range.
       ctx.globalAlpha = 0.2 + (0.32 * b) / (BUCKETS - 1);
+      ctx.fill(paths[b]);
+    }
+  }
+  // The smallest tone bands keep the brand blue instead of the grey.
+  ctx.fillStyle = ACCENT;
+  ctx.globalAlpha = ACCENT_ALPHA;
+  for (let b = 1; b <= ACCENT_BUCKETS; b++) {
+    if (filled[b]) {
       ctx.fill(paths[b]);
     }
   }
