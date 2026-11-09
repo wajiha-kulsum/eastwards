@@ -29,6 +29,24 @@ body {
   overflow-x: clip;
 }
 
+/* Sticky navbar: anchor and focus jumps land below the bar, not under it.
+   Heights mirror the nav's 60 / 68 / 72px steps in Navbar.tsx. */
+html {
+  scroll-padding-top: 60px;
+}
+
+@media (min-width: 640px) {
+  html {
+    scroll-padding-top: 68px;
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    scroll-padding-top: 72px;
+  }
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
