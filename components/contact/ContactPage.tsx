@@ -250,6 +250,44 @@ export function ContactPage() {
             </div>
 
             <div className="sm:col-span-2">
+              <label htmlFor="requirement" className={LABEL_CLASS}>
+                Requirement
+              </label>
+              <div className="relative">
+                <select
+                  id="requirement"
+                  name="requirement"
+                  required
+                  defaultValue=""
+                  className={`${FIELD_CLASS} h-12 w-full appearance-none pr-10`}
+                >
+                  <option value="" disabled>
+                    Select your requirement
+                  </option>
+                  {contact.form.requirements.map((requirement) => (
+                    <option key={requirement} value={requirement}>
+                      {requirement}
+                    </option>
+                  ))}
+                </select>
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink"
+                >
+                  <path
+                    d="M5.5 8l4.5 4.5L14.5 8"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            <div className="sm:col-span-2">
               <label htmlFor="message" className={LABEL_CLASS}>
                 Message
               </label>
