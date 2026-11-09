@@ -734,7 +734,7 @@ export default function DotField({
             // Fade at the edges, and quieter in the middle where the
             // content usually sits so text stays easy to read.
             maskImage:
-              "radial-gradient(ellipse 75% 70% at 50% 50%, #000 40%, transparent 100%), radial-gradient(ellipse 34% 22% at 50% 50%, rgb(0 0 0 / 0.35), #000 100%)",
+              "radial-gradient(ellipse 85% 78% at 50% 50%, #000 40%, transparent 100%), radial-gradient(ellipse 34% 22% at 50% 50%, rgb(0 0 0 / 0.35), #000 100%)",
             maskComposite: "intersect",
           }}
         />
