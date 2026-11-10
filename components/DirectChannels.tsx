@@ -43,17 +43,21 @@ export default function DirectChannels({
           {channels.map((channel) => (
             <li
               key={channel.department}
-              className="flex flex-col gap-1 border-b border-dashed border-line-strong py-4 sm:flex-row sm:items-center sm:justify-between"
+              className="border-b border-dashed border-line-strong"
             >
-              <p className="text-small font-semibold text-ink">
-                {channel.department}
-              </p>
+              {/* The whole row is the mail link: bigger target than the
+                  address alone, and one hover plate across the drafting row. */}
               <a
                 href={`mailto:${channel.email}`}
-                className="inline-flex items-center gap-2 text-small text-ink transition-colors hover:text-primary"
+                className="group -mx-4 flex min-h-14 flex-col gap-1 px-4 py-4 transition-colors hover:bg-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:-mx-5 sm:flex-row sm:items-center sm:justify-between sm:px-5"
               >
-                <MailIcon className="h-[18px] w-[18px] shrink-0" />
-                {channel.email}
+                <span className="text-small font-semibold text-ink">
+                  {channel.department}
+                </span>
+                <span className="inline-flex items-center gap-2 text-small text-ink transition-colors group-hover:text-link">
+                  <MailIcon className="h-[18px] w-[18px] shrink-0" />
+                  {channel.email}
+                </span>
               </a>
             </li>
           ))}

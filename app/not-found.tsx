@@ -15,7 +15,7 @@ export default function NotFound() {
         >
           <path d="M8 3L29 16L8 29V3Z" fill="#2868FF" />
         </svg>
-        <p className="text-small font-semibold tracking-[-0.04em] text-primary">
+        <p className="text-small font-semibold tracking-[-0.04em] text-link">
           / 404 /
         </p>
         <h1 className="font-display text-title font-bold tracking-[-0.02em] text-ink">

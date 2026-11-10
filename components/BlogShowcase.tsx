@@ -6,7 +6,10 @@ import { blog } from "@/lib/content";
 import { SECTION_LANE } from "@/components/ui/lane";
 import { ChevronLeft, ChevronRight } from "@/components/ui/icons";
 
-const posts = blog.posts;
+const HOME_FEATURED_IDS = ["engineering", "infrastructure", "ai", "identity", "security"];
+const posts = [...blog.posts].sort(
+  (a, b) => HOME_FEATURED_IDS.indexOf(a.id) - HOME_FEATURED_IDS.indexOf(b.id),
+);
 
 /* Inactive-tile width falloff, measured from the reference layout:
    the tile right after the active one is widest, then it decays to slivers. */
@@ -17,7 +20,7 @@ const growFor = (distance: number) => {
   return 1.14;
 };
 
-export default function BlogShowcase() {
+export default function BlogShowcase({ compact = false }: { compact?: boolean }) {
   const count = posts.length;
   // unbounded index, arrows wrap infinitely in both directions
   const [cursor, setCursor] = useState(0);
@@ -27,7 +30,7 @@ export default function BlogShowcase() {
   const activePost = posts[activeIndex];
 
   return (
-    <section className={SECTION_LANE}>
+    <section className={compact ? "mx-auto mt-14 max-w-[1720px] px-6 sm:px-10 md:mt-16 lg:px-[5.35%]" : SECTION_LANE}>
       {/* light bordered panel, palette matched to the reference */}
       <div className="rounded-[24px] border border-line bg-card px-5 py-8 sm:px-8 md:px-[31px] lg:py-[44px]">
         {/* Heading: dark line + muted line, controls right */}
@@ -40,12 +43,12 @@ export default function BlogShowcase() {
           </div>
 
           {/* manual paging controls */}
-          <div className="flex items-center gap-2.5">
+          <div className="ml-auto flex items-center gap-2.5">
             <button
               type="button"
               aria-label="Previous article"
               onClick={() => setCursor((i) => i - 1)}
-              className="grid h-9 w-9 place-items-center rounded-[10px] bg-[#eceefb] text-primary transition-colors hover:bg-[#dfe3fa] dark:bg-[#232733] dark:hover:bg-[#2a3040]"
+              className="grid h-11 w-11 place-items-center rounded-[10px] bg-link/10 text-link transition-colors hover:bg-link/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:h-10 sm:w-10"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
@@ -53,7 +56,7 @@ export default function BlogShowcase() {
               type="button"
               aria-label="Next article"
               onClick={() => setCursor((i) => i + 1)}
-              className="grid h-9 w-9 place-items-center rounded-[10px] bg-[#eceefb] text-primary transition-colors hover:bg-[#dfe3fa] dark:bg-[#232733] dark:hover:bg-[#2a3040]"
+              className="grid h-11 w-11 place-items-center rounded-[10px] bg-link/10 text-link transition-colors hover:bg-link/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:h-10 sm:w-10"
             >
               <ChevronRight className="h-4 w-4" />
             </button>
@@ -105,7 +108,7 @@ export default function BlogShowcase() {
                   "group relative min-w-0 basis-0 overflow-hidden rounded-lg text-left",
                   "min-w-[44px] lg:min-w-0",
                   // flex-grow longhand: the flex shorthand never interpolates on WebKit
-                  "transition-[flex-grow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                  "transition-[flex-grow,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
                   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
                   !isActive ? "opacity-95 hover:opacity-100" : "",
                 ].join(" ")}
@@ -122,7 +125,7 @@ export default function BlogShowcase() {
                   {post.image ? (
                     <Image
                       src={post.image}
-                      alt={post.title}
+                      alt=""
                       fill
                       sizes="(max-width: 1023px) 60vw, 700px"
                       className="object-cover"
@@ -130,8 +133,6 @@ export default function BlogShowcase() {
                   ) : null}
                 </div>
 
-                {/* subtle hover lift */}
-                <div className="absolute inset-0 bg-black/5 transition-colors duration-300 group-hover:bg-black/0" />
               </button>
             );
           })}
@@ -140,16 +141,19 @@ export default function BlogShowcase() {
         {/* Featured article details. No CTA: the article routes don't exist
             yet, and a link would 404 from every page that shows this band. */}
         <div className="mt-9">
-          <p
+          <div
             key={activePost.id}
-            className="max-w-[640px] animate-[fade-in_250ms_ease-out] text-small"
+            className="max-w-[640px] animate-[fade-in_250ms_ease-out]"
             aria-live="polite"
           >
-            <span className="font-semibold text-ink">
+            <p className="text-small text-body">{activePost.category}</p>
+            <p className="mt-1 text-small font-semibold text-ink">
               {activePost.title}
-            </span>{" "}
-            <span className="text-body">{activePost.description} …</span>
-          </p>
+            </p>
+            <p className="mt-1 max-w-[560px] text-small text-body">
+              {activePost.description}
+            </p>
+          </div>
         </div>
       </div>
     </section>

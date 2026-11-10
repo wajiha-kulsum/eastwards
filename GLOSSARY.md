@@ -48,10 +48,13 @@ Updated lazily when terms or decisions actually get resolved.
   Chips render at `text-small`; `text-copy` (25) and `text-label` (11) were
   retired — reading copy is `text-small`, statements are `text-lead`.
 - **Brand tokens** — colors from the approved Paper design, retuned to the
-  two-color text system: `primary #2868ff` (accents, links, numbers),
-  `ink`/`statement` `#1e1e1e` (black text), `body`/`faint`/`subtle`
-  `#7e7e7e` (grey text), plus `surface #fafafa`, `line #eeeeee`,
-  `line-strong #d9d9d9`, plus the surface tokens `page` (page/chip
+  two-color text system: `primary #2868ff` (CTA fills, focus rings) and
+  `link #2868ff` (blue text, labels, links; rebinds to `#8fb3ff` in dark so
+  18px text passes AA on `#0f0f0f`), `ink`/`statement` `#1e1e1e` (black text),
+  `body`/`faint`/`subtle` `#737373` (grey text; `#737373` keeps 4.5:1 on white
+  and on `surface`), plus `surface #fafafa`, `line #eeeeee`,
+  `line-strong #d9d9d9`, `field #ededed` / `placeholder #6b6b6b` for form
+  furniture (dark `#1a1c20` / `#9a9a9a`), plus the surface tokens `page` (page/chip
   background; dark `#0f0f0f`) and `card` (white cards/panels; dark
   `#1a1c20`). In the `.dark` block these rebind to the dark palette,
   owned by `next-themes` in `layout.tsx` and switched by

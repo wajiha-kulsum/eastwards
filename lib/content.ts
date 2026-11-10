@@ -91,7 +91,7 @@ export const navServices: readonly NavService[] = [
 
 export const hero = {
   subtext:
-    "We help businesses navigate complexity and move forward with the right technology, engineering, and expertise.",
+    "We help organizations modernize applications, secure infrastructure, and support the teams behind everyday IT.",
   cta: "Find your solution",
   image: "/images/hero-tiles.png",
   mobileImage: "/images/hero-mobile.png",
@@ -287,11 +287,11 @@ export const footer = {
       ],
     },
     {
-      title: "Socials",
+      title: "Contact",
       links: [
-        { label: "Instagram" },
-        { label: "Twitter X" },
-        { label: "LinkedIn" },
+        { label: "General Inquiries", href: "mailto:info@eastwards.co" },
+        { label: "Business & Partnerships", href: "mailto:partners@eastwards.co" },
+        { label: "Careers & Talent", href: "mailto:careers@eastwards.co" },
       ],
     },
     {
@@ -299,7 +299,11 @@ export const footer = {
       links: [{ label: "Careers" }, { label: "Corporate Social Responsibility" }],
     },
   ],
-  legal: ["Privacy Policy", "Cookie Policy", "Terms of Use"],
+  legal: [
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Cookie Policy" },
+    { label: "Terms of Use", href: "/terms" },
+  ],
   copyright:
     "Copyright © 2026 Eastwards Consulting Pte Ltd. All Rights Reserved",
   wordmark: "Eastwards",

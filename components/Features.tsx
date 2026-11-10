@@ -1,191 +1,28 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import { motion, useScroll, useTransform, useMotionValue, useMotionValueEvent } from "motion/react";
-import Link from "next/link";
-import PrimaryButton from "@/components/ui/PrimaryButton";
 import { SECTION_LANE } from "@/components/ui/lane";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { ArrowUpRight } from "lucide-react";
-import { ChevronDown } from "@/components/ui/icons";
+import { ServicePathsHome } from "@/components/ServicePaths";
 import { features } from "@/lib/content";
 
-const CARD_W = 300;
-const GAP = 14;
-const DOTS = 9;
-const START_FRACTION = 0.465; // first card aligns to the copy-column line
-const DRIFT_DELAY_MS = 2500; // auto-scroll starts after a short pause
+/* Home service band: the statement, then three buying paths instead of a
+   drifting carousel. Every service is reachable without horizontal panning,
+   and each path opens on the services index. */
 
 function DotMatrix() {
   /* radial-gradient dot grid strip, exactly like the reference format */
   return (
     <i
       aria-hidden="true"
-      className="hidden h-11 w-3 shrink-0 sm:block sm:bg-[radial-gradient(circle,#d4d4d4_1px,transparent_1.2px)] sm:[background-size:5px_5px]"
+      className="hidden h-11 w-3 shrink-0 sm:block sm:bg-[radial-gradient(circle,var(--color-line-strong)_1px,transparent_1.2px)] sm:[background-size:5px_5px]"
     />
-  );
-}
-
-function CardCarousel() {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const paused = useRef(false);
-  const drift = useMotionValue(0);
-  const drag = useMotionValue(0); // finger travel, folded into the same wrap
-  const [metrics, setMetrics] = useState({ start: 0, travel: 0 });
-  const [active, setActive] = useState(2);
-  const { scrollYProgress: progress } = useScroll({
-    target: wrapRef,
-    offset: ["start end", "end start"],
-  });
-
-  const cards = features.services;
-  const setWidth = cards.length * (CARD_W + GAP);
-
-  // re-measure on resize: start anchor + how far one full set must travel
-  useEffect(() => {
-    let throttle = false;
-    const measure = () => {
-      if (throttle) return;
-      throttle = true;
-      setTimeout(() => {
-        throttle = false;
-        setMetrics({
-          start: window.innerWidth * START_FRACTION,
-          travel: setWidth,
-        });
-      }, 150);
-    };
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, [setWidth]);
-
-  // gentle auto-drift right-to-left, beginning after the delay. Runs only
-  // while the carousel is on screen, RGlobal rAF loops keep the smooth
-  // scroll from ever resting.
-  useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
-    const startedAt = performance.now();
-    let last = 0;
-    let raf = 0;
-    let inView = true;
-
-    const tick = (t: number) => {
-      const dt = last ? Math.min(t - last, 50) : 16;
-      last = t;
-      if (inView && !paused.current && t - startedAt > DRIFT_DELAY_MS) {
-        drift.set(drift.get() - (0.5 * dt) / 16.67);
-      }
-      raf = inView ? requestAnimationFrame(tick) : 0;
-    };
-    raf = requestAnimationFrame(tick);
-
-    const observer = new IntersectionObserver(([entry]) => {
-      inView = entry.isIntersecting;
-      last = 0;
-      if (inView && raf === 0) raf = requestAnimationFrame(tick);
-    });
-    if (wrapRef.current) observer.observe(wrapRef.current);
-
-    return () => {
-      observer.disconnect();
-      cancelAnimationFrame(raf);
-    };
-  }, [drift]);
-
-  // One repeated set starts at the copy-column anchor; earlier cards fill left.
-  // Wrap into one set width so all four copies keep covering the strip.
-  // The drag term rides underneath the scroll + drift terms: panning left
-  // grows it, so the strip follows the finger and the modulo keeps looping.
-  const x = useTransform([progress, drift, drag], ([p, d, gv]: number[]) => {
-    if (typeof window === "undefined") return -metrics.start;
-    const raw = metrics.start - p * metrics.travel - d - gv;
-    const m = raw % setWidth;
-    return m > 0 ? m - setWidth : m;
-  });
-
-  useMotionValueEvent(progress, "change", (p) => {
-    const idx = Math.min(DOTS - 1, Math.floor(p * DOTS));
-    setActive(idx);
-  });
-
-  return (
-    <div>
-      {/* dots left-aligned with the copy column, directly above the cards */}
-      <div
-        className="mb-5 flex gap-[5px] pl-6 sm:pl-[46.5%]"
-        aria-hidden="true"
-      >
-        {Array.from({ length: DOTS }, (_, i) => (
-          <i
-            key={i}
-            className={`h-1.5 w-1.5 rounded-full transition-colors ${
-              i === active ? "bg-ink" : "bg-line-strong"
-            }`}
-          />
-        ))}
-      </div>
-
-      {/* full-bleed scroll-driven track, first card anchored mid-screen */}
-      <div ref={wrapRef} className="overflow-hidden pb-2">
-        <motion.div
-          ref={trackRef}
-          // Hand-pans pause the auto-drift and ride into the same wrap:
-          // 3px gesture threshold keeps plain taps working as card links,
-          // pan-y hands vertical swipes to the page scroller untouched.
-          onPanStart={() => {
-            paused.current = true;
-          }}
-          onPan={(_event, info) => drag.set(drag.get() - info.delta.x)}
-          onPanEnd={() => {
-            paused.current = false;
-          }}
-          style={{ x, gap: GAP }}
-          className="flex will-change-transform [touch-action:pan-y]"
-        >
-          {[...cards, ...cards, ...cards, ...cards].map((service, i) => (
-            <Link
-              key={i}
-              href={service.href}
-              draggable={false}
-              tabIndex={i >= cards.length ? -1 : undefined}
-              className="shrink-0 rounded-[26px] border border-line bg-surface p-[6px] transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-              style={{ width: CARD_W }}
-            >
-              <div className="relative h-[192px] overflow-hidden rounded-[20px] bg-slate-100">
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  fill
-                  sizes="300px"
-                  draggable={false}
-                  className="object-cover"
-                />
-              </div>
-              <div className="flex items-center gap-3 px-3 py-[14px] text-small font-semibold text-statement">
-                {service.title}
-                <ArrowUpRight className="h-4 w-4" />
-              </div>
-            </Link>
-          ))}
-        </motion.div>
-      </div>
-    </div>
   );
 }
 
 export function Features() {
   return (
     <section className={SECTION_LANE}>
-      <div className="grid gap-8 md:grid-cols-[46.5%_1fr]">
-        <h2 className="text-title font-semibold tracking-tight text-ink">
-          For crafting truly
-          <span className="block text-lead font-bold text-primary">
-            prominent IT solutions
-          </span>
+      <div className="grid gap-6 xl:grid-cols-[46.5%_1fr] xl:gap-8">
+        <h2 className="max-w-[18ch] text-title font-semibold leading-[1.1] tracking-tight text-ink">
+          Modernize, secure, and support your IT.
         </h2>
 
         <div>
@@ -196,19 +33,11 @@ export function Features() {
               {features.body}
             </p>
           </div>
-          <PrimaryButton
-            href="/services"
-            className="mt-5 h-10 gap-2 px-7 text-small"
-          >
-            {features.cta}
-            <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-y-0.5" aria-hidden="true" />
-          </PrimaryButton>
         </div>
       </div>
 
-      {/* full-bleed scroll-driven carousel, escapes the container padding */}
-      <div className="relative left-1/2 mt-9 w-screen -translate-x-1/2">
-        <CardCarousel />
+      <div className="mt-10 sm:mt-12">
+        <ServicePathsHome />
       </div>
     </section>
   );

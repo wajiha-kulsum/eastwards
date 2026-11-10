@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import DotHero from "@/components/DotHero";
 import DirectChannels from "@/components/DirectChannels";
 import PageShell from "@/components/ui/PageShell";
@@ -25,7 +26,7 @@ export default function PartnersPage() {
           Paper: eyebrow 25px y418, statement 60px y461, body 35px/775px y441. */}
       <section className="mt-14 md:grid md:grid-cols-2 md:gap-8">
         <div>
-          <p className="text-small font-semibold tracking-[-0.04em] text-primary">
+          <p className="text-small font-semibold tracking-[-0.04em] text-link">
             {partners.eyebrow}
           </p>
           <p className="mt-5 whitespace-pre-line font-display text-lead font-medium tracking-[-0.02em] text-ink">
@@ -47,14 +48,15 @@ export default function PartnersPage() {
         <div className="relative mt-10">
           {/* partnership artwork strip behind the top of the cards (lg only:
               below that the strip is too short for the calibrated overlap) */}
-          <img
+          <Image
             src="/images/partnerhip.svg"
             alt=""
-            loading="lazy"
-            decoding="async"
-            className="hidden w-full lg:block"
+            width={1547}
+            height={232}
+            unoptimized
+            className="hidden h-auto w-full lg:block"
           />
-          <div className="relative grid grid-cols-1 gap-6 sm:grid-cols-2 lg:-mt-[150px] lg:grid-cols-[repeat(3,390px)] lg:justify-center lg:gap-[74px]">
+          <div className="relative grid grid-cols-1 gap-6 sm:grid-cols-2 lg:-mt-[150px] lg:grid-cols-3 lg:justify-center lg:gap-6 xl:gap-[74px]">
             {partners.why.advantages.map((advantage, index) => (
               <article
                 key={advantage.title}
@@ -62,13 +64,14 @@ export default function PartnersPage() {
               >
                 {/* masked polygon near a corner, one per card, never
                     against the top-left number zone */}
-                <img
+                <Image
                   src="/images/polygon-6.svg"
                   alt=""
                   aria-hidden="true"
-                  loading="lazy"
-                  decoding="async"
-                  className={`pointer-events-none absolute h-[55%] max-w-none ${
+                  width={222}
+                  height={256}
+                  unoptimized
+                  className={`pointer-events-none absolute h-[55%] w-auto max-w-none ${
                     index === 0
                       ? "top-[6px] right-[12px]"
                       : index === 1

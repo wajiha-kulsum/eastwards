@@ -16,10 +16,10 @@ import {
 } from "@/components/ui/navigation-menu";
 
 export function Navbar() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const pathname = usePathname();
 
   /* Logo lockup: a little larger at the top of the page, back to normal
      once the page scrolls. Transform-only, so nothing reflows. Re-synced on
@@ -57,7 +57,11 @@ export function Navbar() {
   );
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-page transition-colors duration-300">
+    <header
+      className={`sticky top-0 z-50 w-full border-b bg-page transition-colors duration-300 ${
+        scrolled ? "border-line" : "border-transparent"
+      }`}
+    >
       <nav
         aria-label="Main navigation"
         className="flex h-[60px] w-full items-center gap-7 px-[48px] sm:h-[68px] sm:gap-8 lg:h-[72px] lg:gap-9"
@@ -65,7 +69,7 @@ export function Navbar() {
         {/* Logo */}
         <Link
           href="/"
-          className={`flex shrink-0 origin-left items-center text-small font-bold tracking-[-0.5px] text-ink transition-transform duration-200 ease-out ${
+          className={`flex shrink-0 origin-left items-center rounded-sm text-small font-bold tracking-[-0.5px] text-ink transition-transform duration-200 ease-out focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary ${
             scrolled ? "scale-100" : "scale-[1.25]"
           }`}
         >
@@ -86,12 +90,16 @@ export function Navbar() {
             {navLinks.map((item) =>
               item.label === "Services" ? (
                 <NavigationMenuItem key={item.label}>
-                  <NavigationMenuTrigger className="h-auto px-0 py-0 text-ink hover:text-primary data-popup-open:text-primary [&>svg:last-child]:hidden">
+                  <NavigationMenuTrigger className="h-auto rounded-sm px-0 py-0 text-ink hover:text-link focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary data-popup-open:text-link [&>svg:last-child]:hidden">
                     {/* Label wears the exact sibling-link classes so the
                         button base styling can't shift size/weight/tracking;
                         chevron follows currentColor so it tints with the
                         text on hover/open */}
-                    <span className="inline-flex items-center text-small font-medium tracking-[0.1px] text-ink transition-colors group-hover/navigation-menu-trigger:text-primary group-data-popup-open/navigation-menu-trigger:text-primary lg:tracking-[0.02em]">
+                    <span
+                      className={`inline-flex items-center text-small font-medium tracking-[0.1px] transition-colors group-hover/navigation-menu-trigger:text-link group-data-popup-open/navigation-menu-trigger:text-link lg:tracking-[0.02em] ${
+                        pathname.startsWith("/services") ? "text-link" : "text-ink"
+                      }`}
+                    >
                       {item.label}
                       <Chevron className="ml-1 h-3 w-3 shrink-0 transition-transform duration-300 group-data-popup-open/navigation-menu-trigger:rotate-180 group-data-open/navigation-menu-trigger:rotate-180" />
                     </span>
@@ -112,13 +120,13 @@ export function Navbar() {
                               text, not a link - the flyout's children are the
                               clickable targets. Plain rows stay links. */}
                           {service.items ? (
-                            <span className="pointer-events-none py-2 text-small font-normal text-ink transition-colors group-hover/row:text-primary">
+                            <span className="pointer-events-none py-2 text-small font-normal text-ink transition-colors group-hover/row:text-link">
                               {service.label}
                             </span>
                           ) : (
                             <NavigationMenuLink
                               href={service.href}
-                              className="py-2 text-small font-normal text-ink transition-colors hover:text-primary group-hover/row:text-primary"
+                              className="py-2 text-small font-normal text-ink transition-colors hover:text-link group-hover/row:text-link"
                             >
                               {service.label}
                             </NavigationMenuLink>
@@ -137,7 +145,7 @@ export function Navbar() {
                                       <NavigationMenuLink
                                         key={item.label}
                                         href={item.href}
-                                        className="px-3 py-2 text-small font-normal text-ink transition-colors hover:text-primary"
+                                        className="px-3 py-2 text-small font-normal text-ink transition-colors hover:text-link"
                                       >
                                         {item.label}
                                       </NavigationMenuLink>
@@ -154,7 +162,7 @@ export function Navbar() {
                                   </p>
                                   <NavigationMenuLink
                                     href="/contact"
-                                    className="mt-3 inline-flex items-center gap-1.5 rounded-lg text-small font-medium text-primary transition-colors hover:text-[#1555ed]"
+                                    className="mt-3 inline-flex items-center gap-1.5 rounded-lg text-small font-medium text-link transition-opacity hover:opacity-70"
                                   >
                                     Contact us
                                     <Chevron className="h-3 w-3" />
@@ -175,7 +183,10 @@ export function Navbar() {
                   <NavigationMenuLink asChild>
                     <Link
                       href={item.href}
-                      className="link-underline-sweep text-small font-medium tracking-[0.1px] text-ink transition-colors hover:text-primary lg:tracking-[0.02em]"
+                      aria-current={pathname === item.href ? "page" : undefined}
+                      className={`link-underline-sweep rounded-sm text-small font-medium tracking-[0.1px] transition-colors hover:text-link focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary lg:tracking-[0.02em] ${
+                        pathname === item.href ? "text-link" : "text-ink"
+                      }`}
                     >
                       {item.label}
                     </Link>
@@ -195,7 +206,7 @@ export function Navbar() {
             aria-label="Toggle menu"
             aria-expanded={open}
             aria-controls="mobile-menu"
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-line text-ink md:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-line text-ink transition-colors hover:bg-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:hidden"
           >
             <svg
               viewBox="0 0 20 20"
@@ -228,7 +239,7 @@ export function Navbar() {
       {open && (
         <div
           id="mobile-menu"
-          className="absolute inset-x-4 top-[64px] z-20 rounded-2xl border border-line bg-card p-6 shadow-xl md:hidden"
+          className="absolute inset-x-4 top-[60px] z-20 max-h-[calc(100dvh-76px)] overflow-y-auto rounded-2xl border border-line bg-card p-6 shadow-xl sm:top-[68px] md:hidden"
         >
           <ul className="space-y-4">
             {navLinks.map((item) =>
@@ -237,7 +248,9 @@ export function Navbar() {
                   <button
                     onClick={() => setServicesOpen(!servicesOpen)}
                     aria-expanded={servicesOpen}
-                    className="flex w-full items-center gap-1 text-small font-medium text-ink"
+                    className={`flex min-h-11 w-full items-center gap-1 rounded-sm text-small font-medium transition-colors hover:text-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+                      pathname.startsWith("/services") ? "text-link" : "text-ink"
+                    }`}
                   >
                     {item.label}
                     <Chevron
@@ -251,7 +264,7 @@ export function Navbar() {
                       {navServices.map((service) =>
                         service.items ? (
                           <li key={service.label}>
-                            <p className="py-1 text-small text-body">
+                            <p className="py-2 text-small text-body">
                               {service.label}
                             </p>
                             <ul className="ml-3 space-y-2.5">
@@ -263,7 +276,9 @@ export function Navbar() {
                                       setOpen(false);
                                       setServicesOpen(false);
                                     }}
-                                    className="block py-1 text-small font-medium text-ink"
+                                    className={`block py-2.5 text-small font-medium transition-colors hover:text-link ${
+                                      pathname === child.href ? "text-link" : "text-ink"
+                                    }`}
                                   >
                                     {child.label}
                                   </Link>
@@ -294,7 +309,10 @@ export function Navbar() {
                   <Link
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className="block text-small font-medium text-ink"
+                    aria-current={pathname === item.href ? "page" : undefined}
+                    className={`block min-h-11 rounded-sm py-2.5 text-small font-medium transition-colors hover:text-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+                      pathname === item.href ? "text-link" : "text-ink"
+                    }`}
                   >
                     {item.label}
                   </Link>

@@ -32,13 +32,13 @@ export default function AboutPage() {
         {/* Banner: copy left, photo right at its natural shape (no crop) */}
         <section className="mt-6 grid grid-cols-1 items-start gap-y-8 sm:mt-8 lg:grid-cols-[42%_1fr] lg:gap-x-[5.6%]">
           <div>
-            <p className="text-small font-semibold tracking-[-0.04em] text-primary">
+            <p className="text-small font-semibold tracking-[-0.04em] text-link">
               {about.banner.eyebrow}
             </p>
             <h2 className="mt-4 font-display text-lead font-medium tracking-[-0.02em] text-ink">
               {about.banner.line}
               <span className="flex items-center gap-[0.17em]">
-                <PlayTriangle className="h-[0.79em] w-[0.92em] shrink-0 text-primary" />
+                <PlayTriangle className="h-[0.79em] w-[0.92em] shrink-0 text-link" />
                 <span>
                   {about.banner.follow}{" "}
                   <span className="bg-primary">{about.banner.highlight}</span>

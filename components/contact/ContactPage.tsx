@@ -1,38 +1,96 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
-import { ArrowUpRight, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Check, MapPin, Phone } from "lucide-react";
 import DotHero from "@/components/DotHero";
 import DotTerrain from "@/components/ui/DotTerrain";
 import BlueprintGrid from "@/components/ui/BlueprintGrid";
 import DirectChannels from "@/components/DirectChannels";
 import PageShell from "@/components/ui/PageShell";
+import { LocationPlan } from "@/components/contact/LocationPlan";
 import { contact } from "@/lib/content";
 
-/* Contact page: the original hero design up top, the DotHero statement band
-   with the dot lattice and the right-aligned lede, the pitch and the card
-   row beside the form; the lower half keeps the drafting furniture, Direct
-   Channels drawn as ruled rows on the dashed grid and the page closing into
-   the dot-lattice range. Form furniture matches the original contact page. */
+/* Contact page: the shared dot hero up top, the pitch and the card row beside
+   the form, the drafting grid carrying Direct Channels, and the dot range as
+   the close. The form is the page's product: one consent block, optional
+   fields marked as such, and a success/error state that says what happened. */
 
 /* Shared form furniture: label + field styles in one place so the six
    fields can't drift apart. */
 const LABEL_CLASS =
   "mb-1.5 block text-small font-medium tracking-tight text-ink";
+const OPTIONAL_CLASS = "font-normal text-body";
 const FIELD_CLASS =
-  "w-full rounded-[12px] border border-transparent bg-[#ededed] dark:bg-[#1a1c20] px-3.5 text-small text-ink outline-none transition placeholder:text-[#6b6b6b] dark:placeholder:text-[#6d6d6d] focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20";
+  "rounded-xl border border-line-strong/70 bg-field px-3.5 text-small text-ink outline-none transition-colors placeholder:text-placeholder focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20 aria-invalid:border-destructive aria-invalid:focus:border-destructive aria-invalid:focus:ring-destructive/20";
+const ERROR_CLASS = "mt-1 text-small text-destructive";
+
+type FieldName =
+  | "firstName"
+  | "lastName"
+  | "email"
+  | "requirement"
+  | "message"
+  | "smsConsent";
+type FieldErrors = Partial<Record<FieldName, string>>;
+
+/* The form validates here, not in the browser, so every message is written
+   in the page's voice and sits next to the field that caused it. */
+const REQUIRED_ORDER: readonly FieldName[] = [
+  "firstName",
+  "lastName",
+  "email",
+  "requirement",
+  "message",
+  "smsConsent",
+];
+
+function validate(formData: FormData): FieldErrors {
+  const errors: FieldErrors = {};
+  const value = (name: FieldName) => String(formData.get(name) ?? "").trim();
+
+  if (!value("firstName")) errors.firstName = "Enter your first name.";
+  if (!value("lastName")) errors.lastName = "Enter your last name.";
+
+  const email = value("email");
+  if (!email) errors.email = "Enter your email address.";
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+    errors.email = "Enter a valid email address, like name@company.com.";
+
+  if (!value("requirement")) errors.requirement = "Select what you need help with.";
+  if (!value("message")) errors.message = "Tell us what you need help with.";
+  if (!formData.get("smsConsent"))
+    errors.smsConsent = "Confirm you agree to be contacted about this enquiry.";
+
+  return errors;
+}
 
 export function ContactPage() {
+  const formRef = useRef<HTMLFormElement>(null);
   const [submitting, setSubmitting] = useState(false);
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState<"success" | "error" | null>(null);
+  const [errors, setErrors] = useState<FieldErrors>({});
+
+  const clearError = (name: FieldName) =>
+    setErrors((current) =>
+      current[name] ? { ...current, [name]: undefined } : current
+    );
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setStatus("");
+    setStatus(null);
 
     const form = event.currentTarget;
     const formData = new FormData(form);
+
+    const nextErrors = validate(formData);
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors);
+      const first = REQUIRED_ORDER.find((name) => nextErrors[name]);
+      if (first) formRef.current?.querySelector<HTMLElement>(`#${first}`)?.focus();
+      return;
+    }
+    setErrors({});
 
     // Do not show a success message until the backend confirms.
     try {
@@ -48,12 +106,10 @@ export function ContactPage() {
         throw new Error("Unable to send your message.");
       }
 
-      setStatus("Thank you! Your message has been sent.");
+      setStatus("success");
       form.reset();
     } catch {
-      setStatus(
-        "We couldn't send your message. Please email info@eastwards.co."
-      );
+      setStatus("error");
     } finally {
       setSubmitting(false);
     }
@@ -67,10 +123,10 @@ export function ContactPage() {
       {/* Contact information + form */}
       <section className="mt-9 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.06fr]">
         {/* Left column, mirrors the form's padding so the top row of copy
-            sits level with the form's first field; flex + mt-auto keeps the
-            card row and the Send button finishing on the same line */}
+            sits level with the form. The cards keep their own height instead
+            of stretching to the form. */}
         <div className="flex flex-col pt-4 sm:pt-5">
-          <p className="mb-4 text-small font-semibold tracking-[-0.04em] text-primary">
+          <p className="mb-4 text-small font-semibold tracking-[-0.04em] text-link">
             / {contact.eyebrow} /
           </p>
 
@@ -84,14 +140,13 @@ export function ContactPage() {
             </span>
           </p>
 
-          <div className="flex-1 grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
             {/* Location card */}
-            <article className="flex min-h-[150px] flex-col rounded-[20px] bg-primary p-4 text-white sm:p-5">
+            <article className="flex min-h-[150px] flex-col rounded-2xl bg-primary p-4 text-white sm:p-5">
               <MapPin
                 size={30}
-                strokeWidth={2.7}
-                fill="white"
-                className="mb-3 text-primary"
+                strokeWidth={2}
+                className="mb-3 text-white"
                 aria-hidden="true"
               />
 
@@ -99,7 +154,7 @@ export function ContactPage() {
                 {contact.location.title}
               </h2>
 
-              <address className="text-small not-italic text-white/95">
+              <address className="text-small not-italic text-white">
                 {[
                   contact.location.headquarters,
                   contact.location.company,
@@ -114,15 +169,15 @@ export function ContactPage() {
             </article>
 
             {/* Phone card */}
-            <article className="min-h-[150px] rounded-[20px] border border-line bg-surface p-4 sm:p-5">
+            <article className="min-h-[150px] rounded-2xl border border-line bg-surface p-4 sm:p-5">
               <Phone
                 size={24}
-                fill="#3971ff"
-                className="mb-3 text-primary"
+                strokeWidth={2}
+                className="mb-3 text-link"
                 aria-hidden="true"
               />
 
-              <h2 className="mb-2 text-small font-semibold tracking-[-0.04em] text-primary">
+              <h2 className="mb-2 text-small font-semibold tracking-[-0.04em] text-link">
                 {contact.call.title}
               </h2>
 
@@ -131,7 +186,7 @@ export function ContactPage() {
                   <a
                     key={phone}
                     href={`tel:${phone.replace(/\s/g, "")}`}
-                    className="block transition hover:text-primary"
+                    className="block rounded-sm transition-colors hover:text-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                   >
                     {phone}
                   </a>
@@ -139,14 +194,29 @@ export function ContactPage() {
               </div>
             </article>
           </div>
+
+          <LocationPlan />
         </div>
 
         {/* Contact form */}
         <form
+          ref={formRef}
+          noValidate
           onSubmit={handleSubmit}
-          className="flex min-w-0 flex-col rounded-[24px] border border-line bg-surface p-5 sm:p-6 lg:p-7"
+          aria-labelledby="contact-form-title"
+          className="flex min-w-0 flex-col rounded-3xl border border-line bg-surface p-5 sm:p-6 lg:p-7"
         >
-          <div className="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2 lg:gap-y-5">
+          <h2
+            id="contact-form-title"
+            className="text-lead font-semibold tracking-[-0.02em] text-ink"
+          >
+            Send us a message
+          </h2>
+          <p className="mb-5 mt-1 text-small text-body">
+            Tell us what you need. We reply within one business day.
+          </p>
+
+          <div className="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2 lg:grid-cols-1 lg:gap-y-5 xl:grid-cols-2">
             <div>
               <label htmlFor="firstName" className={LABEL_CLASS}>
                 First Name
@@ -156,10 +226,17 @@ export function ContactPage() {
                 name="firstName"
                 type="text"
                 autoComplete="given-name"
-                placeholder="John"
                 required
-                className={`${FIELD_CLASS} h-12`}
+                aria-invalid={errors.firstName ? true : undefined}
+                aria-describedby={errors.firstName ? "firstName-error" : undefined}
+                onChange={() => clearError("firstName")}
+                className={`${FIELD_CLASS} h-12 w-full`}
               />
+              {errors.firstName ? (
+                <p id="firstName-error" className={ERROR_CLASS}>
+                  {errors.firstName}
+                </p>
+              ) : null}
             </div>
 
             <div>
@@ -171,10 +248,17 @@ export function ContactPage() {
                 name="lastName"
                 type="text"
                 autoComplete="family-name"
-                placeholder="Doe"
                 required
-                className={`${FIELD_CLASS} h-12`}
+                aria-invalid={errors.lastName ? true : undefined}
+                aria-describedby={errors.lastName ? "lastName-error" : undefined}
+                onChange={() => clearError("lastName")}
+                className={`${FIELD_CLASS} h-12 w-full`}
               />
+              {errors.lastName ? (
+                <p id="lastName-error" className={ERROR_CLASS}>
+                  {errors.lastName}
+                </p>
+              ) : null}
             </div>
 
             <div>
@@ -186,43 +270,49 @@ export function ContactPage() {
                 name="email"
                 type="email"
                 autoComplete="email"
-                placeholder="yourmail@gmail.com"
+                placeholder="name@company.com"
                 required
-                className={`${FIELD_CLASS} h-12`}
+                aria-invalid={errors.email ? true : undefined}
+                aria-describedby={errors.email ? "email-error" : undefined}
+                onChange={() => clearError("email")}
+                className={`${FIELD_CLASS} h-12 w-full`}
               />
+              {errors.email ? (
+                <p id="email-error" className={ERROR_CLASS}>
+                  {errors.email}
+                </p>
+              ) : null}
             </div>
 
             <div>
               <label htmlFor="company" className={LABEL_CLASS}>
-                Company
+                Company <span className={OPTIONAL_CLASS}>(optional)</span>
               </label>
               <input
                 id="company"
                 name="company"
                 type="text"
                 autoComplete="organization"
-                placeholder="Company Name"
-                className={`${FIELD_CLASS} h-12`}
+                className={`${FIELD_CLASS} h-12 w-full`}
               />
             </div>
 
             <div>
               <label htmlFor="jobTitle" className={LABEL_CLASS}>
-                Job Title
+                Job Title <span className={OPTIONAL_CLASS}>(optional)</span>
               </label>
               <input
                 id="jobTitle"
                 name="jobTitle"
                 type="text"
                 autoComplete="organization-title"
-                placeholder="Job Title"
-                className={`${FIELD_CLASS} h-12`}
+                className={`${FIELD_CLASS} h-12 w-full`}
               />
             </div>
 
             <div>
               <label htmlFor="phone" className={LABEL_CLASS}>
-                Phone
+                Phone <span className={OPTIONAL_CLASS}>(optional)</span>
               </label>
               <div className="flex gap-2">
                 <select
@@ -230,7 +320,7 @@ export function ContactPage() {
                   name="phoneCode"
                   defaultValue="+65"
                   aria-label="Country code"
-                  className={`${FIELD_CLASS} h-12 w-[104px] shrink-0`}
+                  className={`${FIELD_CLASS} h-12 w-[120px] shrink-0`}
                 >
                   {contact.form.phoneCodes.map(({ country, code }) => (
                     <option key={code} value={code}>
@@ -245,12 +335,12 @@ export function ContactPage() {
                   inputMode="tel"
                   autoComplete="tel"
                   placeholder="9123 4567"
-                  className={`${FIELD_CLASS} h-12 min-w-0`}
+                  className={`${FIELD_CLASS} h-12 min-w-0 flex-1`}
                 />
               </div>
             </div>
 
-            <div className="sm:col-span-2">
+            <div className="sm:col-span-2 lg:col-span-1 xl:col-span-2">
               <label htmlFor="requirement" className={LABEL_CLASS}>
                 Requirement
               </label>
@@ -260,6 +350,9 @@ export function ContactPage() {
                   name="requirement"
                   required
                   defaultValue=""
+                  aria-invalid={errors.requirement ? true : undefined}
+                  aria-describedby={errors.requirement ? "requirement-error" : undefined}
+                  onChange={() => clearError("requirement")}
                   className={`${FIELD_CLASS} h-12 w-full appearance-none pr-10`}
                 >
                   <option value="" disabled>
@@ -286,9 +379,14 @@ export function ContactPage() {
                   />
                 </svg>
               </div>
+              {errors.requirement ? (
+                <p id="requirement-error" className={ERROR_CLASS}>
+                  {errors.requirement}
+                </p>
+              ) : null}
             </div>
 
-            <div className="sm:col-span-2">
+            <div className="sm:col-span-2 lg:col-span-1 xl:col-span-2">
               <label htmlFor="message" className={LABEL_CLASS}>
                 Message
               </label>
@@ -296,68 +394,93 @@ export function ContactPage() {
                 id="message"
                 name="message"
                 rows={5}
-                placeholder="Your Message Here"
+                placeholder="Tell us what you need help with."
                 required
-                className={`${FIELD_CLASS} min-h-[140px] resize-y py-3`}
+                aria-invalid={errors.message ? true : undefined}
+                aria-describedby={errors.message ? "message-error" : undefined}
+                onChange={() => clearError("message")}
+                className={`${FIELD_CLASS} min-h-[140px] w-full resize-y py-3`}
               />
+              {errors.message ? (
+                <p id="message-error" className={ERROR_CLASS}>
+                  {errors.message}
+                </p>
+              ) : null}
             </div>
           </div>
 
-          <div className="mt-5 flex items-start gap-2.5">
+          <div className="mt-6 flex items-start gap-2.5">
             <input
               id="smsConsent"
               name="smsConsent"
               type="checkbox"
               required
+              aria-invalid={errors.smsConsent ? true : undefined}
+              aria-describedby={`smsConsent-note${
+                errors.smsConsent ? " smsConsent-error" : ""
+              }`}
+              onChange={() => clearError("smsConsent")}
               className="mt-1 size-4 shrink-0 rounded-[4px] border border-line-strong bg-surface accent-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             />
-            <label htmlFor="smsConsent" className="text-small text-body">
-              By providing a telephone number and submitting the form, you are
-              consenting to be contacted by SMS text message and agreeing to
-              our{" "}
-              <Link
-                href="/privacy"
-                className="text-ink transition-colors hover:text-primary"
-              >
-                Privacy Policy
-              </Link>
-              . Message frequency may vary. Message and data rates may apply.
-              Reply STOP to opt out of further messaging. Reply HELP for more
-              information.
-            </label>
+            <div>
+              <label htmlFor="smsConsent" className="block text-small text-body">
+                I agree to be contacted about this enquiry by SMS, email or
+                phone.
+              </label>
+              <p id="smsConsent-note" className="mt-1 text-small text-body">
+                By providing a telephone number and submitting the form, you
+                also accept our{" "}
+                <Link
+                  href="/privacy"
+                  className="text-ink underline underline-offset-2 transition-colors hover:text-link"
+                >
+                  Privacy Policy
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/terms"
+                  className="text-ink underline underline-offset-2 transition-colors hover:text-link"
+                >
+                  Terms of Use
+                </Link>
+                . Message frequency may vary. Message and data rates may apply.
+                Reply STOP to opt out or HELP for more information.
+              </p>
+            </div>
           </div>
+          {errors.smsConsent ? (
+            <p id="smsConsent-error" className={ERROR_CLASS}>
+              {errors.smsConsent}
+            </p>
+          ) : null}
 
-          <p className="mt-3 text-small text-body">
-            I agree to the{" "}
-            <Link
-              href="/privacy"
-              className="text-ink transition-colors hover:text-primary"
-            >
-              Privacy Policy
-            </Link>{" "}
-            and{" "}
-            <Link
-              href="/terms"
-              className="text-ink transition-colors hover:text-primary"
-            >
-              Terms of Use
-            </Link>
-            .
-          </p>
-
-          <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-            <p
-              role="status"
-              aria-live="polite"
-              className="max-w-[320px] text-small text-body"
-            >
-              {status}
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+            <p role="status" aria-live="polite" className="max-w-[360px] text-small">
+              {status === "success" ? (
+                <span className="inline-flex items-center gap-1.5 text-ink">
+                  <Check className="h-4 w-4 text-link" aria-hidden="true" />
+                  Thank you! Your message has been sent.
+                </span>
+              ) : null}
+              {status === "error" ? (
+                <span className="text-destructive">
+                  We couldn’t send your message. Please email{" "}
+                  <a
+                    href="mailto:info@eastwards.co"
+                    className="underline underline-offset-2 transition-colors hover:text-link"
+                  >
+                    info@eastwards.co
+                  </a>
+                  .
+                </span>
+              ) : null}
             </p>
 
             <button
               type="submit"
               disabled={submitting}
-              className="ml-auto inline-flex min-h-11 items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-small font-semibold text-white transition hover:bg-[#1555ed] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2868ff] disabled:cursor-not-allowed disabled:opacity-60"
+              aria-busy={submitting}
+              className="ml-auto inline-flex min-h-11 items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-small font-semibold text-white transition-[filter] duration-200 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface active:brightness-95 disabled:cursor-not-allowed disabled:opacity-60 lg:min-h-[52px] lg:px-7"
             >
               {submitting ? "Sending..." : contact.form.submitText}
               <ArrowUpRight size={14} aria-hidden="true" />

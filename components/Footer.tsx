@@ -7,6 +7,9 @@ import Link from "next/link";
    w-full: a flex item with mx-auto shrink-to-fits; without it the footer
    hugs the unbreakable wordmark instead of filling the page. */
 
+const LINK_CLASS =
+  "link-underline-sweep transition-colors hover:text-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+
 export function Footer() {
   return (
     <footer className="relative mx-auto mt-16 w-full max-w-[1720px] px-6 pt-4 sm:px-10 lg:px-[5.35%]">
@@ -22,10 +25,7 @@ export function Footer() {
               {column.links.map((link) => (
                 <li key={link.label}>
                   {"href" in link ? (
-                    <Link
-                      href={link.href}
-                      className="link-underline-sweep transition-colors hover:text-primary"
-                    >
+                    <Link href={link.href} className={LINK_CLASS}>
                       {link.label}
                     </Link>
                   ) : (
@@ -40,15 +40,21 @@ export function Footer() {
       </div>
 
       <div className="mt-16 flex flex-col gap-3 text-small text-subtle sm:flex-row sm:items-center sm:justify-between sm:mt-20">
-        <p className="text-small">
-          {footer.copyright}
-        </p>
-        <div className="flex gap-6 font-display text-small font-medium text-body md:gap-[50px]">
-          {/* Legal pages don't exist yet — plain text until they do. */}
+        <p className="text-small">{footer.copyright}</p>
+        <ul className="flex flex-wrap gap-x-6 gap-y-2 font-display text-small font-medium text-body md:gap-x-[50px]">
           {footer.legal.map((item) => (
-            <span key={item}>{item}</span>
+            <li key={item.label}>
+              {"href" in item ? (
+                <Link href={item.href} className={LINK_CLASS}>
+                  {item.label}
+                </Link>
+              ) : (
+                /* No destination yet: text, not a dead link. */
+                <span>{item.label}</span>
+              )}
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
 
       {/* Giant gradient wordmark reflecting into the page edge. Sized to the
@@ -59,7 +65,7 @@ export function Footer() {
           instead of at the font's hidden descent space. */}
       <p
         aria-hidden="true"
-        className="mt-16 select-none bg-gradient-to-b from-body to-white bg-clip-text text-center font-display text-[clamp(4rem,17.3vw,18.75rem)] font-bold leading-[0.85] [text-box:trim-end_cap_alphabetic] tracking-tight text-transparent sm:mt-24 dark:to-[#0f0f0f]"
+        className="mt-16 select-none bg-gradient-to-b from-body to-page bg-clip-text text-center font-display text-[clamp(4rem,17.3vw,18.75rem)] font-bold leading-[0.85] [text-box:trim-end_cap_alphabetic] tracking-tight text-transparent sm:mt-24"
       >
         {footer.wordmark}
       </p>

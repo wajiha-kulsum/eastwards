@@ -8,7 +8,7 @@ export function SectionLabel({
 }) {
   return (
     <p
-      className={`text-small font-medium text-primary ${className}`}
+      className={`text-small font-medium text-link ${className}`}
     >
       / {children} /
     </p>

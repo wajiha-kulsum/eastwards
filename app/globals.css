@@ -7,12 +7,15 @@
 /* Eastwards design tokens, extracted from the approved Paper design
    (file 01M4QVJZFVVKBY7J2CZVAB4GEE) */
 @theme {
-  --color-primary: #2868ff; /* brand blue: CTA, labels, accents */
+  --color-primary: #2868ff; /* brand blue: CTA fills, focus rings */
+  --color-link: #2868ff; /* blue text/links; lightens in dark for AA */
   --color-ink: #1e1e1e; /* headlines, card text */
-  --color-body: #7e7e7e; /* hero subtext, muted */
+  --color-body: #737373; /* muted text, AA on white and surface */
   --color-statement: #1e1e1e; /* big statement text */
-  --color-faint: #7e7e7e; /* blog secondary text */
-  --color-subtle: #7e7e7e; /* footer small text */
+  --color-faint: #737373; /* blog secondary text */
+  --color-subtle: #737373; /* footer small text */
+  --color-field: #ededed; /* form field fill */
+  --color-placeholder: #6b6b6b; /* placeholder text, AA on field */
   --color-surface: #fafafa; /* card backgrounds */
   --color-line: #eeeeee; /* card borders */
   --color-line-strong: #d9d9d9; /* panel borders, hairlines */
@@ -231,12 +234,15 @@ html {
    the theme merge. Without this, --color-primary resolves near-black and
    the radius scale drifts (contact inputs, cards, menus). */
 @theme {
-  --color-primary: #2868ff; /* brand blue: CTA, labels, accents */
+  --color-primary: #2868ff; /* brand blue: CTA fills, focus rings */
+  --color-link: #2868ff; /* blue text/links; lightens in dark for AA */
   --color-ink: #1e1e1e; /* headlines, card text */
-  --color-body: #7e7e7e; /* hero subtext, muted */
+  --color-body: #737373; /* muted text, AA on white and surface */
   --color-statement: #1e1e1e; /* big statement text */
-  --color-faint: #7e7e7e; /* blog secondary text */
-  --color-subtle: #7e7e7e; /* footer small text */
+  --color-faint: #737373; /* blog secondary text */
+  --color-subtle: #737373; /* footer small text */
+  --color-field: #ededed; /* form field fill */
+  --color-placeholder: #6b6b6b; /* placeholder text, AA on field */
   --color-surface: #fafafa; /* card backgrounds */
   --color-line: #eeeeee; /* card borders */
   --color-line-strong: #d9d9d9; /* panel borders, hairlines */
@@ -293,6 +299,9 @@ html {
   --color-statement: #f2f2f2;
   --color-faint: #8f8f8f;
   --color-subtle: #8f8f8f;
+  --color-link: #8fb3ff;
+  --color-field: #1a1c20;
+  --color-placeholder: #9a9a9a;
   --color-surface: #141518;
   --color-line: #26282c;
   --color-line-strong: #383b41;
