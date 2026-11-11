@@ -1,74 +1,106 @@
-import { footer } from "@/lib/content";
 import Link from "next/link";
+import { Logo } from "@/components/ui/Logo";
+import { contact, footer, nav } from "@/lib/content";
+import { serviceLinks, type ServiceLink } from "@/lib/service-groups";
 
-/* Footer shares the site's one lane system with every section: the same
-   1720px container and 5.35% side lanes. The gradient wordmark is the last
-   element on the page - the scroll ends exactly where it ends.
-   w-full: a flex item with mx-auto shrink-to-fits; without it the footer
-   hugs the unbreakable wordmark instead of filling the page. */
+/* Black footer band on the site's lane (1720px cap, 5.35% lanes): company
+   details, the service groups the header menu uses, company links, then the
+   legal row. Phones stack the details above two link columns; from 1024 the
+   details sit beside the links. Every link goes somewhere real. */
 
 const LINK_CLASS =
-  "link-underline-sweep transition-colors hover:text-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+  "link-underline-sweep rounded-sm text-white/70 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+
+function FooterLink({ link }: { link: ServiceLink }) {
+  return (
+    <li>
+      {link.href.startsWith("/") ? (
+        <Link href={link.href} className={LINK_CLASS}>
+          {link.label}
+        </Link>
+      ) : (
+        <a href={link.href} className={LINK_CLASS}>
+          {link.label}
+        </a>
+      )}
+      {/* a plain space, not a margin, so a wrapped tag starts flush left */}
+      {link.enquire && <> <span className="whitespace-nowrap text-white/55">{nav.enquire}</span></>}
+    </li>
+  );
+}
+
+function Group({ title, links }: { title: string; links: readonly ServiceLink[] }) {
+  return (
+    <div>
+      <h2 className="text-small font-semibold text-white">{title}</h2>
+      <ul className="mt-3 space-y-2 text-pretty">
+        {links.map((link) => (
+          <FooterLink key={link.href} link={link} />
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export function Footer() {
-  return (
-    <footer className="relative mx-auto mt-16 w-full max-w-[1720px] px-6 pt-4 sm:px-10 lg:px-[5.35%]">
-      <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 sm:gap-x-10 md:grid-cols-5 md:gap-x-8">
-        {footer.columns.map((column) => (
-          <nav
-            key={column.title}
-            aria-label={column.title}
-            className="text-small"
-          >
-            <p className="text-body">{column.title}</p>
-            <ul className="mt-3 space-y-2.5 font-display font-semibold text-ink md:mt-4 md:space-y-3">
-              {column.links.map((link) => (
-                <li key={link.label}>
-                  {"href" in link ? (
-                    <Link href={link.href} className={LINK_CLASS}>
-                      {link.label}
-                    </Link>
-                  ) : (
-                    /* No destination yet: text, not a dead link. */
-                    <span>{link.label}</span>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </nav>
-        ))}
-      </div>
+  const { location } = contact;
+  const phone = contact.call.phones[0].number;
+  const email = contact.directChannels.channels[0].email;
+  const [build, operate, secure] = serviceLinks;
 
-      <div className="mt-16 flex flex-col gap-3 text-small text-subtle sm:flex-row sm:items-center sm:justify-between sm:mt-20">
-        <p className="text-small">{footer.copyright}</p>
-        <ul className="flex flex-wrap gap-x-6 gap-y-2 font-display text-small font-medium text-body md:gap-x-[50px]">
-          {footer.legal.map((item) => (
-            <li key={item.label}>
-              {"href" in item ? (
+  return (
+    <footer className="mt-16 border-t border-transparent bg-band text-small text-white dark:border-line">
+      <div className="mx-auto w-full max-w-[1720px] px-6 pb-10 pt-14 sm:px-10 lg:px-[5.35%] lg:pt-16">
+        <div className="grid grid-cols-1 gap-y-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,3fr)] lg:gap-x-12">
+          <div>
+            <Logo className="text-white" />
+            <p className="mt-3 max-w-[300px] text-balance text-white/70">{footer.tagline}</p>
+            <address className="mt-8 not-italic text-white/70">
+              <span className="block font-medium text-white">{location.title}</span>
+              {/* three short lines, so "Road" never wraps alone */}
+              <span className="block">{location.building}</span>
+              <span className="block">{location.street}</span>
+              <span className="block">{location.postalCode}</span>
+            </address>
+            <ul className="mt-4 space-y-1">
+              <li>
+                <a href={`mailto:${email}`} className={LINK_CLASS}>
+                  {email}
+                </a>
+              </li>
+              <li>
+                <a href={`tel:${phone.replace(/\s/g, "")}`} className={LINK_CLASS}>
+                  {phone}
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Secure and govern has the longest names, so its column is
+              widest. Phones: one column, the company links last. */}
+          <nav aria-label="Footer" className="grid grid-cols-1 gap-y-10 sm:grid-cols-[minmax(0,1.35fr)_minmax(0,1.15fr)_minmax(0,0.7fr)] sm:gap-x-10">
+            <Group title={secure.label} links={secure.links} />
+            <div className="space-y-10">
+              <Group title={build.label} links={build.links} />
+              <Group title={operate.label} links={operate.links} />
+            </div>
+            <Group title={footer.company.title} links={footer.company.items} />
+          </nav>
+        </div>
+
+        <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 text-white/60 sm:flex-row sm:items-center sm:justify-between">
+          <p>{footer.copyright}</p>
+          <ul className="flex flex-wrap gap-x-8 gap-y-2">
+            {footer.legal.map((item) => (
+              <li key={item.href}>
                 <Link href={item.href} className={LINK_CLASS}>
                   {item.label}
                 </Link>
-              ) : (
-                /* No destination yet: text, not a dead link. */
-                <span>{item.label}</span>
-              )}
-            </li>
-          ))}
-        </ul>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-
-      {/* Giant gradient wordmark reflecting into the page edge. Sized to the
-          drawing: "Eastwards" ~= 4.93x the font size, so 17.3vw ~= 86% width
-          (paper: 1480/1728) and it never crops at the viewport edges.
-          text-box trims the line box to the alphabetic baseline - "Eastwards"
-          has no descenders, so the page ends exactly at the glyph bottoms
-          instead of at the font's hidden descent space. */}
-      <p
-        aria-hidden="true"
-        className="mt-16 select-none bg-gradient-to-b from-body to-page bg-clip-text text-center font-display text-[clamp(4rem,17.3vw,18.75rem)] font-bold leading-[0.85] [text-box:trim-end_cap_alphabetic] tracking-tight text-transparent sm:mt-24"
-      >
-        {footer.wordmark}
-      </p>
     </footer>
   );
 }

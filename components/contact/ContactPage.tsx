@@ -1,509 +1,149 @@
-"use client";
-
-import { useRef, useState, type FormEvent } from "react";
-import Link from "next/link";
-import { ArrowUpRight, Check, MapPin, Phone } from "lucide-react";
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import DotHero from "@/components/DotHero";
-import DotTerrain from "@/components/ui/DotTerrain";
-import BlueprintGrid from "@/components/ui/BlueprintGrid";
-import DirectChannels from "@/components/DirectChannels";
 import PageShell from "@/components/ui/PageShell";
-import { LocationPlan } from "@/components/contact/LocationPlan";
+import { ContactForm } from "@/components/contact/ContactForm";
+import { CopyEmail } from "@/components/contact/CopyEmail";
+import { DotMap } from "@/components/contact/DotMap";
 import { contact } from "@/lib/content";
 
-/* Contact page: the shared dot hero up top, the pitch and the card row beside
-   the form, the drafting grid carrying Direct Channels, and the dot range as
-   the close. The form is the page's product: one consent block, optional
-   fields marked as such, and a success/error state that says what happened. */
-
-/* Shared form furniture: label + field styles in one place so the six
-   fields can't drift apart. */
-const LABEL_CLASS =
-  "mb-1.5 block text-small font-medium tracking-tight text-ink";
-const OPTIONAL_CLASS = "font-normal text-body";
-const FIELD_CLASS =
-  "rounded-xl border border-line-strong/70 bg-field px-3.5 text-small text-ink outline-none transition-colors placeholder:text-placeholder focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20 aria-invalid:border-destructive aria-invalid:focus:border-destructive aria-invalid:focus:ring-destructive/20";
-const ERROR_CLASS = "mt-1 text-small text-destructive";
-
-type FieldName =
-  | "firstName"
-  | "lastName"
-  | "email"
-  | "requirement"
-  | "message"
-  | "smsConsent";
-type FieldErrors = Partial<Record<FieldName, string>>;
-
-/* The form validates here, not in the browser, so every message is written
-   in the page's voice and sits next to the field that caused it. */
-const REQUIRED_ORDER: readonly FieldName[] = [
-  "firstName",
-  "lastName",
-  "email",
-  "requirement",
-  "message",
-  "smsConsent",
-];
-
-function validate(formData: FormData): FieldErrors {
-  const errors: FieldErrors = {};
-  const value = (name: FieldName) => String(formData.get(name) ?? "").trim();
-
-  if (!value("firstName")) errors.firstName = "Enter your first name.";
-  if (!value("lastName")) errors.lastName = "Enter your last name.";
-
-  const email = value("email");
-  if (!email) errors.email = "Enter your email address.";
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
-    errors.email = "Enter a valid email address, like name@company.com.";
-
-  if (!value("requirement")) errors.requirement = "Select what you need help with.";
-  if (!value("message")) errors.message = "Tell us what you need help with.";
-  if (!formData.get("smsConsent"))
-    errors.smsConsent = "Confirm you agree to be contacted about this enquiry.";
-
-  return errors;
-}
-
+/* Contact page: the shared dot hero, then the conversation (intro, photo and
+   next steps beside the form), then one black band with the direct team
+   addresses, the dot map and the Singapore office. */
 export function ContactPage() {
-  const formRef = useRef<HTMLFormElement>(null);
-  const [submitting, setSubmitting] = useState(false);
-  const [status, setStatus] = useState<"success" | "error" | null>(null);
-  const [errors, setErrors] = useState<FieldErrors>({});
-
-  const clearError = (name: FieldName) =>
-    setErrors((current) =>
-      current[name] ? { ...current, [name]: undefined } : current
-    );
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setStatus(null);
-
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-
-    const nextErrors = validate(formData);
-    if (Object.keys(nextErrors).length > 0) {
-      setErrors(nextErrors);
-      const first = REQUIRED_ORDER.find((name) => nextErrors[name]);
-      if (first) formRef.current?.querySelector<HTMLElement>(`#${first}`)?.focus();
-      return;
-    }
-    setErrors({});
-
-    // Do not show a success message until the backend confirms.
-    try {
-      setSubmitting(true);
-
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        body: JSON.stringify(Object.fromEntries(formData.entries())),
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (!response.ok) {
-        throw new Error("Unable to send your message.");
-      }
-
-      setStatus("success");
-      form.reset();
-    } catch {
-      setStatus("error");
-    } finally {
-      setSubmitting(false);
-    }
-  }
+  const { intro, next, teams, location, call, directChannels } = contact;
+  const lastStep = next.steps.length - 1;
+  const focusRing = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
   return (
-    <PageShell pb="pb-0">
-      {/* Hero, grey dot field behind the heading */}
+    <PageShell pb="pb-16">
       <DotHero title={contact.title} lede={contact.subtitle} />
 
-      {/* Contact information + form */}
-      <section className="mt-9 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.06fr]">
-        {/* Left column, mirrors the form's padding so the top row of copy
-            sits level with the form. The cards keep their own height instead
-            of stretching to the form. */}
-        <div className="flex flex-col pt-4 sm:pt-5">
-          <p className="mb-4 text-small font-semibold tracking-[-0.04em] text-link">
-            / {contact.eyebrow} /
-          </p>
-
-          {/* Question and pitch in one text block, same size and weight
-              throughout, one break after the first question mark */}
-          <p className="relative mb-4 max-w-[600px] text-lead font-medium tracking-[-0.02em] text-ink">
-            {contact.headline.split("?")[0]}?
-            <br />
-            <span className="text-body">
-              {contact.headline.split("?").slice(1).join("?").trim()}
-            </span>
-          </p>
-
-          <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
-            {/* Location card */}
-            <article className="flex min-h-[150px] flex-col rounded-2xl bg-primary p-4 text-white sm:p-5">
-              <MapPin
-                size={30}
-                strokeWidth={2}
-                className="mb-3 text-white"
-                aria-hidden="true"
-              />
-
-              <h2 className="mb-2 text-small font-semibold tracking-[-0.04em]">
-                {contact.location.title}
-              </h2>
-
-              <address className="text-small not-italic text-white">
-                {[
-                  contact.location.headquarters,
-                  contact.location.company,
-                  contact.location.building,
-                  contact.location.postalCode,
-                ].map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </address>
-            </article>
-
-            {/* Phone card */}
-            <article className="min-h-[150px] rounded-2xl border border-line bg-surface p-4 sm:p-5">
-              <Phone
-                size={24}
-                strokeWidth={2}
-                className="mb-3 text-link"
-                aria-hidden="true"
-              />
-
-              <h2 className="mb-2 text-small font-semibold tracking-[-0.04em] text-link">
-                {contact.call.title}
-              </h2>
-
-              <div className="space-y-1 text-small text-body">
-                {contact.call.phones.map((phone) => (
-                  <a
-                    key={phone}
-                    href={`tel:${phone.replace(/\s/g, "")}`}
-                    className="block rounded-sm transition-colors hover:text-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-                  >
-                    {phone}
-                  </a>
-                ))}
-              </div>
-            </article>
-          </div>
-
-          <LocationPlan />
-        </div>
-
-        {/* Contact form */}
-        <form
-          ref={formRef}
-          noValidate
-          onSubmit={handleSubmit}
-          aria-labelledby="contact-form-title"
-          className="flex min-w-0 flex-col rounded-3xl border border-line bg-surface p-5 sm:p-6 lg:p-7"
-        >
-          <h2
-            id="contact-form-title"
-            className="text-lead font-semibold tracking-[-0.02em] text-ink"
-          >
-            Send us a message
+      {/* Phones read intro, form, photo, steps. From 768 the photo and steps
+          sit side by side under the form; from 1280 they stack beside it and
+          the photo takes the spare height, so both columns end level. */}
+      <section
+        aria-labelledby="contact-heading"
+        className="mt-9 grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] xl:grid-rows-[auto_1fr_auto] xl:gap-x-12"
+      >
+        <div className="md:col-span-2 xl:col-span-1 xl:col-start-1 xl:row-start-1">
+          <p className="text-small font-semibold tracking-[-0.04em] text-link">/ {intro.label} /</p>
+          <h2 id="contact-heading" className="mt-3 text-balance text-lead font-medium tracking-[-0.02em] text-ink">
+            {intro.title}
           </h2>
-          <p className="mb-5 mt-1 text-small text-body">
-            Tell us what you need. We reply within one business day.
-          </p>
+        </div>
 
-          <div className="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2 lg:grid-cols-1 lg:gap-y-5 xl:grid-cols-2">
-            <div>
-              <label htmlFor="firstName" className={LABEL_CLASS}>
-                First Name
-              </label>
-              <input
-                id="firstName"
-                name="firstName"
-                type="text"
-                autoComplete="given-name"
-                required
-                aria-invalid={errors.firstName ? true : undefined}
-                aria-describedby={errors.firstName ? "firstName-error" : undefined}
-                onChange={() => clearError("firstName")}
-                className={`${FIELD_CLASS} h-12 w-full`}
-              />
-              {errors.firstName ? (
-                <p id="firstName-error" className={ERROR_CLASS}>
-                  {errors.firstName}
-                </p>
-              ) : null}
-            </div>
+        <div className="min-w-0 md:col-span-2 xl:col-span-1 xl:col-start-2 xl:row-span-3 xl:row-start-1">
+          <ContactForm />
+        </div>
 
-            <div>
-              <label htmlFor="lastName" className={LABEL_CLASS}>
-                Last Name
-              </label>
-              <input
-                id="lastName"
-                name="lastName"
-                type="text"
-                autoComplete="family-name"
-                required
-                aria-invalid={errors.lastName ? true : undefined}
-                aria-describedby={errors.lastName ? "lastName-error" : undefined}
-                onChange={() => clearError("lastName")}
-                className={`${FIELD_CLASS} h-12 w-full`}
-              />
-              {errors.lastName ? (
-                <p id="lastName-error" className={ERROR_CLASS}>
-                  {errors.lastName}
-                </p>
-              ) : null}
-            </div>
+        {/* light grey placeholder, the photo's own tone; the crop leans right so
+            the presenter stays in frame when the box is nearly square */}
+        <div className="relative aspect-[16/9] overflow-hidden rounded-3xl bg-line-strong md:aspect-auto md:min-h-[260px] xl:col-start-1 xl:row-start-2 xl:min-h-[240px]">
+          <Image
+            src={intro.photo}
+            alt=""
+            fill
+            loading="eager"
+            sizes="(min-width: 1280px) 40vw, (min-width: 768px) 50vw, 100vw"
+            className="object-cover object-[72%_40%]"
+          />
+          {/* 1px inner outline so the white room doesn't bleed into the page */}
+          <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-black/10" />
+        </div>
 
-            <div>
-              <label htmlFor="email" className={LABEL_CLASS}>
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                placeholder="name@company.com"
-                required
-                aria-invalid={errors.email ? true : undefined}
-                aria-describedby={errors.email ? "email-error" : undefined}
-                onChange={() => clearError("email")}
-                className={`${FIELD_CLASS} h-12 w-full`}
-              />
-              {errors.email ? (
-                <p id="email-error" className={ERROR_CLASS}>
-                  {errors.email}
-                </p>
-              ) : null}
-            </div>
-
-            <div>
-              <label htmlFor="company" className={LABEL_CLASS}>
-                Company <span className={OPTIONAL_CLASS}>(optional)</span>
-              </label>
-              <input
-                id="company"
-                name="company"
-                type="text"
-                autoComplete="organization"
-                className={`${FIELD_CLASS} h-12 w-full`}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="jobTitle" className={LABEL_CLASS}>
-                Job Title <span className={OPTIONAL_CLASS}>(optional)</span>
-              </label>
-              <input
-                id="jobTitle"
-                name="jobTitle"
-                type="text"
-                autoComplete="organization-title"
-                className={`${FIELD_CLASS} h-12 w-full`}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="phone" className={LABEL_CLASS}>
-                Phone <span className={OPTIONAL_CLASS}>(optional)</span>
-              </label>
-              <div className="flex gap-2">
-                <select
-                  id="phoneCode"
-                  name="phoneCode"
-                  defaultValue="+65"
-                  aria-label="Country code"
-                  className={`${FIELD_CLASS} h-12 w-[120px] shrink-0`}
-                >
-                  {contact.form.phoneCodes.map(({ country, code }) => (
-                    <option key={code} value={code}>
-                      {country} {code}
-                    </option>
-                  ))}
-                </select>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  inputMode="tel"
-                  autoComplete="tel"
-                  placeholder="9123 4567"
-                  className={`${FIELD_CLASS} h-12 min-w-0 flex-1`}
-                />
-              </div>
-            </div>
-
-            <div className="sm:col-span-2 lg:col-span-1 xl:col-span-2">
-              <label htmlFor="requirement" className={LABEL_CLASS}>
-                Requirement
-              </label>
-              <div className="relative">
-                <select
-                  id="requirement"
-                  name="requirement"
-                  required
-                  defaultValue=""
-                  aria-invalid={errors.requirement ? true : undefined}
-                  aria-describedby={errors.requirement ? "requirement-error" : undefined}
-                  onChange={() => clearError("requirement")}
-                  className={`${FIELD_CLASS} h-12 w-full appearance-none pr-10`}
-                >
-                  <option value="" disabled>
-                    Select your requirement
-                  </option>
-                  {contact.form.requirements.map((requirement) => (
-                    <option key={requirement} value={requirement}>
-                      {requirement}
-                    </option>
-                  ))}
-                </select>
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink"
-                >
-                  <path
-                    d="M5.5 8l4.5 4.5L14.5 8"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-              {errors.requirement ? (
-                <p id="requirement-error" className={ERROR_CLASS}>
-                  {errors.requirement}
-                </p>
-              ) : null}
-            </div>
-
-            <div className="sm:col-span-2 lg:col-span-1 xl:col-span-2">
-              <label htmlFor="message" className={LABEL_CLASS}>
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={5}
-                placeholder="Tell us what you need help with."
-                required
-                aria-invalid={errors.message ? true : undefined}
-                aria-describedby={errors.message ? "message-error" : undefined}
-                onChange={() => clearError("message")}
-                className={`${FIELD_CLASS} min-h-[140px] w-full resize-y py-3`}
-              />
-              {errors.message ? (
-                <p id="message-error" className={ERROR_CLASS}>
-                  {errors.message}
-                </p>
-              ) : null}
-            </div>
-          </div>
-
-          <div className="mt-6 flex items-start gap-2.5">
-            <input
-              id="smsConsent"
-              name="smsConsent"
-              type="checkbox"
-              required
-              aria-invalid={errors.smsConsent ? true : undefined}
-              aria-describedby={`smsConsent-note${
-                errors.smsConsent ? " smsConsent-error" : ""
-              }`}
-              onChange={() => clearError("smsConsent")}
-              className="mt-1 size-4 shrink-0 rounded-[4px] border border-line-strong bg-surface accent-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            />
-            <div>
-              <label htmlFor="smsConsent" className="block text-small text-body">
-                I agree to be contacted about this enquiry by SMS, email or
-                phone.
-              </label>
-              <p id="smsConsent-note" className="mt-1 text-small text-body">
-                By providing a telephone number and submitting the form, you
-                also accept our{" "}
-                <Link
-                  href="/privacy"
-                  className="text-ink underline underline-offset-2 transition-colors hover:text-link"
-                >
-                  Privacy Policy
-                </Link>{" "}
-                and{" "}
-                <Link
-                  href="/terms"
-                  className="text-ink underline underline-offset-2 transition-colors hover:text-link"
-                >
-                  Terms of Use
-                </Link>
-                . Message frequency may vary. Message and data rates may apply.
-                Reply STOP to opt out or HELP for more information.
-              </p>
-            </div>
-          </div>
-          {errors.smsConsent ? (
-            <p id="smsConsent-error" className={ERROR_CLASS}>
-              {errors.smsConsent}
-            </p>
-          ) : null}
-
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-            <p role="status" aria-live="polite" className="max-w-[360px] text-small">
-              {status === "success" ? (
-                <span className="inline-flex items-center gap-1.5 text-ink">
-                  <Check className="h-4 w-4 text-link" aria-hidden="true" />
-                  Thank you! Your message has been sent.
+        <div className="rounded-3xl bg-primary p-6 text-white sm:p-7 xl:col-start-1 xl:row-start-3">
+          <h3 className="text-small font-semibold">{next.title}</h3>
+          <ol className="mt-5 space-y-5">
+            {next.steps.map((step, index) => (
+              <li key={step} className="relative flex items-center gap-4">
+                {index < lastStep && (
+                  <span aria-hidden="true" className="absolute -bottom-5 left-[15.5px] top-9 w-px bg-white/40" />
+                )}
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full text-small font-semibold tabular-nums ring-1 ring-inset ring-white/60">
+                  {index + 1}
                 </span>
-              ) : null}
-              {status === "error" ? (
-                <span className="text-destructive">
-                  We couldn’t send your message. Please email{" "}
-                  <a
-                    href="mailto:info@eastwards.co"
-                    className="underline underline-offset-2 transition-colors hover:text-link"
-                  >
-                    info@eastwards.co
-                  </a>
-                  .
-                </span>
-              ) : null}
-            </p>
-
-            <button
-              type="submit"
-              disabled={submitting}
-              aria-busy={submitting}
-              className="ml-auto inline-flex min-h-11 items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-small font-semibold text-white transition-[filter] duration-200 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface active:brightness-95 disabled:cursor-not-allowed disabled:opacity-60 lg:min-h-[52px] lg:px-7"
-            >
-              {submitting ? "Sending..." : contact.form.submitText}
-              <ArrowUpRight size={14} aria-hidden="true" />
-            </button>
-          </div>
-        </form>
-      </section>
-
-      {/* Direct lines in the drafting table's row variant, over the same
-          dashed grid the lower band always carried. */}
-      <section className="relative mt-16 sm:mt-20">
-        <BlueprintGrid />
-
-        <div className="relative z-10">
-          <DirectChannels variant="rows" />
+                <span className="text-small font-semibold">{step}</span>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
-      {/* The page closes into the range; its base runs past the edge, so the
-          page never shows a floor. Full-bleed inside the lane. */}
-      <section className="relative mt-16 sm:mt-20">
-        <div className="relative left-1/2 w-screen -translate-x-1/2">
-          <DotTerrain />
+      {/* Teams and headquarters, the page's one black band */}
+      <section id="teams" aria-labelledby="teams-heading" className="mt-14 rounded-3xl bg-band p-6 text-small text-white sm:mt-16 sm:p-8 lg:p-10 dark:ring-1 dark:ring-inset dark:ring-line">
+        {/* side by side from 1280, below that the directory needs the full width */}
+        <div className="grid grid-cols-1 gap-10 xl:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] xl:items-center xl:gap-16">
+          <div>
+            <h2 id="teams-heading" className="text-lead font-medium tracking-[-0.02em]">
+              {teams.title}
+            </h2>
+            <dl className="mt-6">
+              {directChannels.channels.map((channel) => (
+                <div
+                  key={channel.email}
+                  className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-t border-white/10 py-3 sm:py-4"
+                >
+                  <dt className="font-semibold">{channel.department}</dt>
+                  <dd className="-mr-2 flex items-center gap-1">
+                    <a href={`mailto:${channel.email}`} className={`link-underline-sweep rounded-sm font-medium text-white ${focusRing}`}>
+                      {channel.email}
+                    </a>
+                    <CopyEmail email={channel.email} label={teams.copy.label} done={teams.copy.done} />
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <div className="w-full max-w-[560px] xl:max-w-none">
+            <DotMap label={location.mapLabel} />
+          </div>
+        </div>
+
+        {/* headquarters runs the full width, under both columns, and opens
+            with a photo of the district the office is in. Stacked on phones,
+            photo beside the details from 768, one row from 1280. */}
+        <div className="mt-10 grid grid-cols-1 gap-6 border-t border-white/10 pt-8 md:grid-cols-[240px_minmax(0,1fr)] md:items-center md:gap-x-10">
+          {/* placeholder tone sampled from the photo */}
+          <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-white/10">
+            <Image src={location.photo.src} alt={location.photo.alt} fill sizes="(min-width: 768px) 240px, 100vw" className="object-cover" />
+            <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
+          </div>
+          <div className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_auto] xl:items-center xl:gap-10">
+            <div>
+              <h3 className="font-semibold">{location.title}</h3>
+              <address className="mt-2 not-italic text-white/75">
+                {location.company}
+                <span className="block">
+                  {location.building}, {location.street}
+                </span>
+                <span className="block">{location.postalCode}</span>
+              </address>
+            </div>
+            <ul className="flex flex-wrap gap-x-10 gap-y-3 xl:block xl:space-y-3">
+              {call.phones.map((phone) => (
+                <li key={phone.number}>
+                  <span className="block text-white/65">{phone.label}</span>
+                  <a href={`tel:${phone.number.replace(/\s/g, "")}`} className={`link-underline-sweep rounded-sm font-medium text-white ${focusRing}`}>
+                    {phone.number}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div>
+              <a
+                href={location.directions.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex min-h-11 items-center gap-2 rounded-full px-5 font-semibold text-white ring-1 ring-inset ring-white/40 transition-colors hover:bg-white/10 ${focusRing}`}
+              >
+                {location.directions.label}
+                <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+                <span className="sr-only">(opens in a new tab)</span>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     </PageShell>

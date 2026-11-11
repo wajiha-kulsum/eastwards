@@ -2,92 +2,21 @@
    Components render whatever this module exports, making future
    backend/CMS integration seamless. */
 
-export const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Services", href: "/services" },
-  { label: "Partners", href: "/partners" },
-  { label: "About", href: "/about" },
-  { label: "Contact Us", href: "/contact" },
-] as const;
-
-/* Services nav dropdown, labels and order from the approved dropdown mock.
-   Items 1, 2 and 7 carry `detail`: hovering them opens a sideways flyout.
-   detail.body is the verbatim service description from the /about grid. */
-export type NavService = {
-  label: string;
-  href: string;
-  detail?: { title: string; body: string };
-  items?: { label: string; href: string }[];
-};
-
-export const navServices: readonly NavService[] = [
-  {
-    label: "Application Services",
-    href: "/services/application-services",
-    items: [
-      {
-        label: "Application Lifecycle Management",
-        href: "/services/application-services",
-      },
-      {
-        label: "Enterprise Change Management",
-        href: "/services/application-services",
-      },
-      { label: "Quality Engineering", href: "/services/application-services" },
-      {
-        label: "Workflow Automation Services",
-        href: "/services/application-services",
-      },
-    ],
-  },
-  {
-    label: "Data and Artificial Intelligence",
-    href: "/services",
-    items: [
-      { label: "Data Engineering", href: "/services" },
-      { label: "Data Modernization", href: "/services" },
-      { label: "Enterprise Agentic AI", href: "/services" },
-      { label: "Enterprise Generative AI Solutions", href: "/services" },
-    ],
-  },
-  { label: "Digital Support Services", href: "/services/digital-support-services" },
-  { label: "IT staffing services", href: "/services/it-staffing-services" },
-  { label: "Projects and Professional Services", href: "/services/projects-professional-services" },
-  { label: "Quantum Computing", href: "/services/quantum-computing" },
-  {
-    label: "Cybersecurity",
-    href: "/services",
-    items: [
-      {
-        label: "Threat Monitoring & Incident Response",
-        href: "/services/threat-monitoring-incident-response",
-      },
-      {
-        label: "Infrastructure Security",
-        href: "/services/infrastructure-security",
-      },
-      {
-        label: "Identity and Access Management",
-        href: "/services/identity-and-access-management",
-      },
-      {
-        label: "Governance Risk and Compliance",
-        href: "/services/governance-risk-and-compliance",
-      },
-      { label: "Cloud Security", href: "/services/cloud-security" },
-      { label: "Application Security", href: "/services/application-security" },
-      { label: "AI Security", href: "/services/ai-security" },
-    ],
-  },
-  {
-    label: "Infrastructure and Cloud services",
-    href: "/services",
-  },
-  {
-    label: "Modern Device Management",
-    href: "/services/modern-device-management",
-  },
-];
+/* Header navigation. Services opens the menu built from serviceLinks
+   (lib/service-groups.ts); Contact Us is the header button, so it isn't a
+   link here. */
+export const nav = {
+  services: "Services",
+  allServices: { label: "View all services", href: "/services" },
+  links: [
+    { label: "Partners", href: "/partners" },
+    { label: "About", href: "/about" },
+  ],
+  cta: { label: "Contact Us", href: "/contact" },
+  // tags menu items that open the contact form instead of a service page
+  enquire: "Enquire",
+  menu: { title: "Menu", open: "Open menu", close: "Close menu" },
+} as const;
 
 export const hero = {
   subtext:
@@ -205,24 +134,56 @@ export const blog = {
 
 export const contact = {
   title: "CONTACT US",
-  subtitle:
-    "Fill out the form below, and a member of our leadership or technical team will reach out within one business day.",
-  eyebrow: "get in touch",
-  headline:
-    "Ready to move forward? Have a challenge you're trying to solve, a technology initiative you're planning, or simply an idea worth exploring?",
+  // non-breaking spaces keep the second clause together, so the hero lede
+  // never leaves "directly." alone on its last line
+  subtitle: "Tell us what you need, or\u00a0reach\u00a0a\u00a0team\u00a0directly.",
+  intro: {
+    label: "Start a conversation",
+    title: "Ready to move forward?",
+    // Unsplash, free under the Unsplash License (no credit required):
+    // https://unsplash.com/photos/man-presents-charts-to-seated-audience-in-a-modern-office-Nd7SpexkoNA
+    // illustrative only, never caption the people as our team
+    photo: "/images/contact-meeting.jpg",
+  },
+  // steps 2 and 3 are proposed wording, confirm them with the client
+  next: {
+    title: "What Happens Next",
+    steps: ["A reply within one business day", "A 30-minute scoping call", "A written proposal"],
+  },
   location: {
-    title: "Our Location",
-    headquarters: "Singapore Headquarters",
+    title: "Singapore Headquarters",
+    mapLabel: "Singapore HQ",
     company: "Eastwards Consulting Pte Ltd",
     building: "Chinatown Point",
-    postalCode: "Singapore 059 413",
+    // the building's street address, add the unit number once confirmed
+    street: "133 New Bridge Road",
+    postalCode: "Singapore 059413",
+    directions: {
+      label: "Get Directions",
+      href: "https://www.google.com/maps/search/?api=1&query=Chinatown+Point+133+New+Bridge+Road+Singapore+059413",
+    },
+    // Anita Kieseler on Pexels, free under the Pexels License (no credit required):
+    // https://www.pexels.com/photo/view-of-the-modern-singapore-skyline-20768136/
+    photo: {
+      src: "/images/contact-singapore.jpg",
+      alt: "Singapore’s business district across Marina Bay",
+    },
   },
   call: {
-    title: "Call Us",
-    phones: ["+65 93756 413513", "+91 99125 96699"],
+    // the +65 number has 11 digits, Singapore numbers have 8: confirm it
+    phones: [
+      { number: "+65 93756 413513", label: "Singapore, UTC+8" },
+      { number: "+91 99125 96699", label: "India, UTC+5:30" },
+    ],
   },
   form: {
+    routing: {
+      text: "Partner, candidate or journalist?",
+      link: "Find the right team",
+      href: "#teams",
+    },
     submitText: "Send Message",
+    sending: "Sending...",
     /* Dial codes: HQ first, then the India office and the common markets. */
     phoneCodes: [
       { country: "SG", code: "+65" },
@@ -244,6 +205,22 @@ export const contact = {
       "Projects & Professional",
       "Other",
     ],
+    // the link opens the visitor's mail app with their message filled in
+    failed: {
+      text: "Your message didn’t send. Try again, or",
+      link: "email it to us instead",
+      subject: "Website inquiry",
+    },
+    sent: {
+      title: "Message Sent",
+      before: "We’ll reply to",
+      after: "within one business day.",
+      again: "Send Another Message",
+    },
+  },
+  teams: {
+    title: "Reach the Right Team",
+    copy: { label: "Copy", done: "Copied" },
   },
   directChannels: {
     title: "Direct Channels",
@@ -258,55 +235,25 @@ export const contact = {
   },
 } as const;
 
+/* Service links come from serviceLinks (lib/service-groups.ts) and contact
+   details from `contact`. Only working links are listed: add LinkedIn and the
+   UEN once the client supplies them. */
 export const footer = {
-  /* Label + optional href: entries without a destination render as plain
-     text, never as a dead link. */
-  columns: [
-    {
-      title: "Engineering & Core",
-      links: [
-        { label: "Application Services", href: "/services/application-services" },
-        { label: "Product Engineering", href: "/services" },
-        { label: "Quantum Computing", href: "/services/quantum-computing" },
-      ],
-    },
-    {
-      title: "Cloud & Intelligence",
-      links: [
-        { label: "Data & AI", href: "/services" },
-        { label: "Infrastructure & Cloud", href: "/services" },
-        { label: "Modern Device Management", href: "/services/modern-device-management" },
-      ],
-    },
-    {
-      title: "Advisory & Operations",
-      links: [
-        { label: "Cybersecurity", href: "/services" },
-        { label: "IT Staffing Services", href: "/services/it-staffing-services" },
-        { label: "Projects & Professional", href: "/services/projects-professional-services" },
-      ],
-    },
-    {
-      title: "Contact",
-      links: [
-        { label: "General Inquiries", href: "mailto:info@eastwards.co" },
-        { label: "Business & Partnerships", href: "mailto:partners@eastwards.co" },
-        { label: "Careers & Talent", href: "mailto:careers@eastwards.co" },
-      ],
-    },
-    {
-      title: "About Us",
-      links: [{ label: "Careers" }, { label: "Corporate Social Responsibility" }],
-    },
-  ],
+  tagline: "Technology that moves business forward",
+  company: {
+    title: "Company",
+    items: [
+      { label: "About", href: "/about" },
+      { label: "Partners", href: "/partners" },
+      { label: "Contact Us", href: "/contact" },
+      { label: "Careers", href: "mailto:careers@eastwards.co" },
+    ],
+  },
   legal: [
     { label: "Privacy Policy", href: "/privacy" },
-    { label: "Cookie Policy" },
     { label: "Terms of Use", href: "/terms" },
   ],
-  copyright:
-    "Copyright © 2026 Eastwards Consulting Pte Ltd. All Rights Reserved",
-  wordmark: "Eastwards",
+  copyright: "© 2026 Eastwards Consulting Pte Ltd. All rights reserved.",
 } as const;
 
 export const partners = {
