@@ -166,7 +166,9 @@ export function Footer() {
             <address className="mt-2 not-italic text-white/70">
               {/* three short lines, so "Road" never wraps alone */}
               <span className="block">{location.building}</span>
-              <span className="block">{location.street}</span>
+              <span className="block">
+                {location.street}, {location.unit}
+              </span>
               <span className="block">{location.postalCode}</span>
             </address>
           </div>

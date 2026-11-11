@@ -10,9 +10,13 @@ Updated lazily when terms or decisions actually get resolved.
   `max-w-[1720px] px-6 sm:px-10 lg:px-[5.35%]` (homepage width; rendered explicitly
   in each page component).
 - **Dot field / DotHero** — the dot-matrix lattice + 10px-pitch grid hero shared by
-  Contact, Partners, About and the service pages (`components/ui/DotField.tsx`,
+  Partners, About and the service pages (`components/ui/DotField.tsx`,
   `components/DotHero.tsx`). Its geometry is locked; breaking changes to it are
   breaking changes for all sub-pages.
+- **Contact hero** — the contact page's own hero (`components/contact/ContactHero.tsx`):
+  a soft blue card with the title, lede and one row of shortcuts to each way
+  in (form, inbox, team directory, office), beside the glass panels render
+  with two floating info cards (`.float-soft` in `app/globals.css`).
 - **TextBlur chip** — the TextBlur-wrapped text treatment inside DotHero
   (`components/ui/TextBlur.tsx`).
 - **Blog showcase** — the accordion-gallery "Related Blogs" panel rendered under

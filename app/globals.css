@@ -356,6 +356,25 @@ html {
   }
 }
 
+/* Contact hero cards drift a few pixels up and down over the artwork. */
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.float-soft {
+  animation: float-soft 6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .float-soft {
+    animation: none;
+  }
+}
+
 .dark .nav-services-panel {
   background: #15161a;
   border-color: #26282c;

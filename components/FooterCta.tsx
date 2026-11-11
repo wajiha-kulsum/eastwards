@@ -14,6 +14,28 @@ export function FooterCta() {
 
   const email = contact.form.inbox;
 
+  // On the contact page the visitor is already at the form
+  if (pathname === "/contact") {
+    const { title, before, after } = footer.ctaContact;
+    return (
+      <div className="mb-12 border-b border-white/10 pb-12 lg:mb-14 lg:pb-14">
+        <p className="max-w-[22ch] text-balance text-lead font-semibold tracking-[-0.02em] text-white">
+          {title}
+        </p>
+        <p className="mt-3 max-w-[60ch] text-pretty text-white/70">
+          {before}{" "}
+          <a
+            href={`mailto:${email}`}
+            className="rounded-sm font-medium text-white underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            {email}
+          </a>
+          {after}
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="mb-12 grid gap-6 border-b border-white/10 pb-12 lg:mb-14 lg:grid-cols-[1fr_auto] lg:items-end lg:gap-12 lg:pb-14">
       <div>

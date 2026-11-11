@@ -4,7 +4,7 @@ import { useEffect, useRef, type Ref, type RefObject } from "react";
 import DotField from "@/components/ui/DotField";
 import TextBlur from "@/components/ui/TextBlur";
 
-/* The dot-field hero shared by Contact, Partners, About. Geometry is locked
+/* The dot-field hero shared by Partners and About. Geometry is locked
    so switching pages feels consistent: the dot field (DotField) runs behind
    the copy, every text block wears the shared TextBlur chip, and the 4x7
    logo triangle flows inline right after the title text (hugging it with no

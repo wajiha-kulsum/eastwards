@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Contact Us",
   description:
-    "Ready to move forward? Have a challenge you're trying to solve or a technology initiative you're planning? Get in touch with Eastwards Consulting.",
+    "Big ideas deserve a clear path to execution. Tell us about your goals and challenges, and a member of the Eastwards team will reach out within one business day.",
   path: "/contact",
 });
 
