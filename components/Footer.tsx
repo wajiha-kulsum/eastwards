@@ -82,7 +82,7 @@ export function Footer() {
               </li>
             </ul>
 
-            <ul aria-label="Social media" className="mt-5 flex items-center gap-1">
+            <ul aria-label="Social media" className="mt-5 space-y-2">
               {footer.socials.map((social) => {
                 const Icon = SOCIAL_ICONS[social.label];
                 return (
@@ -92,9 +92,12 @@ export function Footer() {
                       target="_blank"
                       rel="noreferrer"
                       aria-label={`Eastwards on ${social.label} (opens in a new tab)`}
-                      className="flex h-11 w-11 items-center justify-center rounded-full text-white/70 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:h-10 sm:w-10"
+                      className={LINK_CLASS}
                     >
-                      <Icon />
+                      <span className="inline-flex items-center gap-2">
+                        <Icon className="h-[18px] w-[18px] shrink-0" />
+                        {social.label}
+                      </span>
                     </a>
                   </li>
                 );
