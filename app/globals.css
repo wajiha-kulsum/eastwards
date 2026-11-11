@@ -63,28 +63,40 @@ html {
   }
 }
 
-/* Footer link underline that sweeps out from the left on hover.
-   Soft = current color at reduced opacity, 1px hairline. */
-.link-underline-sweep {
-  display: inline-block;
-  position: relative;
+/* Link underline that sweeps out from the left on hover (and keyboard
+   focus). Drawn as a 1px background line rather than a pseudo-element, so
+   it sits right under the text whatever the link's padding
+   (background-origin: content-box) and, with box-decoration-break: clone,
+   under every line of a link that wraps, not only the last one.
+   .underline-on-group-hover does the same for text inside a hovered card
+   (an ancestor with the `group` class). */
+.link-underline-sweep,
+.underline-on-group-hover {
+  background-image: linear-gradient(
+    color-mix(in srgb, currentColor 70%, transparent),
+    color-mix(in srgb, currentColor 70%, transparent)
+  );
+  background-origin: content-box;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-size 0.3s ease-out;
 }
 
-.link-underline-sweep::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -1px;
-  width: 100%;
-  height: 1px;
-  background: color-mix(in srgb, currentColor 55%, transparent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease-out;
+.link-underline-sweep:hover,
+.link-underline-sweep:focus-visible,
+.group:hover .underline-on-group-hover,
+.group:focus-visible .underline-on-group-hover {
+  background-size: 100% 1px;
 }
 
-.link-underline-sweep:hover::after {
-  transform: scaleX(1);
+@media (prefers-reduced-motion: reduce) {
+  .link-underline-sweep,
+  .underline-on-group-hover {
+    transition: none;
+  }
 }
 
 /* Services menu panel: the service groups in two columns, every row a link.
@@ -386,6 +398,24 @@ html {
 }
 @media (prefers-reduced-motion: reduce) {
   .tile-in {
+    animation: none;
+  }
+}
+
+/* About capability stack: a layer's title and points come into focus
+   (blur and opacity, a few pixels of rise) when the layer changes. */
+@keyframes focus-in {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(6px);
+  }
+}
+.focus-in {
+  animation: focus-in 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .focus-in {
     animation: none;
   }
 }

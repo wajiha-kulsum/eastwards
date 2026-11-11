@@ -22,6 +22,7 @@ const pages = {
   "/services": { title: "Services | Eastwards Consulting" },
   "/services/cloud-security": { title: "Cloud Security | Eastwards Consulting" },
   "/careers": { title: "Careers | Eastwards Consulting" },
+  "/responsibility": { title: "Responsibility | Eastwards Consulting" },
   "/privacy": { title: "Privacy Policy | Eastwards Consulting" },
   "/terms": { title: "Terms of Use | Eastwards Consulting" },
   "/cookies": { title: "Cookie Policy | Eastwards Consulting" },

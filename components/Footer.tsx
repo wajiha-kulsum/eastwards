@@ -15,8 +15,9 @@ import { serviceLinks, type ServiceLink } from "@/lib/service-groups";
    into an accordion, so the footer stays about a screen tall on phones.
    Every link goes somewhere real. */
 
-/* py-1 lifts every link past the 24px target minimum; the sweep class keeps
-   the links inline-block, so the padding counts toward the hit area. */
+/* py-1 lifts every link past the 24px target minimum (padding on an inline
+   link still counts toward its hit area); the sweep underline is drawn on
+   the content box, so it stays right under the text on every line. */
 const LINK_CLASS =
   "link-underline-sweep rounded-sm py-1 text-white/70 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 const FOCUS_RING =

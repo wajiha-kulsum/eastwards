@@ -1,7 +1,7 @@
 import { MailIcon } from "@/components/ui/icons";
 import { contact } from "@/lib/content";
 
-/* Direct Channels band shared by the About, Partnership and Contact
+/* Direct Channels band shared by the Partnership and Contact
    artboards: heading, one-line intro, then the department inboxes. Default
    is the four-up light panel; `rows` draws the contact page's drafting
    table, rows split by dashed hairlines. Every prop can be overridden when

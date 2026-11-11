@@ -61,10 +61,6 @@ export function TileChart({ className = "" }: { className?: string }) {
   );
 }
 
-/* Faint square grid behind an illustration, fading at the edges */
-export const GRID_BG =
-  "bg-[linear-gradient(var(--color-line)_1px,transparent_1px),linear-gradient(90deg,var(--color-line)_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(closest-side,black_55%,transparent)]";
-
 /* One small drawing per reason to join */
 export function ReasonArt({ icon }: { icon: CareersIcon }) {
   const line = "stroke-body";

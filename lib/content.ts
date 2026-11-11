@@ -260,8 +260,8 @@ export const contact = {
       { department: "Careers & Talent", email: "careers@eastwards.co" },
       { department: "Media & Press", email: "media@eastwards.co" },
     ],
-    // listed on the contact page only: the shared four-up band on About and
-    // Partnership is laid out for exactly the four channels above
+    // listed on the contact page only: the shared four-up band on
+    // Partnership and the About rows are laid out for the four channels above
     legal: { department: "Legal Enquiries", email: "legal@eastwards.co" },
   },
 } as const;
@@ -271,15 +271,21 @@ export const contact = {
    below are the verified accounts. */
 export const footer = {
   tagline: "Technology that moves business forward",
-  // closing call to action; hidden on the homepage, which ends on its own CTA
+  // closing call to action above the footer links
   cta: {
     title: "Have a technology challenge to solve?",
     body: "Talk with our team about the right next step for your business.",
     button: "Talk to our team",
+    /* Pages that end on their own call to action, so the footer's would
+       repeat it: home (HomeContactCta), careers (speaks to candidates),
+       responsibility (its own CSR contact band). Add a path here, never a
+       check in FooterCta. */
+    hideOn: ["/", "/careers", "/responsibility"],
   },
   // the same row on /contact, where a button to the contact page would point
   // at itself: the visitor already has the form, so this offers the inbox
   ctaContact: {
+    path: "/contact",
     title: "Ready to accelerate?",
     before: "If you’re in a hurry, skip the form and email us directly at",
     after: ". We look forward to hearing from you.",
@@ -287,12 +293,11 @@ export const footer = {
   // headings of the contact strip above the legal row
   reach: { call: "Call us", email: "Email us" },
   company: {
-    title: "Company",
+    title: "About us",
     items: [
       { label: "About", href: "/about" },
-      { label: "Partners", href: "/partners" },
-      { label: "Contact Us", href: "/contact" },
       { label: "Careers", href: "/careers" },
+      { label: "Corporate Social Responsibility", href: "/responsibility" },
     ],
   },
   socials: [
@@ -333,110 +338,6 @@ export const partners = {
     ],
   },
 } as const;
-
-export const about = {
-  title: "About Us",
-  lede: "Nobody builds alone. It takes the right people, a fresh perspective, and a shared idea to make something click.",
-  banner: {
-    eyebrow: "/ Let's work together /",
-    line: "We provide solutions",
-    follow: "that drive",
-    highlight: "business",
-    body: "At Eastwards, we help enterprises transform digital complexity into measurable advantage. Headquartered in Singapore with a global delivery footprint, we combine strategic insight with hands-on engineering to design, secure, and operate the platforms that power modern business.\nOur promise: faster time to market, lower operational risk, and sustained cost efficiency.",
-    alt: "Eastwards team working together around a table",
-  },
-  solutions: {
-    title: "Comprehensive Digital Solutions",
-    groups: [
-      {
-        title: "Innovation & Engineering",
-        items: [
-          {
-            title: "Application Development & Product Engineering",
-            body: "Web and mobile products built to grow with your business.",
-          },
-          {
-            title: "Quantum Computing Advisory",
-            body: "Explore quantum possibilities and find where they fit.",
-          },
-          {
-            title: "Data & Artificial Intelligence",
-            body: "Turn data into insights and AI into real value.",
-          },
-        ],
-      },
-      {
-        title: "Resilience & Security",
-        items: [
-          {
-            title: "Cybersecurity Services",
-            body: "Spot risks early and protect what matters.",
-          },
-          {
-            title: "Infrastructure & Cloud",
-            body: "Build smarter, more flexible cloud infrastructure.",
-          },
-          {
-            title: "Modern Device Management",
-            body: "Keep devices secure and teams connected.",
-          },
-        ],
-      },
-      {
-        title: "Delivery & Talent",
-        items: [
-          {
-            title: "Projects & Professional Services",
-            body: "Bring clarity, expertise, and momentum to every project.",
-          },
-          {
-            title: "IT Staffing Services",
-            body: "Find the right technical talent for your team.",
-          },
-          {
-            title: "Digital Support Services",
-            body: "Keep your systems running and your users supported.",
-          },
-        ],
-      },
-      {
-        title: "Your Partner in Growth",
-        items: [
-          {
-            title: "We Listen First",
-            body: "We understand your needs before jumping into solutions.",
-          },
-          {
-            title: "We Build Together",
-            body: "We share progress, adapt quickly, and keep you involved.",
-          },
-          {
-            title: "We Grow Together",
-            body: "We share knowledge and build lasting partnerships.",
-          },
-        ],
-      },
-      {
-        title: "Why Choose Eastwards",
-        items: [
-          {
-            title: "Experience That Counts",
-            body: "Technical expertise focused on your challenges.",
-          },
-          {
-            title: "Results That Matter",
-            body: "Solutions built around meaningful business outcomes.",
-          },
-          {
-            title: "Better Together",
-            body: "The right people and expertise, working as one.",
-          },
-        ],
-      },
-    ],
-  },
-} as const;
-
 
 /* ---------- Service pages (/services/[slug]) ----------
    Copy is the client-approved service page text, structured into
