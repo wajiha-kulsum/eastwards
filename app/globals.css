@@ -375,6 +375,21 @@ html {
   }
 }
 
+/* Careers hero tile chart: tiles fade in column by column, once. */
+@keyframes tile-in {
+  from {
+    opacity: 0;
+  }
+}
+.tile-in {
+  animation: tile-in 500ms ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tile-in {
+    animation: none;
+  }
+}
+
 .dark .nav-services-panel {
   background: #15161a;
   border-color: #26282c;

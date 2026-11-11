@@ -10,7 +10,8 @@ import { contact, footer } from "@/lib/content";
    there; every other page gets one last way into an enquiry. */
 export function FooterCta() {
   const pathname = usePathname();
-  if (pathname === "/") return null;
+  // home ends on its own CTA; careers speaks to candidates, not clients
+  if (pathname === "/" || pathname === "/careers") return null;
 
   const email = contact.form.inbox;
 

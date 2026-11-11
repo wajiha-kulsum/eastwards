@@ -4,7 +4,15 @@ import { Suspense, useCallback, useEffect, useRef, useState, type FormEvent } fr
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ArrowUpRight, Check } from "lucide-react";
+import {
+  ERROR_CLASS,
+  FIELD_CLASS,
+  FORM_LINK_CLASS as LINK_CLASS,
+  LABEL_CLASS,
+  OPTIONAL_CLASS,
+} from "@/components/ui/form-styles";
 import { contact } from "@/lib/content";
+import { isEmail } from "@/lib/validation";
 
 /* The contact form: one consent block, optional fields marked as such, inline
    errors written in the page's voice, and an outcome that says what happened.
@@ -12,16 +20,6 @@ import { contact } from "@/lib/content";
 
 const copy = contact.form;
 const inbox = contact.form.inbox;
-
-/* Shared form furniture: label + field styles in one place so the fields
-   can't drift apart. Borders use field-line, 3:1 against the card. */
-const LABEL_CLASS = "mb-1.5 block text-small font-medium tracking-tight text-ink";
-const OPTIONAL_CLASS = "font-normal text-body";
-const FIELD_CLASS =
-  "rounded-xl border border-field-line bg-field px-3.5 text-small text-ink outline-none transition-colors placeholder:text-placeholder focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20 aria-invalid:border-destructive aria-invalid:focus:border-destructive aria-invalid:focus:ring-destructive/20";
-const ERROR_CLASS = "mt-1 text-small text-destructive";
-const LINK_CLASS =
-  "rounded-sm text-ink underline underline-offset-2 transition-colors hover:text-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
 type FieldName = "firstName" | "lastName" | "email" | "requirement" | "message" | "smsConsent";
 type FieldErrors = Partial<Record<FieldName, string>>;
@@ -50,7 +48,7 @@ function validate(formData: FormData): FieldErrors {
 
   const email = value("email");
   if (!email) errors.email = MESSAGES.email;
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = EMAIL_INVALID;
+  else if (!isEmail(email)) errors.email = EMAIL_INVALID;
 
   if (!value("requirement")) errors.requirement = MESSAGES.requirement;
   if (!value("message")) errors.message = MESSAGES.message;

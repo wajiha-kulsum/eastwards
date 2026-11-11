@@ -286,14 +286,13 @@ export const footer = {
   },
   // headings of the contact strip above the legal row
   reach: { call: "Call us", email: "Email us" },
-  backToTop: "Back to top",
   company: {
     title: "Company",
     items: [
       { label: "About", href: "/about" },
       { label: "Partners", href: "/partners" },
       { label: "Contact Us", href: "/contact" },
-      { label: "Careers", href: "mailto:careers@eastwards.co" },
+      { label: "Careers", href: "/careers" },
     ],
   },
   socials: [
