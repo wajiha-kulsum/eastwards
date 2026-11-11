@@ -5,17 +5,19 @@ import { ArrowUpRight } from "lucide-react";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import { contact, footer } from "@/lib/content";
 
-/* The footer's closing call to action. The homepage already ends on
-   HomeContactCta right above the footer, so the row stays out of the way
-   there; every other page gets one last way into an enquiry. */
+/* The footer's closing call to action: one last way into an enquiry. Which
+   pages skip it, or get the contact-page variant, is data in lib/content
+   (footer.cta.hideOn, footer.ctaContact.path), not logic here. */
+const hidden = new Set<string>(footer.cta.hideOn);
+
 export function FooterCta() {
   const pathname = usePathname();
-  if (pathname === "/") return null;
+  if (hidden.has(pathname)) return null;
 
   const email = contact.form.inbox;
 
   // On the contact page the visitor is already at the form
-  if (pathname === "/contact") {
+  if (pathname === footer.ctaContact.path) {
     const { title, before, after } = footer.ctaContact;
     return (
       <div className="mb-12 border-b border-white/10 pb-12 lg:mb-14 lg:pb-14">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useSyncExternalStore } from "react";
-import { ChevronDown, Cookie, X } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import { Dialog, Switch } from "radix-ui";
 import { RichText } from "@/components/legal/RichText";
 import {
@@ -24,8 +24,8 @@ const NONE: Choice = { analytics: false, preferences: false, marketing: false };
 const ALL: Choice = { analytics: true, preferences: true, marketing: true };
 
 const FOCUS = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
-const SOLID = `inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-5 text-small font-semibold text-white transition-[filter] hover:brightness-110 ${FOCUS}`;
-const OUTLINE = `inline-flex min-h-11 items-center justify-center rounded-full border border-line-strong bg-card px-5 text-small font-semibold text-ink transition-colors hover:border-ink ${FOCUS}`;
+const SOLID = `inline-flex min-h-11 items-center justify-center rounded-lg bg-primary px-5 text-small font-semibold text-white transition-[filter] hover:brightness-110 ${FOCUS}`;
+const OUTLINE = `inline-flex min-h-11 items-center justify-center rounded-lg border border-line-strong bg-card px-5 text-small font-semibold text-ink transition-colors hover:border-ink ${FOCUS}`;
 
 function Preferences({
   open,
@@ -49,17 +49,17 @@ function Preferences({
         <Dialog.Overlay className="fixed inset-0 z-[70] bg-black/40 data-[state=open]:animate-in data-[state=open]:fade-in-0 motion-reduce:animate-none" />
         {/* The whole dialog scrolls (short screens included) and the
             actions stay pinned to its bottom edge */}
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-[71] max-h-[min(90svh,780px)] w-[calc(100%-2rem)] max-w-[560px] -translate-x-1/2 -translate-y-1/2 overflow-y-auto overscroll-contain rounded-3xl border border-line bg-card text-ink shadow-2xl data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 motion-reduce:animate-none">
+        <Dialog.Content className="fixed left-1/2 top-1/2 z-[71] max-h-[min(90svh,780px)] w-[calc(100%-2rem)] max-w-[560px] -translate-x-1/2 -translate-y-1/2 overflow-y-auto overscroll-contain rounded-xl border border-line-strong bg-card text-ink shadow-2xl data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 motion-reduce:animate-none">
           <div className="flex items-start justify-between gap-4 border-b border-line px-6 py-5">
             <div>
-              <Dialog.Title className="text-lead font-medium tracking-[-0.02em]">{copy.preferences.title}</Dialog.Title>
+              <Dialog.Title className="text-lead font-semibold tracking-[-0.02em]">{copy.preferences.title}</Dialog.Title>
               <Dialog.Description className="mt-2 text-small leading-[1.6] text-body">
                 {copy.preferences.body}
               </Dialog.Description>
             </div>
             <Dialog.Close
               aria-label="Close"
-              className={`-mr-2 grid h-11 w-11 shrink-0 place-items-center rounded-full text-body transition-colors hover:bg-surface hover:text-ink ${FOCUS}`}
+              className={`-mr-2 grid h-11 w-11 shrink-0 place-items-center rounded-lg text-body transition-colors hover:bg-surface hover:text-ink ${FOCUS}`}
             >
               <X className="h-5 w-5" aria-hidden="true" />
             </Dialog.Close>
@@ -138,19 +138,14 @@ export function ConsentBanner() {
       {current === null && !prefsOpen ? (
         <section
           aria-labelledby="consent-title"
-          className="fixed inset-x-3 bottom-3 z-[55] max-h-[calc(100svh-1.5rem)] overflow-y-auto overscroll-contain rounded-3xl border border-line bg-card p-5 text-ink shadow-[0_24px_60px_-20px_rgb(0_0_0/0.35)] animate-in fade-in-0 slide-in-from-bottom-4 duration-300 motion-reduce:animate-none sm:inset-x-auto sm:bottom-6 sm:left-6 sm:w-[min(480px,calc(100vw-3rem))] sm:p-6 print:hidden"
+          className="fixed inset-x-3 bottom-3 z-[55] max-h-[calc(100svh-1.5rem)] overflow-y-auto overscroll-contain rounded-xl border border-line-strong bg-card p-5 text-ink shadow-[0_4px_24px_rgb(0_0_0/0.12)] animate-in fade-in-0 duration-300 motion-reduce:animate-none sm:inset-x-auto sm:bottom-6 sm:left-6 sm:w-[min(440px,calc(100vw-3rem))] print:hidden"
         >
-          <div className="flex items-center gap-3">
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-primary/10 text-link">
-              <Cookie className="h-5 w-5" aria-hidden="true" />
-            </span>
-            <h2 id="consent-title" className="text-small font-semibold">
-              {copy.title}
-            </h2>
-          </div>
+          <h2 id="consent-title" className="text-small font-semibold">
+            {copy.title}
+          </h2>
 
           {/* phones show three lines until the visitor expands the notice */}
-          <p className={`mt-3 text-small leading-[1.6] text-body ${expanded ? "" : "max-sm:line-clamp-3"}`}>{copy.intro}</p>
+          <p className={`mt-2 text-small leading-[1.6] text-body ${expanded ? "" : "max-sm:line-clamp-3"}`}>{copy.intro}</p>
 
           <dl id="consent-points" hidden={!expanded} className="mt-3 space-y-2 text-small leading-[1.6]">
             {copy.points.map((point) => (
@@ -190,7 +185,7 @@ export function ConsentBanner() {
             <button
               type="button"
               onClick={() => setPrefsOpen(true)}
-              className={`col-span-2 inline-flex min-h-11 items-center justify-center rounded-full text-small font-semibold text-ink underline-offset-4 hover:underline ${FOCUS}`}
+              className={`col-span-2 inline-flex min-h-11 items-center justify-center rounded-lg text-small font-semibold text-ink underline-offset-4 hover:underline ${FOCUS}`}
             >
               {copy.actions.manage}
             </button>

@@ -7,7 +7,7 @@ import { SITE_URL } from "@/lib/seo";
    No lastModified: a build-time date claims every page changed on every
    deploy and teaches crawlers to ignore the field. */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/about", "/partners", "/contact", "/services", "/privacy", "/terms", "/cookies"].map(
+  const staticRoutes = ["", "/about", "/partners", "/contact", "/services", "/careers", "/responsibility", "/privacy", "/terms", "/cookies"].map(
     (path) => ({ url: `${SITE_URL}${path}` })
   );
   const services = servicePages.map((service) => ({

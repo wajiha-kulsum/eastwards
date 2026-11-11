@@ -1,20 +1,19 @@
 import { Resend } from "resend";
 import { contact } from "@/lib/content";
+import { EMAIL_SHAPE, MAIL_FROM as FROM, oneLine } from "@/lib/mail";
+import { allowRequest, tooManyRequests } from "@/lib/rate-limit";
 
 /* Contact form endpoint: the same rules as the form, then delivery by email
    through Resend to contact@eastwards.co. A JSON webhook can still take a
-   copy (CONTACT_WEBHOOK_URL), and the visitor gets a short acknowledgement. */
+   copy (CONTACT_WEBHOOK_URL), and the visitor gets a short acknowledgement.
+   Sends are rate limited per visitor, and the acknowledgement carries no
+   text the visitor typed, so it can't be used to email strangers. */
 
 const { requirements, phoneCodes } = contact.form;
 const allowedRequirements = new Set<string>(requirements);
 const allowedCodes = new Set<string>(phoneCodes.map((p) => p.code));
-const emailShape = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const CONTACT_TO = process.env.CONTACT_EMAIL_TO ?? "contact@eastwards.co";
-// Sender is env-driven so the form can be tested with Resend's test address
-// before eastwards.co is verified.
-const FROM =
-  process.env.CONTACT_FROM ?? "Eastwards Consulting <no-reply@eastwards.co>";
 
 // name -> [required, max length]
 const fields = {
@@ -26,10 +25,6 @@ const fields = {
   phone: [false, 40],
   message: [true, 5000],
 } as const;
-
-// Keep visitor text out of the subject header
-const oneLine = (value: string, max = 160) =>
-  value.replace(/[\r\n]+/g, " ").trim().slice(0, max);
 
 async function deliverWebhook(url: string, message: unknown) {
   try {
@@ -69,7 +64,7 @@ export async function POST(request: Request) {
     if (!value && required) errors[name] = "missing";
     else if (value.length > max) errors[name] = "invalid";
   }
-  if (entry.email && !errors.email && !emailShape.test(entry.email)) errors.email = "invalid";
+  if (entry.email && !errors.email && !EMAIL_SHAPE.test(entry.email)) errors.email = "invalid";
 
   const requirement = text("requirement");
   if (!allowedRequirements.has(requirement)) errors.requirement = requirement ? "invalid" : "missing";
@@ -82,6 +77,9 @@ export async function POST(request: Request) {
   if (Object.keys(errors).length) {
     return Response.json({ ok: false, errors }, { status: 400 });
   }
+
+  // Counted only once valid, so fixing a typo never uses up an attempt
+  if (!allowRequest(request, "contact", 5, 10 * 60_000)) return tooManyRequests(600);
 
   const message = {
     ...entry,
@@ -136,7 +134,8 @@ export async function POST(request: Request) {
         replyTo: CONTACT_TO,
         subject: "We received your message - Eastwards Consulting",
         text: [
-          `Hi ${entry.firstName},`,
+          // no visitor-typed text here: see the note at the top
+          "Hello,",
           "",
           "Thank you for contacting Eastwards. We received your message and a member of our team will reply within one business day.",
           "",
