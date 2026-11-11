@@ -65,7 +65,7 @@ export const organizationJsonLd = {
   url: SITE_URL,
   logo: `${SITE_URL}/images/logo.svg`,
   email: contact.directChannels.channels[0].email,
-  telephone: contact.call.phones,
+  telephone: contact.call.phones.map((phone) => phone.number),
   address: {
     "@type": "PostalAddress",
     streetAddress: contact.location.building,

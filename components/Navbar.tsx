@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { navLinks, navServices } from "@/lib/content";
+import { useSyncExternalStore, type ComponentProps } from "react";
+import { Dialog } from "radix-ui";
 import { ThemeSwitch } from "@/components/ui/ThemeSwitch";
+import { Logo } from "@/components/ui/Logo";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -14,314 +14,295 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { contact, nav } from "@/lib/content";
+import { serviceLinks } from "@/lib/service-groups";
+import { cn } from "@/lib/utils";
 
-export function Navbar() {
-  const pathname = usePathname();
-  const [open, setOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+/* Header: logo, then (from 1024) the Services menu and the page links, then
+   the theme switch and the one solid Contact Us pill. Below 1024 a menu
+   button opens a full-screen sheet with the same links. */
 
-  /* Logo lockup: a little larger at the top of the page, back to normal
-     once the page scrolls. Transform-only, so nothing reflows. Re-synced on
-     route change because navigation resets the scroll. */
-  useEffect(() => {
-    const sync = () => setScrolled(window.scrollY > 10);
-    sync();
-    window.addEventListener("scroll", sync, { passive: true });
-    return () => window.removeEventListener("scroll", sync);
-  }, [pathname]);
+// outline-solid undoes the outline-none baked into the shadcn menu parts
+const focusRing =
+  "focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
-  /* The nav's own 20-viewBox chevron: trigger + contact arrows carry the
-      text color, the flyout row arrows pin the brand blue. */
-  const Chevron = ({
-    className,
-    stroke = "currentColor",
-  }: {
-    className?: string;
-    stroke?: string;
-  }) => (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 20 20"
-      fill="none"
-      className={className}
-    >
-      <path
-        d="M7 4.5L12.5 10L7 15.5"
-        stroke={stroke}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+const isCurrent = (pathname: string, href: string) =>
+  pathname === href || pathname.startsWith(`${href}/`);
+
+// Logo lockup: a little larger at the top of the page, back to normal once
+// the page scrolls (transform only, nothing reflows); the hairline under the
+// bar appears at the same moment
+const subscribeScroll = (onChange: () => void) => {
+  window.addEventListener("scroll", onChange, { passive: true });
+  return () => window.removeEventListener("scroll", onChange);
+};
+const readScrolled = () => window.scrollY > 10;
+const serverScrolled = () => false;
+
+const logoScale = (scrolled: boolean) =>
+  cn(
+    "origin-left text-ink transition-transform duration-200 ease-out",
+    scrolled ? "scale-100" : "scale-[1.25]"
+  );
+
+/* The nav's own 20-viewBox chevron, tinted by the text colour */
+function Chevron({ className }: { className?: string }) {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" className={className}>
+      <path d="M7 4.5L12.5 10L7 15.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
+  );
+}
+
+function ContactButton({ current, className, ...props }: { current: boolean } & Omit<ComponentProps<typeof Link>, "href">) {
+  return (
+    <Link
+      href={nav.cta.href}
+      aria-current={current ? "page" : undefined}
+      className={cn(
+        "inline-flex h-11 shrink-0 items-center justify-center rounded-full bg-primary px-5 text-small font-semibold text-white transition-[filter] duration-200 hover:brightness-110 active:brightness-95",
+        focusRing,
+        className
+      )}
+      {...props}
+    >
+      {nav.cta.label}
+    </Link>
+  );
+}
+
+function ServicesMenu({ pathname }: { pathname: string }) {
+  const [build, operate, secure] = serviceLinks;
+  const column = (groups: typeof serviceLinks) => (
+    <div className="space-y-5">
+      {groups.map((group) => (
+        <div key={group.id}>
+          <p className="px-3 pb-1.5 text-small font-medium text-body">{group.label}</p>
+          <ul>
+            {group.links.map((link) => (
+              <li key={link.href}>
+                {/* classes go on NavigationMenuLink so cn merges them over
+                    its defaults; asChild alone would only concatenate */}
+                <NavigationMenuLink
+                  asChild
+                  active={isCurrent(pathname, link.href)}
+                  className="justify-between gap-6 rounded-[10px] px-3 py-1.5 text-small text-ink transition-colors duration-150 in-data-[slot=navigation-menu-content]:rounded-[10px] hover:bg-surface hover:text-link focus:bg-surface data-active:bg-transparent data-active:font-medium data-active:text-link"
+                >
+                  <Link href={link.href}>
+                    {link.label}
+                    {link.enquire && <span className="text-small font-normal text-body">{nav.enquire}</span>}
+                  </Link>
+                </NavigationMenuLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
   );
 
   return (
-    <header
-      className={`sticky top-0 z-50 w-full border-b bg-page transition-colors duration-300 ${
-        scrolled ? "border-line" : "border-transparent"
-      }`}
-    >
-      <nav
-        aria-label="Main navigation"
-        className="flex h-[60px] w-full items-center gap-7 px-[48px] sm:h-[68px] sm:gap-8 lg:h-[72px] lg:gap-9"
+    <NavigationMenuItem className="static">
+      <NavigationMenuTrigger
+        className={cn(
+          "h-auto rounded-sm px-0 py-0 text-small font-medium tracking-[0.02em] hover:bg-transparent hover:text-link focus:bg-transparent data-open:bg-transparent data-open:text-link data-open:hover:bg-transparent data-open:focus:bg-transparent [&>svg:last-child]:hidden",
+          pathname.startsWith("/services") ? "text-link" : "text-ink",
+          focusRing
+        )}
       >
-        {/* Logo */}
-        <Link
-          href="/"
-          className={`flex shrink-0 origin-left items-center rounded-sm text-small font-bold tracking-[-0.5px] text-ink transition-transform duration-200 ease-out focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary ${
-            scrolled ? "scale-100" : "scale-[1.25]"
-          }`}
-        >
-          Eastwards
-          <Image
-            src="/images/logo.svg"
-            alt=""
-            aria-hidden="true"
-            width={27}
-            height={32}
-            className="ml-2 h-[16px] w-auto lg:h-[18px]"
-          />
-        </Link>
+        {nav.services}
+        <Chevron className="ml-1 h-3 w-3 shrink-0 rotate-90 transition-transform duration-300 group-data-open/navigation-menu-trigger:-rotate-90" />
+      </NavigationMenuTrigger>
+      {/* Look and placement in .nav-services-panel (globals) */}
+      <NavigationMenuContent className="nav-services-panel">
+        {column([build, operate])}
+        {column([secure])}
+        <div className="col-span-2 mt-3 border-t border-line px-3 pt-3">
+          <NavigationMenuLink
+            asChild
+            active={pathname === nav.allServices.href}
+            className="inline-flex gap-1.5 rounded-sm p-0 text-small font-medium text-link hover:bg-transparent focus:bg-transparent data-active:bg-transparent"
+          >
+            <Link href={nav.allServices.href}>
+              {nav.allServices.label}
+              <Chevron className="h-3 w-3" />
+            </Link>
+          </NavigationMenuLink>
+        </div>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
+  );
+}
 
-        {/* Desktop navigation */}
-        <NavigationMenu viewport={false} className="ml-auto hidden md:block">
-          <NavigationMenuList className="items-center gap-7 sm:gap-8 lg:gap-9">
-            {navLinks.map((item) =>
-              item.label === "Services" ? (
-                <NavigationMenuItem key={item.label}>
-                  <NavigationMenuTrigger className="h-auto rounded-sm px-0 py-0 text-ink hover:text-link focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary data-popup-open:text-link [&>svg:last-child]:hidden">
-                    {/* Label wears the exact sibling-link classes so the
-                        button base styling can't shift size/weight/tracking;
-                        chevron follows currentColor so it tints with the
-                        text on hover/open */}
-                    <span
-                      className={`inline-flex items-center text-small font-medium tracking-[0.1px] transition-colors group-hover/navigation-menu-trigger:text-link group-data-popup-open/navigation-menu-trigger:text-link lg:tracking-[0.02em] ${
-                        pathname.startsWith("/services") ? "text-link" : "text-ink"
-                      }`}
-                    >
-                      {item.label}
-                      <Chevron className="ml-1 h-3 w-3 shrink-0 transition-transform duration-300 group-data-popup-open/navigation-menu-trigger:rotate-180 group-data-open/navigation-menu-trigger:rotate-180" />
-                    </span>
-                  </NavigationMenuTrigger>
-                  {/* Dark two-column panel driven by .nav-services-panel
-                      (globals), unlayered CSS outranks the group-variant
-                      utilities in the shadcn content defaults. Rows for
-                      items with `detail` carry a blue chevron and reveal a
-                      sideways flyout (hover the row to its right edge - the
-                      12px pl on the flyout keeps the hover bridge gapless). */}
-                  <NavigationMenuContent className="nav-services-panel">
-                    {navServices.map((service) => (
-                        <div
-                          key={service.label}
-                          className="group/row relative flex items-center justify-between gap-6 px-3"
-                        >
-                          {/* Category hub rows (carry `items`) are hover-only:
-                              text, not a link - the flyout's children are the
-                              clickable targets. Plain rows stay links. */}
-                          {service.items ? (
-                            <span className="pointer-events-none py-2 text-small font-normal text-ink transition-colors group-hover/row:text-link">
-                              {service.label}
-                            </span>
-                          ) : (
-                            <NavigationMenuLink
-                              href={service.href}
-                              className="py-2 text-small font-normal text-ink transition-colors hover:text-link group-hover/row:text-link"
+/* Below 1024 the menu is a full-screen sheet with its own copy of the header
+   bar. Keyed on the path so any navigation (back button included) closes it.
+   Radix handles focus, Escape and the scroll lock (through the overlay). */
+function MobileMenu({ pathname, scrolled }: { pathname: string; scrolled: boolean }) {
+  const phone = contact.call.phones[0].number;
+  const email = contact.directChannels.channels[0].email;
+  const row = cn("flex min-h-11 items-center rounded-sm text-ink aria-[current=page]:text-link", focusRing);
+
+  return (
+    <Dialog.Root key={pathname}>
+      <Dialog.Trigger
+        aria-label={nav.menu.open}
+        className={cn(
+          "flex h-11 w-11 items-center justify-center rounded-full border border-line text-ink transition-colors hover:bg-surface lg:hidden",
+          focusRing
+        )}
+      >
+        <svg viewBox="0 0 20 20" fill="none" className="h-4 w-4" aria-hidden="true">
+          <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        </svg>
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        {/* invisible, but Radix applies the scroll lock through the overlay */}
+        <Dialog.Overlay className="fixed inset-0 z-[60]" />
+        <Dialog.Content
+          aria-describedby={undefined}
+          className="fixed inset-0 z-[60] flex flex-col overflow-y-auto overscroll-contain bg-page text-ink data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:duration-200 motion-reduce:animate-none"
+        >
+          <Dialog.Title className="sr-only">{nav.menu.title}</Dialog.Title>
+          <div className="flex h-[60px] shrink-0 items-center gap-3 border-b border-line px-[48px] sm:h-[68px]">
+            {/* same size as the bar's logo, so opening the menu doesn't jump */}
+            <Dialog.Close asChild>
+              <Logo className={logoScale(scrolled)} />
+            </Dialog.Close>
+            <div className="ml-auto flex items-center gap-3">
+              <ThemeSwitch />
+              <Dialog.Close
+                aria-label={nav.menu.close}
+                className={cn(
+                  "flex h-11 w-11 items-center justify-center rounded-full border border-line text-ink transition-colors hover:bg-surface",
+                  focusRing
+                )}
+              >
+                <svg viewBox="0 0 20 20" fill="none" className="h-4 w-4" aria-hidden="true">
+                  <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                </svg>
+              </Dialog.Close>
+            </div>
+          </div>
+
+          <nav aria-label="Main" className="px-[48px] pt-2">
+            <details className="group border-b border-line" open={pathname.startsWith("/services") || undefined}>
+              <summary
+                className={cn(
+                  "flex min-h-14 cursor-pointer list-none items-center justify-between rounded-sm text-lead font-medium [&::-webkit-details-marker]:hidden",
+                  pathname.startsWith("/services") ? "text-link" : "text-ink",
+                  focusRing
+                )}
+              >
+                {nav.services}
+                <Chevron className="h-4 w-4 rotate-90 transition-transform duration-200 group-open:-rotate-90 motion-reduce:transition-none" />
+              </summary>
+              <div className="space-y-6 pb-6">
+                {serviceLinks.map((group) => (
+                  <div key={group.id}>
+                    <p className="text-small font-medium text-body">{group.label}</p>
+                    <ul className="mt-1">
+                      {group.links.map((link) => (
+                        <li key={link.href}>
+                          <Dialog.Close asChild>
+                            <Link
+                              href={link.href}
+                              aria-current={isCurrent(pathname, link.href) ? "page" : undefined}
+                              className={cn(row, "justify-between gap-4 text-small")}
                             >
-                              {service.label}
-                            </NavigationMenuLink>
-                          )}
-                          {service.detail || service.items ? (
-                            <>
-                              <Chevron
-                                className="h-3 w-3 shrink-0 transition-transform duration-200 group-hover/row:translate-x-0.5"
-                                stroke="#2868FF"
-                              />
-                              <div className="invisible absolute left-full top-0 z-10 pl-3 opacity-0 transition-opacity duration-200 group-hover/row:visible group-hover/row:opacity-100 focus-within:visible focus-within:opacity-100">
-                                {service.items ? (
-                                <div className="min-w-[280px] rounded-2xl border border-line bg-card p-3 shadow-xl">
-                                  <div className="flex flex-col">
-                                    {service.items.map((item) => (
-                                      <NavigationMenuLink
-                                        key={item.label}
-                                        href={item.href}
-                                        className="px-3 py-2 text-small font-normal text-ink transition-colors hover:text-link"
-                                      >
-                                        {item.label}
-                                      </NavigationMenuLink>
-                                    ))}
-                                  </div>
-                                </div>
-                              ) : (
-                                <div className="w-max max-w-[280px] rounded-2xl border border-line bg-card p-5 shadow-xl">
-                                  <p className="text-small font-medium text-ink">
-                                    {service.detail?.title}
-                                  </p>
-                                  <p className="mt-2 text-small text-body">
-                                    {service.detail?.body}
-                                  </p>
-                                  <NavigationMenuLink
-                                    href="/contact"
-                                    className="mt-3 inline-flex items-center gap-1.5 rounded-lg text-small font-medium text-link transition-opacity hover:opacity-70"
-                                  >
-                                    Contact us
-                                    <Chevron className="h-3 w-3" />
-                                  </NavigationMenuLink>
-                                </div>
-                              )}
-                              </div>
-                            </>
-                          ) : (
-                            <span className="w-3 shrink-0" aria-hidden="true" />
-                          )}
-                        </div>
+                              {link.label}
+                              {link.enquire && <span className="text-small text-body">{nav.enquire}</span>}
+                            </Link>
+                          </Dialog.Close>
+                        </li>
                       ))}
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-              ) : (
-                <NavigationMenuItem key={item.label}>
-                  <NavigationMenuLink asChild>
-                    <Link
-                      href={item.href}
-                      aria-current={pathname === item.href ? "page" : undefined}
-                      className={`link-underline-sweep rounded-sm text-small font-medium tracking-[0.1px] transition-colors hover:text-link focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary lg:tracking-[0.02em] ${
-                        pathname === item.href ? "text-link" : "text-ink"
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              ),
-            )}
+                    </ul>
+                  </div>
+                ))}
+                <Dialog.Close asChild>
+                  <Link
+                    href={nav.allServices.href}
+                    aria-current={pathname === nav.allServices.href ? "page" : undefined}
+                    className={cn(row, "w-fit gap-1.5 text-small font-medium text-link")}
+                  >
+                    {nav.allServices.label}
+                    <Chevron className="h-3 w-3" />
+                  </Link>
+                </Dialog.Close>
+              </div>
+            </details>
+            {nav.links.map((link) => (
+              <Dialog.Close asChild key={link.href}>
+                <Link
+                  href={link.href}
+                  aria-current={isCurrent(pathname, link.href) ? "page" : undefined}
+                  className={cn(row, "min-h-14 border-b border-line text-lead font-medium")}
+                >
+                  {link.label}
+                </Link>
+              </Dialog.Close>
+            ))}
+          </nav>
+
+          <div className="mt-auto space-y-5 px-[48px] pb-10 pt-8">
+            <Dialog.Close asChild>
+              <ContactButton current={pathname === nav.cta.href} className="w-full" />
+            </Dialog.Close>
+            <div className="space-y-1 text-small">
+              <a href={`mailto:${email}`} className={cn("block w-fit rounded-sm font-medium text-ink", focusRing)}>
+                {email}
+              </a>
+              <a href={`tel:${phone.replace(/\s/g, "")}`} className={cn("block w-fit rounded-sm text-body", focusRing)}>
+                {phone}
+              </a>
+            </div>
+          </div>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
+  );
+}
+
+export function Navbar() {
+  const pathname = usePathname();
+  const scrolled = useSyncExternalStore(subscribeScroll, readScrolled, serverScrolled);
+
+  return (
+    <header
+      className={cn(
+        "sticky top-0 z-50 w-full border-b bg-page transition-colors duration-300",
+        scrolled ? "border-line" : "border-transparent"
+      )}
+    >
+      {/* a div, not a nav: Radix NavigationMenu renders the "Main" nav landmark */}
+      <div className="flex h-[60px] w-full items-center gap-7 px-[48px] sm:h-[68px] sm:gap-8 lg:h-[72px] lg:gap-9">
+        <Logo className={logoScale(scrolled)} />
+
+        <NavigationMenu viewport={false} className="ml-auto hidden lg:flex">
+          <NavigationMenuList className="items-center gap-9">
+            <ServicesMenu pathname={pathname} />
+            {nav.links.map((link) => (
+              <NavigationMenuItem key={link.href}>
+                <NavigationMenuLink
+                  asChild
+                  active={isCurrent(pathname, link.href)}
+                  className={cn(
+                    "link-underline-sweep rounded-sm p-0 text-small font-medium tracking-[0.02em] text-ink transition-colors hover:bg-transparent hover:text-link focus:bg-transparent data-active:bg-transparent data-active:text-link",
+                    focusRing
+                  )}
+                >
+                  <Link href={link.href}>{link.label}</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            ))}
           </NavigationMenuList>
         </NavigationMenu>
 
-        {/* Theme toggle + mobile menu toggle */}
-        <div className="ml-auto flex shrink-0 items-center gap-3 md:ml-0">
+        <div className="ml-auto flex shrink-0 items-center gap-3 lg:ml-0">
           <ThemeSwitch />
-
-          <button
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-line text-ink transition-colors hover:bg-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:hidden"
-          >
-            <svg
-              viewBox="0 0 20 20"
-              fill="none"
-              className="h-4 w-4"
-              aria-hidden="true"
-            >
-              {open ? (
-                <path
-                  d="M5 5l10 10M15 5L5 15"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                />
-              ) : (
-                <path
-                  d="M3 6h14M3 10h14M3 14h14"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                />
-              )}
-            </svg>
-          </button>
+          <ContactButton current={pathname === nav.cta.href} className="max-sm:hidden" />
+          <MobileMenu pathname={pathname} scrolled={scrolled} />
         </div>
-      </nav>
-
-      {/* Mobile dropdown; Services expands into the same navServices rows
-          the desktop panel uses (one flat level, category labels muted). */}
-      {open && (
-        <div
-          id="mobile-menu"
-          className="absolute inset-x-4 top-[60px] z-20 max-h-[calc(100dvh-76px)] overflow-y-auto rounded-2xl border border-line bg-card p-6 shadow-xl sm:top-[68px] md:hidden"
-        >
-          <ul className="space-y-4">
-            {navLinks.map((item) =>
-              item.label === "Services" ? (
-                <li key={item.label}>
-                  <button
-                    onClick={() => setServicesOpen(!servicesOpen)}
-                    aria-expanded={servicesOpen}
-                    className={`flex min-h-11 w-full items-center gap-1 rounded-sm text-small font-medium transition-colors hover:text-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
-                      pathname.startsWith("/services") ? "text-link" : "text-ink"
-                    }`}
-                  >
-                    {item.label}
-                    <Chevron
-                      className={`h-3 w-3 transition-transform duration-200${
-                        servicesOpen ? " rotate-90" : ""
-                      }`}
-                    />
-                  </button>
-                  {servicesOpen && (
-                    <ul className="mt-3 space-y-2.5 border-l border-line pl-3">
-                      {navServices.map((service) =>
-                        service.items ? (
-                          <li key={service.label}>
-                            <p className="py-2 text-small text-body">
-                              {service.label}
-                            </p>
-                            <ul className="ml-3 space-y-2.5">
-                              {service.items.map((child) => (
-                                <li key={child.label}>
-                                  <Link
-                                    href={child.href}
-                                    onClick={() => {
-                                      setOpen(false);
-                                      setServicesOpen(false);
-                                    }}
-                                    className={`block py-2.5 text-small font-medium transition-colors hover:text-link ${
-                                      pathname === child.href ? "text-link" : "text-ink"
-                                    }`}
-                                  >
-                                    {child.label}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </li>
-                        ) : (
-                          <li key={service.label}>
-                            <Link
-                              href={service.href}
-                              onClick={() => {
-                                setOpen(false);
-                                setServicesOpen(false);
-                              }}
-                              className="block py-1 text-small font-medium text-ink"
-                            >
-                              {service.label}
-                            </Link>
-                          </li>
-                        ),
-                      )}
-                    </ul>
-                  )}
-                </li>
-              ) : (
-                <li key={item.label}>
-                  <Link
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    aria-current={pathname === item.href ? "page" : undefined}
-                    className={`block min-h-11 rounded-sm py-2.5 text-small font-medium transition-colors hover:text-link focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
-                      pathname === item.href ? "text-link" : "text-ink"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ),
-            )}
-          </ul>
-        </div>
-      )}
+      </div>
     </header>
   );
 }

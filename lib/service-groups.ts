@@ -1,4 +1,4 @@
-import { servicePages, type ServicePageContent } from "@/lib/content";
+import { contact, servicePages, type ServicePageContent } from "@/lib/content";
 
 /* The services index reads as three buying paths, not an alphabetical
    directory: build something, run it, secure it. Grouping lives here so the
@@ -57,3 +57,32 @@ export const serviceGroups: readonly ServiceGroup[] = [
     ]),
   },
 ];
+
+/* The header menu and the footer list the same groups as links, plus the two
+   service lines that have no page yet: those open the contact form with that
+   requirement chosen and are tagged "Enquire". Swap in the pages when they
+   exist. */
+export type ServiceLink = { label: string; href: string; enquire?: boolean };
+
+const enquiry = (requirement: (typeof contact.form.requirements)[number]): ServiceLink => ({
+  label: requirement,
+  href: `/contact?requirement=${encodeURIComponent(requirement)}`,
+  enquire: true,
+});
+
+const enquiries: Record<string, readonly ServiceLink[]> = {
+  "build-and-modernize": [enquiry("Data & AI")],
+  "operate-and-support": [enquiry("Infrastructure & Cloud")],
+};
+
+export const serviceLinks = serviceGroups.map((group) => ({
+  id: group.id,
+  label: group.label,
+  links: [
+    ...group.services.map((service): ServiceLink => ({
+      label: service.title,
+      href: `/services/${service.slug}`,
+    })),
+    ...(enquiries[group.id] ?? []),
+  ],
+}));

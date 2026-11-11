@@ -33,20 +33,21 @@ body {
 }
 
 /* Sticky navbar: anchor and focus jumps land below the bar, not under it.
-   Heights mirror the nav's 60 / 68 / 72px steps in Navbar.tsx. */
+   The nav's 60 / 68 / 72px steps plus 16px, so a target never sits flush
+   against the bar's hairline. */
 html {
-  scroll-padding-top: 60px;
+  scroll-padding-top: 76px;
 }
 
 @media (min-width: 640px) {
   html {
-    scroll-padding-top: 68px;
+    scroll-padding-top: 84px;
   }
 }
 
 @media (min-width: 1024px) {
   html {
-    scroll-padding-top: 72px;
+    scroll-padding-top: 88px;
   }
 }
 
@@ -86,24 +87,35 @@ html {
   transform: scaleX(1);
 }
 
-/* Services dropdown panel. Unlayered on purpose: it must outrank the
-   group-variant utilities baked into the shadcn navigation-menu content
-   (bg-popover, md:w-auto, rounded-lg) that class merging cannot outrank. */
+/* Services menu panel: the service groups in two columns, every row a link.
+   Unlayered on purpose: it must outrank the group-variant utilities baked
+   into the shadcn navigation-menu content (bg-popover, md:w-auto, left-0)
+   that class merging cannot outrank. Anchored to the right edge of the nav
+   links so it opens leftwards and never runs past the viewport. */
 .nav-services-panel {
-  width: fit-content;
-  /* submenus overflow the panel itself - never clip them */
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: auto;
+  width: max-content;
+  max-width: calc(100vw - 48px);
+  margin-top: 12px;
   overflow: visible;
   border-radius: 16px;
   border: 1px solid #e8e8e8;
   border-bottom: 3px solid #2868ff;
   background: #ffffff;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
-  padding: 16px;
+  padding: 20px 12px 12px;
   display: grid;
-  grid-auto-flow: column;
-  grid-template-rows: repeat(5, auto);
   grid-template-columns: repeat(2, max-content);
-  gap: 4px 36px;
+  gap: 0 24px;
+}
+
+/* the content's own focus:outline-none would hide the keyboard focus ring */
+.nav-services-panel a:focus-visible {
+  outline: 2px solid #2868ff;
+  outline-offset: 2px;
 }
 
 @theme inline {
@@ -248,6 +260,8 @@ html {
   --color-line-strong: #d9d9d9; /* panel borders, hairlines */
   --color-page: #ffffff; /* page/chip background */
   --color-card: #ffffff; /* white cards, panels, buttons on the page */
+  --color-band: #111111; /* black bands: footer, contact teams band */
+  --color-field-line: #8a8f98; /* form field borders, 3:1 on surface */
 
   --font-sans: var(--font-instrument-sans), system-ui, sans-serif;
   --font-display: var(--font-inter-display), system-ui, sans-serif;
@@ -307,6 +321,9 @@ html {
   --color-line-strong: #383b41;
   --color-page: #0f0f0f;
   --color-card: #1a1c20;
+  /* a step lighter than the page, so black bands still read as bands */
+  --color-band: #1a1c20;
+  --color-field-line: #666a75;
 }
 
 /* Dot lattice: grey in light, faint blue-grey after dark. */
