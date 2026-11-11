@@ -6,6 +6,7 @@
    (lib/service-groups.ts); Contact Us is the header button, so it isn't a
    link here. */
 export const nav = {
+  home: { label: "Home", href: "/" },
   services: "Services",
   allServices: { label: "View all services", href: "/services" },
   links: [

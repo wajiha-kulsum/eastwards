@@ -185,6 +185,15 @@ function MobileMenu({ pathname, scrolled }: { pathname: string; scrolled: boolea
           </div>
 
           <nav aria-label="Main" className="px-[48px] pt-2">
+            <Dialog.Close asChild>
+              <Link
+                href={nav.home.href}
+                aria-current={pathname === nav.home.href ? "page" : undefined}
+                className={cn(row, "min-h-14 border-b border-line text-lead font-medium")}
+              >
+                {nav.home.label}
+              </Link>
+            </Dialog.Close>
             <details className="group border-b border-line" open={pathname.startsWith("/services") || undefined}>
               <summary
                 className={cn(
@@ -279,6 +288,18 @@ export function Navbar() {
 
         <NavigationMenu viewport={false} className="ml-auto hidden lg:flex">
           <NavigationMenuList className="items-center gap-9">
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                asChild
+                active={pathname === nav.home.href}
+                className={cn(
+                  "link-underline-sweep rounded-sm p-0 text-small font-medium tracking-[0.02em] text-ink transition-colors hover:bg-transparent hover:text-link focus:bg-transparent data-active:bg-transparent data-active:text-link",
+                  focusRing
+                )}
+              >
+                <Link href={nav.home.href}>{nav.home.label}</Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
             <ServicesMenu pathname={pathname} />
             {nav.links.map((link) => (
               <NavigationMenuItem key={link.href}>
