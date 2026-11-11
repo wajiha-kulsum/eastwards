@@ -11,7 +11,10 @@ const allowedCodes = new Set<string>(phoneCodes.map((p) => p.code));
 const emailShape = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const CONTACT_TO = process.env.CONTACT_EMAIL_TO ?? "contact@eastwards.co";
-const FROM = "Eastwards Consulting <no-reply@eastwards.co>";
+// Sender is env-driven so the form can be tested with Resend's test address
+// before eastwards.co is verified.
+const FROM =
+  process.env.CONTACT_FROM ?? "Eastwards Consulting <no-reply@eastwards.co>";
 
 // name -> [required, max length]
 const fields = {
