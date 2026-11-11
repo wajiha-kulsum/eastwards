@@ -203,11 +203,6 @@ export function Footer() {
                 </Link>
               </li>
             ))}
-            <li>
-              <a href="#main" className={LINK_CLASS}>
-                {footer.backToTop}
-              </a>
-            </li>
           </ul>
         </div>
       </div>
