@@ -105,14 +105,12 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Secure and govern has the longest names, so its column is
-              widest. Phones: one column, the company links last. */}
-          <nav aria-label="Footer" className="grid grid-cols-1 gap-y-10 sm:grid-cols-[minmax(0,1.35fr)_minmax(0,1.15fr)_minmax(0,0.7fr)] sm:gap-x-10">
+          {/* Four groups, one heading row: every column title sits on the
+              same line, items stack underneath. Phones: two columns. */}
+          <nav aria-label="Footer" className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 sm:gap-x-10 xl:grid-cols-[minmax(0,1.35fr)_minmax(0,1.15fr)_minmax(0,1.15fr)_minmax(0,0.7fr)]">
             <Group title={secure.label} links={secure.links} />
-            <div className="space-y-10">
-              <Group title={build.label} links={build.links} />
-              <Group title={operate.label} links={operate.links} />
-            </div>
+            <Group title={build.label} links={build.links} />
+            <Group title={operate.label} links={operate.links} />
             <Group title={footer.company.title} links={footer.company.items} />
           </nav>
         </div>
