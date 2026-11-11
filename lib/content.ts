@@ -304,8 +304,9 @@ export const footer = {
   legal: [
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Use", href: "/terms" },
+    { label: "Cookie Policy", href: "/cookies" },
   ],
-  copyright: "© 2026 Eastwards Consulting Pte Ltd. All rights reserved.",
+  copyright: "© 2027 Eastwards Consulting Pte Ltd. All rights reserved.",
 } as const;
 
 export const partners = {

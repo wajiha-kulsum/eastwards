@@ -113,7 +113,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="mt-16 border-t border-transparent bg-band text-small text-white dark:border-line">
+    <footer className="mt-16 border-t border-transparent bg-band text-small text-white dark:border-line print:hidden">
       <div className="mx-auto w-full max-w-[1720px] px-6 pb-10 pt-14 sm:px-10 lg:px-[5.35%] lg:pt-16">
         <FooterCta />
 

@@ -42,6 +42,17 @@ Updated lazily when terms or decisions actually get resolved.
 - **Label chip** — the boxed micro eyebrow (hairline border, uppercase
   `text-label` type) used on card grid cells; the one sanctioned micro label.
 
+## Legal and consent
+
+- **Legal pages** — `/terms`, `/privacy`, `/cookies`, one layout
+  (`components/legal/LegalPage.tsx`) over the client's text kept as data in
+  `lib/legal.ts`: hero card, "At a glance" cards, sticky "On this page" list,
+  sections, related policies.
+- **Consent banner** — the first-visit privacy notice with Accept All / Reject
+  All / Manage Preferences (`components/legal/ConsentBanner.tsx`). The choice
+  is the `ew_consent` cookie, read only through `lib/consent.ts`: gate any
+  analytics or marketing script on `hasConsent(...)`.
+
 ## Design system
 
 - **Token scale** — exactly four sizes the site uses, fixed pixels on every

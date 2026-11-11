@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { Instrument_Sans } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { Footer } from "@/components/Footer";
+import { ConsentBanner } from "@/components/legal/ConsentBanner";
 import { Navbar } from "@/components/Navbar";
 import { JsonLd } from "@/components/SeoJsonLd";
 import {
@@ -77,6 +78,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           >
             Skip to content
           </a>
+          {/* Early in the tab order, so keyboard users meet the cookie
+              choice before the page, though it never takes focus itself */}
+          <ConsentBanner />
           <Navbar />
           {children}
           <Footer />
