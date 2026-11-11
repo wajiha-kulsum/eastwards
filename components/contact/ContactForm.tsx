@@ -11,7 +11,7 @@ import { contact } from "@/lib/content";
    A failed send hands the visitor a pre-filled email instead of a dead end. */
 
 const copy = contact.form;
-const inbox = contact.directChannels.channels[0].email;
+const inbox = contact.form.inbox;
 
 /* Shared form furniture: label + field styles in one place so the fields
    can't drift apart. Borders use field-line, 3:1 against the card. */

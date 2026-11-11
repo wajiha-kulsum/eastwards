@@ -185,6 +185,8 @@ export const contact = {
     },
     submitText: "Send Message",
     sending: "Sending...",
+    // Delivery inbox and the target of the failed-send mailto fallback
+    inbox: "contact@eastwards.co",
     /* Dial codes: HQ first, then the India office and the common markets. */
     phoneCodes: [
       { country: "SG", code: "+65" },
