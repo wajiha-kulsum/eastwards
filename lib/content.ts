@@ -243,6 +243,15 @@ export const contact = {
    below are the verified accounts. */
 export const footer = {
   tagline: "Technology that moves business forward",
+  // closing call to action; hidden on the homepage, which ends on its own CTA
+  cta: {
+    title: "Have a technology challenge to solve?",
+    body: "Talk with our team about the right next step for your business.",
+    button: "Talk to our team",
+  },
+  // headings of the contact strip above the legal row
+  reach: { call: "Call us", email: "Email us" },
+  backToTop: "Back to top",
   company: {
     title: "Company",
     items: [
