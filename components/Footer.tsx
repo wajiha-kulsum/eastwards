@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
+import { InstagramIcon, LinkedinIcon, YoutubeIcon } from "@/components/ui/BrandIcons";
 import { contact, footer, nav } from "@/lib/content";
 import { serviceLinks, type ServiceLink } from "@/lib/service-groups";
 
@@ -10,6 +11,12 @@ import { serviceLinks, type ServiceLink } from "@/lib/service-groups";
 
 const LINK_CLASS =
   "link-underline-sweep rounded-sm text-white/70 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+
+const SOCIAL_ICONS = {
+  Instagram: InstagramIcon,
+  YouTube: YoutubeIcon,
+  LinkedIn: LinkedinIcon,
+} as const;
 
 function FooterLink({ link }: { link: ServiceLink }) {
   return (
@@ -73,6 +80,25 @@ export function Footer() {
                   {phone}
                 </a>
               </li>
+            </ul>
+
+            <ul aria-label="Social media" className="mt-5 flex items-center gap-1">
+              {footer.socials.map((social) => {
+                const Icon = SOCIAL_ICONS[social.label];
+                return (
+                  <li key={social.label}>
+                    <a
+                      href={social.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`Eastwards on ${social.label} (opens in a new tab)`}
+                      className="flex h-11 w-11 items-center justify-center rounded-full text-white/70 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:h-10 sm:w-10"
+                    >
+                      <Icon />
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 

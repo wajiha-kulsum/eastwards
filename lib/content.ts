@@ -237,8 +237,8 @@ export const contact = {
 } as const;
 
 /* Service links come from serviceLinks (lib/service-groups.ts) and contact
-   details from `contact`. Only working links are listed: add LinkedIn and the
-   UEN once the client supplies them. */
+   details from `contact`. Only working links are listed; the social profiles
+   below are the verified accounts. */
 export const footer = {
   tagline: "Technology that moves business forward",
   company: {
@@ -250,6 +250,11 @@ export const footer = {
       { label: "Careers", href: "mailto:careers@eastwards.co" },
     ],
   },
+  socials: [
+    { label: "Instagram", href: "https://www.instagram.com/eastwards.co/" },
+    { label: "YouTube", href: "https://www.youtube.com/@EastwardsConsulting" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/eastwards-consulting" },
+  ],
   legal: [
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Use", href: "/terms" },
