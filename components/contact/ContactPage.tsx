@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import DotHero from "@/components/DotHero";
+import { ContactHero } from "@/components/contact/ContactHero";
 import PageShell from "@/components/ui/PageShell";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { CopyEmail } from "@/components/contact/CopyEmail";
@@ -17,7 +17,7 @@ export function ContactPage() {
 
   return (
     <PageShell pb="pb-16">
-      <DotHero title={contact.title} lede={contact.subtitle} />
+      <ContactHero />
 
       {/* Phones read intro, form, photo, steps. From 768 the photo and steps
           sit side by side under the form; from 1280 they stack beside it and
@@ -27,13 +27,18 @@ export function ContactPage() {
         className="mt-9 grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] xl:grid-rows-[auto_1fr_auto] xl:gap-x-12"
       >
         <div className="md:col-span-2 xl:col-span-1 xl:col-start-1 xl:row-start-1">
-          <p className="text-small font-semibold tracking-[-0.04em] text-link">/ {intro.label} /</p>
+          <p className="text-small font-semibold text-link">{intro.label}</p>
           <h2 id="contact-heading" className="mt-3 text-balance text-lead font-medium tracking-[-0.02em] text-ink">
             {intro.title}
           </h2>
+          {intro.body.map((paragraph) => (
+            <p key={paragraph.slice(0, 24)} className="mt-4 max-w-[62ch] text-pretty text-small leading-[1.6] text-body">
+              {paragraph}
+            </p>
+          ))}
         </div>
 
-        <div className="min-w-0 md:col-span-2 xl:col-span-1 xl:col-start-2 xl:row-span-3 xl:row-start-1">
+        <div id="contact-form" className="min-w-0 md:col-span-2 xl:col-span-1 xl:col-start-2 xl:row-span-3 xl:row-start-1">
           <ContactForm />
         </div>
 
@@ -76,10 +81,11 @@ export function ContactPage() {
         <div className="grid grid-cols-1 gap-10 xl:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] xl:items-center xl:gap-16">
           <div>
             <h2 id="teams-heading" className="text-lead font-medium tracking-[-0.02em]">
-              {teams.title}
+              {directChannels.title}
             </h2>
+            <p className="mt-2 max-w-[48ch] text-pretty text-white/70">{directChannels.subtitle}</p>
             <dl className="mt-6">
-              {directChannels.channels.map((channel) => (
+              {[...directChannels.channels, directChannels.legal].map((channel) => (
                 <div
                   key={channel.email}
                   className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-t border-white/10 py-3 sm:py-4"
@@ -104,7 +110,7 @@ export function ContactPage() {
         {/* headquarters runs the full width, under both columns, and opens
             with a photo of the district the office is in. Stacked on phones,
             photo beside the details from 768, one row from 1280. */}
-        <div className="mt-10 grid grid-cols-1 gap-6 border-t border-white/10 pt-8 md:grid-cols-[240px_minmax(0,1fr)] md:items-center md:gap-x-10">
+        <div id="headquarters" className="mt-10 grid grid-cols-1 gap-6 border-t border-white/10 pt-8 md:grid-cols-[240px_minmax(0,1fr)] md:items-center md:gap-x-10">
           {/* placeholder tone sampled from the photo */}
           <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-white/10">
             <Image src={location.photo.src} alt={location.photo.alt} fill sizes="(min-width: 768px) 240px, 100vw" className="object-cover" />
@@ -112,11 +118,12 @@ export function ContactPage() {
           </div>
           <div className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_auto] xl:items-center xl:gap-10">
             <div>
-              <h3 className="font-semibold">{location.title}</h3>
-              <address className="mt-2 not-italic text-white/75">
+              <h3 className="font-semibold">{location.visit.title}</h3>
+              <p className="mt-2 max-w-[44ch] text-pretty text-white/75">{location.visit.body}</p>
+              <address className="mt-3 not-italic text-white/75">
                 {location.company}
                 <span className="block">
-                  {location.building}, {location.street}
+                  {location.street}, {location.unit} {location.building}
                 </span>
                 <span className="block">{location.postalCode}</span>
               </address>

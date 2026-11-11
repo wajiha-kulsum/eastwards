@@ -278,7 +278,7 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full border-b bg-page transition-colors duration-300",
+        "sticky top-0 z-50 w-full border-b bg-page transition-colors duration-300 print:hidden",
         scrolled ? "border-line" : "border-transparent"
       )}
     >

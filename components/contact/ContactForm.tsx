@@ -211,7 +211,9 @@ export function ContactForm() {
       aria-labelledby="contact-heading"
       className="flex min-w-0 flex-col rounded-3xl border border-line bg-surface p-5 sm:p-6 xl:h-full lg:p-7"
     >
-      <p className="mb-5 text-small text-body">
+      <h3 className="text-small font-semibold text-ink">{copy.start.title}</h3>
+      <p className="mt-1 text-pretty text-small text-body">{copy.start.body}</p>
+      <p className="mb-5 mt-4 text-small text-body">
         {copy.routing.text}{" "}
         <a href={copy.routing.href} className={LINK_CLASS}>
           {copy.routing.link}
@@ -267,7 +269,7 @@ export function ContactForm() {
 
         <div>
           <label htmlFor="email" className={LABEL_CLASS}>
-            Email
+            Work Email
           </label>
           <input
             id="email"
@@ -330,7 +332,7 @@ export function ContactForm() {
 
         <div className="sm:col-span-2">
           <label htmlFor="requirement" className={LABEL_CLASS}>
-            Requirement
+            Service Interest
           </label>
           <div className="relative">
             <select
@@ -345,7 +347,7 @@ export function ContactForm() {
               className={`${FIELD_CLASS} h-12 w-full appearance-none pr-10`}
             >
               <option value="" disabled>
-                Select your requirement
+                Select a service
               </option>
               {copy.requirements.map((requirement) => (
                 <option key={requirement} value={requirement}>
@@ -405,7 +407,7 @@ export function ContactForm() {
           aria-invalid={errors.smsConsent ? true : undefined}
           aria-describedby={`smsConsent-note${errors.smsConsent ? " smsConsent-error" : ""}`}
           onChange={() => clearError("smsConsent")}
-          className="mt-1 size-4 shrink-0 rounded-[4px] border border-line-strong bg-surface accent-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="mt-0.5 size-5 shrink-0 rounded-[4px] border border-line-strong bg-surface accent-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         />
         <div>
           <label htmlFor="smsConsent" className="block text-small text-body">
@@ -445,7 +447,7 @@ export function ContactForm() {
         <button
           type="submit"
           aria-disabled={submitting || undefined}
-          className="ml-auto inline-flex min-h-11 items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-small font-semibold text-white transition-[filter] duration-200 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface active:brightness-95 aria-disabled:cursor-progress lg:min-h-[52px] lg:px-7"
+          className="inline-flex w-full min-h-12 items-center justify-center gap-2 rounded-full sm:ml-auto sm:w-auto sm:min-h-11 bg-primary px-6 py-2.5 text-small font-semibold text-white transition-[filter] duration-200 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface active:brightness-95 aria-disabled:cursor-progress lg:min-h-[52px] lg:px-7"
         >
           {submitting ? (
             <span aria-hidden="true" className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white motion-reduce:animate-none" />

@@ -135,12 +135,29 @@ export const blog = {
 
 export const contact = {
   title: "CONTACT US",
-  // non-breaking spaces keep the second clause together, so the hero lede
-  // never leaves "directly." alone on its last line
-  subtitle: "Tell us what you need, or\u00a0reach\u00a0a\u00a0team\u00a0directly.",
+  // a non-breaking space keeps the last two words together, so the hero lede
+  // never leaves "you." alone on its last line
+  subtitle: "Choose the way that works best for\u00a0you.",
+  // the two cards floating over the hero artwork
+  hero: {
+    reply: { title: "Quick response", detail: "Within one business day" },
+    office: { detail: "Chinatown Point, UTC+8" },
+  },
+  // the hero's shortcuts, one per way in
+  ways: {
+    label: "Ways to reach us",
+    form: "Send a message",
+    email: "Email us",
+    teams: "Find the right team",
+    visit: "Visit our office",
+  },
   intro: {
-    label: "Start a conversation",
-    title: "Ready to move forward?",
+    label: "Get in Touch",
+    title: "Let\u2019s Build the Future of Your Enterprise",
+    body: [
+      "Big ideas deserve a clear path to execution. Whether you are looking to secure your infrastructure, scale your product engineering, or explore the frontier of Quantum Computing, the team at Eastwards is ready to guide you.",
+      "We don\u2019t believe in \u201cone size fits all\u201d solutions. Tell us about your goals, your challenges, and where you want to take your business next. Our experts will help you get there with precision and speed.",
+    ],
     // Unsplash, free under the Unsplash License (no credit required):
     // https://unsplash.com/photos/man-presents-charts-to-seated-audience-in-a-modern-office-Nd7SpexkoNA
     // illustrative only, never caption the people as our team
@@ -152,12 +169,17 @@ export const contact = {
     steps: ["A reply within one business day", "A 30-minute scoping call", "A written proposal"],
   },
   location: {
+    // short name, used by the footer; the contact page uses `visit` below
     title: "Singapore Headquarters",
+    visit: {
+      title: "Visit Our Global Headquarters",
+      body: "Located in the heart of Singapore’s business district, our doors are always open for strategic discussions.",
+    },
     mapLabel: "Singapore HQ",
     company: "Eastwards Consulting Pte Ltd",
     building: "Chinatown Point",
-    // the building's street address, add the unit number once confirmed
-    street: "133 New Bridge Road",
+    street: "133 New Bridge Rd",
+    unit: "#08-01",
     postalCode: "Singapore 059413",
     directions: {
       label: "Get Directions",
@@ -178,6 +200,10 @@ export const contact = {
     ],
   },
   form: {
+    start: {
+      title: "Start a Conversation",
+      body: "Fill out the form below, and a member of our leadership or technical team will reach out within one business day.",
+    },
     routing: {
       text: "Partner, candidate or journalist?",
       link: "Find the right team",
@@ -222,7 +248,6 @@ export const contact = {
     },
   },
   teams: {
-    title: "Reach the Right Team",
     copy: { label: "Copy", done: "Copied" },
   },
   directChannels: {
@@ -235,6 +260,9 @@ export const contact = {
       { department: "Careers & Talent", email: "careers@eastwards.co" },
       { department: "Media & Press", email: "media@eastwards.co" },
     ],
+    // listed on the contact page only: the shared four-up band on About and
+    // Partnership is laid out for exactly the four channels above
+    legal: { department: "Legal Enquiries", email: "legal@eastwards.co" },
   },
 } as const;
 
@@ -243,6 +271,22 @@ export const contact = {
    below are the verified accounts. */
 export const footer = {
   tagline: "Technology that moves business forward",
+  // closing call to action; hidden on the homepage, which ends on its own CTA
+  cta: {
+    title: "Have a technology challenge to solve?",
+    body: "Talk with our team about the right next step for your business.",
+    button: "Talk to our team",
+  },
+  // the same row on /contact, where a button to the contact page would point
+  // at itself: the visitor already has the form, so this offers the inbox
+  ctaContact: {
+    title: "Ready to accelerate?",
+    before: "If you’re in a hurry, skip the form and email us directly at",
+    after: ". We look forward to hearing from you.",
+  },
+  // headings of the contact strip above the legal row
+  reach: { call: "Call us", email: "Email us" },
+  backToTop: "Back to top",
   company: {
     title: "Company",
     items: [
@@ -260,8 +304,9 @@ export const footer = {
   legal: [
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Use", href: "/terms" },
+    { label: "Cookie Policy", href: "/cookies" },
   ],
-  copyright: "© 2026 Eastwards Consulting Pte Ltd. All rights reserved.",
+  copyright: "© 2027 Eastwards Consulting Pte Ltd. All rights reserved.",
 } as const;
 
 export const partners = {

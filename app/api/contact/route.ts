@@ -127,9 +127,10 @@ export async function POST(request: Request) {
       return Response.json({ ok: false }, { status: 502 });
     }
 
-    // The enquiry is delivered; the acknowledgement is best effort.
+    // The enquiry is delivered; the acknowledgement is best effort. The SDK
+    // returns failures as `error` instead of throwing, so check it to log them.
     try {
-      await resend.emails.send({
+      const { error } = await resend.emails.send({
         from: FROM,
         to: entry.email,
         replyTo: CONTACT_TO,
@@ -144,6 +145,7 @@ export async function POST(request: Request) {
           "Eastwards Consulting Pte Ltd",
         ].join("\n"),
       });
+      if (error) console.error("[contact] auto-reply failed", error);
     } catch (error) {
       console.error("[contact] auto-reply failed", error);
     }
