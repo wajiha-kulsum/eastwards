@@ -13,10 +13,10 @@ Updated lazily when terms or decisions actually get resolved.
   Partners and the service pages (`components/ui/DotField.tsx`,
   `components/DotHero.tsx`). Its geometry is locked; breaking changes to it are
   breaking changes for all sub-pages.
-- **Contact hero** — the contact page's own hero (`components/contact/ContactHero.tsx`):
-  a soft blue card with the title, lede and one row of shortcuts to each way
-  in (form, inbox, team directory, office), beside the glass panels render
-  with two floating info cards (`.float-soft` in `app/globals.css`).
+- **Contact page** — laid out wide after entersoftsecurity.com/contact
+  (`components/contact/ContactPage.tsx`): the first screen is the heading,
+  intro, next steps and direct lines beside the form, then the black band
+  with the team addresses, the dot map and the Singapore office.
 - **Framed page** — the attio.com/careers-style layout shared by `/careers`,
   `/responsibility` and `/about` (`components/ui/framed.tsx`): content between hairline
   rails, a rule between sections, two-tone headings (`TwoTone`: ink lead,

@@ -143,34 +143,21 @@ export const blog = {
 } as const;
 
 export const contact = {
-  title: "CONTACT US",
-  // a non-breaking space keeps the last two words together, so the hero lede
-  // never leaves "you." alone on its last line
-  subtitle: "Choose the way that works best for\u00a0you.",
-  // the two cards floating over the hero artwork
-  hero: {
-    reply: { title: "Quick response", detail: "Within one business day" },
-    office: { detail: "Chinatown Point, UTC+8" },
-  },
-  // the hero's shortcuts, one per way in
+  // small label over the contact page heading
+  title: "Contact Us",
+  // the direct lines beside the form, as on the reference layout
   ways: {
-    label: "Ways to reach us",
-    form: "Send a message",
-    email: "Email us",
-    teams: "Find the right team",
-    visit: "Visit our office",
+    label: "Reach us directly",
+    email: "Email",
+    call: "Call",
+    visit: "Office",
   },
   intro: {
-    label: "Get in Touch",
     title: "Let\u2019s Build the Future of Your Enterprise",
     body: [
       "Big ideas deserve a clear path to execution. Whether you are looking to secure your infrastructure, scale your product engineering, or explore the frontier of Quantum Computing, the team at Eastwards is ready to guide you.",
       "We don\u2019t believe in \u201cone size fits all\u201d solutions. Tell us about your goals, your challenges, and where you want to take your business next. Our experts will help you get there with precision and speed.",
     ],
-    // Unsplash, free under the Unsplash License (no credit required):
-    // https://unsplash.com/photos/man-presents-charts-to-seated-audience-in-a-modern-office-Nd7SpexkoNA
-    // illustrative only, never caption the people as our team
-    photo: "/images/contact-meeting.jpg",
   },
   // steps 2 and 3 are proposed wording, confirm them with the client
   next: {

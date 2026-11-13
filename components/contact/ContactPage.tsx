@@ -1,77 +1,113 @@
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
-import { ContactHero } from "@/components/contact/ContactHero";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import PageShell from "@/components/ui/PageShell";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { CopyEmail } from "@/components/contact/CopyEmail";
 import { DotMap } from "@/components/contact/DotMap";
 import { contact } from "@/lib/content";
 
-/* Contact page: the shared dot hero, then the conversation (intro, photo and
-   next steps beside the form), then one black band with the direct team
+/* Contact page, laid out wide (after entersoftsecurity.com/contact): the
+   first screen is the heading, intro, next steps and direct lines on the
+   left with the form beside them, then one black band with the team
    addresses, the dot map and the Singapore office. */
 export function ContactPage() {
-  const { intro, next, teams, location, call, directChannels } = contact;
+  const { intro, next, ways, teams, location, call, directChannels, form } = contact;
   const lastStep = next.steps.length - 1;
   const focusRing = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+  const link = `link-underline-sweep rounded-sm font-medium text-ink transition-colors hover:text-link ${focusRing}`;
 
   return (
     <PageShell pb="pb-16">
-      <ContactHero />
-
-      {/* Phones read intro, form, photo, steps. From 768 the photo and steps
-          sit side by side under the form; from 1280 they stack beside it and
-          the photo takes the spare height, so both columns end level. */}
+      {/* Phones read heading, form, next steps, direct lines. From 1024 the
+          form sits beside the other three, level with the heading. */}
       <section
         aria-labelledby="contact-heading"
-        className="mt-9 grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] xl:grid-rows-[auto_1fr_auto] xl:gap-x-12"
+        className="grid grid-cols-1 gap-8 pt-8 sm:pt-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:grid-rows-[auto_auto_1fr] lg:gap-x-14 lg:pt-10 xl:gap-x-20"
       >
-        <div className="md:col-span-2 xl:col-span-1 xl:col-start-1 xl:row-start-1">
-          <p className="text-small font-semibold text-link">{intro.label}</p>
-          <h2 id="contact-heading" className="mt-3 text-balance text-lead font-medium tracking-[-0.02em] text-ink">
+        <div className="lg:col-start-1 lg:row-start-1">
+          <p className="text-small font-semibold text-link">{contact.title}</p>
+          <h1
+            id="contact-heading"
+            className="mt-3 max-w-[16ch] text-balance font-display text-title font-bold leading-[1.05] tracking-[-0.03em] text-ink"
+          >
             {intro.title}
-          </h2>
+          </h1>
           {intro.body.map((paragraph) => (
-            <p key={paragraph.slice(0, 24)} className="mt-4 max-w-[62ch] text-pretty text-small leading-[1.6] text-body">
+            <p key={paragraph.slice(0, 24)} className="mt-4 max-w-[60ch] text-pretty text-small leading-[1.6] text-body">
               {paragraph}
             </p>
           ))}
         </div>
 
-        <div id="contact-form" className="min-w-0 md:col-span-2 xl:col-span-1 xl:col-start-2 xl:row-span-3 xl:row-start-1">
+        <div id="contact-form" className="min-w-0 scroll-mt-24 lg:col-start-2 lg:row-span-3 lg:row-start-1">
           <ContactForm />
         </div>
 
-        {/* light grey placeholder, the photo's own tone; the crop leans right so
-            the presenter stays in frame when the box is nearly square */}
-        <div className="relative aspect-[16/9] overflow-hidden rounded-3xl bg-line-strong md:aspect-auto md:min-h-[260px] xl:col-start-1 xl:row-start-2 xl:min-h-[240px]">
-          <Image
-            src={intro.photo}
-            alt=""
-            fill
-            loading="eager"
-            sizes="(min-width: 1280px) 40vw, (min-width: 768px) 50vw, 100vw"
-            className="object-cover object-[72%_40%]"
-          />
-          {/* 1px inner outline so the white room doesn't bleed into the page */}
-          <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-black/10" />
-        </div>
-
-        <div className="rounded-3xl bg-primary p-6 text-white sm:p-7 xl:col-start-1 xl:row-start-3">
-          <h3 className="text-small font-semibold">{next.title}</h3>
-          <ol className="mt-5 space-y-5">
+        <div className="rounded-3xl bg-primary p-6 text-white sm:p-7 lg:col-start-1 lg:row-start-2">
+          <h2 className="text-small font-semibold">{next.title}</h2>
+          {/* one row from 640, the steps read left to right */}
+          <ol className="mt-5 grid gap-5 sm:grid-cols-3 sm:gap-4">
             {next.steps.map((step, index) => (
-              <li key={step} className="relative flex items-center gap-4">
+              <li key={step} className="relative flex items-center gap-4 sm:flex-col sm:items-start sm:gap-3">
                 {index < lastStep && (
-                  <span aria-hidden="true" className="absolute -bottom-5 left-[15.5px] top-9 w-px bg-white/40" />
+                  <span
+                    aria-hidden="true"
+                    className="absolute -bottom-5 left-[15.5px] top-9 w-px bg-white/40 sm:bottom-auto sm:left-10 sm:right-1 sm:top-4 sm:h-px sm:w-auto"
+                  />
                 )}
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full text-small font-semibold tabular-nums ring-1 ring-inset ring-white/60">
                   {index + 1}
                 </span>
-                <span className="text-small font-semibold">{step}</span>
+                <span className="text-pretty text-small font-semibold">{step}</span>
               </li>
             ))}
           </ol>
+        </div>
+
+        {/* Direct lines, for visitors who'd rather not use the form */}
+        <div className="lg:col-start-1 lg:row-start-3">
+          <h2 className="text-small font-semibold text-ink">{ways.label}</h2>
+          <dl className="mt-3 divide-y divide-line border-y border-line text-small">
+            <div className="flex items-center gap-4 py-3">
+              <dt className="flex w-24 shrink-0 items-center gap-2.5 text-body">
+                <Mail className="h-4 w-4 text-link" aria-hidden="true" />
+                {ways.email}
+              </dt>
+              <dd className="flex min-w-0 items-center gap-2">
+                <a href={`mailto:${form.inbox}`} className={link}>
+                  {form.inbox}
+                </a>
+                <CopyEmail email={form.inbox} label={teams.copy.label} done={teams.copy.done} tone="light" />
+              </dd>
+            </div>
+            <div className="flex items-start gap-4 py-3">
+              <dt className="flex w-24 shrink-0 items-center gap-2.5 text-body">
+                <Phone className="h-4 w-4 text-link" aria-hidden="true" />
+                {ways.call}
+              </dt>
+              <dd className="space-y-1">
+                {call.phones.map((phone) => (
+                  <span key={phone.number} className="block">
+                    <a href={`tel:${phone.number.replace(/\s/g, "")}`} className={link}>
+                      {phone.number}
+                    </a>
+                    <span className="block text-body sm:inline"> {phone.label}</span>
+                  </span>
+                ))}
+              </dd>
+            </div>
+            <div className="flex items-center gap-4 py-3">
+              <dt className="flex w-24 shrink-0 items-center gap-2.5 text-body">
+                <MapPin className="h-4 w-4 text-link" aria-hidden="true" />
+                {ways.visit}
+              </dt>
+              <dd>
+                <a href="#headquarters" className={link}>
+                  {location.building}, {location.street}
+                </a>
+              </dd>
+            </div>
+          </dl>
         </div>
       </section>
 

@@ -378,25 +378,6 @@ html {
   }
 }
 
-/* Contact hero cards drift a few pixels up and down over the artwork. */
-@keyframes float-soft {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-.float-soft {
-  animation: float-soft 6s ease-in-out infinite;
-}
-@media (prefers-reduced-motion: reduce) {
-  .float-soft {
-    animation: none;
-  }
-}
-
 /* Careers hero tile chart: tiles fade in column by column, once. */
 @keyframes tile-in {
   from {

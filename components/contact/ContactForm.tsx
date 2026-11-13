@@ -379,14 +379,14 @@ export function ContactForm() {
           <textarea
             id="message"
             name="message"
-            rows={5}
+            rows={4}
             placeholder="Tell us what you need help with."
             maxLength={5000}
             required
             aria-invalid={errors.message ? true : undefined}
             aria-describedby={errors.message ? "message-error" : undefined}
             onChange={() => clearError("message")}
-            className={`${FIELD_CLASS} min-h-[140px] w-full resize-y py-3`}
+            className={`${FIELD_CLASS} min-h-[120px] w-full resize-y py-3`}
           />
           {errors.message ? (
             <p id="message-error" className={ERROR_CLASS}>
