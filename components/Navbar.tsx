@@ -134,6 +134,47 @@ function ServicesMenu({ pathname }: { pathname: string }) {
   );
 }
 
+/* About: a short panel under its trigger, one row per page with a line on
+   what's there. Same trigger and panel look as Services. */
+function AboutMenu({ pathname }: { pathname: string }) {
+  const current = nav.about.items.some((item) => isCurrent(pathname, item.href));
+
+  return (
+    <NavigationMenuItem>
+      <NavigationMenuTrigger
+        className={cn(
+          "h-auto rounded-sm px-0 py-0 text-small font-medium tracking-[0.02em] hover:bg-transparent hover:text-link focus:bg-transparent data-open:bg-transparent data-open:text-link data-open:hover:bg-transparent data-open:focus:bg-transparent [&>svg:last-child]:hidden",
+          current ? "text-link" : "text-ink",
+          focusRing
+        )}
+      >
+        {nav.about.label}
+        <Chevron className="ml-1 h-3 w-3 shrink-0 rotate-90 transition-transform duration-300 group-data-open/navigation-menu-trigger:-rotate-90" />
+      </NavigationMenuTrigger>
+      <NavigationMenuContent className="nav-services-panel nav-about-panel">
+        <ul>
+          {nav.about.items.map((item) => (
+            <li key={item.href}>
+              <NavigationMenuLink
+                asChild
+                active={isCurrent(pathname, item.href)}
+                className="group/about block rounded-[10px] px-3 py-2.5 text-small transition-colors duration-150 in-data-[slot=navigation-menu-content]:rounded-[10px] hover:bg-surface focus:bg-surface data-active:bg-transparent"
+              >
+                <Link href={item.href}>
+                  <span className="block font-medium text-ink transition-colors duration-150 group-hover/about:text-link group-data-active/about:text-link">
+                    {item.label}
+                  </span>
+                  <span className="mt-0.5 block font-normal text-body">{item.description}</span>
+                </Link>
+              </NavigationMenuLink>
+            </li>
+          ))}
+        </ul>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
+  );
+}
+
 /* Below 1024 the menu is a full-screen sheet with its own copy of the header
    bar. Keyed on the path so any navigation (back button included) closes it.
    Radix handles focus, Escape and the scroll lock (through the overlay). */
@@ -163,7 +204,7 @@ function MobileMenu({ pathname, scrolled }: { pathname: string; scrolled: boolea
           className="fixed inset-0 z-[60] flex flex-col overflow-y-auto overscroll-contain bg-page text-ink data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:duration-200 motion-reduce:animate-none"
         >
           <Dialog.Title className="sr-only">{nav.menu.title}</Dialog.Title>
-          <div className="flex h-[60px] shrink-0 items-center gap-3 border-b border-line px-[48px] sm:h-[68px]">
+          <div className="flex h-[60px] shrink-0 items-center gap-3 border-b border-line px-6 sm:h-[68px] sm:px-[48px]">
             {/* same size as the bar's logo, so opening the menu doesn't jump */}
             <Dialog.Close asChild>
               <Logo className={logoScale(scrolled)} />
@@ -184,7 +225,7 @@ function MobileMenu({ pathname, scrolled }: { pathname: string; scrolled: boolea
             </div>
           </div>
 
-          <nav aria-label="Main" className="px-[48px] pt-2">
+          <nav aria-label="Main" className="px-6 pt-2 sm:px-[48px]">
             <Dialog.Close asChild>
               <Link
                 href={nav.home.href}
@@ -250,9 +291,40 @@ function MobileMenu({ pathname, scrolled }: { pathname: string; scrolled: boolea
                 </Link>
               </Dialog.Close>
             ))}
+            <details
+              className="group border-b border-line"
+              open={nav.about.items.some((item) => isCurrent(pathname, item.href)) || undefined}
+            >
+              <summary
+                className={cn(
+                  "flex min-h-14 cursor-pointer list-none items-center justify-between rounded-sm text-lead font-medium [&::-webkit-details-marker]:hidden",
+                  nav.about.items.some((item) => isCurrent(pathname, item.href)) ? "text-link" : "text-ink",
+                  focusRing
+                )}
+              >
+                {nav.about.label}
+                <Chevron className="h-4 w-4 rotate-90 transition-transform duration-200 group-open:-rotate-90 motion-reduce:transition-none" />
+              </summary>
+              <ul className="pb-4">
+                {nav.about.items.map((item) => (
+                  <li key={item.href}>
+                    <Dialog.Close asChild>
+                      <Link
+                        href={item.href}
+                        aria-current={isCurrent(pathname, item.href) ? "page" : undefined}
+                        className={cn(row, "flex-col items-start justify-center py-2 text-small")}
+                      >
+                        <span className="font-medium">{item.label}</span>
+                        <span className="text-body">{item.description}</span>
+                      </Link>
+                    </Dialog.Close>
+                  </li>
+                ))}
+              </ul>
+            </details>
           </nav>
 
-          <div className="mt-auto space-y-5 px-[48px] pb-10 pt-8">
+          <div className="mt-auto space-y-5 px-6 pb-10 sm:px-[48px] pt-8">
             <Dialog.Close asChild>
               <ContactButton current={pathname === nav.cta.href} className="w-full" />
             </Dialog.Close>
@@ -283,7 +355,8 @@ export function Navbar() {
       )}
     >
       {/* a div, not a nav: Radix NavigationMenu renders the "Main" nav landmark */}
-      <div className="flex h-[60px] w-full items-center gap-7 px-[48px] sm:h-[68px] sm:gap-8 lg:h-[72px] lg:gap-9">
+      {/* phones: 24px, the same gutter as page content and the footer */}
+      <div className="flex h-[60px] w-full items-center gap-7 px-6 sm:h-[68px] sm:px-[48px] sm:gap-8 lg:h-[72px] lg:gap-9">
         <Logo className={logoScale(scrolled)} />
 
         <NavigationMenu viewport={false} className="ml-auto hidden lg:flex">
@@ -315,6 +388,7 @@ export function Navbar() {
                 </NavigationMenuLink>
               </NavigationMenuItem>
             ))}
+            <AboutMenu pathname={pathname} />
           </NavigationMenuList>
         </NavigationMenu>
 

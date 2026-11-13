@@ -196,17 +196,19 @@ function PinnedStack() {
   );
 }
 
-/* Phones and reduced motion: the layers as cards stacking on scroll */
+/* Phones and reduced motion: the layers as cards stacking on scroll. Cards
+   only pin on screens tall enough to show a whole card, so on short phones
+   the next card never slides over points not yet read. */
 function CardStack() {
   return (
-    <ol className="space-y-5 px-6 pb-16 sm:px-10">
+    <ol className="mx-auto max-w-[720px] space-y-4 px-6 pb-16 sm:px-10 lg:px-0">
       {layers.map((item, index) => (
         <li
           key={item.id}
-          className="sticky overflow-hidden rounded-3xl border border-white/10 bg-[var(--color-band)] shadow-[0_-12px_30px_-12px_rgb(0_0_0/0.6)]"
-          style={{ top: `calc(76px + ${index * 14}px)` }}
+          className="relative overflow-hidden rounded-2xl border border-white/10 bg-[var(--color-band)] shadow-[0_-12px_30px_-12px_rgb(0_0_0/0.6)] [@media(min-height:700px)]:sticky"
+          style={{ top: `calc(76px + ${index * 12}px)` }}
         >
-          <div className="relative aspect-[16/9] bg-white/5">
+          <div className="relative aspect-[2/1] bg-white/5">
             <Image
               src={item.image.src}
               alt={item.image.alt}
@@ -214,13 +216,13 @@ function CardStack() {
               sizes="(min-width: 640px) 80vw, calc(100vw - 48px)"
               className="object-cover"
             />
-            <span className="absolute left-4 top-4 rounded-lg bg-[var(--color-band)]/85 px-2.5 py-1 text-small font-medium tabular-nums text-white">
+            <span className="absolute left-3 top-3 rounded-lg bg-[var(--color-band)]/85 px-2.5 py-1 text-small font-medium tabular-nums text-white">
               {LAYER} {pad(index + 1)} {OF} {pad(COUNT)}
             </span>
           </div>
           <div className="p-5 sm:p-7">
-            <h3 className="font-display text-lead font-bold tracking-[-0.02em] text-white">{item.title}</h3>
-            <ul className="mt-5 space-y-4 border-t border-white/10 pt-5">
+            <h3 className="text-balance font-display text-lead font-bold leading-[1.15] tracking-[-0.02em] text-white">{item.title}</h3>
+            <ul className="mt-4 space-y-3.5 border-t border-white/10 pt-4">
               {item.items.map((point) => (
                 <li key={point.title}>
                   <p className="text-small font-semibold text-white">{point.title}</p>

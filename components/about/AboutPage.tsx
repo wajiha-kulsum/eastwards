@@ -32,14 +32,15 @@ export default function AboutPage() {
             {hero.lead}
           </h1>
           <p className="mt-5 max-w-[44ch] text-pretty text-lead leading-[1.35] tracking-[-0.01em] text-body">{hero.rest}</p>
-          <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <PrimaryButton href={hero.primary.href} className="min-h-11 gap-2 px-6 text-small lg:min-h-[52px] lg:px-7">
+          {/* phones: one full-width button, the secondary link centred under it */}
+          <div className="mt-8 flex flex-col gap-2 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-3">
+            <PrimaryButton href={hero.primary.href} className="min-h-12 gap-2 px-6 text-small sm:min-h-11 lg:min-h-[52px] lg:px-7">
               {hero.primary.label}
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </PrimaryButton>
             <a
               href={hero.secondary.href}
-              className={`inline-flex min-h-11 items-center gap-1.5 rounded-sm px-1 text-small font-semibold text-ink transition-colors hover:text-link ${FOCUS}`}
+              className={`inline-flex min-h-11 items-center justify-center gap-1.5 rounded-sm px-1 text-small font-semibold text-ink transition-colors hover:text-link ${FOCUS}`}
             >
               <span className="link-underline-sweep">{hero.secondary.label}</span>
               <ArrowDown className="h-4 w-4" aria-hidden="true" />
@@ -56,8 +57,8 @@ export default function AboutPage() {
             sizes="(min-width: 1720px) 760px, (min-width: 1024px) 46vw, calc(100vw - 48px)"
             className="aspect-[4/3] h-auto w-full rounded-3xl object-cover"
           />
-          <figcaption className="absolute bottom-4 left-4 flex items-center gap-3 rounded-2xl border border-line bg-card/95 py-2.5 pl-2.5 pr-4 shadow-[0_8px_24px_-12px_rgb(0_0_0/0.35)] backdrop-blur-sm sm:bottom-5 sm:left-5">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-primary/10 text-link">
+          <figcaption className="absolute bottom-3 left-3 flex items-center gap-2.5 whitespace-nowrap rounded-2xl border border-line bg-card/95 py-2 pl-2 pr-3.5 shadow-[0_8px_24px_-12px_rgb(0_0_0/0.35)] backdrop-blur-sm sm:bottom-5 sm:left-5 sm:gap-3 sm:py-2.5 sm:pl-2.5 sm:pr-4">
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-primary/10 text-link sm:h-9 sm:w-9">
               <MapPin className="h-4 w-4" aria-hidden="true" />
             </span>
             <span className="leading-tight">

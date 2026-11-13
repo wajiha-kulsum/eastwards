@@ -3,16 +3,25 @@
    backend/CMS integration seamless. */
 
 /* Header navigation. Services opens the menu built from serviceLinks
-   (lib/service-groups.ts); Contact Us is the header button, so it isn't a
-   link here. */
+   (lib/service-groups.ts) and About opens its own short menu; Contact Us is
+   the header button, so it isn't a link here. */
 export const nav = {
   home: { label: "Home", href: "/" },
   services: "Services",
   allServices: { label: "View all services", href: "/services" },
-  links: [
-    { label: "Partners", href: "/partners" },
-    { label: "About", href: "/about" },
-  ],
+  links: [{ label: "Partners", href: "/partners" }],
+  about: {
+    label: "About",
+    items: [
+      { label: "About", href: "/about", description: "Who we are and how we work" },
+      { label: "Careers", href: "/careers", description: "Open roles and how to apply" },
+      {
+        label: "Corporate Social Responsibility",
+        href: "/responsibility",
+        description: "How we grow responsibly",
+      },
+    ],
+  },
   cta: { label: "Contact Us", href: "/contact" },
   // tags menu items that open the contact form instead of a service page
   enquire: "Enquire",

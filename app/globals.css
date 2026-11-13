@@ -124,6 +124,16 @@ html {
   gap: 0 24px;
 }
 
+/* About's panel: the same look, one column, right-aligned under its own
+   trigger so it never runs past the viewport edge */
+.nav-about-panel {
+  right: -12px;
+  left: auto;
+  width: 360px;
+  padding: 8px;
+  grid-template-columns: 1fr;
+}
+
 /* the content's own focus:outline-none would hide the keyboard focus ring */
 .nav-services-panel a:focus-visible {
   outline: 2px solid #2868ff;

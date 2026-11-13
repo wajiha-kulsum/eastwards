@@ -41,12 +41,14 @@ export function TwoTone({
   );
 }
 
-/* The page frame: the site lane, then the railed column inside it */
+/* The page frame: the site lane, then the railed column inside it. Phones
+   drop the rails and their gutter, so content keeps the full width and
+   lines up with the footer at 24px. */
 export function FramedPage({ children }: { children: React.ReactNode }) {
   return (
     <main id="main" className="flex-1 bg-page text-ink">
-      <div className="mx-auto max-w-[1720px] px-6 pt-3 sm:px-10 lg:px-[5.35%]">
-        <div className="border-x border-line">{children}</div>
+      <div className="mx-auto max-w-[1720px] pt-3 sm:px-10 lg:px-[5.35%]">
+        <div className="sm:border-x sm:border-line">{children}</div>
       </div>
     </main>
   );
