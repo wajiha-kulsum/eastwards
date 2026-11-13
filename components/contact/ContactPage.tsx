@@ -17,12 +17,12 @@ export function ContactPage() {
   const link = `link-underline-sweep rounded-sm font-medium text-ink transition-colors hover:text-link ${focusRing}`;
 
   return (
-    <PageShell pb="pb-16">
+    <PageShell pb="pb-16" wide>
       {/* Phones read heading, form, next steps, direct lines. From 1024 the
           form sits beside the other three, level with the heading. */}
       <section
         aria-labelledby="contact-heading"
-        className="grid grid-cols-1 gap-8 pt-8 sm:pt-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:grid-rows-[auto_auto_1fr] lg:gap-x-14 lg:pt-10 xl:gap-x-20"
+        className="grid grid-cols-1 gap-8 pt-8 sm:pt-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.2fr)] xl:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:grid-rows-[auto_auto_1fr] lg:gap-x-12 lg:pt-10 xl:gap-x-16"
       >
         <div className="lg:col-start-1 lg:row-start-1">
           <p className="text-small font-semibold text-link">{contact.title}</p>
