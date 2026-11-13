@@ -90,7 +90,6 @@ function ServicesMenu({ pathname }: { pathname: string }) {
                 >
                   <Link href={link.href}>
                     {link.label}
-                    {link.enquire && <span className="text-small font-normal text-body">{nav.enquire}</span>}
                   </Link>
                 </NavigationMenuLink>
               </li>
@@ -260,7 +259,6 @@ function MobileMenu({ pathname, scrolled }: { pathname: string; scrolled: boolea
                               className={cn(row, "justify-between gap-4 text-small")}
                             >
                               {link.label}
-                              {link.enquire && <span className="text-small text-body">{nav.enquire}</span>}
                             </Link>
                           </Dialog.Close>
                         </li>

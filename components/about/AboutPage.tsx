@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { ArrowDown, ArrowUpRight, MapPin, Rocket, ShieldCheck, TrendingUp, type LucideIcon } from "lucide-react";
 import { CapabilityStack } from "@/components/about/CapabilityStack";
-import { CopyEmail } from "@/components/contact/CopyEmail";
 import { BODY, CHIP, FOCUS, FramedPage, PAD, SECTION, TwoTone } from "@/components/ui/framed";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import { about, type PromiseIcon } from "@/lib/about";
@@ -118,15 +117,12 @@ export default function AboutPage() {
             {contact.directChannels.channels.map((channel) => (
               <li key={channel.email} className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 py-4 sm:py-5">
                 <span className="text-small text-body">{channel.department}</span>
-                <span className="flex items-center gap-3">
-                  <a
-                    href={`mailto:${channel.email}`}
-                    className={`rounded-sm text-small font-semibold text-ink transition-colors hover:text-link ${FOCUS}`}
-                  >
-                    <span className="link-underline-sweep">{channel.email}</span>
-                  </a>
-                  <CopyEmail email={channel.email} label={channels.copy.label} done={channels.copy.done} tone="light" />
-                </span>
+                <a
+                  href={`mailto:${channel.email}`}
+                  className={`rounded-sm text-small font-semibold text-ink transition-colors hover:text-link ${FOCUS}`}
+                >
+                  <span className="link-underline-sweep">{channel.email}</span>
+                </a>
               </li>
             ))}
           </ul>

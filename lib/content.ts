@@ -23,8 +23,6 @@ export const nav = {
     ],
   },
   cta: { label: "Contact Us", href: "/contact" },
-  // tags menu items that open the contact form instead of a service page
-  enquire: "Enquire",
   menu: { title: "Menu", open: "Open menu", close: "Close menu" },
 } as const;
 
@@ -191,8 +189,8 @@ export const contact = {
   call: {
     // the +65 number has 11 digits, Singapore numbers have 8: confirm it
     phones: [
-      { number: "+65 93756 413513", label: "Singapore, UTC+8" },
-      { number: "+91 99125 96699", label: "India, UTC+5:30" },
+      { number: "+65 93756 413513", label: "Singapore" },
+      { number: "+91 99125 96699", label: "India" },
     ],
   },
   form: {
@@ -235,9 +233,6 @@ export const contact = {
       again: "Send Another Message",
     },
   },
-  teams: {
-    copy: { label: "Copy", done: "Copied" },
-  },
   directChannels: {
     title: "Direct Channels",
     subtitle:
@@ -258,7 +253,7 @@ export const contact = {
    details from `contact`. Only working links are listed; the social profiles
    below are the verified accounts. */
 export const footer = {
-  tagline: "Technology that moves business forward",
+  tagline: "Guiding Enterprises Towards Intelligent Growth",
   // closing call to action above the footer links
   cta: {
     title: "Have a technology challenge to solve?",

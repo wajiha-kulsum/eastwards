@@ -16,7 +16,6 @@ import {
   Users,
   type LucideIcon,
 } from "lucide-react";
-import { CopyEmail } from "@/components/contact/CopyEmail";
 import { PillarsFigure } from "@/components/responsibility/Graphics";
 import { PillarNav } from "@/components/responsibility/PillarNav";
 import { BODY, CHIP, FOCUS, FramedPage, GRID_BG, HATCH, PAD, SECTION, TwoTone } from "@/components/ui/framed";
@@ -234,12 +233,9 @@ export default function ResponsibilityPage() {
               <Mail className="h-4 w-4" aria-hidden="true" />
               {contact.button}
             </PrimaryButton>
-            <span className="inline-flex items-center gap-2">
-              <a href={`mailto:${CSR_EMAIL}`} className={`link-underline-sweep rounded-sm text-small font-semibold text-ink ${FOCUS}`}>
-                {CSR_EMAIL}
-              </a>
-              <CopyEmail email={CSR_EMAIL} label={contact.copy.label} done={contact.copy.done} tone="light" />
-            </span>
+            <a href={`mailto:${CSR_EMAIL}`} className={`link-underline-sweep rounded-sm text-small font-semibold text-ink ${FOCUS}`}>
+              {CSR_EMAIL}
+            </a>
           </div>
         </div>
         <div aria-hidden="true" className="relative hidden place-items-center border-l border-line p-10 lg:grid">

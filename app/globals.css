@@ -448,6 +448,14 @@ html {
   color: var(--color-placeholder);
 }
 
+/* Native dropdown lists (the country picker, the form selects): Chrome on
+   Windows draws a transparent select's list white while the text follows
+   the theme, so dark mode showed light text on white. Paint them to theme. */
+select option {
+  background-color: var(--color-card);
+  color: var(--color-ink);
+}
+
 /* About capability stack: a layer's title and points come into focus
    (blur and opacity, a few pixels of rise) when the layer changes. */
 @keyframes focus-in {
