@@ -18,7 +18,6 @@ export const nav = {
       {
         label: "Corporate Social Responsibility",
         href: "/responsibility",
-        description: "How we grow responsibly",
       },
     ],
   },
