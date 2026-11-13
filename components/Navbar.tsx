@@ -312,7 +312,6 @@ function MobileMenu({ pathname, scrolled }: { pathname: string; scrolled: boolea
                         className={cn(row, "flex-col items-start justify-center py-2 text-small")}
                       >
                         <span className="font-medium">{item.label}</span>
-                        <span className="text-body">{item.description}</span>
                       </Link>
                     </Dialog.Close>
                   </li>
