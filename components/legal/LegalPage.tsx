@@ -156,7 +156,7 @@ function Table({ block }: { block: Extract<LegalBlock, { kind: "table" }> }) {
 }
 
 function NecessityBadge({ value }: { value: string }) {
-  const required = value === "Mandatory";
+  const required = value === "Mandatory" || value === "Essential";
   return (
     <span
       className={`inline-flex rounded-full px-2.5 py-0.5 text-small font-medium ${required ? "bg-primary text-white" : "bg-surface text-body ring-1 ring-inset ring-line-strong"}`}

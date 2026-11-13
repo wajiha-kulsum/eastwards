@@ -37,69 +37,99 @@ const ADDRESS = `${location.street}, ${location.unit} ${location.building}, ${lo
 const LEGAL_EMAIL = "legal@eastwards.co";
 const DPO_EMAIL = "DPO@eastwards.co";
 
+/* Terms of Use for eastwards.co, written to Singapore law as it stands in
+   November 2026: the Unfair Contract Terms Act 1977 (no exclusion of
+   liability for death or personal injury caused by negligence, other
+   exclusions only as far as reasonable), the Copyright Act 2021 (terms
+   cannot take away its permitted uses, such as computational data
+   analysis), the Computer Misuse Act 1993, and the Contracts (Rights of
+   Third Parties) Act 2001. They cover the website only: consulting work is
+   under each client's service agreement. Not legal advice: have Singapore
+   counsel review them. */
 export const terms: LegalDoc = {
   path: "/terms",
   title: "Terms of Use",
   description:
-    "The terms that apply when you use eastwards.co: intellectual property, permitted use, liability and the Singapore law that governs them.",
+    "The terms that apply when you use eastwards.co: intellectual property, acceptable use, liability, and the Singapore law that governs them.",
   intro: [
-    "Welcome to Eastwards.co. This website is owned and operated by Eastwards Consulting Pte Ltd. By accessing or using this website, including our blogs and news articles, you agree to comply with and be bound by the following terms and conditions.",
+    "These Terms of Use apply to your use of eastwards.co (the “website”), which is owned and operated by Eastwards Consulting Pte Ltd (“Eastwards”, “we” or “us”), a company registered in Singapore.",
+    "By accessing or using the website, you agree to these terms. If you do not agree, please do not use the website. Our [Privacy Policy](/privacy) and [Cookie Policy](/cookies) explain how we handle personal data and cookies, and form part of these terms.",
   ],
-  numbered: false,
+  numbered: true,
   // Scott Graham on Unsplash, free under the Unsplash License (no credit required):
   // https://unsplash.com/photos/man-writing-on-paper-OQMZwNd3ThU
   image: { src: "/images/legal-terms.jpg", alt: "A person signing a printed document at a desk", width: 1600, height: 1068 },
   highlights: [
     { icon: "landmark", title: "Singapore law", text: "These terms are governed by the laws of Singapore and its courts." },
-    { icon: "info", title: "Information, not advice", text: "Site content is general information. Consulting needs a formal service agreement." },
-    { icon: "shield", title: "Use it lawfully", text: "No malware, no scraping without permission, nothing that harms the site." },
+    {
+      icon: "info",
+      title: "Information, not advice",
+      text: "Website content is general information. Consulting work is covered by a separate service agreement.",
+    },
+    { icon: "shield", title: "Use it lawfully", text: "No malware, no unauthorised access, nothing that harms the site or others." },
   ],
   sections: [
     {
-      id: "intellectual-property",
-      title: "Intellectual Property Rights",
+      id: "about-these-terms",
+      title: "About These Terms",
       blocks: [
         {
-          kind: "p",
-          text: "Unless otherwise stated, Eastwards Consulting Pte Ltd owns the intellectual property rights for all material on this website, including:",
-        },
-        {
           kind: "list",
           items: [
-            "Text, graphics, and logos.",
-            "Whitepapers, case studies, blogs, news articles, and service descriptions regarding AI, Quantum Computing, and Cybersecurity.",
-            "Website design and layout.",
-          ],
-        },
-        {
-          kind: "list",
-          lead: "You may:",
-          tone: "allow",
-          items: ["View and download content for personal, non-commercial caching or printing only."],
-        },
-        {
-          kind: "list",
-          lead: "You must not:",
-          tone: "deny",
-          items: [
-            "Repost, sell, rent, or sub-license material from this website without our express written consent.",
-            "Use our content in a way that infringes copyright or intellectual property rights.",
+            "These terms cover the website only. Any consulting, staffing or other services we provide are governed by the service agreement we sign with you, which takes priority over these terms if the two conflict.",
+            "You must be at least 18, or using the website with the permission of a parent, guardian or your employer, to accept these terms.",
+            "If you use the website on behalf of a company or other organisation, you confirm that you are authorised to accept these terms for it.",
           ],
         },
       ],
     },
     {
-      id: "permitted-use",
-      title: "Permitted Use",
+      id: "intellectual-property",
+      title: "Intellectual Property",
       blocks: [
-        { kind: "p", text: "You agree to use this website only for lawful purposes. You are prohibited from:" },
+        {
+          kind: "p",
+          text: "Unless stated otherwise, Eastwards owns or is licensed to use all intellectual property rights in the website, including its text, graphics, logos, design and layout, and our articles, case studies and service descriptions. These are protected by the Copyright Act 2021 and other intellectual property laws.",
+        },
+        {
+          kind: "list",
+          lead: "You may:",
+          tone: "allow",
+          items: [
+            "View, download and print pages for your own reference or for internal use within your organisation.",
+            "Share links to our pages.",
+          ],
+        },
+        {
+          kind: "list",
+          lead: "You must not, without our written permission:",
+          tone: "deny",
+          items: [
+            "Republish, sell, rent, sub-license or otherwise commercially exploit material from the website.",
+            "Remove or change any copyright or other notices.",
+            "Use our name, logo or trade marks in a way that suggests we endorse you or your products.",
+          ],
+        },
+        {
+          kind: "p",
+          text: "Names and logos of our partners and other companies shown on the website belong to their owners. Nothing in these terms limits any use of our content that the Copyright Act 2021 permits, such as fair use or computational data analysis.",
+        },
+      ],
+    },
+    {
+      id: "acceptable-use",
+      title: "Acceptable Use",
+      blocks: [
+        { kind: "p", text: "You agree to use the website only for lawful purposes. You must not:" },
         {
           kind: "list",
           tone: "deny",
           items: [
-            "Using the site in any way that causes damage or impairs availability.",
-            "Uploading or transmitting spyware, viruses, or malicious software.",
-            "Conducting systematic or automated data collection (scraping, mining) without our permission.",
+            "Gain, or try to gain, unauthorised access to the website, its servers or any connected system, which may be an offence under the Computer Misuse Act 1993.",
+            "Upload or transmit viruses, spyware or any other harmful code.",
+            "Use the website in a way that damages it, disrupts it, or impairs its availability or security, including by overloading it with automated requests.",
+            "Send spam, or submit false, misleading or someone else’s information through our forms.",
+            "Use the website to harass anyone, or to infringe anyone’s rights.",
           ],
         },
       ],
@@ -110,35 +140,47 @@ export const terms: LegalDoc = {
       blocks: [
         {
           kind: "p",
-          text: "The information provided on this website, including blogs, news articles, and service pages, is for general informational purposes only. It does not constitute professional technical, business, or legal advice. For specific consulting needs, you must enter into a formal service agreement with us.",
+          text: "The content on the website, including articles and service pages, is general information only. It is not professional technical, business, legal or financial advice, and you should not rely on it as such. For advice on your situation, please [contact us](/contact) about a formal engagement.",
         },
       ],
     },
     {
-      id: "user-generated-content",
-      title: "User-Generated Content",
+      id: "information-you-send",
+      title: "Information You Send Us",
       blocks: [
         {
           kind: "p",
-          text: "If you submit inquiries via our [“Contact Us”](/contact) forms or provide comments on our blog:",
+          text: "When you send us an enquiry, a job application or other information through the website:",
         },
         {
           kind: "list",
           items: [
-            "You grant us a non-exclusive, royalty-free license to use and process that information to fulfill your request.",
-            "You agree that we may moderate, edit, or remove comments at our discretion.",
-            "You must not submit content that is defamatory, obscene, or infringes on third-party rights.",
+            "You confirm that it is accurate and that you are entitled to share it.",
+            "You allow us to use it to respond to you and for the purposes described in our [Privacy Policy](/privacy).",
+            "You must not send anything that is unlawful, defamatory, or that infringes someone else’s rights, or confidential information you are not allowed to share.",
+            "Sending an enquiry does not create a client relationship or any obligation on either side until we sign a service agreement.",
           ],
         },
       ],
     },
     {
-      id: "age-limitations",
-      title: "Age Limitations",
+      id: "availability-and-accuracy",
+      title: "Availability and Accuracy",
       blocks: [
         {
           kind: "p",
-          text: "Our website and services are intended for business clients and are not directed to children under 16 years of age. We do not knowingly collect personal data from minors.",
+          text: "We work to keep the website accurate and available, but we provide it “as is” and “as available”. To the extent permitted by law, we do not promise that:",
+        },
+        {
+          kind: "list",
+          items: [
+            "The website will always be available, uninterrupted, secure or free of errors or viruses.",
+            "Its content is complete, accurate or up to date.",
+          ],
+        },
+        {
+          kind: "p",
+          text: "We may change, suspend or remove any part of the website at any time.",
         },
       ],
     },
@@ -148,16 +190,12 @@ export const terms: LegalDoc = {
       blocks: [
         {
           kind: "p",
-          text: "Eastwards Consulting Pte Ltd provides this website on an “as-is” basis. While we strive for accuracy, we make no representations or warranties:",
+          text: "The website is free to use. To the extent permitted by law, Eastwards will not be liable to you for any loss or damage arising from your use of, or inability to use, the website or its content, including loss of profits, revenue, data, business or goodwill, or any indirect or consequential loss.",
         },
         {
-          kind: "list",
-          items: [
-            "That the website will be constantly available or error-free.",
-            "That the information on this website is complete, true, or non-misleading.",
-          ],
+          kind: "p",
+          text: "Nothing in these terms excludes or limits our liability for death or personal injury caused by our negligence, for fraud or fraudulent misrepresentation, or for anything else that cannot be excluded or limited under Singapore law, including the Unfair Contract Terms Act 1977.",
         },
-        { kind: "p", text: "We will not be liable for any loss or damage arising from your use of this website." },
       ],
     },
     {
@@ -166,58 +204,86 @@ export const terms: LegalDoc = {
       blocks: [
         {
           kind: "p",
-          text: "You agree to indemnify and hold harmless Eastwards Consulting Pte Ltd, its employees, and affiliates against any claims, damages, liabilities, or expenses arising from your misuse of the website or violation of these Terms of Use.",
-        },
-      ],
-    },
-    {
-      id: "termination-of-use",
-      title: "Termination of Use",
-      blocks: [
-        {
-          kind: "p",
-          text: "We reserve the right to suspend or terminate your access to the website at any time, without notice, if you violate these Terms of Use or engage in unlawful activity.",
+          text: "You agree to compensate Eastwards, its employees and affiliates for any claims, losses, liabilities and reasonable costs (including legal fees) arising from your breach of these terms or your unlawful use of the website.",
         },
       ],
     },
     {
       id: "external-links",
-      title: "External Links",
+      title: "Links to Other Websites",
       blocks: [
         {
           kind: "p",
-          text: "Our website may contain links to third-party websites (e.g., partners, cloud providers). We have no control over the content or privacy practices of these sites and accept no responsibility for them.",
+          text: "The website links to other websites, such as our partners and our social media profiles. We do not control them and are not responsible for their content or their privacy practices. A link does not mean we endorse the website or its owner.",
+        },
+      ],
+    },
+    {
+      id: "termination-of-use",
+      title: "Suspending Your Access",
+      blocks: [
+        {
+          kind: "p",
+          text: "We may suspend or end your access to the website, without notice, if we reasonably believe you have breached these terms or used the website unlawfully.",
         },
       ],
     },
     {
       id: "variation-and-updates",
-      title: "Variation & Updates",
+      title: "Changes to These Terms",
       blocks: [
         {
           kind: "p",
-          text: "We may revise these Terms of Use from time to time. The revised terms will apply from the date of publication. Material changes will be notified via a website banner or other appropriate means.",
+          text: "We may update these terms from time to time. The updated terms apply from the date we publish them on this page, and we will tell you about significant changes through the website. If you keep using the website after that, you accept the updated terms.",
+        },
+      ],
+    },
+    {
+      id: "general",
+      title: "General",
+      blocks: [
+        {
+          kind: "list",
+          items: [
+            {
+              term: "Severability",
+              text: "If a court finds any part of these terms invalid or unenforceable, the rest of the terms continue to apply.",
+            },
+            {
+              term: "No waiver",
+              text: "If we do not enforce a right under these terms straight away, we can still enforce it later.",
+            },
+            {
+              term: "Third-party rights",
+              text: "No one other than you and Eastwards has any right to enforce these terms under the Contracts (Rights of Third Parties) Act 2001.",
+            },
+            {
+              term: "Transfer",
+              text: "We may transfer our rights and obligations under these terms, for example if our business is sold or restructured.",
+            },
+          ],
         },
       ],
     },
     {
       id: "governing-law",
-      title: "Governing Law",
+      title: "Governing Law and Disputes",
       blocks: [
         {
           kind: "p",
-          text: "These terms are governed by and construed in accordance with the laws of Singapore. Any disputes relating to these terms shall be subject to the exclusive jurisdiction of the courts of Singapore.",
+          text: "These terms, and any dispute arising from them or from your use of the website, are governed by the laws of Singapore. The courts of Singapore have exclusive jurisdiction. Before starting proceedings, please contact us so we can try to resolve the matter informally.",
         },
       ],
     },
     {
       id: "contact-details",
-      title: "Contact Details",
+      title: "Contact Us",
       blocks: [
-        { kind: "p", text: "If you have any questions about these Terms of Use, please contact us:" },
+        { kind: "p", text: "If you have questions about these Terms of Use, please contact us:" },
         {
           kind: "contact",
           items: [
+            { label: "Company", value: contact.location.company },
             { label: "Email", value: LEGAL_EMAIL, href: `mailto:${LEGAL_EMAIL}` },
             { label: "Address", value: ADDRESS },
           ],
@@ -227,40 +293,114 @@ export const terms: LegalDoc = {
   ],
 };
 
+/* Privacy Policy, written to Singapore's Personal Data Protection Act 2012
+   (PDPA) as it stands in November 2026: the PDPA's obligations (consent,
+   notification, purpose, access and correction, accuracy, protection,
+   retention, transfer, breach notification, accountability), the Do Not
+   Call and Spam Control rules for marketing, the PDPC's NRIC guidelines,
+   and the Personal Data Protection Regulations 2021 as amended in 2026 for
+   overseas transfers. The PDPA's data portability obligation is not yet in
+   force, so the policy does not promise it as a legal right.
+   Points the client must confirm before relying on them: the 12-month
+   retention of unsuccessful job applications, and that every service
+   provider has a transfer contract or recognised certification in place.
+   Not legal advice: have Singapore counsel review it. */
 export const privacy: LegalDoc = {
   path: "/privacy",
   title: "Privacy Policy",
   description:
-    "How Eastwards Consulting collects, uses, shares and protects your personal data under Singapore’s PDPA, and how to exercise your rights.",
+    "How Eastwards Consulting collects, uses, shares and protects your personal data under Singapore’s Personal Data Protection Act 2012 (PDPA), and how to exercise your rights.",
   intro: [
-    "Welcome to Eastwards Consulting Pte Ltd. We value your privacy and are committed to protecting your personal data. This Privacy Policy outlines how we collect, use, disclose, and safeguard your information when you interact with our website and services.",
+    "Eastwards Consulting Pte Ltd (“Eastwards”, “we” or “us”) respects your privacy. This Privacy Policy explains how we collect, use, disclose and protect your personal data when you visit eastwards.co, contact us, apply to work with us, or engage our services, and how you can exercise your rights.",
+    "We handle personal data in line with Singapore’s Personal Data Protection Act 2012 (PDPA), its regulations, and the advisory guidelines of the Personal Data Protection Commission (PDPC). By using our website or giving us your personal data, you acknowledge that we will handle it as described here.",
   ],
   numbered: true,
   // Philipp Katzenberger on Unsplash, free under the Unsplash License (no credit required):
   // https://unsplash.com/photos/closeup-photo-of-turned-on-blue-and-white-laptop-computer-iIJrUoeRoCQ
   image: { src: "/images/legal-privacy.jpg", alt: "A laptop keyboard lit in blue in a dark room", width: 1600, height: 1067 },
   highlights: [
-    { icon: "ban", title: "We do not sell your data", text: "We share it only on a need-to-know basis, with trusted vendors, or when the law requires." },
-    { icon: "user", title: "Your data, your rights", text: "Access, correct, delete or move your data, or withdraw consent at any time." },
-    { icon: "clock", title: "Answers within 30 days", text: "We aim to respond to every privacy-related inquiry within 30 days." },
+    {
+      icon: "ban",
+      title: "We do not sell your data",
+      text: "We share it only with our team, service providers bound by contract, or where the law requires.",
+    },
+    {
+      icon: "user",
+      title: "Your data, your rights",
+      text: "Ask to see or correct your data, or withdraw your consent, at any time.",
+    },
+    {
+      icon: "clock",
+      title: "Answers within 30 days",
+      text: "We reply to access and correction requests as soon as we can, and within 30 days.",
+    },
   ],
   sections: [
     {
-      id: "information-we-collect",
-      title: "Information We Collect",
+      id: "who-we-are",
+      title: "Who We Are and What This Policy Covers",
       blocks: [
-        { kind: "p", text: "We collect various types of information to provide and improve our services:" },
+        {
+          kind: "p",
+          text: `Eastwards Consulting Pte Ltd is a company registered in Singapore, at ${ADDRESS}. We decide how and why the personal data described in this policy is used, and we are responsible for it under the PDPA.`,
+        },
         {
           kind: "list",
           items: [
-            { term: "Personal Data", text: "Names, email addresses, phone numbers, and billing information." },
-            { term: "Technical Data", text: "IP addresses, browser types, device information, and cookie data." },
-            { term: "Business Data", text: "Project details, client requirements, and operational workflows." },
             {
-              term: "Sensitive Data",
-              text: "In specific engagements, we may process financial or regulatory data as required for project execution.",
+              term: "What it covers",
+              text: "Personal data of website visitors, people who contact us, job applicants, and the people we deal with at our clients, partners and suppliers.",
+            },
+            {
+              term: "Client data in our projects",
+              text: "When we process personal data on a client’s behalf during an engagement, we act as that client’s data intermediary. We use that data only to deliver the agreed services, under our contract and the client’s instructions, and the client’s own privacy policy applies to it.",
+            },
+            {
+              term: "Business contact information",
+              text: "The PDPA’s main obligations do not apply to business contact information (such as your name, job title and work email) given solely for business purposes. We still protect it as described in this policy.",
             },
           ],
+        },
+      ],
+    },
+    {
+      id: "information-we-collect",
+      title: "Personal Data We Collect",
+      blocks: [
+        { kind: "p", text: "Depending on how you interact with us, we may collect:" },
+        {
+          kind: "list",
+          items: [
+            {
+              term: "Identity and contact details",
+              text: "Your name, job title, company, email address, phone number and country.",
+            },
+            {
+              term: "Enquiry details",
+              text: "The service you are interested in, your message, and a record of your consent to be contacted.",
+            },
+            {
+              term: "Job application details",
+              text: "Your CV, work and education history, LinkedIn or portfolio link, current location, the role you are applying for, and anything else you choose to tell us.",
+            },
+            {
+              term: "Engagement and billing details",
+              text: "Contracts, invoices, payment records, and project information that may include personal data held in our clients’ systems.",
+            },
+            {
+              term: "Technical data",
+              text: "Your IP address, browser and device type, pages visited, and cookie identifiers, collected in line with your cookie choices.",
+            },
+          ],
+        },
+        {
+          kind: "p",
+          lead: "NRIC and other identification numbers:",
+          text: "We do not collect your NRIC, FIN, passport or other national identification number unless the law requires it or it is needed to verify your identity to a high degree of accuracy, in line with the PDPC’s advisory guidelines on NRIC numbers.",
+        },
+        {
+          kind: "p",
+          text: "Please do not send us sensitive personal data, such as health, financial account or identification details, through our website forms.",
         },
       ],
     },
@@ -272,16 +412,16 @@ export const privacy: LegalDoc = {
           kind: "list",
           items: [
             {
-              term: "Direct Interaction",
-              text: "Information you provide by filling out forms, signing contracts, or communicating with us via email.",
+              term: "From you",
+              text: "When you fill in a form on our website, email or call us, apply for a role, sign a contract, or meet us at an event.",
             },
             {
-              term: "Automated Technologies",
-              text: "As you navigate our site, we may automatically collect technical data via cookies and website analytics.",
+              term: "Automatically",
+              text: "Through cookies and similar technologies as you use our website. Optional cookies are used only if you allow them.",
             },
             {
-              term: "Third-Party Sources",
-              text: "Information received from business partners, vendors, or public databases.",
+              term: "From others",
+              text: "From your employer when it engages us, from referees or recruitment partners you have authorised, and from public sources such as company registries and professional networking sites.",
             },
           ],
         },
@@ -289,61 +429,177 @@ export const privacy: LegalDoc = {
     },
     {
       id: "purpose-of-data-use",
-      title: "Purpose of Data Use",
+      title: "How We Use Your Data",
       blocks: [
-        { kind: "p", text: "Eastwards Consulting Pte Ltd uses your data for the following purposes:" },
+        { kind: "p", text: "We use personal data only for purposes a reasonable person would consider appropriate, namely to:" },
+        {
+          kind: "list",
+          items: [
+            "Respond to your enquiries and requests.",
+            "Plan, deliver and manage our services across application development, data and AI, quantum computing advisory, cybersecurity, cloud and IT support.",
+            "Assess job applications and manage recruitment.",
+            "Send you updates, insights and marketing, where you have agreed to receive them.",
+            "Operate, secure and improve our website, including preventing spam, fraud and misuse.",
+            "Improve our services and understand how they are used.",
+            "Keep accounting, tax and audit records, and meet our other legal and regulatory obligations.",
+            "Establish, exercise or defend legal claims.",
+          ],
+        },
+        {
+          kind: "p",
+          text: "If we want to use your personal data for a new purpose, we will tell you and, where the PDPA requires it, ask for your consent first.",
+        },
+      ],
+    },
+    {
+      id: "consent-and-notification",
+      title: "Consent and Notification",
+      blocks: [
+        {
+          kind: "p",
+          text: "We tell you the purposes for collecting your personal data at or before the time we collect it. We then collect, use or disclose it only:",
+        },
         {
           kind: "list",
           items: [
             {
-              term: "Service Delivery",
-              text: "Executing projects across our core pillars (AI, Quantum Computing, Cybersecurity, Cloud, etc.).",
+              term: "With your consent",
+              text: "For example, when you tick the consent box on our contact or careers form.",
             },
             {
-              term: "Communication",
-              text: "Providing project updates, technical support, and marketing materials (with your consent).",
+              term: "With your deemed consent",
+              text: "Where you voluntarily give us your data for an obvious purpose (such as sending us an enquiry), where it is needed to perform a contract with you, or where we have notified you of a new purpose and given you a reasonable period to opt out after assessing that it is not likely to harm you.",
             },
-            { term: "Legal Compliance", text: "Meeting tax, audit, and regulatory obligations." },
-            { term: "Optimization", text: "Analyzing website usage to improve our digital presence and service offerings." },
+            {
+              term: "Under an exception in the PDPA",
+              text: "Such as our legitimate interests (for example, detecting fraud or securing our systems) or business improvement, after assessing that the benefit outweighs any likely adverse effect on you, or where the law requires or allows it.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "marketing",
+      title: "Marketing Messages",
+      blocks: [
+        {
+          kind: "list",
+          items: [
+            "We send marketing messages only where you have agreed to receive them.",
+            "Every marketing email includes a way to unsubscribe, as required by the Spam Control Act 1965.",
+            "We will not send marketing calls or messages to a Singapore telephone number listed on the Do Not Call Registry unless you have given us clear and unambiguous consent in writing or another accessible form.",
+            "You can opt out of marketing at any time by using the unsubscribe link or contacting our Data Protection Officer. Opting out will not affect messages about services you have engaged us for.",
           ],
         },
       ],
     },
     {
       id: "data-sharing",
-      title: "Data Sharing and Disclosure",
+      title: "Sharing Your Data",
       blocks: [
-        { kind: "p", text: "We do not sell your data. We only share information with:" },
+        { kind: "p", text: "We do not sell your personal data. We share it only with:" },
         {
           kind: "list",
           items: [
-            { term: "Internal Teams", text: "Consultants and support staff on a “need-to-know” basis." },
-            { term: "Third-Party Vendors", text: "Trusted partners such as cloud service providers and payment processors." },
-            { term: "Legal Authorities", text: "When mandated by law or to protect our legal rights." },
+            { term: "Our team", text: "Consultants and staff, including our team in India, on a need-to-know basis." },
             {
-              term: "International Transfers",
-              text: "When transferring personal data outside Singapore, we ensure the recipient provides a standard of protection comparable to the PDPA. This may include Standard Contractual Clauses (SCCs), binding corporate rules, or certifications such as ISO/IEC 27001.",
+              term: "Service providers",
+              text: "Companies that host our website, deliver our email, store our data or support our IT, accounting and professional needs. They may use your data only to provide their services to us, and are bound by contract to protect it.",
+            },
+            {
+              term: "Partners and clients",
+              text: "Technology partners or clients, where needed to deliver an engagement you are part of.",
+            },
+            {
+              term: "Authorities and advisers",
+              text: "Regulators, law enforcement, courts and our professional advisers, where the law requires or allows it, or to protect our legal rights.",
+            },
+            {
+              term: "Business transfers",
+              text: "A buyer or successor if all or part of our business is sold, merged or restructured, as permitted by the PDPA.",
             },
           ],
         },
       ],
     },
     {
-      id: "retention-and-deletion",
-      title: "Data Retention & Deletion",
+      id: "international-transfers",
+      title: "Transfers Outside Singapore",
       blocks: [
+        {
+          kind: "p",
+          text: "Some of our team and service providers are outside Singapore, so your personal data may be transferred to and stored in other countries. Before transferring it, we take steps to ensure the recipient protects it to a standard comparable to the PDPA, as the Personal Data Protection Regulations 2021 require. In particular, we ensure the recipient is:",
+        },
+        {
+          kind: "list",
+          items: [
+            "Bound by legally enforceable obligations, such as data protection laws, a contract (including the ASEAN Model Contractual Clauses, where suitable) or binding corporate rules; or",
+            "Holds a certification recognised under those regulations, such as a Global or APEC Cross-Border Privacy Rules (CBPR) or Privacy Recognition for Processors (PRP) certification.",
+          ],
+        },
+      ],
+    },
+    {
+      id: "retention-and-deletion",
+      title: "How Long We Keep Your Data",
+      blocks: [
+        {
+          kind: "p",
+          text: "We keep personal data only for as long as we need it for the purposes it was collected for, or for legal or business reasons. When we no longer need it, we securely delete it or anonymise it so it can no longer identify you. For example:",
+        },
         {
           kind: "list",
           items: [
             {
-              term: "Retention",
-              text: "We retain personal data only for as long as necessary to fulfill the purposes for which it was collected, or as required by applicable laws. For example, financial records are retained for 7 years in accordance with Singapore’s Income Tax Act.",
+              term: "Enquiries",
+              text: "For as long as needed to answer you and manage any resulting relationship.",
             },
             {
-              term: "Secure Disposal",
-              text: "Once the retention period expires, data will be securely deleted or anonymized to prevent unauthorized access.",
+              term: "Job applications",
+              text: "If you are hired, as part of your employee records. If not, for up to 12 months so we can consider you for other suitable roles, unless you ask us to delete it sooner.",
+            },
+            {
+              term: "Accounting and tax records",
+              text: "For at least five years, as required by the Income Tax Act 1947 and the Companies Act 1967.",
             },
           ],
+        },
+      ],
+    },
+    {
+      id: "security-measures",
+      title: "How We Protect Your Data",
+      blocks: [
+        {
+          kind: "p",
+          text: "We make reasonable security arrangements to protect personal data from unauthorised access, collection, use, disclosure, copying, modification, disposal, and from loss of the storage media it is kept on:",
+        },
+        {
+          kind: "list",
+          items: [
+            {
+              term: "Technical",
+              text: "Encryption in transit (TLS), access controls, multi-factor authentication and system monitoring.",
+            },
+            {
+              term: "Organisational",
+              text: "Need-to-know access, confidentiality obligations, staff training, and due diligence on our service providers.",
+            },
+          ],
+        },
+        {
+          kind: "p",
+          text: "No method of transmission or storage is completely secure, but we work to protect your data and review our safeguards regularly.",
+        },
+      ],
+    },
+    {
+      id: "data-breaches",
+      title: "Data Breaches",
+      blocks: [
+        {
+          kind: "p",
+          text: "If we have reason to believe a data breach has occurred, we will assess it promptly, and within 30 days. If it is likely to cause significant harm to the people affected, or affects 500 or more people, we will notify the PDPC within three calendar days of completing our assessment. Where it is likely to cause you significant harm, we will also notify you and tell you what you can do to protect yourself.",
         },
       ],
     },
@@ -351,122 +607,152 @@ export const privacy: LegalDoc = {
       id: "your-rights",
       title: "Your Rights",
       blocks: [
-        {
-          kind: "p",
-          text: "You have the following rights under the PDPA and, where applicable, international frameworks:",
-        },
+        { kind: "p", text: "Under the PDPA, you can ask us to:" },
         {
           kind: "list",
           items: [
-            { term: "Access & Correction", text: "Request a copy of your data or correct inaccuracies." },
-            { term: "Deletion (Right to be Forgotten)", text: "Request that we erase your personal data." },
-            { term: "Portability", text: "Request the transfer of your data to another organization." },
-            { term: "Opt-out", text: "Withdraw consent for marketing communications at any time." },
-          ],
-        },
-      ],
-    },
-    {
-      id: "consent-and-notification",
-      title: "Consent & Notification",
-      blocks: [
-        {
-          kind: "list",
-          items: [
-            "We obtain your consent before collecting, using, or disclosing personal data, except where permitted or required by law.",
-            "Consent may be provided through written agreements, online forms, or electronic checkboxes.",
-            "You may withdraw consent at any time by contacting our Data Protection Officer.",
-            "Before or at the time of collecting personal data, we will notify you of the purposes for which the data is collected, how it will be used, and to whom it may be disclosed.",
-          ],
-        },
-      ],
-    },
-    {
-      id: "security-measures",
-      title: "Security Measures",
-      blocks: [
-        { kind: "p", text: "We implement robust security protocols to protect your information:" },
-        {
-          kind: "list",
-          items: [
-            { term: "Technical", text: "Encryption (SSL/TLS), firewalls, and secure servers." },
-            { term: "Organizational", text: "Employee training on data privacy and strict access control policies." },
             {
-              term: "Incident Response",
-              text: "In the event of a data breach, we have procedures to notify affected individuals and regulators as required by the PDPA.",
+              term: "Access your data",
+              text: "Give you the personal data we hold about you, and information about how it has been used or disclosed in the past year. We may charge a reasonable fee for this; if so, we will tell you the amount before we proceed.",
+            },
+            {
+              term: "Correct your data",
+              text: "Fix personal data that is inaccurate or incomplete.",
+            },
+            {
+              term: "Withdraw your consent",
+              text: "Stop collecting, using or disclosing your personal data. We will tell you the likely consequences of withdrawing, for example that we may no longer be able to provide a service, and will stop within a reasonable time unless the law allows us to continue.",
             },
           ],
+        },
+        { kind: "p", text: "We also welcome requests that go beyond what the PDPA requires:" },
+        {
+          kind: "list",
+          items: [
+            {
+              term: "Deletion",
+              text: "You can ask us to delete your personal data. We will do so unless we need to keep it for a legal or business reason, in which case we will tell you why.",
+            },
+            {
+              term: "A copy in a common format",
+              text: "The PDPA’s data portability obligation is not yet in force, but if you would like your data in a commonly used electronic format, we will help where we reasonably can.",
+            },
+          ],
+        },
+        {
+          kind: "p",
+          text: "To make a request, contact our Data Protection Officer using the details below. We may need to verify your identity first. We will respond to access and correction requests as soon as reasonably possible and within 30 days; if we need longer, we will tell you within those 30 days when we will reply. If we cannot meet your request, we will explain why.",
         },
       ],
     },
     {
       id: "cookies-and-tracking",
-      title: "Cookies and Tracking",
+      title: "Cookies",
       blocks: [
         {
           kind: "list",
           items: [
-            "Our website uses essential cookies for functionality and non-essential cookies (analytics, marketing) only with your explicit consent.",
-            "You may manage cookie preferences via our consent banner at any time.",
-            "Non-essential cookies will not be activated unless you opt in.",
+            "We use essential cookies to make our website work. Analytics, preference and marketing cookies are used only if you opt in.",
+            "You can change your cookie choices or withdraw your consent at any time, as explained in our Cookie Policy.",
           ],
         },
-        { kind: "p", text: "For detailed information, please refer to our [Cookie Policy](/cookies)." },
+        { kind: "p", text: "For details of the cookies we use, see our [Cookie Policy](/cookies)." },
       ],
     },
     {
-      id: "compliance-frameworks",
-      title: "Compliance Frameworks",
+      id: "children",
+      title: "Children",
       blocks: [
         {
           kind: "p",
-          text: "Eastwards Consulting Pte Ltd operates primarily under the Singapore Personal Data Protection Act (PDPA). We also strive to align our data processing practices with global standards (such as GDPR and CCPA) where applicable to our international clientele.",
+          text: "Our website and services are intended for businesses and are not directed at children under 16. We do not knowingly collect personal data from children. If you believe a child has given us personal data, please contact us and we will delete it.",
+        },
+      ],
+    },
+    {
+      id: "other-laws",
+      title: "Other Data Protection Laws",
+      blocks: [
+        {
+          kind: "p",
+          text: "This policy is written for the PDPA. Where we serve clients in other countries, their local laws (such as the EU or UK GDPR) may give you additional rights, and we will respect them where they apply. Contact us if you would like to know more.",
+        },
+      ],
+    },
+    {
+      id: "changes",
+      title: "Changes to This Policy",
+      blocks: [
+        {
+          kind: "p",
+          text: "We may update this policy to reflect changes in the law or in how we handle personal data. The current version is always on this page. If we make significant changes, we will let you know through our website or by email where appropriate.",
         },
       ],
     },
     {
       id: "contact-us",
-      title: "Contact Us",
+      title: "Contact Our Data Protection Officer",
       blocks: [
         {
           kind: "p",
-          text: "If you have questions about this policy or wish to exercise your rights, please contact our Data Protection Officer (DPO):",
+          text: "For questions about this policy, to exercise your rights, or to raise a concern, contact our Data Protection Officer (DPO):",
         },
         {
           kind: "contact",
           items: [
             { label: "Company", value: contact.location.company },
             { label: "Data Protection Officer Address", value: ADDRESS },
-            { label: "General Legal Inquiries", value: LEGAL_EMAIL, href: `mailto:${LEGAL_EMAIL}` },
             { label: "DPO Inquiries", value: DPO_EMAIL, href: `mailto:${DPO_EMAIL}` },
+            { label: "General Legal Inquiries", value: LEGAL_EMAIL, href: `mailto:${LEGAL_EMAIL}` },
           ],
         },
         {
           kind: "p",
-          lead: "Complaint Process:",
-          text: "You may also submit concerns via our website [“Contact Us” form](/contact). We aim to respond to all privacy-related inquiries within 30 days.",
+          lead: "Complaints:",
+          text: "If you have a concern, please write to our DPO first so we can look into it. We will acknowledge your complaint and aim to resolve it within 30 days. If you are not satisfied with our response, you may contact the Personal Data Protection Commission at [www.pdpc.gov.sg](https://www.pdpc.gov.sg).",
         },
       ],
     },
   ],
 };
 
+/* Cookie Policy. Singapore has no cookie-specific law: the PDPA applies
+   where cookies collect personal data, read with the PDPC's Advisory
+   Guidelines on Selected Topics (online activities). The tables list what
+   the site really stores, checked in November 2026: one essential cookie
+   (lib/consent.ts) and the theme setting (next-themes, local storage); no
+   server or third-party cookies. Add a row here before adding any tool that
+   stores something, and bump VERSION in lib/consent.ts so the banner asks
+   again. Not legal advice: have Singapore counsel review it. */
 export const cookiePolicy: LegalDoc = {
   path: "/cookies",
   title: "Cookie Policy",
   description:
-    "Which cookies eastwards.co uses, why, how long they last, and how to accept, reject or change them at any time.",
+    "Which cookies and similar technologies eastwards.co uses, why, how long they last, and how to accept, reject or change them, under Singapore’s PDPA.",
   intro: [
-    "This Cookie Policy explains how Eastwards Consulting Pte Ltd (“we”, “us”, or “our”) uses cookies and similar tracking technologies when you visit our website. By managing your preferences through our cookie banner, you control which cookies are activated. Essential cookies are always enabled, while non-essential cookies require your explicit consent.",
+    "This Cookie Policy explains how Eastwards Consulting Pte Ltd (“Eastwards”, “we” or “us”) uses cookies and similar technologies on eastwards.co, and how you can control them.",
+    "Singapore does not have a separate cookie law. Where cookies collect personal data, the Personal Data Protection Act 2012 (PDPA) applies, and we follow the Personal Data Protection Commission’s guidance on online activities. Please read this policy together with our [Privacy Policy](/privacy).",
   ],
   numbered: false,
   // Burst on Unsplash, free under the Unsplash License (no credit required):
   // https://unsplash.com/photos/person-typing-on-silver-macbook-kUqqaRjJuw0
   image: { src: "/images/legal-cookies.jpg", alt: "A person typing on a laptop at a bright desk", width: 1600, height: 1067 },
   highlights: [
-    { icon: "shield", title: "Essential only by default", text: "Non-essential cookies stay off until you opt in." },
-    { icon: "sliders", title: "You decide", text: "Accept all, reject all, or choose category by category." },
-    { icon: "toggle", title: "Your browser, your rules", text: "You can also set your browser to refuse cookies or alert you when they are set." },
+    {
+      icon: "shield",
+      title: "Only what the site needs",
+      text: "One essential cookie and one display setting. No analytics or advertising cookies are in use today.",
+    },
+    {
+      icon: "sliders",
+      title: "You decide",
+      text: "Optional cookies stay off unless you opt in, and rejecting is as easy as accepting.",
+    },
+    {
+      icon: "toggle",
+      title: "Your browser, your rules",
+      text: "You can also block or delete cookies in your browser settings at any time.",
+    },
   ],
   sections: [
     {
@@ -475,100 +761,138 @@ export const cookiePolicy: LegalDoc = {
       blocks: [
         {
           kind: "p",
-          text: "Cookies are small text files stored on your computer or mobile device when you visit a website. They are widely used to make websites function efficiently, enhance user experience, and provide information to site owners.",
+          text: "Cookies are small text files that a website stores on your computer or phone. Websites can also keep information in your browser’s local storage, which works in a similar way. We use both terms together as “cookies” in this policy.",
+        },
+        {
+          kind: "p",
+          text: "Essential cookies are needed for a website to work as you would expect. Optional cookies, such as analytics or advertising cookies, are not needed for the site to work.",
         },
       ],
     },
     {
-      id: "how-we-use-cookies",
-      title: "How We Use Cookies",
+      id: "cookies-we-use",
+      title: "Cookies We Use",
       blocks: [
-        { kind: "p", text: "We use cookies for several purposes, including:" },
         {
-          kind: "list",
-          items: [
-            { term: "Security", text: "Keeping our site safe and stable." },
-            { term: "Preferences", text: "Remembering your language, region, or other choices." },
-            {
-              term: "Analytics",
-              text: "Understanding how visitors interact with our services (e.g., Quantum Computing or Cybersecurity pages).",
-            },
-            { term: "Marketing", text: "Delivering relevant ads and measuring campaign effectiveness." },
+          kind: "p",
+          text: "These are the only cookies and similar technologies our website uses today. Both are set by us (first party), and neither is used to identify you or track you across other websites.",
+        },
+        {
+          kind: "table",
+          caption: "Cookies and local storage used on eastwards.co, with their purpose and how long they last",
+          head: ["Name", "Purpose", "Type", "How long it lasts"],
+          rows: [
+            ["ew_consent", "A cookie that remembers your cookie choices, so we do not ask on every visit.", "Essential", "6 months"],
+            [
+              "theme",
+              "Kept in local storage. Remembers whether you chose light or dark mode, and is saved only when you switch.",
+              "Functional",
+              "Until you clear it",
+            ],
           ],
         },
       ],
     },
     {
-      id: "types-of-cookies",
-      title: "Types of Cookies We Use",
+      id: "optional-cookies",
+      title: "Optional Cookies",
       blocks: [
         {
+          kind: "p",
+          text: "Our cookie banner lets you choose three optional categories. We do not use any cookies in these categories today. If we start to, they will stay off unless you opt in, and we will list each one in this policy first.",
+        },
+        {
           kind: "table",
-          caption: "Cookie categories, what they do, whether they are required, and how long they typically last",
-          head: ["Cookie Category", "Purpose", "Necessity", "Typical Retention"],
+          caption: "Optional cookie categories, what they would be used for, and their status",
+          head: ["Category", "What it would be used for", "Type", "Status"],
           rows: [
-            ["Essential Cookies", "Required for site functionality (secure logins, billing processes).", "Mandatory", "Session-based"],
-            ["Analytics Cookies", "Measure traffic and usage patterns via tools like Google Analytics.", "Optional", "30 days – 1 year"],
-            ["Preference Cookies", "Store user choices (language, region).", "Optional", "Up to 1 year"],
-            ["Marketing Cookies", "Track visitors across websites for personalized advertising.", "Optional", "6 months – 2 years"],
+            ["Analytics", "Counting visits and seeing how pages are used, so we can improve the site.", "Optional", "Not in use today"],
+            ["Preferences", "Remembering choices such as language or region.", "Optional", "Not in use today"],
+            ["Marketing", "Measuring campaigns and showing relevant ads on other websites.", "Optional", "Not in use today"],
           ],
         },
       ],
     },
     {
       id: "third-party-cookies",
-      title: "Third-Party Cookies",
+      title: "Third-Party Cookies and Links",
       blocks: [
-        { kind: "p", text: "We may use cookies provided by trusted third parties, including:" },
         {
           kind: "list",
           items: [
-            { term: "Google Analytics", text: "To measure traffic and usage patterns." },
-            { term: "Cloudflare", text: "To protect against DDoS attacks and ensure site stability." },
-            { term: "Stripe/PayPal", text: "To facilitate secure transactions for our professional services." },
+            "No third party sets cookies through our website, and the services that host and deliver our website do not set cookies.",
+            "Our website links to other sites, such as LinkedIn, YouTube, Instagram and Google Maps. Those sites set their own cookies when you visit them, under their own policies, which we do not control.",
+          ],
+        },
+      ],
+    },
+    {
+      id: "consent",
+      title: "How We Ask for Consent",
+      blocks: [
+        {
+          kind: "list",
+          items: [
+            {
+              term: "Essential cookies",
+              text: "These are needed for the website to work as you request, so under the PDPA your consent is deemed when you use the site.",
+            },
+            {
+              term: "Optional cookies",
+              text: "We use these only after you opt in through our cookie banner. No option is ticked in advance, and “Reject All” is as easy to use as “Accept All”.",
+            },
+            {
+              term: "Browser settings",
+              text: "We do not treat your browser settings alone as consent to optional cookies.",
+            },
           ],
         },
       ],
     },
     {
       id: "your-choices",
-      title: "Your Choices: Opt-In & Opt-Out",
+      title: "Your Choices",
       blocks: [
-        { kind: "p", text: "We respect your privacy. You have the following options:" },
         {
           kind: "list",
           items: [
             {
-              term: "Cookie Consent Banner",
-              text: "On your first visit, you can “Accept All,” “Reject All” (except essential), or “Manage Preferences.”",
+              term: "Cookie banner",
+              text: "On your first visit you can choose “Accept All”, “Reject All” or “Manage Preferences” to pick categories one by one.",
             },
-            { term: "Browser Settings", text: "Configure your browser to refuse cookies or alert you when cookies are set." },
             {
-              term: "Withdrawal of Consent",
-              text: "Change preferences anytime via the “Cookie Settings” link in our website footer.",
+              term: "Changing your mind",
+              text: "To change your choice or withdraw your consent, delete the cookies for eastwards.co in your browser settings. The banner will ask again on your next visit. It also asks again after six months, and whenever we change the categories we use.",
+            },
+            {
+              term: "Browser settings",
+              text: "Most browsers let you block or delete cookies, or warn you before one is set. Private or incognito windows delete cookies when you close them.",
             },
           ],
         },
-        { kind: "note", text: "Disabling certain cookies may affect site functionality." },
+        {
+          kind: "note",
+          text: "If you block essential cookies, the site still works, but we cannot remember your choices and the banner will appear on every visit.",
+        },
       ],
     },
     {
-      id: "international-transfers",
-      title: "International Data Transfers",
+      id: "personal-data",
+      title: "Personal Data and Transfers",
       blocks: [
         {
           kind: "p",
-          text: "As Eastwards Consulting serves a global audience, information collected via cookies may be processed outside Singapore. We ensure such transfers comply with the PDPA and other relevant laws by using secure cloud providers and contractual safeguards.",
+          text: "Any personal data collected through cookies is handled as described in our [Privacy Policy](/privacy), including how we protect it, how long we keep it, and how we safeguard it when it is transferred outside Singapore.",
         },
       ],
     },
     {
       id: "age-limitations",
-      title: "Age Limitations",
+      title: "Children",
       blocks: [
         {
           kind: "p",
-          text: "Our services are intended for business clients and are not directed to children under 16 years of age. We do not knowingly use cookies to collect personal data from minors.",
+          text: "Our website and services are intended for businesses and are not directed at children under 16. We do not knowingly use cookies to collect personal data from children.",
         },
       ],
     },
@@ -578,7 +902,7 @@ export const cookiePolicy: LegalDoc = {
       blocks: [
         {
           kind: "p",
-          text: "We may update this Cookie Policy periodically to reflect changes in technology or legislation. Please check this page for the latest version.",
+          text: "We will update this policy before we add or change any cookies, and when the law or guidance changes. The current version is always on this page.",
         },
       ],
     },
@@ -586,7 +910,7 @@ export const cookiePolicy: LegalDoc = {
       id: "contact-us",
       title: "Contact Us",
       blocks: [
-        { kind: "p", text: "If you have questions about our use of cookies, please contact:" },
+        { kind: "p", text: "If you have questions about our use of cookies, contact our Data Protection Officer:" },
         {
           kind: "contact",
           items: [
@@ -618,7 +942,7 @@ export const consent = {
     },
     {
       term: "Cookies",
-      text: "Essential cookies support site functionality; non-essential cookies (analytics/marketing) are used only with your consent.",
+      text: "We use one essential cookie to remember your choices. Optional cookies are used only with your consent, and none are in use today.",
     },
     {
       term: "International Transfers",
@@ -641,29 +965,29 @@ export const consent = {
     {
       id: "essential",
       title: "Essential Cookies",
-      text: "Required for site functionality (secure logins, billing processes).",
-      retention: "Session-based",
+      text: "Remembers your cookie choices so we do not ask on every visit.",
+      retention: "6 months",
       required: true,
     },
     {
       id: "analytics",
       title: "Analytics Cookies",
-      text: "Measure traffic and usage patterns via tools like Google Analytics.",
-      retention: "30 days – 1 year",
+      text: "Count visits and see how pages are used. Not in use today.",
+      retention: "None while not in use",
       required: false,
     },
     {
       id: "preferences",
       title: "Preference Cookies",
-      text: "Store user choices (language, region).",
-      retention: "Up to 1 year",
+      text: "Remember choices such as language or region. Not in use today.",
+      retention: "None while not in use",
       required: false,
     },
     {
       id: "marketing",
       title: "Marketing Cookies",
-      text: "Track visitors across websites for personalized advertising.",
-      retention: "6 months – 2 years",
+      text: "Measure campaigns and show relevant ads on other websites. Not in use today.",
+      retention: "None while not in use",
       required: false,
     },
   ],
