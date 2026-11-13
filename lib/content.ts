@@ -13,7 +13,7 @@ export const nav = {
   about: {
     label: "About",
     items: [
-      { label: "About", href: "/about", description: "Who we are and how we work" },
+      { label: "About Us", href: "/about", description: "Who we are and how we work" },
       { label: "Careers", href: "/careers", description: "Open roles and how to apply" },
       {
         label: "Corporate Social Responsibility",
