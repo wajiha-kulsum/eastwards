@@ -14,7 +14,7 @@ export const nav = {
     label: "About",
     items: [
       { label: "About Us", href: "/about" },
-      { label: "Careers", href: "/careers", description: "Open roles and how to apply" },
+      { label: "Careers", href: "/careers" },
       {
         label: "Corporate Social Responsibility",
         href: "/responsibility",
