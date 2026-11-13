@@ -163,7 +163,6 @@ function AboutMenu({ pathname }: { pathname: string }) {
                   <span className="block font-medium text-ink transition-colors duration-150 group-hover/about:text-link group-data-active/about:text-link">
                     {item.label}
                   </span>
-                  <span className="mt-0.5 block font-normal text-body">{item.description}</span>
                 </Link>
               </NavigationMenuLink>
             </li>
