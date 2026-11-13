@@ -1,6 +1,7 @@
 import { Resend } from "resend";
 import { contact } from "@/lib/content";
 import { EMAIL_SHAPE, MAIL_FROM as FROM, oneLine } from "@/lib/mail";
+import { formatPhone } from "@/lib/phone";
 import { allowRequest, tooManyRequests } from "@/lib/rate-limit";
 
 /* Contact form endpoint: the same rules as the form, then delivery by email
@@ -9,9 +10,8 @@ import { allowRequest, tooManyRequests } from "@/lib/rate-limit";
    Sends are rate limited per visitor, and the acknowledgement carries no
    text the visitor typed, so it can't be used to email strangers. */
 
-const { requirements, phoneCodes } = contact.form;
+const { requirements } = contact.form;
 const allowedRequirements = new Set<string>(requirements);
-const allowedCodes = new Set<string>(phoneCodes.map((p) => p.code));
 
 const CONTACT_TO = process.env.CONTACT_EMAIL_TO ?? "contact@eastwards.co";
 
@@ -69,8 +69,9 @@ export async function POST(request: Request) {
   const requirement = text("requirement");
   if (!allowedRequirements.has(requirement)) errors.requirement = requirement ? "invalid" : "missing";
 
-  const phoneCode = text("phoneCode");
-  if (phoneCode && !allowedCodes.has(phoneCode)) errors.phoneCode = "invalid";
+  // optional; when given it must be a real number (international form, from PhoneField)
+  const phone = entry.phone ? formatPhone(entry.phone) : "";
+  if (phone === null) errors.phone = "invalid";
 
   if (!input.smsConsent) errors.smsConsent = "missing";
 
@@ -83,7 +84,7 @@ export async function POST(request: Request) {
 
   const message = {
     ...entry,
-    phone: entry.phone && `${phoneCode} ${entry.phone}`,
+    phone,
     requirement,
     smsConsent: true,
     receivedAt: new Date().toISOString(),

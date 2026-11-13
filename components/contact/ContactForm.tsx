@@ -12,6 +12,8 @@ import {
   OPTIONAL_CLASS,
 } from "@/components/ui/form-styles";
 import { contact } from "@/lib/content";
+import { PhoneField } from "@/components/ui/PhoneField";
+import { formatPhone, PHONE_INVALID } from "@/lib/phone";
 import { isEmail } from "@/lib/validation";
 
 /* The contact form: one consent block, optional fields marked as such, inline
@@ -21,18 +23,20 @@ import { isEmail } from "@/lib/validation";
 const copy = contact.form;
 const inbox = contact.form.inbox;
 
-type FieldName = "firstName" | "lastName" | "email" | "requirement" | "message" | "smsConsent";
+type FieldName = "firstName" | "lastName" | "email" | "phone" | "requirement" | "message" | "smsConsent";
 type FieldErrors = Partial<Record<FieldName, string>>;
 
 /* The form validates here, not in the browser, so every message is written
    in the page's voice and sits next to the field that caused it. The API
    checks the same rules and answers with field codes. */
-const REQUIRED_ORDER: readonly FieldName[] = ["firstName", "lastName", "email", "requirement", "message", "smsConsent"];
+const REQUIRED_ORDER: readonly FieldName[] = ["firstName", "lastName", "email", "phone", "requirement", "message", "smsConsent"];
 
 const MESSAGES: Record<FieldName, string> = {
   firstName: "Enter your first name.",
   lastName: "Enter your last name.",
   email: "Enter your email address.",
+  // optional, so only ever "not a real number"
+  phone: PHONE_INVALID,
   requirement: "Select what you need help with.",
   message: "Tell us what you need help with.",
   smsConsent: "Confirm you agree to be contacted about this enquiry.",
@@ -50,6 +54,9 @@ function validate(formData: FormData): FieldErrors {
   if (!email) errors.email = MESSAGES.email;
   else if (!isEmail(email)) errors.email = EMAIL_INVALID;
 
+  const phone = value("phone");
+  if (phone && !formatPhone(phone)) errors.phone = MESSAGES.phone;
+
   if (!value("requirement")) errors.requirement = MESSAGES.requirement;
   if (!value("message")) errors.message = MESSAGES.message;
   if (!formData.get("smsConsent")) errors.smsConsent = MESSAGES.smsConsent;
@@ -60,7 +67,7 @@ function validate(formData: FormData): FieldErrors {
 // When sending fails, the visitor's own mail app gets the message instead
 function mailtoFor(data: FormData) {
   const value = (name: string) => String(data.get(name) ?? "").trim();
-  const phone = value("phone") && `${value("phoneCode")} ${value("phone")}`;
+  const phone = value("phone") && (formatPhone(value("phone")) ?? value("phone"));
   const details = [
     ["Name", `${value("firstName")} ${value("lastName")}`.trim()],
     ["Email", value("email")],
@@ -307,25 +314,18 @@ export function ContactForm() {
           <label htmlFor="phone" className={LABEL_CLASS}>
             Phone <span className={OPTIONAL_CLASS}>(optional)</span>
           </label>
-          <div className="flex gap-2">
-            <select id="phoneCode" name="phoneCode" defaultValue="+65" aria-label="Country code" className={`${FIELD_CLASS} h-12 w-[120px] shrink-0`}>
-              {copy.phoneCodes.map(({ country, code }) => (
-                <option key={code} value={code}>
-                  {country} {code}
-                </option>
-              ))}
-            </select>
-            <input
-              id="phone"
-              name="phone"
-              type="tel"
-              inputMode="tel"
-              autoComplete="tel"
-              placeholder="9123 4567"
-              maxLength={40}
-              className={`${FIELD_CLASS} h-12 min-w-0 flex-1`}
-            />
-          </div>
+          <PhoneField
+            id="phone"
+            name="phone"
+            invalid={Boolean(errors.phone)}
+            describedBy={errors.phone ? "phone-error" : undefined}
+            onChange={() => clearError("phone")}
+          />
+          {errors.phone ? (
+            <p id="phone-error" className={ERROR_CLASS}>
+              {errors.phone}
+            </p>
+          ) : null}
         </div>
 
         <div className="sm:col-span-2">

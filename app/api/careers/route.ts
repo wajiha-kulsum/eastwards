@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 import { careers, CAREERS_EMAIL, CV_RULES, GENERAL_APPLICATION } from "@/lib/careers";
-import { contact } from "@/lib/content";
 import { EMAIL_SHAPE, MAIL_FROM, oneLine } from "@/lib/mail";
+import { formatPhone } from "@/lib/phone";
 import { allowRequest, tooManyRequests } from "@/lib/rate-limit";
 import { allowedExtension, isHttpUrl } from "@/lib/validation";
 
@@ -20,7 +20,6 @@ const MAX_REQUEST_BYTES = CV_RULES.maxBytes + 512 * 1024;
 
 const allowedAreas = new Set<string>(careers.form.areas);
 const allowedPositions = new Set<string>([GENERAL_APPLICATION, ...careers.positions.openings.map((o) => o.title)]);
-const allowedCodes = new Set<string>(contact.form.phoneCodes.map((p) => p.code));
 
 // name -> [required, max length]
 const fields = {
@@ -97,8 +96,9 @@ export async function POST(request: Request) {
   const position = text("position") || GENERAL_APPLICATION;
   if (!allowedPositions.has(position)) errors.position = "invalid";
 
-  const phoneCode = text("phoneCode");
-  if (entry.phone && phoneCode && !allowedCodes.has(phoneCode)) errors.phoneCode = "invalid";
+  // optional; when given it must be a real number (international form, from PhoneField)
+  const phone = entry.phone ? formatPhone(entry.phone) : "";
+  if (phone === null) errors.phone = "invalid";
 
   if (!form.get("consent")) errors.consent = "missing";
 
@@ -126,7 +126,6 @@ export async function POST(request: Request) {
   if (!allowRequest(request, "careers", 3, 10 * 60_000)) return tooManyRequests(600);
 
   const fullName = `${entry.firstName} ${entry.lastName}`.trim();
-  const phone = entry.phone && `${phoneCode} ${entry.phone}`.trim();
   const receivedAt = new Date().toISOString();
 
   const resendKey = process.env.RESEND_API_KEY;

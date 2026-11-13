@@ -222,14 +222,6 @@ export const contact = {
     sending: "Sending...",
     // Delivery inbox and the target of the failed-send mailto fallback
     inbox: "contact@eastwards.co",
-    /* Dial codes: HQ first, then the India office and the common markets. */
-    phoneCodes: [
-      { country: "SG", code: "+65" },
-      { country: "IN", code: "+91" },
-      { country: "US", code: "+1" },
-      { country: "UK", code: "+44" },
-      { country: "AE", code: "+971" },
-    ],
     /* The requirement menu mirrors the footer's service lines one to one. */
     requirements: [
       "Application Services",
