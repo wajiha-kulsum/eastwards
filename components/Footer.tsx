@@ -3,7 +3,7 @@ import { ChevronDown } from "lucide-react";
 import { FooterCta } from "@/components/FooterCta";
 import { Logo } from "@/components/ui/Logo";
 import { InstagramIcon, LinkedinIcon, YoutubeIcon } from "@/components/ui/BrandIcons";
-import { contact, footer, nav } from "@/lib/content";
+import { contact, footer } from "@/lib/content";
 import { serviceLinks, type ServiceLink } from "@/lib/service-groups";
 
 /* Black footer band on the site's lane (1720px cap, 5.35% lanes), top to
@@ -37,7 +37,6 @@ function FooterLink({ link, row = false }: { link: ServiceLink; row?: boolean })
   const label = (
     <>
       {link.label}
-      {link.enquire && <span className="sr-only">, {nav.enquire.toLowerCase()}</span>}
     </>
   );
   return (
@@ -50,15 +49,6 @@ function FooterLink({ link, row = false }: { link: ServiceLink; row?: boolean })
         <a href={link.href} className={className}>
           {label}
         </a>
-      )}
-      {/* a tag, not part of the name: services without a page open the form */}
-      {link.enquire && (
-        <span
-          aria-hidden="true"
-          className="ml-2 inline-block whitespace-nowrap rounded-sm border border-white/20 px-1.5 align-middle text-small leading-tight text-white/60"
-        >
-          {nav.enquire}
-        </span>
       )}
     </li>
   );

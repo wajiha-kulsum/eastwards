@@ -60,14 +60,12 @@ export const serviceGroups: readonly ServiceGroup[] = [
 
 /* The header menu and the footer list the same groups as links, plus the two
    service lines that have no page yet: those open the contact form with that
-   requirement chosen and are tagged "Enquire". Swap in the pages when they
-   exist. */
-export type ServiceLink = { label: string; href: string; enquire?: boolean };
+   requirement chosen. Swap in the pages when they exist. */
+export type ServiceLink = { label: string; href: string };
 
 const enquiry = (requirement: (typeof contact.form.requirements)[number]): ServiceLink => ({
   label: requirement,
   href: `/contact?requirement=${encodeURIComponent(requirement)}`,
-  enquire: true,
 });
 
 const enquiries: Record<string, readonly ServiceLink[]> = {

@@ -116,6 +116,5 @@ export const about = {
   channels: {
     title: "Talk to the right team.",
     lede: "Need to reach a specific department? Use the direct lines below for a faster response.",
-    copy: { label: "Copy", done: "Copied" },
   },
 } as const;

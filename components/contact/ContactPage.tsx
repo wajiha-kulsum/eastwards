@@ -2,7 +2,6 @@ import Image from "next/image";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import PageShell from "@/components/ui/PageShell";
 import { ContactForm } from "@/components/contact/ContactForm";
-import { CopyEmail } from "@/components/contact/CopyEmail";
 import { DotMap } from "@/components/contact/DotMap";
 import { contact } from "@/lib/content";
 
@@ -11,7 +10,7 @@ import { contact } from "@/lib/content";
    left with the form beside them, then one black band with the team
    addresses, the dot map and the Singapore office. */
 export function ContactPage() {
-  const { intro, next, ways, teams, location, call, directChannels, form } = contact;
+  const { intro, next, ways, location, call, directChannels, form } = contact;
   const lastStep = next.steps.length - 1;
   const focusRing = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
   const link = `link-underline-sweep rounded-sm font-medium text-ink transition-colors hover:text-link ${focusRing}`;
@@ -73,11 +72,10 @@ export function ContactPage() {
                 <Mail className="h-4 w-4 text-link" aria-hidden="true" />
                 {ways.email}
               </dt>
-              <dd className="flex min-w-0 items-center gap-2">
+              <dd className="min-w-0">
                 <a href={`mailto:${form.inbox}`} className={link}>
                   {form.inbox}
                 </a>
-                <CopyEmail email={form.inbox} label={teams.copy.label} done={teams.copy.done} tone="light" />
               </dd>
             </div>
             <div className="flex items-start gap-4 py-3">
@@ -127,11 +125,10 @@ export function ContactPage() {
                   className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-t border-white/10 py-3 sm:py-4"
                 >
                   <dt className="font-semibold">{channel.department}</dt>
-                  <dd className="-mr-2 flex items-center gap-1">
+                  <dd>
                     <a href={`mailto:${channel.email}`} className={`link-underline-sweep rounded-sm font-medium text-white ${focusRing}`}>
                       {channel.email}
                     </a>
-                    <CopyEmail email={channel.email} label={teams.copy.label} done={teams.copy.done} />
                   </dd>
                 </div>
               ))}

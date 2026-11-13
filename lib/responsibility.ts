@@ -148,6 +148,5 @@ export const responsibility = {
     title: "Partner with us.",
     lede: "To learn more about our social impact initiatives or to partner with us on a community project, please reach out at:",
     button: "Email the CSR team",
-    copy: { label: "Copy", done: "Copied" },
   },
 } as const;
