@@ -6,7 +6,8 @@ import { ArrowUpRight, Check, FileText, Upload, X } from "lucide-react";
 import { RichText } from "@/components/legal/RichText";
 import { ERROR_CLASS, FIELD_CLASS, FORM_LINK_CLASS, LABEL_CLASS, OPTIONAL_CLASS } from "@/components/ui/form-styles";
 import { careers, CAREERS_EMAIL, CV_RULES, GENERAL_APPLICATION } from "@/lib/careers";
-import { contact } from "@/lib/content";
+import { PhoneField } from "@/components/ui/PhoneField";
+import { formatPhone, PHONE_INVALID } from "@/lib/phone";
 import { allowedExtension, isEmail, isHttpUrl } from "@/lib/validation";
 
 /* The application form. It validates here first, so every message sits next
@@ -18,15 +19,16 @@ import { allowedExtension, isEmail, isHttpUrl } from "@/lib/validation";
 const copy = careers.form;
 const openings = careers.positions.openings;
 
-type FieldName = "firstName" | "lastName" | "email" | "link" | "area" | "cv" | "consent";
+type FieldName = "firstName" | "lastName" | "email" | "phone" | "link" | "area" | "cv" | "consent";
 type FieldErrors = Partial<Record<FieldName, string>>;
 
-const ORDER: readonly FieldName[] = ["firstName", "lastName", "email", "link", "area", "cv", "consent"];
+const ORDER: readonly FieldName[] = ["firstName", "lastName", "email", "phone", "link", "area", "cv", "consent"];
 
 const MESSAGES: Record<FieldName, string> = {
   firstName: "Enter your first name.",
   lastName: "Enter your last name.",
   email: "Enter your email address.",
+  phone: PHONE_INVALID,
   link: "Enter a full link, starting with https://",
   area: "Select the area you’re interested in.",
   cv: "Attach your CV.",
@@ -55,6 +57,8 @@ function validate(data: FormData, file: File | null): FieldErrors {
   if (!email) errors.email = MESSAGES.email;
   else if (!isEmail(email)) errors.email = EMAIL_INVALID;
   const link = value("link");
+  const phone = value("phone");
+  if (phone && !formatPhone(phone)) errors.phone = MESSAGES.phone;
   if (link && !isHttpUrl(link)) errors.link = MESSAGES.link;
   if (!value("area")) errors.area = MESSAGES.area;
   const cv = checkFile(file);
@@ -67,7 +71,7 @@ function validate(data: FormData, file: File | null): FieldErrors {
 function mailtoFor(data: FormData) {
   const value = (name: string) => String(data.get(name) ?? "").trim();
   const name = `${value("firstName")} ${value("lastName")}`.trim();
-  const phone = value("phone") && `${value("phoneCode")} ${value("phone")}`;
+  const phone = value("phone") && (formatPhone(value("phone")) ?? value("phone"));
   const lines = [
     ["Name", name],
     ["Email", value("email")],
@@ -310,31 +314,14 @@ export function CareerForm() {
           />
         </Field>
 
-        <Field id="phone" label="Phone" optional>
-          <div className="flex gap-2">
-            <select
-              id="phoneCode"
-              name="phoneCode"
-              defaultValue="+65"
-              aria-label="Country code"
-              className={`${FIELD_CLASS} h-12 w-[120px] shrink-0`}
-            >
-              {contact.form.phoneCodes.map(({ country, code }) => (
-                <option key={code} value={code}>
-                  {country} {code}
-                </option>
-              ))}
-            </select>
-            <input
-              id="phone"
-              name="phone"
-              type="tel"
-              inputMode="tel"
-              autoComplete="tel"
-              maxLength={40}
-              className={`${FIELD_CLASS} h-12 min-w-0 flex-1`}
-            />
-          </div>
+        <Field id="phone" label="Phone" optional error={errors.phone}>
+          <PhoneField
+            id="phone"
+            name="phone"
+            invalid={Boolean(errors.phone)}
+            describedBy={errors.phone ? "phone-error" : undefined}
+            onChange={() => clearError("phone")}
+          />
         </Field>
 
         <Field id="location" label="Current Location" optional>

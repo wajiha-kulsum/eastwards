@@ -412,6 +412,61 @@ html {
   }
 }
 
+/* Phone field (components/ui/PhoneField): the library's country picker and
+   number input drawn as one form field, matching FIELD_CLASS in
+   components/ui/form-styles. Flag and chevron sit left of a hairline. */
+.phone-field {
+  --PhoneInput-color--focus: var(--color-primary);
+  --PhoneInputCountryFlag-height: 1.05em;
+  --PhoneInputCountryFlag-borderColor: rgb(0 0 0 / 0.15);
+  --PhoneInputCountrySelectArrow-opacity: 0.7;
+  --PhoneInputCountrySelectArrow-width: 0.38em;
+  --PhoneInputCountrySelectArrow-borderWidth: 1.5px;
+  height: 3rem;
+  border: 1px solid var(--color-field-line);
+  border-radius: var(--radius-xl);
+  background: var(--color-field);
+  color: var(--color-ink);
+  font-size: var(--text-small);
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease,
+    box-shadow 150ms ease;
+}
+.phone-field:focus-within {
+  border-color: var(--color-primary);
+  background: var(--color-card);
+  box-shadow: 0 0 0 2px rgb(40 104 255 / 0.2);
+}
+.phone-field:has(input[aria-invalid="true"]) {
+  border-color: var(--color-destructive);
+}
+.phone-field .PhoneInputCountry {
+  align-self: stretch;
+  margin: 0;
+  padding: 0 12px 0 14px;
+  border-right: 1px solid var(--color-field-line);
+  border-radius: var(--radius-xl) 0 0 var(--radius-xl);
+}
+.phone-field .PhoneInputCountrySelect:focus-visible + .PhoneInputCountryIcon {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+.phone-field .PhoneInputInput {
+  height: 100%;
+  min-width: 0;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  outline: none;
+}
+.phone-field .PhoneInputInput::placeholder {
+  color: var(--color-placeholder);
+}
+
 /* About capability stack: a layer's title and points come into focus
    (blur and opacity, a few pixels of rise) when the layer changes. */
 @keyframes focus-in {
