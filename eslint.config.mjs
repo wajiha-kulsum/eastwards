@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Trail tooling is plain CommonJS, not app code.
+    ".trail/**",
   ]),
 ]);
 
