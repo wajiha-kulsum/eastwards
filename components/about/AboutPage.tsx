@@ -105,7 +105,7 @@ export default function AboutPage() {
       <ScrollProgress />
       <SmoothScroll />
       <div className="mx-auto max-w-[2000px] pt-3 sm:px-6">
-        {/* Hero: the photo first, the arrow and headline on it (top left), the intro below */}
+        {/* Hero: the photo first, the arrow and headline on it (bottom left), the intro below */}
         <section className={`${PAD} pb-16 pt-6 sm:pb-24 sm:pt-8`}>
           <div className="relative overflow-hidden rounded-3xl">
             <Image
@@ -117,13 +117,13 @@ export default function AboutPage() {
               sizes="(min-width: 2000px) 1900px, 95vw"
               className="about-hero-settle aspect-[4/5] h-auto w-full object-cover sm:aspect-[3/2] lg:aspect-[2/1] 2xl:aspect-[21/9]"
             />
-            {/* scrim behind the headline, which sits top left over the bright window: from the top on phones, from the top-left corner on wide screens */}
+            {/* scrim behind the headline, bottom left: from the bottom on phones, from the bottom-left corner on wide screens */}
             <div
               aria-hidden="true"
-              className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/30 to-transparent lg:bg-gradient-to-br lg:from-black/75 lg:via-black/25 lg:to-transparent"
+              className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent lg:bg-gradient-to-tr lg:from-black/75 lg:via-black/25 lg:to-transparent"
             />
-            {/* the client's frame: the logo's arrow, then the headline under it, top left */}
-            <div className="absolute inset-x-5 top-6 flex flex-col items-start sm:inset-x-8 sm:top-8 lg:inset-x-12 lg:right-auto lg:top-12">
+            {/* the logo's arrow, then the headline under it, bottom left */}
+            <div className="absolute inset-x-5 bottom-6 flex flex-col items-start sm:inset-x-8 sm:bottom-8 lg:inset-x-12 lg:bottom-12 lg:right-auto">
               <BlurFade className="reveal-fallback">
                 <LogoArrow className="h-9 w-auto text-primary sm:h-11 lg:h-14" />
               </BlurFade>
@@ -249,14 +249,14 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Next steps: a photo of a first conversation beside the three links, each opening the contact form */}
+        {/* Next steps: the three links on the left, a photo of a first conversation on the right (first on phones); each link opens the contact form */}
         <section aria-labelledby="next-heading" className={SECTION}>
           <Heading id="next-heading" className={`${H2} text-ink`}>
             {nextStep.title}
           </Heading>
           {/* group/next: hovering any link eases the photo in a touch, tying the two halves together */}
           <div className="group/next mt-10 grid gap-3 sm:mt-12 lg:grid-cols-12">
-            <BlurFade inView className="relative min-h-[260px] overflow-hidden rounded-2xl sm:min-h-[360px] lg:col-span-5 lg:min-h-0">
+            <BlurFade inView className="relative min-h-[260px] overflow-hidden rounded-2xl sm:min-h-[360px] lg:order-2 lg:col-span-5 lg:min-h-0">
               <Image
                 src={nextStep.image.src}
                 alt={nextStep.image.alt}
