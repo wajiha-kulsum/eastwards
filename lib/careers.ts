@@ -36,7 +36,6 @@ export const careers = {
   description:
     "Careers at Eastwards: work on Quantum Computing, Generative AI and cloud-native engineering with a Singapore-headquartered team. Send your application.",
   hero: {
-    label: "Careers",
     title: "Shape the Future of",
     highlight: "Intelligent Growth.",
     lede: "At Eastwards, we don’t just hire for skills; we hire for mindset. We are looking for builders, thinkers, and problem-solvers who are passionate about using technology to solve the world’s most complex enterprise challenges.",

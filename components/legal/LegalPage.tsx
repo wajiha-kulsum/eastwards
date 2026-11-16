@@ -17,6 +17,7 @@ import {
 import { LegalToc } from "@/components/legal/LegalToc";
 import { RichText } from "@/components/legal/RichText";
 import { legalDocs, type LegalBlock, type LegalDoc, type LegalIcon, type LegalListItem } from "@/lib/legal";
+import { LANE } from "@/components/ui/lane";
 
 /* One layout for Terms, Privacy and Cookies. Top to bottom: the hero card
    (title, intro, photo), three "at a glance" cards, then the document beside
@@ -236,7 +237,7 @@ export default function LegalPage({ doc }: { doc: LegalDoc }) {
 
   return (
     <main id="main" className="flex-1 bg-page text-ink">
-      <div className="mx-auto max-w-[1720px] px-6 pb-20 pt-3 sm:px-10 lg:px-[5.35%]">
+      <div className={`${LANE} pb-20 pt-3`}>
         {/* Hero card */}
         <header className="relative overflow-hidden rounded-[24px] border border-line bg-surface sm:rounded-[30px] print:border-0 print:bg-transparent">
           <div

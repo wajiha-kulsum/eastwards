@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Globe, Mail, Phone } from "lucide-react";
 import PageShell from "@/components/ui/PageShell";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { DotMap } from "@/components/contact/DotMap";
@@ -10,13 +10,13 @@ import { contact } from "@/lib/content";
    left with the form beside them, then one black band with the team
    addresses, the dot map and the Singapore office. */
 export function ContactPage() {
-  const { intro, next, ways, location, call, directChannels, form } = contact;
+  const { intro, next, ways, location, call, directChannels } = contact;
   const lastStep = next.steps.length - 1;
   const focusRing = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
   const link = `link-underline-sweep rounded-sm font-medium text-ink transition-colors hover:text-link ${focusRing}`;
 
   return (
-    <PageShell pb="pb-16" wide>
+    <PageShell pb="pb-16">
       {/* Phones read heading, form, next steps, direct lines. From 1024 the
           form sits beside the other three, level with the heading. */}
       <section
@@ -24,10 +24,9 @@ export function ContactPage() {
         className="grid grid-cols-1 gap-8 pt-8 sm:pt-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.2fr)] xl:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:grid-rows-[auto_auto_1fr] lg:gap-x-12 lg:pt-10 xl:gap-x-16"
       >
         <div className="lg:col-start-1 lg:row-start-1">
-          <p className="text-small font-semibold text-link">{contact.title}</p>
           <h1
             id="contact-heading"
-            className="mt-3 max-w-[16ch] text-balance font-display text-title font-bold leading-[1.05] tracking-[-0.03em] text-ink"
+            className="max-w-[16ch] text-balance font-display text-title font-bold leading-[1.05] tracking-[-0.03em] text-ink"
           >
             {intro.title}
           </h1>
@@ -69,13 +68,26 @@ export function ContactPage() {
           <dl className="mt-3 divide-y divide-line border-y border-line text-small">
             <div className="flex items-center gap-4 py-3">
               <dt className="flex w-24 shrink-0 items-center gap-2.5 text-body">
+                <Globe className="h-4 w-4 text-link" aria-hidden="true" />
+                {ways.web}
+              </dt>
+              <dd className="min-w-0">
+                <a href={ways.site.href} className={link}>
+                  {ways.site.label}
+                </a>
+              </dd>
+            </div>
+            <div className="flex items-start gap-4 py-3">
+              <dt className="flex w-24 shrink-0 items-center gap-2.5 text-body">
                 <Mail className="h-4 w-4 text-link" aria-hidden="true" />
                 {ways.email}
               </dt>
-              <dd className="min-w-0">
-                <a href={`mailto:${form.inbox}`} className={link}>
-                  {form.inbox}
-                </a>
+              <dd className="flex min-w-0 flex-wrap gap-x-4 gap-y-1">
+                {ways.emails.map((email) => (
+                  <a key={email} href={`mailto:${email}`} className={link}>
+                    {email}
+                  </a>
+                ))}
               </dd>
             </div>
             <div className="flex items-start gap-4 py-3">
@@ -92,17 +104,6 @@ export function ContactPage() {
                     <span className="block text-body sm:inline"> {phone.label}</span>
                   </span>
                 ))}
-              </dd>
-            </div>
-            <div className="flex items-center gap-4 py-3">
-              <dt className="flex w-24 shrink-0 items-center gap-2.5 text-body">
-                <MapPin className="h-4 w-4 text-link" aria-hidden="true" />
-                {ways.visit}
-              </dt>
-              <dd>
-                <a href="#headquarters" className={link}>
-                  {location.building}, {location.street}
-                </a>
               </dd>
             </div>
           </dl>

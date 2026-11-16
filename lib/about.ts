@@ -1,7 +1,8 @@
-/* About page content. The words are the client's approved About copy,
-   reorganized for the redesign: the hero line, the "who we are" statement
-   with its promise split into its three outcomes, and the five capability
-   layers, each with a photo. Rendering lives in components/about. */
+/* About page content. Every sentence is from the client's About document
+   (supplied 2026-11-16) and nothing else: the client asked for that text
+   only. Hyphens lost in the document's paste are restored (hands-on,
+   long-term), and the spaced dashes between a term and its text become the
+   title/body split. Rendering lives in components/about. */
 
 export type PromiseIcon = "rocket" | "shield" | "trend";
 
@@ -18,28 +19,36 @@ export type Layer = {
 
 export const about = {
   title: "About Us",
-  // meta description and the hero's second line
-  lede: "Nobody builds alone. It takes the right people, a fresh perspective, and a shared idea to make something click.",
+  // meta description: the document's opening sentence
+  lede: "At Eastwards, we help enterprises transform digital complexity into measurable advantage.",
   hero: {
-    label: "About Us",
-    lead: "Nobody builds alone.",
-    rest: "It takes the right people, a fresh perspective, and a shared idea to make something click.",
-    primary: { label: "Talk to our team", href: "/contact" },
-    secondary: { label: "See how we work", href: "#capabilities" },
+    title: "Guiding Enterprises Toward Intelligent Growth.",
+    body: "At Eastwards, we help enterprises transform digital complexity into measurable advantage. Headquartered in Singapore with a global delivery footprint, we combine strategic insight with hands-on engineering to design, secure, and operate the platforms that power modern business.",
+    primary: { label: "Contact Us", href: "/contact" },
+    secondary: { label: "Comprehensive Digital Solutions", href: "#capabilities" },
     photo: {
       src: "/images/people.jpg",
       alt: "Eastwards team working together around a table",
       width: 1594,
       height: 1054,
     },
-    // two facts from the statement below, pinned on the photo
-    place: { title: "Singapore HQ", detail: "Global delivery footprint" },
+    // two facts from the statement above, pinned on the photo
+    place: { title: "Headquartered in Singapore", detail: "Global delivery footprint" },
   },
-  intro: {
-    title: "We provide solutions that drive business.",
-    body: "At Eastwards, we help enterprises transform digital complexity into measurable advantage. Headquartered in Singapore with a global delivery footprint, we combine strategic insight with hands-on engineering to design, secure, and operate the platforms that power modern business.",
-    promiseTitle: "Our promise",
-    promise: [
+  mission: {
+    title: "Mission",
+    statement: "To make digital transformation predictable, secure, and outcome-driven.",
+    body: "We view transformation as a continuous capability, not a one-off project. By aligning engineering rigor with business priorities, we deliver measurable ROI and long-term resilience.",
+  },
+  foundation: {
+    title: "Our Foundation",
+    statement:
+      "Founded by senior IT and delivery leaders with over 20 years of experience, Eastwards bridges legacy operations with future-ready innovation.",
+    body: "We blend deep technical expertise with pragmatic delivery practices so clients can reduce risk, scale reliably, and unlock new revenue streams.",
+  },
+  promise: {
+    title: "Our promise",
+    items: [
       { icon: "rocket" as PromiseIcon, title: "Faster time to market" },
       { icon: "shield" as PromiseIcon, title: "Lower operational risk" },
       { icon: "trend" as PromiseIcon, title: "Sustained cost efficiency" },
@@ -47,7 +56,6 @@ export const about = {
   },
   capabilities: {
     title: "Comprehensive Digital Solutions.",
-    lede: "Five layers, from the first line of code to the results that matter.",
     layer: "Layer",
     of: "of",
     layers: [
@@ -56,9 +64,18 @@ export const about = {
         title: "Innovation & Engineering",
         short: "Engineering",
         items: [
-          { title: "Application Development & Product Engineering", body: "Web and mobile products built to grow with your business." },
-          { title: "Quantum Computing Advisory", body: "Explore quantum possibilities and find where they fit." },
-          { title: "Data & Artificial Intelligence", body: "Turn data into insights and AI into real value." },
+          {
+            title: "Application Development & Product Engineering",
+            body: "Cloud-native web and mobile platforms, from discovery to continuous delivery.",
+          },
+          {
+            title: "Quantum Computing Advisory",
+            body: "Feasibility studies and strategic roadmaps for organizations exploring quantum advantage.",
+          },
+          {
+            title: "Data & Artificial Intelligence",
+            body: "Data engineering, analytics, and ML operationalization to turn information into strategic assets.",
+          },
         ],
         // James Harrison, https://unsplash.com/photos/vpOeXr5wmR4
         image: { src: "/images/about-engineering.jpg", alt: "A laptop showing source code on a desk" },
@@ -68,9 +85,9 @@ export const about = {
         title: "Resilience & Security",
         short: "Security",
         items: [
-          { title: "Cybersecurity Services", body: "Spot risks early and protect what matters." },
-          { title: "Infrastructure & Cloud", body: "Build smarter, more flexible cloud infrastructure." },
-          { title: "Modern Device Management", body: "Keep devices secure and teams connected." },
+          { title: "Cybersecurity Services", body: "Risk assessments, security engineering, and compliance built into delivery." },
+          { title: "Infrastructure & Cloud", body: "Resilient migrations, hybrid architectures, and cost optimization." },
+          { title: "Modern Device Management", body: "Secure remote work enablement and unified endpoint management." },
         ],
         // Albert Stoynov, https://unsplash.com/photos/dyUp7WPu5q4
         image: { src: "/images/about-security.jpg", alt: "Network cables plugged into a switch lit in blue" },
@@ -80,41 +97,76 @@ export const about = {
         title: "Delivery & Talent",
         short: "Delivery",
         items: [
-          { title: "Projects & Professional Services", body: "Bring clarity, expertise, and momentum to every project." },
-          { title: "IT Staffing Services", body: "Find the right technical talent for your team." },
-          { title: "Digital Support Services", body: "Keep your systems running and your users supported." },
+          {
+            title: "Projects & Professional Services",
+            body: "Program management and solution architecture to ensure projects land on time and on budget.",
+          },
+          { title: "IT Staffing Services", body: "Flexible access to vetted technical talent for specialized or long-term needs." },
+          {
+            title: "Digital Support Services",
+            body: "24/7 managed services and UX operations to keep systems reliable and user experiences consistent.",
+          },
         ],
         // airfocus, https://unsplash.com/photos/v89zhr0iBFY
         image: { src: "/images/about-delivery.jpg", alt: "Two colleagues planning a project on a board of notes" },
       },
       {
-        id: "partner-in-growth",
-        title: "Your Partner in Growth",
-        short: "Partnership",
-        items: [
-          { title: "We Listen First", body: "We understand your needs before jumping into solutions." },
-          { title: "We Build Together", body: "We share progress, adapt quickly, and keep you involved." },
-          { title: "We Grow Together", body: "We share knowledge and build lasting partnerships." },
-        ],
-        // Radission US, https://unsplash.com/photos/_XeQ8XEWb4Q
-        image: { src: "/images/about-partner.jpg", alt: "Two people shaking hands across a meeting table" },
-      },
-      {
         id: "why-eastwards",
-        title: "Why Choose Eastwards",
+        title: "Why Organizations Choose Eastwards",
         short: "Why Eastwards",
         items: [
-          { title: "Experience That Counts", body: "Technical expertise focused on your challenges." },
-          { title: "Results That Matter", body: "Solutions built around meaningful business outcomes." },
-          { title: "Better Together", body: "The right people and expertise, working as one." },
+          { title: "Proven Expertise", body: "Decades of leadership in large-scale transformations across industries." },
+          { title: "Outcome Focused", body: "Success measured by reduced cycle time, improved uptime, and demonstrable ROI." },
+          { title: "Security by Design", body: "Compliance and security embedded from day one." },
+          { title: "Global Reach, Local Sensibility", body: "Strategic hub in Singapore with delivery tailored to local markets." },
+          {
+            title: "Ecosystem Alliances",
+            body: "Partnerships with leading technology vendors for validated, high-performance solutions.",
+          },
         ],
         // Vitaly Gariev, https://unsplash.com/photos/d80Nf1ptTfY
         image: { src: "/images/about-why.jpg", alt: "A consultant presenting results charts to a team" },
       },
+      {
+        id: "partner-in-growth",
+        // the document's "Our Approach – Your Partner in Growth", dash as a colon
+        title: "Our Approach: Your Partner in Growth",
+        short: "Our Approach",
+        items: [
+          { title: "Client First", body: "Engagements begin with your strategic goals and measurable outcomes." },
+          {
+            title: "Agile & Iterative",
+            body: "Continuous feedback and incremental delivery keep projects aligned with evolving priorities.",
+          },
+          {
+            title: "Engineering Rigor",
+            body: "Automated testing, CI/CD, and Infrastructure as Code ensure quality and repeatability.",
+          },
+          {
+            title: "Collaborative Partnership",
+            body: "We embed with your teams to transfer knowledge and build long-term capability.",
+          },
+        ],
+        // Radission US, https://unsplash.com/photos/_XeQ8XEWb4Q
+        image: { src: "/images/about-partner.jpg", alt: "Two people shaking hands across a meeting table" },
+      },
     ] satisfies readonly Layer[],
   },
-  channels: {
-    title: "Talk to the right team.",
-    lede: "Need to reach a specific department? Use the direct lines below for a faster response.",
+  // each step opens the contact form, with the matching requirement chosen where one exists
+  nextStep: {
+    title: "Take the Next Step.",
+    items: [
+      {
+        title: "Book a Quantum Readiness Review",
+        body: "A 30-minute assessment with quick wins and a 90-day roadmap.",
+        href: "/contact?requirement=Quantum%20Computing",
+      },
+      { title: "Request a Case Study", body: "Get a detailed case study tailored to your industry.", href: "/contact" },
+      {
+        title: "Engage Talent Fast",
+        body: "Access vetted technical specialists for immediate project needs.",
+        href: "/contact?requirement=IT%20Staffing%20Services",
+      },
+    ],
   },
 } as const;

@@ -27,7 +27,6 @@ export const responsibility = {
   description:
     "Purpose-driven growth at Eastwards: sustainable engineering, bridging the digital divide, ethical and responsible AI, and diversity, equity and inclusion.",
   hero: {
-    label: "Responsibility",
     title: "Purpose-Driven Growth:",
     highlight: "Our Commitment to Responsibility.",
     lede: "At Eastwards, we believe that true progress is measured by more than just technological milestones. As we guide enterprises towards intelligent growth, we recognize our responsibility to ensure that growth is sustainable, equitable, and ethical.",

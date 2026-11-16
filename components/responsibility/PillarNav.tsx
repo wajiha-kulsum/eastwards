@@ -48,7 +48,7 @@ export function PillarNav({ items, label }: { items: readonly Item[]; label: str
       aria-label={label}
       className="sticky top-[60px] z-30 border-y border-line bg-page/90 backdrop-blur-sm sm:top-[68px] lg:top-[72px] print:hidden"
     >
-      <ol ref={rail} className="flex gap-2 overflow-x-auto px-6 py-3 [scrollbar-width:none] sm:px-10 lg:px-16 xl:px-24 [&::-webkit-scrollbar]:hidden">
+      <ol ref={rail} className="flex gap-2 overflow-x-auto px-6 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {items.map((item, index) => {
           const current = item.id === active;
           return (

@@ -63,13 +63,12 @@ export default function ResponsibilityPage() {
       {/* Hero */}
       <section className={`grid items-center gap-10 ${PAD} pb-14 pt-14 sm:pb-20 sm:pt-20 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:pt-28`}>
         <div className="max-w-[760px]">
-          <span className={CHIP}>{hero.label}</span>
-          <h1 className="mt-6 text-balance font-display text-display font-bold leading-[1.02] tracking-[-0.03em] text-ink">
+          <h1 className="text-balance font-display text-display font-bold leading-[1.02] tracking-[-0.03em] text-ink">
             {keepCompounds(hero.title)}
             <span className="mt-4 block text-lead font-semibold leading-[1.2] tracking-[-0.02em] text-primary">{hero.highlight}</span>
           </h1>
-          <p className="mt-6 max-w-[58ch] text-pretty text-small leading-[1.6] text-ink/80">{hero.lede}</p>
-          <p className={`mt-4 max-w-[58ch] ${BODY}`}>{hero.framework}</p>
+          <p className="mt-6 max-w-[72ch] text-pretty text-small leading-[1.6] text-ink/80">{hero.lede}</p>
+          <p className={`mt-4 max-w-[72ch] ${BODY}`}>{hero.framework}</p>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
             <PrimaryButton href={`mailto:${CSR_EMAIL}`} className="min-h-11 gap-2 px-6 text-small lg:min-h-[52px] lg:px-7">
               {hero.primary}
@@ -170,7 +169,7 @@ export default function ResponsibilityPage() {
                   <div className="mt-5">
                     <TwoTone id={`${pillar.id}-heading`} lead={pillar.title} rest={pillar.subtitle} />
                   </div>
-                  <p className={`mt-4 max-w-[56ch] ${BODY}`}>{pillar.intro}</p>
+                  <p className={`mt-4 max-w-[72ch] ${BODY}`}>{pillar.intro}</p>
                 </div>
                 <div className="relative aspect-[3/2] overflow-hidden rounded-2xl bg-line-strong">
                   <Image

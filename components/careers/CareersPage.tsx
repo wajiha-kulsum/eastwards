@@ -50,11 +50,10 @@ export default function CareersPage() {
       {/* Hero: copy top left, tile chart rising bottom right */}
       <section className={`relative flex flex-col overflow-hidden ${PAD} pb-10 pt-14 sm:pt-20 lg:min-h-[720px] lg:pt-28`}>
         <div className="relative z-10 max-w-[760px]">
-          <span className={CHIP}>{hero.label}</span>
-          <h1 className="mt-6 text-balance font-display text-display font-bold leading-[1.02] tracking-[-0.03em] text-ink">
+          <h1 className="text-balance font-display text-display font-bold leading-[1.02] tracking-[-0.03em] text-ink">
             {hero.title} <span className="text-primary">{hero.highlight}</span>
           </h1>
-          <p className="mt-6 max-w-[56ch] text-pretty text-small leading-[1.6] text-ink/80">{hero.lede}</p>
+          <p className="mt-6 max-w-[72ch] text-pretty text-small leading-[1.6] text-ink/80">{hero.lede}</p>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
             <PrimaryButton href="#apply" className="min-h-11 gap-2 px-6 text-small lg:min-h-[52px] lg:px-7">
               {hero.primary}

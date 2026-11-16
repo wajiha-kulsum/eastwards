@@ -5,8 +5,9 @@ import { Logo } from "@/components/ui/Logo";
 import { InstagramIcon, LinkedinIcon, YoutubeIcon } from "@/components/ui/BrandIcons";
 import { contact, footer } from "@/lib/content";
 import { serviceLinks, type ServiceLink } from "@/lib/service-groups";
+import { LANE } from "@/components/ui/lane";
 
-/* Black footer band on the site's lane (1720px cap, 5.35% lanes), top to
+/* Black footer band on the site's lane (components/ui/lane), top to
    bottom: the closing call to action (not on the homepage), the brand row
    with the socials, the link groups the header menu uses, the contact strip
    (Singapore HQ, both phone lines, email), then the legal row.
@@ -105,7 +106,7 @@ export function Footer() {
 
   return (
     <footer className="mt-16 border-t border-transparent bg-band text-small text-white dark:border-line print:hidden">
-      <div className="mx-auto w-full max-w-[1720px] px-6 pb-10 pt-14 sm:px-10 lg:px-[5.35%] lg:pt-16">
+      <div className={`${LANE} w-full pb-10 pt-14 lg:pt-16`}>
         <FooterCta />
 
         {/* Brand row: logo and tagline, socials opposite from 1024 */}

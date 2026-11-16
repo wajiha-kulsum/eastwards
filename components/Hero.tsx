@@ -57,7 +57,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative mx-auto max-w-[1720px] px-3 pt-3 sm:px-[25px] sm:pt-6">
+    <section className="relative mx-auto max-w-[2000px] px-3 pt-3 sm:px-[25px] sm:pt-6">
       {/* Keep hero content visible immediately. The artwork is deliberately
           bright and still; a reveal animation made the text look washed out
           in captures and delayed the page's most important information. */}

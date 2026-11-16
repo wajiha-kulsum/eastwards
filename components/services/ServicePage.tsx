@@ -3,6 +3,7 @@ import BlogShowcase from "@/components/BlogShowcase";
 import { LABEL_CHIP } from "@/components/services/label-chip";
 import { InkText } from "@/components/ui/InkText";
 import type { ServiceBlock, ServicePageContent } from "@/lib/content";
+import { LANE } from "@/components/ui/lane";
 
 /* Sub-page renderer for /services/[slug]. The mock's look applied to the
    shared system: centered dot-field hero with one CTA (ServiceHero), statement
@@ -211,7 +212,7 @@ export default function ServicePage({ service }: { service: ServicePageContent }
   const [lead, ...rest] = service.blocks;
   return (
     <main id="main" className="bg-page text-ink">
-      <div className="mx-auto max-w-[1720px] px-6 pt-3 sm:px-10 lg:px-[5.35%]">
+      <div className={`${LANE} pt-3`}>
         <ServiceHero title={service.title} lede={service.lede} />
 
         {lead?.kind === "lead" ? (
