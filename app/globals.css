@@ -497,3 +497,35 @@ select:-webkit-autofill {
   -webkit-text-fill-color: #f2f2f2;
   caret-color: #f2f2f2;
 }
+
+/* Above-the-fold entrances (the About hero) render hidden on the server and
+   are revealed by motion once scripts run. If scripts are slow, this shows
+   them anyway after 1.4s: a CSS animation outranks motion's inline styles,
+   and by then motion's own entrance has finished. */
+.reveal-fallback,
+.reveal-fallback [data-slot="text-animate-segment"] {
+  animation: reveal-fallback 0s 1.4s forwards;
+}
+@keyframes reveal-fallback {
+  to {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}
+
+/* About hero photo: settles from a slight zoom as the page opens. CSS, so
+   it plays before scripts load. */
+@keyframes about-hero-settle {
+  from {
+    transform: scale(1.06);
+  }
+}
+.about-hero-settle {
+  animation: about-hero-settle 1.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-hero-settle {
+    animation: none;
+  }
+}

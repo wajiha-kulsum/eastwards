@@ -17,7 +17,7 @@ export default function Home() {
       <Hero />
       <Features />
       <CoreValues />
-      <BlogShowcase />
+      <BlogShowcase compact />
       <HomeContactCta />
     </main>
   );

@@ -10,7 +10,7 @@ export default function HomeContactCta() {
     <section className={`${SECTION_LANE} relative pb-16 sm:pb-20`}>
       <div
         aria-hidden="true"
-        className="dot-field pointer-events-none absolute inset-x-6 top-0 h-40 opacity-50 [mask-image:linear-gradient(to_bottom,black,transparent)] sm:inset-x-12"
+        className="dot-field pointer-events-none absolute inset-x-6 top-0 h-40 opacity-50 [mask-image:linear-gradient(to_bottom,black,transparent)] sm:inset-x-10 lg:inset-x-[5.35%]"
       />
 
       <div className="relative grid gap-6 border-t border-line-strong pt-7 sm:grid-cols-[1fr_auto] sm:items-end sm:gap-10 sm:pt-8">
