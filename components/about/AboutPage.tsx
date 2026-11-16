@@ -1,140 +1,291 @@
 import Image from "next/image";
-import { ArrowDown, ArrowUpRight, MapPin, Rocket, ShieldCheck, TrendingUp, type LucideIcon } from "lucide-react";
+import { Fragment } from "react";
 import { CapabilityStack } from "@/components/about/CapabilityStack";
-import { BODY, FOCUS, FramedPage, PAD, SECTION, TwoTone } from "@/components/ui/framed";
-import PrimaryButton from "@/components/ui/PrimaryButton";
-import { about, type PromiseIcon } from "@/lib/about";
+import { SmoothScroll } from "@/components/about/SmoothScroll";
+import { BlurFade } from "@/components/ui/blur-fade";
+import { BODY, FOCUS, PAD } from "@/components/ui/framed";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
+import { TextAnimate } from "@/components/ui/text-animate";
+import { about } from "@/lib/about";
 
-/* About Us on the shared frame (components/ui/framed), a sibling of
-   /careers and /responsibility: a wide (landscape) hero with the text
-   running across the page and the team photo as a banner under it, then
-   the mission and foundation with the promise as three outcomes, the five
+/* About Us, set as an editorial
+   page rather than a kit of cards: the team photo with the headline on it,
+   the intro as a large statement, mission and foundation as rows, the
    capability layers as a pinned walkthrough on a dark band
-   (components/about/CapabilityStack), and the next steps. Copy is data in
-   lib/about.ts. */
+   (components/about/CapabilityStack), why clients choose Eastwards as a
+   mosaic of reasons around one photo, the approach beside a photo of the
+   work, and the next steps as links beside a photo. No icon tiles or small
+   blue labels: the client found them generic. The only graphic mark is
+   the logo's own arrow. No borders either (the client asked for them
+   gone): no frame rails, no section rules; groups are held by spacing and
+   a faint tinted surface. Motion: the reading-progress hairline, the
+   headline's word-by-word entrance, photos easing in from a blur, and
+   eased wheel scrolling (Craftwork's Blank components and Lenis), all off
+   under reduced motion. Micro-interactions: the hero photo settles in,
+   section headings rise word by word, cards and rows arrive in a short
+   stagger, and on hover the logo's outlined arrow fills and nudges forward.
+   Reveals sit on wrappers and hovers on the card, so the two never fight.
+   Copy is data in lib/about.ts. */
 
-const PROMISE_ICONS: Record<PromiseIcon, LucideIcon> = {
-  rocket: Rocket,
-  shield: ShieldCheck,
-  trend: TrendingUp,
-};
+// A section on the page: spacing alone separates it from the next
+const SECTION = `${PAD} py-14 sm:py-20`;
+// A faint surface for grouped content, 4% ink over the page so it works in both themes
+const TINT = "bg-[color-mix(in_oklab,var(--color-ink)_4%,var(--color-page))]";
+const TINT_HOVER = "hover:bg-[color-mix(in_oklab,var(--color-ink)_8%,var(--color-page))]";
 
-const LABEL = "text-small font-semibold text-link";
+// Section headings share one display style; the colour comes from the band they sit on
+const H2 = "max-w-[20ch] text-balance font-display text-title font-bold leading-[1.05] tracking-[-0.03em]";
+// The name of a block in the side column of a row (Mission, Our Foundation, Our promise)
+const ROW_NAME = "text-small font-semibold text-ink";
+// A title one step under the section heading: the reasons and the next steps
+const TILE_TITLE = "text-balance font-display text-xl font-semibold leading-[1.2] tracking-[-0.015em] text-ink sm:text-2xl";
+// A large statement: the document's key sentences
+const STATEMENT = "text-pretty text-lead font-medium leading-[1.3] tracking-[-0.015em] text-ink";
+
+/* Keeps hyphenated words (outcome-driven, future-ready) whole, so a large
+   statement never ends a line on "outcome-" */
+function keepHyphenated(text: string) {
+  return text.split(/(\S+-\S+)/).map((part, i) =>
+    i % 2 ? (
+      <span key={i} className="whitespace-nowrap">
+        {part}
+      </span>
+    ) : (
+      part
+    )
+  );
+}
+
+/* A section heading that rises word by word the first time it comes into view */
+function Heading({ id, className, children }: { id: string; className: string; children: string }) {
+  return (
+    <TextAnimate as="h2" id={id} by="word" animation="blurInUp" duration={0.45} once className={className}>
+      {children}
+    </TextAnimate>
+  );
+}
+
+/* The logo's arrow drawn as an outline (the client's card sketch): it
+   fills with blue and nudges forward when its card is hovered */
+function ArrowMark({ className }: { className?: string }) {
+  return (
+    <svg viewBox="-2 -2 31 36" aria-hidden="true" className={className}>
+      <path
+        d="M27 15.5885L0 31.1769L0 0L27 15.5885Z"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+        className="fill-transparent transition-[fill] duration-300 ease-out group-hover:fill-current"
+      />
+    </svg>
+  );
+}
+
+// A card on the tinted surface, deepening and lifting slightly on hover
+const CARD = `group h-full rounded-2xl ${TINT} ${TINT_HOVER} transition-[background-color,transform] duration-300 ease-out motion-safe:hover:-translate-y-0.5`;
+
+/* The arrow from the Eastwards logo, used wherever the page points onward */
+function LogoArrow({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 27 32" aria-hidden="true" className={className}>
+      <path d="M27 15.5885L0 31.1769L0 0L27 15.5885Z" fill="currentColor" />
+    </svg>
+  );
+}
 
 export default function AboutPage() {
-  const { hero, mission, foundation, promise, capabilities, nextStep } = about;
+  const { hero, mission, foundation, promise, capabilities, why, approach, nextStep } = about;
 
   return (
-    <FramedPage>
-      {/* Hero: the text spans the page width, the photo is a wide banner below */}
-      <section className={`${PAD} pb-14 pt-14 sm:pb-20 sm:pt-20 lg:pt-24`}>
-        <h1 className="max-w-[22ch] text-balance font-display text-display font-bold leading-[1.02] tracking-[-0.03em] text-ink">
-          {hero.title}
-        </h1>
-        <p className="mt-6 max-w-[72ch] text-pretty text-lead leading-[1.45] tracking-[-0.01em] text-body sm:mt-8">{hero.body}</p>
-        {/* phones: one full-width button, the secondary link centred under it */}
-        <div className="mt-8 flex flex-col gap-2 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-3">
-          <PrimaryButton href={hero.primary.href} className="min-h-12 gap-2 px-6 text-small sm:min-h-11 lg:min-h-[52px] lg:px-7">
-            {hero.primary.label}
-            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-          </PrimaryButton>
-          <a
-            href={hero.secondary.href}
-            className={`inline-flex min-h-11 items-center justify-center gap-1.5 rounded-sm px-1 text-small font-semibold text-ink transition-colors hover:text-link ${FOCUS}`}
-          >
-            <span className="link-underline-sweep">{hero.secondary.label}</span>
-            <ArrowDown className="h-4 w-4" aria-hidden="true" />
-          </a>
-        </div>
-        <figure className="relative mt-10 sm:mt-14">
-          <Image
-            src={hero.photo.src}
-            alt={hero.photo.alt}
-            width={hero.photo.width}
-            height={hero.photo.height}
-            priority
-            sizes="(min-width: 2000px) 1900px, 95vw"
-            className="aspect-[4/3] h-auto w-full rounded-3xl object-cover sm:aspect-[2/1] lg:aspect-[21/9]"
-          />
-          <figcaption className="absolute bottom-3 left-3 flex items-center gap-2.5 whitespace-nowrap rounded-2xl border border-line bg-card/95 py-2 pl-2 pr-3.5 shadow-[0_8px_24px_-12px_rgb(0_0_0/0.35)] backdrop-blur-sm sm:bottom-5 sm:left-5 sm:gap-3 sm:py-2.5 sm:pl-2.5 sm:pr-4">
-            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-primary/10 text-link sm:h-9 sm:w-9">
-              <MapPin className="h-4 w-4" aria-hidden="true" />
-            </span>
-            <span className="leading-tight">
-              <span className="block text-small font-semibold text-ink">{hero.place.title}</span>
-              <span className="block text-small text-body">{hero.place.detail}</span>
-            </span>
-          </figcaption>
-        </figure>
-      </section>
-
-      {/* Mission and foundation side by side, then the promise as three outcomes */}
-      <section className={SECTION}>
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-14">
-          {[mission, foundation].map((block) => (
-            <div key={block.title}>
-              <h2 className={LABEL}>{block.title}</h2>
-              <div className="mt-4">
-                <TwoTone as="p" lead={block.statement} />
-              </div>
-              <p className={`mt-4 max-w-[60ch] text-pretty ${BODY}`}>{block.body}</p>
-            </div>
-          ))}
-        </div>
-        <div className="mt-12 sm:mt-16">
-          <h2 className={LABEL}>{promise.title}</h2>
-          <ul className="mt-4 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3">
-            {promise.items.map((item) => {
-              const Icon = PROMISE_ICONS[item.icon];
-              return (
-                <li key={item.title} className="flex items-center gap-4 bg-page p-5 sm:p-6">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-primary/10 text-link">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <span className="text-small font-semibold text-ink">{item.title}</span>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </section>
-
-      {/* Capabilities: five layers, text and photo, on a dark band */}
-      <section id="capabilities" aria-labelledby="capabilities-heading" className="scroll-mt-20 bg-band text-white">
-        <div className={`${PAD} pb-12 pt-16 sm:pb-16 sm:pt-24 lg:pb-4`}>
-          <h2
-            id="capabilities-heading"
-            className="max-w-[24ch] text-balance font-display text-title font-bold leading-[1.05] tracking-[-0.03em] text-white"
-          >
-            {capabilities.title}
-          </h2>
-        </div>
-        <CapabilityStack />
-      </section>
-
-      {/* Next steps, each opening the contact form */}
-      <section aria-labelledby="next-heading" className={SECTION}>
-        <TwoTone id="next-heading" lead={nextStep.title} />
-        <ul className="mt-8 grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-3">
-          {nextStep.items.map((item) => (
-            <li key={item.title} className="flex bg-page">
-              <a
-                href={item.href}
-                className={`group flex w-full flex-col gap-2 p-6 transition-colors hover:bg-card sm:p-7 focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-primary`}
+    <main id="main" className="flex-1 bg-page text-ink">
+      {/* without scripts, nothing waits on an entrance animation */}
+      <noscript>
+        <style>{`[data-slot="blur-fade"],[data-slot="text-animate-segment"]{opacity:1!important;filter:none!important;transform:none!important}`}</style>
+      </noscript>
+      <ScrollProgress />
+      <SmoothScroll />
+      <div className="mx-auto max-w-[2000px] pt-3 sm:px-6">
+        {/* Hero: the photo first, the arrow and headline on it (top left), the intro below */}
+        <section className={`${PAD} pb-16 pt-6 sm:pb-24 sm:pt-8`}>
+          <div className="relative overflow-hidden rounded-3xl">
+            <Image
+              src={hero.photo.src}
+              alt={hero.photo.alt}
+              width={hero.photo.width}
+              height={hero.photo.height}
+              priority
+              sizes="(min-width: 2000px) 1900px, 95vw"
+              className="about-hero-settle aspect-[4/5] h-auto w-full object-cover sm:aspect-[3/2] lg:aspect-[2/1] 2xl:aspect-[21/9]"
+            />
+            {/* scrim behind the headline, which sits top left over the bright window: from the top on phones, from the top-left corner on wide screens */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/30 to-transparent lg:bg-gradient-to-br lg:from-black/75 lg:via-black/25 lg:to-transparent"
+            />
+            {/* the client's frame: the logo's arrow, then the headline under it, top left */}
+            <div className="absolute inset-x-5 top-6 flex flex-col items-start sm:inset-x-8 sm:top-8 lg:inset-x-12 lg:right-auto lg:top-12">
+              <BlurFade className="reveal-fallback">
+                <LogoArrow className="h-9 w-auto text-primary sm:h-11 lg:h-14" />
+              </BlurFade>
+              {/* 768-1279 keeps the title size: below 1280 the photo is too short for an 88px headline stacked under the arrow */}
+              <TextAnimate
+                as="h1"
+                by="word"
+                animation="blurInUp"
+                startOnView={false}
+                once
+                duration={0.5}
+                delay={0.1}
+                className="reveal-fallback mt-5 max-w-[15ch] text-balance font-display text-display font-bold leading-[1.02] tracking-[-0.03em] text-white md:text-title lg:mt-7 xl:text-display"
               >
-                <span className="flex items-start justify-between gap-4 text-small font-semibold text-ink">
-                  {item.title}
-                  <ArrowUpRight
-                    className="h-4 w-4 shrink-0 text-link transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                    aria-hidden="true"
-                  />
-                </span>
-                <span className={BODY}>{item.body}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </FramedPage>
+                {hero.title}
+              </TextAnimate>
+            </div>
+          </div>
+          {/* the opening paragraph: its first sentence as the statement, the rest beside it */}
+          <BlurFade delay={0.45} className="reveal-fallback mt-10 grid gap-5 sm:mt-14 lg:grid-cols-12 lg:gap-10">
+            <p className={`${STATEMENT} lg:col-span-7`}>{keepHyphenated(hero.intro.lead)}</p>
+            <p className={`${BODY} max-w-[52ch] text-pretty lg:col-span-4 lg:col-start-9 lg:self-end`}>{hero.intro.rest}</p>
+          </BlurFade>
+        </section>
+
+        {/* Mission and foundation as rows (name, statement, detail), then the promise */}
+        <section aria-label={`${mission.title} and ${foundation.title}`} className={SECTION}>
+          <div className="space-y-12 lg:space-y-16">
+            {[mission, foundation].map((block) => (
+              <BlurFade key={block.title} inView className="grid gap-4 lg:grid-cols-12 lg:gap-10">
+                <h2 className={`${ROW_NAME} lg:col-span-3`}>{block.title}</h2>
+                <p className={`${STATEMENT} lg:col-span-6`}>{keepHyphenated(block.statement)}</p>
+                <p className={`${BODY} max-w-[52ch] text-pretty lg:col-span-3`}>{block.body}</p>
+              </BlurFade>
+            ))}
+            <div className="grid gap-6 lg:grid-cols-12 lg:gap-10">
+              <h2 className={`${ROW_NAME} lg:col-span-3`}>{promise.title}</h2>
+              <ul className="grid gap-3 sm:grid-cols-3 lg:col-span-9">
+                {promise.items.map((item, i) => (
+                  <li key={item.title}>
+                    <BlurFade inView delay={i * 0.08} className="h-full">
+                      <p
+                        className={`${CARD} p-6 text-balance font-display text-lead font-semibold leading-[1.15] tracking-[-0.02em] text-ink sm:p-7`}
+                      >
+                        {item.title}
+                      </p>
+                    </BlurFade>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Capabilities: three layers, a photo per specialisation, on a dark band */}
+        <section id="capabilities" aria-labelledby="capabilities-heading" className="bg-band text-white">
+          <div className={`${PAD} pb-12 pt-16 sm:pb-16 sm:pt-24 lg:px-12 lg:pb-4 xl:px-16`}>
+            <Heading id="capabilities-heading" className={`${H2} max-w-[24ch] text-white`}>
+              {capabilities.title}
+            </Heading>
+          </div>
+          <CapabilityStack />
+        </section>
+
+        {/* Why Eastwards: five cards after the client's sketch (arrow, heading, statement) and one photo */}
+        <section aria-labelledby="why-heading" className={SECTION}>
+          <Heading id="why-heading" className={`${H2} text-ink`}>
+            {why.title}
+          </Heading>
+          <div className="mt-10 grid gap-3 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
+            {why.items.map((item, i) => (
+              <Fragment key={item.title}>
+                {/* the photo takes the third cell: the end of the first row on wide screens */}
+                {i === 2 ? (
+                  <BlurFade
+                    inView
+                    delay={0.16}
+                    className="relative min-h-[240px] overflow-hidden rounded-2xl sm:col-span-2 lg:col-span-1"
+                  >
+                    <Image src={why.image.src} alt={why.image.alt} fill sizes="(min-width: 1024px) 32vw, 95vw" className="object-cover" />
+                  </BlurFade>
+                ) : null}
+                <BlurFade
+                  inView
+                  delay={(i < 2 ? i : i + 1) * 0.08}
+                  className={i === why.items.length - 1 ? "sm:col-span-2 lg:col-span-1" : ""}
+                >
+                  <div className={`${CARD} p-7 sm:p-8 lg:min-h-[240px]`}>
+                    <ArrowMark className="h-7 w-auto text-primary transition-transform duration-300 ease-out group-hover:translate-x-1" />
+                    <h3 className={`${TILE_TITLE} mt-6`}>{item.title}</h3>
+                    <p className={`${BODY} mt-2 max-w-[40ch] text-pretty`}>{item.body}</p>
+                  </div>
+                </BlurFade>
+              </Fragment>
+            ))}
+          </div>
+        </section>
+
+        {/* Our approach: a photo of the work beside the four principles */}
+        <section aria-labelledby="approach-heading" className={SECTION}>
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
+            <BlurFade inView className="relative aspect-[4/3] overflow-hidden rounded-3xl lg:sticky lg:top-28 lg:col-span-6 lg:self-start">
+              <Image src={approach.image.src} alt={approach.image.alt} fill sizes="(min-width: 1024px) 48vw, 95vw" className="object-cover" />
+            </BlurFade>
+            <div className="lg:col-span-5 lg:col-start-8">
+              <Heading id="approach-heading" className={`${H2} text-ink`}>
+                {approach.title}
+              </Heading>
+              <ul className="mt-10 space-y-7">
+                {approach.items.map((item, i) => (
+                  <li key={item.title}>
+                    <BlurFade inView delay={i * 0.08} className="group flex gap-4">
+                      <ArrowMark className="mt-1 h-4 w-auto shrink-0 text-primary transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
+                      <div>
+                        <h3 className="text-small font-semibold text-ink">{item.title}</h3>
+                        <p className={`${BODY} mt-1.5 text-pretty`}>{item.body}</p>
+                      </div>
+                    </BlurFade>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Next steps: a photo of a first conversation beside the three links, each opening the contact form */}
+        <section aria-labelledby="next-heading" className={SECTION}>
+          <Heading id="next-heading" className={`${H2} text-ink`}>
+            {nextStep.title}
+          </Heading>
+          {/* group/next: hovering any link eases the photo in a touch, tying the two halves together */}
+          <div className="group/next mt-10 grid gap-3 sm:mt-12 lg:grid-cols-12">
+            <BlurFade inView className="relative min-h-[260px] overflow-hidden rounded-2xl sm:min-h-[360px] lg:col-span-5 lg:min-h-0">
+              <Image
+                src={nextStep.image.src}
+                alt={nextStep.image.alt}
+                fill
+                sizes="(min-width: 1024px) 40vw, 95vw"
+                className="object-cover transition-transform duration-700 ease-out motion-safe:group-has-[a:hover]/next:scale-[1.04]"
+              />
+            </BlurFade>
+            <ul className="flex flex-col gap-3 lg:col-span-7">
+              {nextStep.items.map((item, i) => (
+                <li key={item.title} className="flex-1">
+                  <BlurFade inView delay={0.08 + i * 0.08} className="h-full">
+                    <a
+                      href={item.href}
+                      className={`group grid h-full grid-cols-[minmax(0,1fr)_auto] content-center items-center gap-x-6 gap-y-2 rounded-2xl px-6 py-7 transition-colors duration-200 sm:px-8 sm:py-8 ${TINT} ${TINT_HOVER} ${FOCUS}`}
+                    >
+                      <span className={`${TILE_TITLE} transition-transform duration-300 ease-out group-hover:translate-x-1`}>{item.title}</span>
+                      <span className={`${BODY} col-start-1 row-start-2 max-w-[52ch] text-pretty`}>{keepHyphenated(item.body)}</span>
+                      <span className="col-start-2 row-span-2 row-start-1 grid h-11 w-11 place-items-center rounded-full bg-page text-primary transition-[background-color,color,transform] duration-200 group-hover:bg-primary group-hover:text-white motion-safe:group-hover:scale-110">
+                        <LogoArrow className="ml-0.5 h-3.5 w-auto transition-transform duration-200 group-hover:translate-x-0.5" />
+                      </span>
+                    </a>
+                  </BlurFade>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      </div>
+    </main>
   );
 }

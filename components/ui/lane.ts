@@ -4,5 +4,6 @@
    text everywhere, so every page uses this one lane. */
 export const LANE = "mx-auto max-w-[2000px] px-6 sm:px-12";
 
-// A home page section on the lane, with the shared top rhythm
-export const SECTION_LANE = `${LANE} mt-14 md:mt-16`;
+// Home page sections keep their original lane (1720px cap, 5.35% sides): the
+// client asked for the landing page to keep its original look
+export const SECTION_LANE = "mx-auto mt-14 max-w-[1720px] px-6 sm:px-10 md:mt-16 lg:px-[5.35%]";
