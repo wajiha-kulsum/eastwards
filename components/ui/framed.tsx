@@ -4,8 +4,9 @@
    ink lead, then grey), and grids get hatched gutters or a faint square grid
    behind their drawings. */
 
-// Side padding inside the rails, and a full section with its top rule
-export const PAD = "px-6 sm:px-10 lg:px-16 xl:px-24";
+// Side padding inside the rails (24px, so content sits 48px from the edge
+// like every other page), and a full section with its top rule
+export const PAD = "px-6";
 export const SECTION = `border-t border-line ${PAD} py-16 sm:py-24`;
 
 export const FOCUS = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -41,13 +42,14 @@ export function TwoTone({
   );
 }
 
-/* The page frame: the site lane, then the railed column inside it. Phones
+/* The page frame: the site lane with the rails 24px from the edge, then the
+   railed column inside it. Phones
    drop the rails and their gutter, so content keeps the full width and
    lines up with the footer at 24px. */
 export function FramedPage({ children }: { children: React.ReactNode }) {
   return (
     <main id="main" className="flex-1 bg-page text-ink">
-      <div className="mx-auto max-w-[1720px] pt-3 sm:px-10 lg:px-[5.35%]">
+      <div className="mx-auto max-w-[2000px] pt-3 sm:px-6">
         <div className="sm:border-x sm:border-line">{children}</div>
       </div>
     </main>

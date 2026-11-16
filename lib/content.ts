@@ -140,14 +140,16 @@ export const blog = {
 } as const;
 
 export const contact = {
-  // small label over the contact page heading
-  title: "Contact Us",
-  // the direct lines beside the form, as on the reference layout
+  /* The details beside the form: the website and the two inboxes from the
+     client's document. The address stays in the headquarters band below. */
   ways: {
     label: "Reach us directly",
     email: "Email",
     call: "Call",
-    visit: "Office",
+    web: "Website",
+    emails: ["contact@eastwards.co", "info@eastwards.co"],
+    // shown as the document writes it, linked to the canonical apex host
+    site: { label: "www.eastwards.co", href: "https://eastwards.co" },
   },
   intro: {
     title: "Let\u2019s Build the Future of Your Enterprise",
@@ -260,9 +262,9 @@ export const footer = {
     button: "Talk to our team",
     /* Pages that end on their own call to action, so the footer's would
        repeat it: home (HomeContactCta), careers (speaks to candidates),
-       responsibility (its own CSR contact band). Add a path here, never a
-       check in FooterCta. */
-    hideOn: ["/", "/careers", "/responsibility"],
+       responsibility (its own CSR contact band), about (Take the Next Step).
+       Add a path here, never a check in FooterCta. */
+    hideOn: ["/", "/careers", "/responsibility", "/about"],
   },
   // the same row on /contact, where a button to the contact page would point
   // at itself: the visitor already has the form, so this offers the inbox

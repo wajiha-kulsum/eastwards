@@ -20,7 +20,7 @@ const growFor = (distance: number) => {
   return 1.14;
 };
 
-export default function BlogShowcase({ compact = false }: { compact?: boolean }) {
+export default function BlogShowcase() {
   const count = posts.length;
   // unbounded index, arrows wrap infinitely in both directions
   const [cursor, setCursor] = useState(0);
@@ -30,7 +30,7 @@ export default function BlogShowcase({ compact = false }: { compact?: boolean })
   const activePost = posts[activeIndex];
 
   return (
-    <section className={compact ? "mx-auto mt-14 max-w-[1720px] px-6 sm:px-10 md:mt-16 lg:px-[5.35%]" : SECTION_LANE}>
+    <section className={SECTION_LANE}>
       {/* light bordered panel, palette matched to the reference */}
       <div className="rounded-[24px] border border-line bg-card px-5 py-8 sm:px-8 md:px-[31px] lg:py-[44px]">
         {/* Heading: dark line + muted line, controls right */}
