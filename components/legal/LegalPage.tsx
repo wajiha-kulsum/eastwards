@@ -107,7 +107,7 @@ function Table({ block }: { block: Extract<LegalBlock, { kind: "table" }> }) {
           </thead>
           <tbody>
             {block.rows.map(([name, ...cells]) => (
-              <tr key={name} className="border-t border-line align-top">
+              <tr key={name} className="align-top even:bg-[color-mix(in_oklab,var(--color-ink)_4%,var(--color-page))]">
                 <th scope="row" className="px-4 py-3 font-semibold text-ink">
                   {name}
                 </th>

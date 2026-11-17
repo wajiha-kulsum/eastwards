@@ -1,5 +1,3 @@
-import type { CareersIcon } from "@/lib/careers";
-
 /* Line drawings for the careers page, all inline SVG on the site's tokens so
    they follow the theme. Solid strokes only (no dashes or dots), with one
    brand-blue accent each. Decorative: every one is aria-hidden. */
@@ -10,7 +8,8 @@ const noise = (a: number, b: number) => (((a * 73856093) ^ (b * 19349663)) >>> 0
 
 /* Hero tile chart: columns of rounded tiles rising left to right, a growth
    curve built from the same tile language as the homepage hero art. Mostly
-   quiet greys, with brand-blue tiles near the crest of each column. */
+   quiet greys, with brand-blue tiles near the crest of each column. Flat
+   fills, no outlines; tiles light up under the cursor (globals.css .tile). */
 export function TileChart({ className = "" }: { className?: string }) {
   const cols = 28;
   const rows = 18;
@@ -30,9 +29,10 @@ export function TileChart({ className = "" }: { className?: string }) {
       if (!crest && v > 0.93) continue; // a few gaps keep it organic
       const base = { x: c * pitch, y: height - tile - r * pitch, delay: c * 28 + r * 6 };
       if (crest && v < 0.42) {
-        tiles.push({ ...base, tone: "fill-primary", opacity: 0.2 + v * 1.6 });
+        // the brighter crest tiles pulse, like live activity
+        tiles.push({ ...base, tone: v < 0.2 ? "fill-primary tile-pulse" : "fill-primary", opacity: 0.2 + v * 1.6 });
       } else if (v < 0.5) {
-        tiles.push({ ...base, tone: "fill-surface stroke-line" });
+        tiles.push({ ...base, tone: "fill-[color-mix(in_oklab,var(--color-ink)_3%,var(--color-page))]" });
       } else if (v < 0.82) {
         tiles.push({ ...base, tone: "fill-line" });
       } else {
@@ -51,64 +51,11 @@ export function TileChart({ className = "" }: { className?: string }) {
           width={tile}
           height={tile}
           rx={5}
-          strokeWidth={1}
           opacity={t.opacity}
-          className={`tile-in ${t.tone}`}
+          className={`tile ${t.tone.includes("tile-pulse") ? "" : "tile-in "}${t.tone}`}
           style={{ animationDelay: `${t.delay}ms` }}
         />
       ))}
-    </svg>
-  );
-}
-
-/* One small drawing per reason to join */
-export function ReasonArt({ icon }: { icon: CareersIcon }) {
-  const line = "stroke-body";
-  return (
-    <svg viewBox="0 0 96 96" fill="none" aria-hidden="true" className="h-20 w-20" strokeWidth={1.25} strokeLinecap="round" strokeLinejoin="round">
-      {icon === "cpu" ? (
-        // a chip: frame, core, pins on every side
-        <>
-          <rect x="26" y="26" width="44" height="44" rx="4" className={line} />
-          <rect x="38" y="38" width="20" height="20" rx="2" className={line} />
-          {[34, 44, 52, 62].map((p) => (
-            <g key={p} className={line}>
-              <path d={`M${p} 26V16`} />
-              <path d={`M${p} 70v10`} />
-              <path d={`M26 ${p}H16`} />
-              <path d={`M70 ${p}h10`} />
-            </g>
-          ))}
-          <circle cx="48" cy="48" r="3.5" className="fill-primary" stroke="none" />
-        </>
-      ) : icon === "graduation" ? (
-        // rising steps: experience handed on
-        <>
-          <path d="M18 74h60" className={line} />
-          <rect x="22" y="58" width="16" height="16" rx="2" className={line} />
-          <rect x="40" y="44" width="16" height="30" rx="2" className={line} />
-          <rect x="58" y="28" width="16" height="46" rx="2" className={line} />
-          <path d="M24 48l18-14 16 8 18-16" className={line} />
-          <circle cx="76" cy="26" r="3.5" className="fill-primary" stroke="none" />
-        </>
-      ) : icon === "globe" ? (
-        // a globe with one point marked: local roots, global reach
-        <>
-          <circle cx="48" cy="48" r="28" className={line} />
-          <ellipse cx="48" cy="48" rx="12" ry="28" className={line} />
-          <path d="M20 48h56M24 34h48M24 62h48" className={line} />
-          <circle cx="58" cy="58" r="3.5" className="fill-primary" stroke="none" />
-          <circle cx="58" cy="58" r="7" className="stroke-primary" />
-        </>
-      ) : (
-        // a target: ownership, aim, outcome
-        <>
-          <circle cx="48" cy="48" r="28" className={line} />
-          <circle cx="48" cy="48" r="17" className={line} />
-          <path d="M48 12v14M48 70v14M12 48h14M70 48h14" className={line} />
-          <circle cx="48" cy="48" r="4" className="fill-primary" stroke="none" />
-        </>
-      )}
     </svg>
   );
 }

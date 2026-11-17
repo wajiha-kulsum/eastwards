@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Fragment } from "react";
 import { CapabilityStack } from "@/components/about/CapabilityStack";
 import { SmoothScroll } from "@/components/about/SmoothScroll";
+import { ArrowMark } from "@/components/ui/ArrowMark";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { BODY, FOCUS, PAD } from "@/components/ui/framed";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
@@ -62,22 +63,6 @@ function Heading({ id, className, children }: { id: string; className: string; c
     <TextAnimate as="h2" id={id} by="word" animation="blurInUp" duration={0.45} once className={className}>
       {children}
     </TextAnimate>
-  );
-}
-
-/* The logo's arrow drawn as an outline (the client's card sketch): it
-   fills with blue and nudges forward when its card is hovered */
-function ArrowMark({ className }: { className?: string }) {
-  return (
-    <svg viewBox="-2 -2 31 36" aria-hidden="true" className={className}>
-      <path
-        d="M27 15.5885L0 31.1769L0 0L27 15.5885Z"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinejoin="round"
-        className="fill-transparent transition-[fill] duration-300 ease-out group-hover:fill-current"
-      />
-    </svg>
   );
 }
 

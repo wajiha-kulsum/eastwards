@@ -529,3 +529,86 @@ select:-webkit-autofill {
     animation: none;
   }
 }
+
+/* No borders anywhere on the site: the client asked for every line and
+   outline gone, on every page. One rule here instead of ~200 border classes
+   across the components; border utilities left in the markup are inert.
+   Groups are held by spacing and tinted surfaces instead. Exceptions:
+   loading spinners (their ring is the spinner). 1px rings (box-shadow
+   outlines) go too; 2px focus rings stay, so keyboard focus is still shown. */
+*:not(.animate-spin),
+::before,
+::after {
+  border-width: 0 !important;
+}
+[class~="ring-1"],
+[class*=":ring-1"] {
+  --tw-ring-shadow: 0 0 #0000 !important;
+  --tw-inset-ring-shadow: 0 0 #0000 !important;
+}
+/* A field in error had only a red border; it now shows a red glow */
+[aria-invalid="true"]:is(input, textarea, select) {
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--color-destructive) 45%, transparent);
+}
+/* the phone field's flag carries its own 1px outline */
+.PhoneInputCountryIcon--border {
+  box-shadow: none !important;
+}
+
+/* Marquee (Craftwork's Blank): each copy slides by its own length */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+/* Careers tile chart: a tile lights up blue under the cursor and fades back
+   slowly, so moving across the chart leaves a short trail; the blue crest
+   tiles pulse gently, like live activity. Both off under reduced motion. */
+.tile {
+  transition:
+    fill 700ms ease-out,
+    opacity 700ms ease-out;
+}
+@media (hover: hover) {
+  .tile:hover {
+    fill: var(--color-primary);
+    opacity: 1;
+    transition-duration: 60ms;
+  }
+}
+@keyframes tile-pulse {
+  50% {
+    opacity: 0.25;
+  }
+}
+.tile-pulse {
+  animation:
+    tile-in 500ms ease-out both,
+    tile-pulse 3.6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tile,
+  .tile-pulse {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* Careers job alerts: the paper plane drifts, as if in flight */
+@keyframes plane-drift {
+  50% {
+    transform: translate(6px, -8px) rotate(-2deg);
+  }
+}
+.plane-drift {
+  animation: plane-drift 6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .plane-drift {
+    animation: none;
+  }
+}

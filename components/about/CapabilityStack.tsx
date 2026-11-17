@@ -144,12 +144,13 @@ function PinnedLayers() {
                   >
                     <span
                       aria-hidden="true"
-                      className={`h-[11px] w-[11px] shrink-0 rounded-full border transition-[background-color,border-color,box-shadow] duration-300 ${
+                      className={`h-[11px] w-[11px] shrink-0 rounded-full transition-[background-color,box-shadow] duration-300 ${
+                        // filled dots, no outlines: lit for the layer in view, blue-grey once passed, faint ahead
                         current
-                          ? "border-primary bg-primary shadow-[0_0_0_5px_rgb(40_104_255/0.18)]"
+                          ? "bg-primary shadow-[0_0_0_5px_rgb(40_104_255/0.18)]"
                           : done
-                            ? "border-primary bg-[var(--color-band)]"
-                            : "border-white/30 bg-[var(--color-band)]"
+                            ? "bg-primary/50"
+                            : "bg-white/25"
                       }`}
                     />
                     <span className={`transition-colors duration-300 ${current ? "font-semibold text-white" : "text-white/45 group-hover:text-white/80"}`}>

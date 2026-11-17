@@ -46,7 +46,7 @@ export function PillarNav({ items, label }: { items: readonly Item[]; label: str
   return (
     <nav
       aria-label={label}
-      className="sticky top-[60px] z-30 border-y border-line bg-page/90 backdrop-blur-sm sm:top-[68px] lg:top-[72px] print:hidden"
+      className="sticky top-[60px] z-30 bg-page/90 backdrop-blur-sm sm:top-[68px] lg:top-[72px] print:hidden"
     >
       <ol ref={rail} className="flex gap-2 overflow-x-auto px-6 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {items.map((item, index) => {
@@ -56,8 +56,8 @@ export function PillarNav({ items, label }: { items: readonly Item[]; label: str
               <a
                 href={`#${item.id}`}
                 aria-current={current ? "location" : undefined}
-                className={`inline-flex min-h-10 items-center gap-2 rounded-lg border px-3 text-small font-medium transition-colors ${FOCUS} ${
-                  current ? "border-primary bg-primary text-white" : "border-line-strong bg-card text-ink hover:border-ink"
+                className={`inline-flex min-h-10 items-center gap-2 rounded-lg px-3 text-small font-medium transition-colors ${FOCUS} ${
+                  current ? "bg-primary text-white" : "bg-[color-mix(in_oklab,var(--color-ink)_5%,var(--color-page))] text-ink hover:bg-[color-mix(in_oklab,var(--color-ink)_10%,var(--color-page))]"
                 }`}
               >
                 <span className={`tabular-nums ${current ? "text-white/80" : "text-link"}`}>{String(index + 1).padStart(2, "0")}</span>

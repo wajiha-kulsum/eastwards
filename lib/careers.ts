@@ -96,11 +96,20 @@ export const careers = {
       {
         title: "Engineering Excellence",
         body: "We don’t cut corners. We believe in automated testing, CI/CD, and clean, scalable code.",
+        // X, https://unsplash.com/photos/kwzWjTnDPLk (free license)
+        image: { src: "/images/careers-value-engineering.jpg", alt: "Two engineers working through code together on a laptop" },
       },
-      { title: "Integrity & Transparency", body: "We are honest with our clients and with each other." },
+      {
+        title: "Integrity & Transparency",
+        body: "We are honest with our clients and with each other.",
+        // Brooke Cagle, https://unsplash.com/photos/-uHVRvDr7pg (free license)
+        image: { src: "/images/careers-value-integrity.jpg", alt: "Colleagues in an open, friendly conversation around a table" },
+      },
       {
         title: "Continuous Growth",
         body: "The tech landscape changes weekly; we provide the resources and environment for you to keep your skills sharp.",
+        // Van Tay Media, https://unsplash.com/photos/9buwiennNqg (free license)
+        image: { src: "/images/careers-value-growth.jpg", alt: "A team sketching ideas together in a workshop" },
       },
     ],
   },

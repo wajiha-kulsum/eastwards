@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import { PillarsFigure } from "@/components/responsibility/Graphics";
 import { PillarNav } from "@/components/responsibility/PillarNav";
-import { BODY, CHIP, FOCUS, FramedPage, GRID_BG, HATCH, PAD, SECTION, TwoTone } from "@/components/ui/framed";
+import { BODY, CHIP, FOCUS, FramedPage, GRID_BG, PAD, SECTION, TINT, TINT_HOVER, TwoTone } from "@/components/ui/framed";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import { CSR_EMAIL, responsibility, type ItemIcon } from "@/lib/responsibility";
 
@@ -112,15 +112,15 @@ export default function ResponsibilityPage() {
       </section>
 
       {/* Pillar index: four numbered cells that jump to their sections */}
-      <section id="pillars" aria-labelledby="pillars-heading" className="scroll-mt-24 border-t border-line pt-16 sm:pt-24">
+      <section id="pillars" aria-labelledby="pillars-heading" className="scroll-mt-24 pt-16 sm:pt-24">
         <div className={PAD}>
           <TwoTone id="pillars-heading" lead={index.label} rest={index.lede} />
         </div>
-        <ul className="mt-10 grid gap-px border-t border-line bg-line sm:mt-14 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className={`mt-10 grid gap-3 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4 ${PAD}`}>
           {pillars.map((pillar, i) => (
-            <li key={pillar.id} className="bg-page">
-              <a href={`#${pillar.id}`} className={`group flex h-full flex-col transition-colors hover:bg-surface ${FOCUS}`}>
-                <span className="relative block aspect-[4/3] overflow-hidden border-b border-line bg-line-strong">
+            <li key={pillar.id}>
+              <a href={`#${pillar.id}`} className={`group flex h-full flex-col overflow-hidden rounded-2xl transition-colors ${TINT} ${TINT_HOVER} ${FOCUS}`}>
+                <span className="relative block aspect-[4/3] overflow-hidden bg-line-strong">
                   {/* decorative here: the section below carries the description */}
                   <Image
                     src={pillar.image.src}
@@ -158,7 +158,7 @@ export default function ResponsibilityPage() {
               key={pillar.id}
               id={pillar.id}
               aria-labelledby={`${pillar.id}-heading`}
-              className="scroll-mt-40 border-b border-line py-16 last:border-b-0 sm:py-24"
+              className="scroll-mt-40 py-16 sm:py-24"
             >
               <div className={`grid gap-8 ${PAD} lg:grid-cols-2 lg:items-center lg:gap-16`}>
                 <div className={flip ? "lg:order-2" : undefined}>
@@ -183,14 +183,13 @@ export default function ResponsibilityPage() {
                 </div>
               </div>
 
-              <div className="mt-10 grid border-y border-line sm:mt-14 lg:grid-cols-[4rem_minmax(0,1fr)_4rem] xl:grid-cols-[6rem_minmax(0,1fr)_6rem]">
-                <div aria-hidden="true" className={`hidden border-r border-line lg:block ${HATCH}`} />
-                <ul className={`grid gap-px bg-line ${pillar.items.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2"}`}>
+              <div className={`mt-10 sm:mt-14 ${PAD}`}>
+                <ul className={`grid gap-3 ${pillar.items.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2"}`}>
                   {pillar.items.map((item) => {
                     const Icon = ITEM_ICONS[item.icon];
                     return (
-                      <li key={item.term} className="bg-page p-6 sm:p-8">
-                        <span className="grid h-11 w-11 place-items-center rounded-xl border border-line-strong bg-surface text-link">
+                      <li key={item.term} className={`rounded-2xl p-6 sm:p-8 ${TINT}`}>
+                        <span className="grid h-11 w-11 place-items-center rounded-xl bg-page text-link">
                           <Icon className="h-5 w-5" strokeWidth={1.5} aria-hidden="true" />
                         </span>
                         <h3 className="mt-5 text-small font-semibold text-ink">{item.term}</h3>
@@ -199,7 +198,6 @@ export default function ResponsibilityPage() {
                     );
                   })}
                 </ul>
-                <div aria-hidden="true" className={`hidden border-l border-line lg:block ${HATCH}`} />
               </div>
             </section>
           );
@@ -209,7 +207,7 @@ export default function ResponsibilityPage() {
       {/* Moving forward together */}
       <section aria-labelledby="closing-heading" className={SECTION}>
         <TwoTone id="closing-heading" lead={closing.title} rest={closing.statement} />
-        <figure className="mt-12 max-w-[920px] border-t border-line pt-10 sm:mt-16">
+        <figure className="mt-12 max-w-[920px] sm:mt-16">
           <blockquote className="text-balance text-lead font-medium leading-[1.3] tracking-[-0.02em] text-ink">
             <span aria-hidden="true" className="text-link">
               “
@@ -224,7 +222,7 @@ export default function ResponsibilityPage() {
       </section>
 
       {/* Contact */}
-      <section aria-labelledby="csr-contact-heading" className="grid border-t border-line bg-surface lg:grid-cols-[minmax(0,1fr)_minmax(0,0.75fr)]">
+      <section aria-labelledby="csr-contact-heading" className={`grid lg:grid-cols-[minmax(0,1fr)_minmax(0,0.75fr)] ${TINT}`}>
         <div className={`${PAD} py-14 sm:py-20`}>
           <TwoTone id="csr-contact-heading" lead={contact.title} rest={contact.lede} />
           <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-3">
@@ -237,7 +235,7 @@ export default function ResponsibilityPage() {
             </a>
           </div>
         </div>
-        <div aria-hidden="true" className="relative hidden place-items-center border-l border-line p-10 lg:grid">
+        <div aria-hidden="true" className="relative hidden place-items-center p-10 lg:grid">
           <span className={`absolute inset-0 ${GRID_BG}`} />
           {/* four pillars, one mindset */}
           <PillarsFigure labels={pillars.map((pillar) => pillar.short)} className="relative h-auto w-full max-w-[420px]" />

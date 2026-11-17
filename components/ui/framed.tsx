@@ -7,13 +7,18 @@
 // Side padding inside the rails (24px, so content sits 48px from the edge
 // like every other page), and a full section with its top rule
 export const PAD = "px-6";
-export const SECTION = `border-t border-line ${PAD} py-16 sm:py-24`;
+export const SECTION = `${PAD} py-16 sm:py-24`;
+
+// No borders on these pages (the client asked for them gone, as on About):
+// groups sit on a faint surface, 4% ink over the page, so it works in both themes
+export const TINT = "bg-[color-mix(in_oklab,var(--color-ink)_4%,var(--color-page))]";
+export const TINT_HOVER = "hover:bg-[color-mix(in_oklab,var(--color-ink)_8%,var(--color-page))]";
 
 export const FOCUS = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 export const BODY = "text-small leading-[1.7] text-body";
 
 // Small rounded tag: the page label in the hero, numbers on grid cells
-export const CHIP = "inline-flex items-center rounded-lg border border-line-strong bg-card px-3 py-1 text-small font-medium text-ink";
+export const CHIP = "inline-flex items-center rounded-lg bg-[color-mix(in_oklab,var(--color-ink)_6%,var(--color-page))] px-3 py-1 text-small font-medium text-ink";
 
 // Diagonal hatching for the gutters beside a grid
 export const HATCH = "bg-[repeating-linear-gradient(135deg,var(--color-line)_0_1px,transparent_1px_9px)]";
@@ -49,8 +54,12 @@ export function TwoTone({
 export function FramedPage({ children }: { children: React.ReactNode }) {
   return (
     <main id="main" className="flex-1 bg-page text-ink">
+      {/* without scripts, nothing waits on an entrance animation */}
+      <noscript>
+        <style>{`[data-slot="blur-fade"]{opacity:1!important;filter:none!important;transform:none!important}[data-slot=\"scroll-reveal\"] span{opacity:1!important}`}</style>
+      </noscript>
       <div className="mx-auto max-w-[2000px] pt-3 sm:px-6">
-        <div className="sm:border-x sm:border-line">{children}</div>
+        <div>{children}</div>
       </div>
     </main>
   );
