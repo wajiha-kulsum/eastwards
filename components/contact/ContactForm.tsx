@@ -444,8 +444,8 @@ export function ContactForm() {
       <div className="mt-5 flex xl:mt-auto xl:pt-5">
         <button
           type="submit"
-          aria-disabled={submitting || undefined}
-          className="inline-flex w-full min-h-12 items-center justify-center gap-2 rounded-full sm:ml-auto sm:w-auto sm:min-h-11 bg-primary px-6 py-2.5 text-small font-semibold text-white transition-[filter] duration-200 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface active:brightness-95 aria-disabled:cursor-progress lg:min-h-[52px] lg:px-7"
+          disabled={submitting}
+          className="inline-flex w-full min-h-12 items-center justify-center gap-2 rounded-full sm:ml-auto sm:w-auto sm:min-h-11 bg-primary px-6 py-2.5 text-small font-semibold text-white transition-[filter] duration-200 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface active:brightness-95 disabled:cursor-progress lg:min-h-[52px] lg:px-7"
         >
           {submitting ? (
             <span aria-hidden="true" className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white motion-reduce:animate-none" />

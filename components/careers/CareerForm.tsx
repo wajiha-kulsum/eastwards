@@ -522,8 +522,8 @@ export function CareerForm() {
       <div className="mt-6 flex">
         <button
           type="submit"
-          aria-disabled={submitting || undefined}
-          className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-7 text-small font-semibold text-white transition-[filter] duration-200 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface active:brightness-95 aria-disabled:cursor-progress sm:ml-auto sm:w-auto"
+          disabled={submitting}
+          className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-7 text-small font-semibold text-white transition-[filter] duration-200 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface active:brightness-95 disabled:cursor-progress sm:ml-auto sm:w-auto"
         >
           {submitting ? (
             <span aria-hidden="true" className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white motion-reduce:animate-none" />

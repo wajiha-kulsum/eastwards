@@ -82,8 +82,8 @@ export function JobAlerts() {
             />
             <button
               type="submit"
-              aria-disabled={state === "sending" || undefined}
-              className={`inline-flex h-12 shrink-0 items-center justify-center rounded-lg bg-ink px-5 text-small font-semibold text-page transition-opacity hover:opacity-90 aria-disabled:cursor-progress ${FOCUS}`}
+              disabled={state === "sending"}
+              className={`inline-flex h-12 shrink-0 items-center justify-center rounded-lg bg-ink px-5 text-small font-semibold text-page transition-opacity hover:opacity-90 disabled:cursor-progress ${FOCUS}`}
             >
               {state === "sending" ? copy.sending : copy.submit}
             </button>
