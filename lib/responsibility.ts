@@ -20,14 +20,12 @@ export type Pillar = {
   image: { src: string; alt: string };
 };
 
-export const CSR_EMAIL = "csr@eastwards.co";
-
 export const responsibility = {
   title: "Responsibility",
   description:
     "Purpose-driven growth at Eastwards: sustainable engineering, bridging the digital divide, ethical and responsible AI, and diversity, equity and inclusion.",
   hero: {
-    title: "Purpose-Driven Growth:",
+    title: "Purpose Driven Growth",
     highlight: "Our Commitment to Responsibility.",
     lede: "At Eastwards, we believe that true progress is measured by more than just technological milestones. As we guide enterprises towards intelligent growth, we recognize our responsibility to ensure that growth is sustainable, equitable, and ethical.",
     framework:
@@ -118,7 +116,6 @@ export const responsibility = {
       image: { src: "/images/csr-inclusion.jpg", alt: "A diverse team gathered around a laptop in a bright office" },
       short: "Inclusion",
       title: "Diversity, Equity, and Inclusion.",
-      subtitle: "DEI",
       intro:
         "Our strength lies in our diversity. We are committed to building a workplace, and a broader industry, where talent is the only prerequisite for success.",
       items: [
@@ -145,7 +142,14 @@ export const responsibility = {
   },
   contact: {
     title: "Partner with us.",
-    lede: "To learn more about our social impact initiatives or to partner with us on a community project, please reach out at:",
-    button: "Email the CSR team",
+    lede: "To learn more about our social impact initiatives or to partner with us on a community project, send the CSR team a note.",
+    // the CSR form (components/responsibility/CsrForm, app/api/csr)
+    form: {
+      submit: "Send to the CSR team",
+      sending: "Sending...",
+      failed: "Your message didn’t send. Please try again in a moment.",
+      sent: { title: "Message sent", before: "Thank you. The CSR team will reply to", after: "soon." },
+      again: "Send another message",
+    },
   },
 } as const;

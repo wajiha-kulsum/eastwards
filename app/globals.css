@@ -536,13 +536,16 @@ select:-webkit-autofill {
    Groups are held by spacing and tinted surfaces instead. Exceptions:
    loading spinners (their ring is the spinner). 1px rings (box-shadow
    outlines) go too; 2px focus rings stay, so keyboard focus is still shown. */
-*:not(.animate-spin),
-::before,
-::after {
+/* The home page keeps its original look, borders included (navbar and
+   footer too while on it): its <main> carries .keep-borders, and the rule
+   only applies on pages without it. */
+html:not(:has(.keep-borders)) *:not(.animate-spin),
+html:not(:has(.keep-borders)) ::before,
+html:not(:has(.keep-borders)) ::after {
   border-width: 0 !important;
 }
-[class~="ring-1"],
-[class*=":ring-1"] {
+html:not(:has(.keep-borders)) [class~="ring-1"],
+html:not(:has(.keep-borders)) [class*=":ring-1"] {
   --tw-ring-shadow: 0 0 #0000 !important;
   --tw-inset-ring-shadow: 0 0 #0000 !important;
 }

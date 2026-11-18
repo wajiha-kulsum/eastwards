@@ -49,7 +49,7 @@ export function PillarNav({ items, label }: { items: readonly Item[]; label: str
       className="sticky top-[60px] z-30 bg-page/90 backdrop-blur-sm sm:top-[68px] lg:top-[72px] print:hidden"
     >
       <ol ref={rail} className="flex gap-2 overflow-x-auto px-6 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {items.map((item, index) => {
+        {items.map((item) => {
           const current = item.id === active;
           return (
             <li key={item.id} className="shrink-0">
@@ -60,7 +60,6 @@ export function PillarNav({ items, label }: { items: readonly Item[]; label: str
                   current ? "bg-primary text-white" : "bg-[color-mix(in_oklab,var(--color-ink)_5%,var(--color-page))] text-ink hover:bg-[color-mix(in_oklab,var(--color-ink)_10%,var(--color-page))]"
                 }`}
               >
-                <span className={`tabular-nums ${current ? "text-white/80" : "text-link"}`}>{String(index + 1).padStart(2, "0")}</span>
                 {item.label}
               </a>
             </li>

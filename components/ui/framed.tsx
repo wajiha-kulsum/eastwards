@@ -58,7 +58,7 @@ export function FramedPage({ children }: { children: React.ReactNode }) {
       <noscript>
         <style>{`[data-slot="blur-fade"]{opacity:1!important;filter:none!important;transform:none!important}[data-slot=\"scroll-reveal\"] span{opacity:1!important}`}</style>
       </noscript>
-      <div className="mx-auto max-w-[2000px] pt-3 sm:px-6">
+      <div className="mx-auto max-w-[2000px] sm:px-6">
         <div>{children}</div>
       </div>
     </main>

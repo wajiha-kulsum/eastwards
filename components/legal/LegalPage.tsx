@@ -237,14 +237,14 @@ export default function LegalPage({ doc }: { doc: LegalDoc }) {
 
   return (
     <main id="main" className="flex-1 bg-page text-ink">
-      <div className={`${LANE} pb-20 pt-3`}>
+      <div className={`${LANE} pb-20`}>
         {/* Hero card */}
         <header className="relative overflow-hidden rounded-[24px] border border-line bg-surface sm:rounded-[30px] print:border-0 print:bg-transparent">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 bg-[radial-gradient(55%_75%_at_80%_50%,color-mix(in_srgb,var(--color-primary)_14%,transparent),transparent)] print:hidden"
           />
-          <div className="relative grid items-center gap-8 p-6 sm:p-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-12 lg:p-14">
+          <div className="relative grid items-center gap-8 px-6 pb-6 pt-2 sm:px-10 sm:pb-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-12 lg:px-14 lg:pb-14">
             <div>
               <p className="text-small font-semibold text-link">Legal</p>
               <h1 className="mt-3 text-balance font-display text-display font-bold uppercase leading-[0.95] tracking-[-0.03em] text-ink">

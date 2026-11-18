@@ -141,6 +141,10 @@ export const about = {
     items: [
       { title: "Proven Expertise", body: "Decades of leadership in large-scale transformations across industries." },
       { title: "Outcome Focused", body: "Success measured by reduced cycle time, improved uptime, and demonstrable ROI." },
+      {
+        title: "End-to-End Delivery",
+        body: "One partner from strategy and design through build, run, and ongoing support.",
+      },
       { title: "Security by Design", body: "Compliance and security embedded from day one." },
       {
         title: "Global Reach, Local Sensibility",
@@ -151,8 +155,6 @@ export const about = {
         body: "Partnerships with leading technology vendors for validated, high-performance solutions.",
       },
     ],
-    // Vitaly Gariev, https://unsplash.com/photos/d80Nf1ptTfY
-    image: { src: "/images/about-why.jpg", alt: "A consultant presenting results charts to a team" },
   },
   approach: {
     // the document's "Our Approach – Your Partner in Growth", dash as a colon

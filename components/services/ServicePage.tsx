@@ -212,7 +212,7 @@ export default function ServicePage({ service }: { service: ServicePageContent }
   const [lead, ...rest] = service.blocks;
   return (
     <main id="main" className="bg-page text-ink">
-      <div className={`${LANE} pt-3`}>
+      <div className={LANE}>
         <ServiceHero title={service.title} lede={service.lede} />
 
         {lead?.kind === "lead" ? (

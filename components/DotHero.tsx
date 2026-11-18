@@ -102,7 +102,7 @@ export default function DotHero({ title, lede }: { title: string; lede: string }
   useDotSnap(fieldRef, markRef, chipRef);
 
   return (
-    <section className="relative flex min-h-[160px] flex-col overflow-hidden pt-2 sm:min-h-[190px] lg:min-h-[210px]">
+    <section className="relative flex min-h-[160px] flex-col overflow-hidden sm:min-h-[190px] lg:min-h-[210px]">
       <DotField className="bottom-[12px] top-[22px]" fieldRef={fieldRef} />
 
       <div className="relative z-10 py-1">

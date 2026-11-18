@@ -67,7 +67,7 @@ export default function CareersPage() {
       <ScrollProgress />
       {/* Hero: copy left, centred against the tile chart rising bottom right
           (it lights up under the cursor); the headline rises word by word */}
-      <section className={`relative flex flex-col overflow-hidden ${PAD} pb-10 pt-14 sm:pt-20 lg:min-h-[720px] lg:justify-center lg:py-20`}>
+      <section className={`relative flex flex-col overflow-hidden ${PAD} pb-10 lg:min-h-[720px] lg:pb-20`}>
         <div className="relative z-10 max-w-[760px]">
           <h1 className="reveal-fallback text-balance font-display text-display font-bold leading-[1.02] tracking-[-0.03em] text-ink">
             <TextAnimate as="span" by="word" animation="blurInUp" startOnView={false} once duration={0.4} delay={0.05}>
@@ -108,7 +108,7 @@ export default function CareersPage() {
           </BlurFade>
         </div>
 
-        <div className="relative mt-12 [mask-image:linear-gradient(to_right,transparent,black_30%)] lg:absolute lg:bottom-20 lg:right-0 lg:mt-0 lg:w-[58%] lg:max-w-[920px] xl:w-[54%]">
+        <div className="relative mt-12 hidden [mask-image:linear-gradient(to_right,transparent,black_30%)] sm:block lg:absolute lg:bottom-20 lg:right-0 lg:mt-0 lg:w-[58%] lg:max-w-[920px] xl:w-[54%]">
           <TileChart className="h-auto w-full" />
         </div>
 

@@ -20,7 +20,7 @@ export const metadata: Metadata = pageMetadata({
 export default function ServicesIndexRoute() {
   return (
     <main id="main" className="bg-page text-ink">
-      <div className={`${LANE} pt-3`}>
+      <div className={LANE}>
         <ServiceHero title="Services" lede={features.body} />
 
         <section className="mt-10 sm:mt-14 lg:mt-16">

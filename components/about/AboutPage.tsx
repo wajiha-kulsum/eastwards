@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Fragment } from "react";
 import { CapabilityStack } from "@/components/about/CapabilityStack";
 import { SmoothScroll } from "@/components/about/SmoothScroll";
 import { ArrowMark } from "@/components/ui/ArrowMark";
@@ -89,9 +88,9 @@ export default function AboutPage() {
       </noscript>
       <ScrollProgress />
       <SmoothScroll />
-      <div className="mx-auto max-w-[2000px] pt-3 sm:px-6">
+      <div className="mx-auto max-w-[2000px] sm:px-6">
         {/* Hero: the photo first, the arrow and headline on it (bottom left), the intro below */}
-        <section className={`${PAD} pb-16 pt-6 sm:pb-24 sm:pt-8`}>
+        <section className={`${PAD} pb-16 sm:pb-24`}>
           <div className="relative overflow-hidden rounded-3xl">
             <Image
               src={hero.photo.src}
@@ -173,36 +172,20 @@ export default function AboutPage() {
           <CapabilityStack />
         </section>
 
-        {/* Why Eastwards: five cards after the client's sketch (arrow, heading, statement) and one photo */}
+        {/* Why Eastwards: six cards after the client's sketch (arrow, heading, statement) */}
         <section aria-labelledby="why-heading" className={SECTION}>
           <Heading id="why-heading" className={`${H2} text-ink`}>
             {why.title}
           </Heading>
           <div className="mt-10 grid gap-3 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
             {why.items.map((item, i) => (
-              <Fragment key={item.title}>
-                {/* the photo takes the third cell: the end of the first row on wide screens */}
-                {i === 2 ? (
-                  <BlurFade
-                    inView
-                    delay={0.16}
-                    className="relative min-h-[240px] overflow-hidden rounded-2xl sm:col-span-2 lg:col-span-1"
-                  >
-                    <Image src={why.image.src} alt={why.image.alt} fill sizes="(min-width: 1024px) 32vw, 95vw" className="object-cover" />
-                  </BlurFade>
-                ) : null}
-                <BlurFade
-                  inView
-                  delay={(i < 2 ? i : i + 1) * 0.08}
-                  className={i === why.items.length - 1 ? "sm:col-span-2 lg:col-span-1" : ""}
-                >
+                <BlurFade key={item.title} inView delay={i * 0.08}>
                   <div className={`${CARD} p-7 sm:p-8 lg:min-h-[240px]`}>
                     <ArrowMark className="h-7 w-auto text-primary transition-transform duration-300 ease-out group-hover:translate-x-1" />
                     <h3 className={`${TILE_TITLE} mt-6`}>{item.title}</h3>
                     <p className={`${BODY} mt-2 max-w-[40ch] text-pretty`}>{item.body}</p>
                   </div>
                 </BlurFade>
-              </Fragment>
             ))}
           </div>
         </section>
