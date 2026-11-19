@@ -256,10 +256,7 @@ export default function CareersPage() {
         <div className="mt-10 space-y-8 sm:mt-14">
           {groups.map(([team, rows]) => (
             <div key={team} className={`overflow-hidden rounded-2xl ${TINT}`}>
-              <h3 className="flex items-baseline gap-2 px-5 pb-1 pt-4 text-small font-semibold text-ink sm:px-6">
-                {team}
-                <span className="text-small font-normal tabular-nums text-body">{rows.length}</span>
-              </h3>
+              <h3 className="px-5 pb-1 pt-4 text-small font-semibold text-ink sm:px-6">{team}</h3>
               <ul className="p-2 pt-0">
                 {rows.map((row) => (
                   <li key={row.key}>

@@ -24,7 +24,8 @@ export const about = {
   // meta description: the document's opening sentence
   lede: "At Eastwards, we help enterprises transform digital complexity into measurable advantage.",
   hero: {
-    title: "Guiding Enterprises Toward Intelligent Growth.",
+    // the line breaks are the client's: "Enterprises Towards" stays on one line
+    title: "Guiding\nEnterprises Towards\nIntelligent Growth.",
     // the document's opening paragraph: its first sentence leads in ink, the rest follows in grey
     intro: {
       lead: "At Eastwards, we help enterprises transform digital complexity into measurable advantage.",

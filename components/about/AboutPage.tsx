@@ -28,7 +28,7 @@ import { about } from "@/lib/about";
    Copy is data in lib/about.ts. */
 
 // A section on the page: spacing alone separates it from the next
-const SECTION = `${PAD} py-14 sm:py-20`;
+const SECTION = `${PAD} py-8 sm:py-12`;
 // A faint surface for grouped content, 4% ink over the page so it works in both themes
 const TINT = "bg-[color-mix(in_oklab,var(--color-ink)_4%,var(--color-page))]";
 const TINT_HOVER = "hover:bg-[color-mix(in_oklab,var(--color-ink)_8%,var(--color-page))]";
@@ -90,7 +90,7 @@ export default function AboutPage() {
       <SmoothScroll />
       <div className="mx-auto max-w-[2000px] sm:px-6">
         {/* Hero: the photo first, the arrow and headline on it (bottom left), the intro below */}
-        <section className={`${PAD} pb-16 sm:pb-24`}>
+        <section className={`${PAD} pb-6 sm:pb-8`}>
           <div className="relative overflow-hidden rounded-3xl">
             <Image
               src={hero.photo.src}
@@ -120,51 +120,53 @@ export default function AboutPage() {
                 once
                 duration={0.5}
                 delay={0.1}
-                className="reveal-fallback mt-5 max-w-[15ch] text-balance font-display text-display font-bold leading-[1.02] tracking-[-0.03em] text-white md:text-title lg:mt-7 xl:text-display"
+                className="reveal-fallback mt-5 font-display text-display font-bold leading-[1.02] tracking-[-0.03em] text-white md:text-title lg:mt-7 xl:text-display"
               >
                 {hero.title}
               </TextAnimate>
             </div>
           </div>
           {/* the opening paragraph: its first sentence as the statement, the rest beside it */}
-          <BlurFade delay={0.45} className="reveal-fallback mt-10 grid gap-5 sm:mt-14 lg:grid-cols-12 lg:gap-10">
+          <BlurFade delay={0.45} className="reveal-fallback mt-8 grid gap-4 sm:mt-10 lg:grid-cols-12 lg:gap-10">
             <p className={`${STATEMENT} lg:col-span-7`}>{keepHyphenated(hero.intro.lead)}</p>
             <p className={`${BODY} max-w-[52ch] text-pretty lg:col-span-4 lg:col-start-9 lg:self-end`}>{hero.intro.rest}</p>
           </BlurFade>
         </section>
 
-        {/* Mission and foundation as rows (name, statement, detail), then the promise */}
+        {/* Mission and foundation side by side (name, statement, detail), then the promise as one strip */}
         <section aria-label={`${mission.title} and ${foundation.title}`} className={SECTION}>
-          <div className="space-y-12 lg:space-y-16">
-            {[mission, foundation].map((block) => (
-              <BlurFade key={block.title} inView className="grid gap-4 lg:grid-cols-12 lg:gap-10">
-                <h2 className={`${ROW_NAME} lg:col-span-3`}>{block.title}</h2>
-                <p className={`${STATEMENT} lg:col-span-6`}>{keepHyphenated(block.statement)}</p>
-                <p className={`${BODY} max-w-[52ch] text-pretty lg:col-span-3`}>{block.body}</p>
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 xl:gap-24">
+            {[mission, foundation].map((block, i) => (
+              <BlurFade key={block.title} inView delay={i * 0.08}>
+                <h2 className={ROW_NAME}>{block.title}</h2>
+                {/* a step under the intro statement while the two share a row, so neither runs long */}
+                <p className={`${STATEMENT} mt-3 lg:text-2xl 2xl:text-lead`}>{keepHyphenated(block.statement)}</p>
+                <p className={`${BODY} mt-4 max-w-[60ch] text-pretty`}>{block.body}</p>
               </BlurFade>
             ))}
-            <div className="grid gap-6 lg:grid-cols-12 lg:gap-10">
-              <h2 className={`${ROW_NAME} lg:col-span-3`}>{promise.title}</h2>
-              <ul className="grid gap-3 sm:grid-cols-3 lg:col-span-9">
-                {promise.items.map((item, i) => (
-                  <li key={item.title}>
-                    <BlurFade inView delay={i * 0.08} className="h-full">
-                      <p
-                        className={`${CARD} p-6 text-balance font-display text-lead font-semibold leading-[1.15] tracking-[-0.02em] text-ink sm:p-7`}
-                      >
-                        {item.title}
-                      </p>
-                    </BlurFade>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
+          <BlurFade
+            inView
+            delay={0.16}
+            className={`mt-10 grid gap-5 rounded-2xl p-6 sm:p-8 lg:mt-14 lg:grid-cols-12 lg:items-center lg:gap-10 ${TINT}`}
+          >
+            <h2 className={`${ROW_NAME} lg:col-span-3`}>{promise.title}</h2>
+            <ul className="grid gap-4 sm:grid-cols-3 sm:gap-6 lg:col-span-9">
+              {promise.items.map((item) => (
+                <li key={item.title} className="group flex items-center gap-3">
+                  <ArrowMark className="h-5 w-auto shrink-0 text-primary transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
+                  <span className="text-balance font-display text-xl font-semibold leading-[1.2] tracking-[-0.015em] text-ink">
+                    {item.title}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </BlurFade>
         </section>
 
         {/* Capabilities: three layers, a photo per specialisation, on a dark band */}
         <section id="capabilities" aria-labelledby="capabilities-heading" className="bg-band text-white">
-          <div className={`${PAD} pb-12 pt-16 sm:pb-16 sm:pt-24 lg:px-12 lg:pb-4 xl:px-16`}>
+          <div className={`${PAD} pb-8 pt-12 sm:pb-10 sm:pt-16 lg:px-12 lg:pb-4 xl:px-16`}>
             <Heading id="capabilities-heading" className={`${H2} max-w-[24ch] text-white`}>
               {capabilities.title}
             </Heading>
