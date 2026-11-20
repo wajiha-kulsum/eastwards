@@ -199,9 +199,15 @@ export default function AboutPage() {
               <Image src={approach.image.src} alt={approach.image.alt} fill sizes="(min-width: 1024px) 48vw, 95vw" className="object-cover" />
             </BlurFade>
             <div className="lg:col-span-5 lg:col-start-8">
-              <Heading id="approach-heading" className={`${H2} text-ink`}>
-                {approach.title}
-              </Heading>
+              {/* two lines: the name in brand blue, the tagline in ink */}
+              <h2 id="approach-heading" className={H2}>
+                <TextAnimate as="span" by="word" animation="blurInUp" duration={0.3} once className="block text-primary">
+                  {approach.title}
+                </TextAnimate>
+                <TextAnimate as="span" by="word" animation="blurInUp" duration={0.45} delay={0.15} once className="block text-ink">
+                  {approach.tagline}
+                </TextAnimate>
+              </h2>
               <ul className="mt-10 space-y-7">
                 {approach.items.map((item, i) => (
                   <li key={item.title}>

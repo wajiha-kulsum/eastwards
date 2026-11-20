@@ -158,8 +158,9 @@ export const about = {
     ],
   },
   approach: {
-    // the document's "Our Approach – Your Partner in Growth", dash as a colon
-    title: "Our Approach: Your Partner in Growth",
+    // the document's "Our Approach – Your Partner in Growth": the client wants it as two lines, the first in brand blue
+    title: "Our Approach",
+    tagline: "Your Partner in Growth",
     items: [
       { title: "Client First", body: "Engagements begin with your strategic goals and measurable outcomes." },
       {
