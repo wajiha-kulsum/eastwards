@@ -24,8 +24,6 @@ Updated lazily when terms or decisions actually get resolved.
   (`GRID_BG`). Drawings are inline SVG, solid strokes, one blue accent.
 - **TextBlur chip** — the TextBlur-wrapped text treatment inside DotHero
   (`components/ui/TextBlur.tsx`).
-- **Blog showcase** — the accordion-gallery "Related Blogs" panel rendered under
-  multiple pages (`components/BlogShowcase.tsx`), outside the lane div.
 
 ## Services surface
 

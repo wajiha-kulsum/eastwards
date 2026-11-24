@@ -3,7 +3,6 @@ import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
 import { CoreValues } from "@/components/CoreValues";
 import HomeContactCta from "@/components/HomeContactCta";
-import BlogShowcase from "@/components/BlogShowcase";
 import { pageMetadata, SITE_DESCRIPTION } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -17,7 +16,6 @@ export default function Home() {
       <Hero />
       <Features />
       <CoreValues />
-      <BlogShowcase compact />
       <HomeContactCta />
     </main>
   );

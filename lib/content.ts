@@ -71,74 +71,6 @@ export const coreValues = {
   ],
 } as const;
 
-export type BlogPost = {
-  id: string;
-  category: string;
-  title: string;
-  description: string;
-  href: string;
-  image: string;
-  accent: string;
-};
-
-export const blog = {
-  heading: "Explore the Blog",
-  subtext:
-    "Real-world tech insights, backed by 20+ years of engineering experience.",
-  posts: [
-    {
-      id: "security",
-      category: "Security",
-      title: "AI Security Best Practices: Safeguarding Innovation in the Digital Era",
-      description:
-        "They play a role in making operations more seamless, bridging the gap between authorities, consumers and businesses.",
-      href: "/insights/ai-security",
-      image: "/images/insight-ai-security.png",
-      accent: "from-orange-300 via-orange-700 to-slate-950",
-    },
-    {
-      id: "identity",
-      category: "Technology",
-      title: "Building Trust in a Digital-First World",
-      description:
-        "Explore how modern identity systems and intelligent security infrastructure are transforming digital trust.",
-      href: "/insights/digital-trust",
-      image: "/images/insight-digital-trust.jpg",
-      accent: "from-blue-950 via-cyan-800 to-slate-950",
-    },
-    {
-      id: "ai",
-      category: "Artificial Intelligence",
-      title: "The Next Era of Enterprise AI",
-      description:
-        "A practical look at how businesses can integrate AI into their workflows and unlock new opportunities.",
-      href: "/insights/enterprise-ai",
-      image: "/images/insight-enterprise-ai.jpg",
-      accent: "from-violet-800 via-blue-800 to-indigo-950",
-    },
-    {
-      id: "engineering",
-      category: "Engineering",
-      title: "Engineering Systems That Scale",
-      description:
-        "Designing resilient, scalable digital systems for complex enterprise environments.",
-      href: "/insights/scalable-systems",
-      image: "/images/insight-scalable-systems.jpg",
-      accent: "from-rose-500 via-red-800 to-slate-950",
-    },
-    {
-      id: "infrastructure",
-      category: "Infrastructure",
-      title: "Rethinking Modern Digital Infrastructure",
-      description:
-        "Building the foundation for connected, efficient and future-ready organisations.",
-      href: "/insights/digital-infrastructure",
-      image: "/images/insight-digital-infrastructure.jpg",
-      accent: "from-slate-500 via-slate-800 to-black",
-    },
-  ] as readonly BlogPost[],
-} as const;
-
 export const contact = {
   /* The details beside the form: the website and the two inboxes from the
      client's document. The address stays in the headquarters band below. */
@@ -262,9 +194,10 @@ export const footer = {
     button: "Talk to our team",
     /* Pages that end on their own call to action, so the footer's would
        repeat it: home (HomeContactCta), careers (speaks to candidates),
-       responsibility (its own CSR contact band), about (Take the Next Step).
+       responsibility (its own CSR contact band), about (Take the Next Step),
+       AI security (ends on the Quick-Scan offer).
        Add a path here, never a check in FooterCta. */
-    hideOn: ["/", "/careers", "/responsibility", "/about"],
+    hideOn: ["/", "/careers", "/responsibility", "/about", "/services/ai-security"],
   },
   // the same row on /contact, where a button to the contact page would point
   // at itself: the visitor already has the form, so this offers the inbox
@@ -1199,150 +1132,11 @@ export const servicePages: readonly ServicePageContent[] = [
     ],
   },
   {
+    /* rendered by its own page (components/services/AiSecurityPage.tsx,
+       copy in lib/ai-security.ts); this entry keeps it in menus and metadata */
     slug: "ai-security",
     title: "AI Security",
-    lede: "Building trust in the digital era, securing AI end-to-end.",
-    blocks: [
-      {
-        kind: "lead",
-        body: "Artificial Intelligence (AI) is transforming industries, from healthcare and finance to retail and manufacturing. Yet, as organizations embrace AI to drive innovation and efficiency, they face a critical challenge: how to secure AI systems against evolving cyber threats.",
-      },
-      {
-        kind: "prose",
-        paragraphs: [
-          "At Eastwards, we believe that protecting AI is not just about safeguarding technology, it’s about preserving trust, compliance, and business resilience.",
-        ],
-      },
-      {
-        kind: "prose",
-        heading: "Why AI Security Matters",
-        paragraphs: [
-          "AI systems thrive on data, and that makes them prime targets for attackers. From adversarial inputs that trick algorithms into making wrong decisions, to poisoned training datasets that corrupt models at their core, the risks are real. Left unchecked, these vulnerabilities can lead to:",
-        ],
-      },
-      {
-        kind: "bullets",
-        items: [
-          "Data breaches exposing sensitive customer or patient information",
-          "Model manipulation that undermines decision accuracy",
-          "Compliance failures with regulations such as GDPR or HIPAA",
-          "Loss of trust among customers, partners, and stakeholders",
-        ],
-      },
-      {
-        kind: "prose",
-        paragraphs: [
-          "Securing AI is therefore not optional, it is a strategic necessity for every modern enterprise.",
-        ],
-      },
-      {
-        kind: "prose",
-        heading: "Common Threats Facing AI Systems",
-        paragraphs: [
-          "Organizations deploying AI must be aware of the most pressing risks:",
-        ],
-      },
-      {
-        kind: "cards",
-        columns: 2,
-        items: [
-          {
-            title: "Adversarial Attacks",
-            body: "Subtle changes to inputs (images, text, or audio) that cause misclassification.",
-          },
-          {
-            title: "Poisoning Attacks",
-            body: "Corrupted training data that biases or destabilizes models.",
-          },
-          {
-            title: "Model Extraction",
-            body: "Reverse-engineering AI models to steal intellectual property or exploit sensitive outputs.",
-          },
-          {
-            title: "Prompt Manipulation",
-            body: "Tricking generative AI into producing harmful or misleading content.",
-          },
-        ],
-      },
-      {
-        kind: "prose",
-        heading: "Our Approach to Securing AI",
-        paragraphs: [
-          "Eastwards offers a comprehensive AI security framework designed to protect models, data, and infrastructure across the entire lifecycle:",
-        ],
-      },
-      {
-        kind: "cards",
-        columns: 2,
-        items: [
-          {
-            title: "Adversarial Training & Testing",
-            body: "We harden models by exposing them to manipulated inputs during training, ensuring resilience against real-world attacks.",
-          },
-          {
-            title: "Data Integrity & Validation",
-            body: "Our teams implement strict input validation, anomaly detection, and continuous monitoring to prevent poisoning attempts.",
-          },
-          {
-            title: "Model Protection & Access Control",
-            body: "We safeguard proprietary models with encryption, role-based access, and multi-factor authentication to prevent theft or misuse.",
-          },
-          {
-            title: "Explainable AI",
-            body: "Transparency builds trust. We integrate explainability tools that allow stakeholders to understand and verify AI decisions.",
-          },
-          {
-            title: "Regular Security Audits",
-            body: "Through penetration testing, vulnerability assessments, and compliance checks, we ensure AI systems remain secure and aligned with regulations.",
-          },
-        ],
-      },
-      {
-        kind: "prose",
-        heading: "Emerging Trends We Address",
-        paragraphs: [
-          "AI security is a moving target. Our services anticipate and mitigate new risks such as:",
-        ],
-      },
-      {
-        kind: "cards",
-        items: [
-          {
-            title: "Federated Learning",
-            body: "Protecting data privacy without centralizing sensitive information.",
-          },
-          {
-            title: "Supply Chain Security",
-            body: "Ensuring third-party datasets and pre-trained models are verified and trustworthy.",
-          },
-          {
-            title: "Ethical AI Governance",
-            body: "Embedding fairness, accountability, and compliance into every deployment.",
-          },
-        ],
-      },
-      {
-        kind: "prose",
-        heading: "Why Partner with Eastwards",
-        paragraphs: [
-          "By choosing Eastwards, organizations gain more than technical safeguards, they gain a strategic partner committed to ensuring AI delivers value securely. Our expertise helps businesses:",
-        ],
-      },
-      {
-        kind: "bullets",
-        items: [
-          "Protect intellectual property",
-          "Maintain compliance with global standards",
-          "Build customer trust through secure, ethical AI practices",
-          "Enable innovation without compromising resilience",
-        ],
-      },
-      {
-        kind: "prose",
-        paragraphs: [
-          "AI is the future of business, but without robust security, its promise can quickly turn into risk. At Eastwards, we help enterprises secure their AI systems end-to-end, ensuring they remain reliable, compliant, and future-ready.",
-        ],
-      },
-    ],
+    lede: "Independent AI security for growing businesses in Singapore and worldwide, with every control mapped to IMDA, CSA, the PDPA, OWASP, the NIST AI RMF and ISO/IEC 42001.",
+    blocks: [],
   },
 ];
