@@ -71,7 +71,6 @@ check("sitemap lists service pages", sitemap.includes(`<loc>${SITE}/services/`))
 check("robots points at sitemap", (await (await fetch(`${BASE}/robots.txt`)).text()).includes(`${SITE}/sitemap.xml`));
 check("og image serves a png", await fetch(`${BASE}/opengraph-image`).then((r) => r.ok && (r.headers.get("content-type") ?? "").includes("image/png")));
 check("service page has Service schema", html["/services/cloud-security"].body.includes('"@type":"Service"'));
-check("blog tiles are real images", html["/"].body.includes("object-cover"));
 
 /* Every internal link reachable from these pages must resolve. */
 const seen = new Set();

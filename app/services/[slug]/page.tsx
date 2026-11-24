@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ServicePage from "@/components/services/ServicePage";
+import AiSecurityPage from "@/components/services/AiSecurityPage";
 import { JsonLd } from "@/components/SeoJsonLd";
 import { features, servicePages } from "@/lib/content";
 import { pageMetadata, SITE_NAME, SITE_URL } from "@/lib/seo";
@@ -45,7 +46,7 @@ export default async function ServiceRoute({
           provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
         }}
       />
-      <ServicePage service={service} />
+      {service.slug === "ai-security" ? <AiSecurityPage /> : <ServicePage service={service} />}
     </>
   );
 }

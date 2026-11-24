@@ -1,5 +1,4 @@
 import ServiceHero from "@/components/services/ServiceHero";
-import BlogShowcase from "@/components/BlogShowcase";
 import { LABEL_CHIP } from "@/components/services/label-chip";
 import { InkText } from "@/components/ui/InkText";
 import type { ServiceBlock, ServicePageContent } from "@/lib/content";
@@ -11,8 +10,7 @@ import { LANE } from "@/components/ui/lane";
    (same kind, no heading) merge into the previous section so copy flows as
    one document. Cards render as the mock's hairline grid: outer hairline
    rectangle, internal 1px dividers, boxed number chips, square corners, no
-   card backgrounds. The blog showcase renders after the lane div so its
-   width matches the homepage exactly. */
+   card backgrounds. */
 
 type ProseBlock = Extract<ServiceBlock, { kind: "prose" }>;
 type BulletsBlock = Extract<ServiceBlock, { kind: "bullets" }>;
@@ -238,10 +236,6 @@ export default function ServicePage({ service }: { service: ServicePageContent }
           ))}
         </div>
       </div>
-
-      {/* Related Blogs, the common blog showcase, rendered outside the lane
-          div so it carries the exact homepage width, not a nested lane */}
-      <BlogShowcase />
     </main>
   );
 }

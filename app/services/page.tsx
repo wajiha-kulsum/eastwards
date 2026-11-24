@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import BlogShowcase from "@/components/BlogShowcase";
 import { ServicePathsIndex } from "@/components/ServicePaths";
 import ServiceHero from "@/components/services/ServiceHero";
 import { features } from "@/lib/content";
@@ -27,8 +26,6 @@ export default function ServicesIndexRoute() {
           <ServicePathsIndex />
         </section>
       </div>
-
-      <BlogShowcase />
     </main>
   );
 }
