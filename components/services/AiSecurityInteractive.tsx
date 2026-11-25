@@ -430,11 +430,19 @@ const bandOf = (score: number): Band => (score <= 2 ? "Low" : score <= 4 ? "Medi
 // mixes in more colour so the bands keep their contrast on the dark page
 const mix = (c: string, light: number, dark: number) =>
   `light-dark(color-mix(in oklab, ${c} ${light}%, var(--color-page)), color-mix(in oklab, ${c} ${dark}%, var(--color-page)))`;
+// faint tints so the matrix reads as a quiet grid and only the findings stand out
 const BAND_FILL: Record<Band, string> = {
-  Low: mix("var(--color-primary)", 12, 34),
-  Medium: mix("#F2B13A", 45, 72),
-  High: mix("#EE7A3A", 62, 76),
-  Critical: mix("#E5484D", 80, 82),
+  Low: mix("var(--color-primary)", 7, 14),
+  Medium: mix("#F2B13A", 24, 20),
+  High: mix("#EE7A3A", 32, 27),
+  Critical: mix("#E5484D", 44, 38),
+};
+// solid swatches for the legend and the severity labels
+const BAND_DOT: Record<Band, string> = {
+  Low: "color-mix(in oklab, var(--color-primary) 45%, var(--color-page))",
+  Medium: "#E9A23B",
+  High: "#E8743B",
+  Critical: "#E5484D",
 };
 
 /* One page of a sample Quick-Scan report: the likelihood and impact
@@ -449,101 +457,113 @@ export function ReportSheet() {
     findings.findIndex((f) => f.at[0] === likelihood && f.at[1] === impact);
 
   return (
-    <figure className={`w-full rounded-2xl bg-page p-5 sm:p-7 ${SOFT_SHADOW}`} onMouseLeave={() => setActive(null)}>
+    <figure
+      className={`@container w-full rounded-2xl bg-page p-5 sm:p-7 ${SOFT_SHADOW} dark:shadow-none`}
+      onMouseLeave={() => setActive(null)}
+    >
       {/* report masthead */}
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex items-center justify-between gap-4 border-b border-line pb-4">
         <span className="flex items-center gap-1.5 text-[14px] font-semibold text-ink">
           Eastwards
           <ArrowMark className="h-2.5 w-auto text-primary [&_path]:fill-current" />
           <span className="ml-1.5 font-normal text-body">{heatmap.document}</span>
         </span>
-        <span className={`rounded-full px-2.5 py-0.5 text-[12px] font-medium text-body ${TINT}`}>{heatmap.tag}</span>
+        <span className="text-[12px] font-medium text-body">{heatmap.tag}</span>
       </div>
 
-      {/* the matrix: likelihood up the side, impact along the bottom, legend beside the title */}
-      <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5">
-        <figcaption className="text-[15px] font-semibold text-ink">{heatmap.title}</figcaption>
-        <ul className="flex flex-wrap gap-x-3.5 gap-y-1">
-          {BANDS.map((band) => (
-            <li key={band} className="flex items-center gap-1.5 text-[12px] text-body">
-              <span aria-hidden="true" className="h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: BAND_FILL[band] }} />
-              {band}
+      {/* matrix and findings side by side when the report has the room, stacked when not */}
+      <div className="mt-5 grid gap-6 @[760px]:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] @[760px]:gap-10">
+        <div>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <figcaption className="text-[15px] font-semibold text-ink">{heatmap.title}</figcaption>
+            <ul className="flex flex-wrap gap-x-3 gap-y-1">
+              {BANDS.map((band) => (
+                <li key={band} className="flex items-center gap-1.5 text-[12px] text-body">
+                  <span aria-hidden="true" className="h-2 w-2 rounded-full" style={{ backgroundColor: BAND_DOT[band] }} />
+                  {band}
+                </li>
+              ))}
+            </ul>
+          </div>
+          {/* likelihood up the side, impact along the bottom */}
+          <div className="mt-4 grid grid-cols-[auto_minmax(0,1fr)] gap-x-2.5">
+            <div className="grid grid-rows-4 gap-1">
+              {[...heatmap.likelihoodLevels].reverse().map((level) => (
+                <span key={level} className="flex items-center justify-end text-right text-[11px] leading-tight text-body">
+                  {level}
+                </span>
+              ))}
+            </div>
+            <div className="grid grid-cols-4 grid-rows-4 gap-1">
+              {[4, 3, 2, 1].flatMap((likelihood) =>
+                [1, 2, 3, 4].map((impact) => {
+                  const band = bandOf(likelihood * impact);
+                  const finding = findingAt(likelihood, impact);
+                  const dim = active !== null && finding !== active;
+                  return (
+                    <span
+                      key={`${likelihood}-${impact}`}
+                      title={`${heatmap.likelihoodLevels[likelihood - 1]} likelihood, ${heatmap.impactLevels[impact - 1].toLowerCase()} impact: ${band}`}
+                      onMouseEnter={finding >= 0 ? () => setActive(finding) : undefined}
+                      className={`flex h-9 items-center justify-center rounded-[5px] transition-opacity duration-300 ${dim ? "opacity-40" : "opacity-100"}`}
+                      style={{ backgroundColor: BAND_FILL[band] }}
+                    >
+                      {finding >= 0 ? (
+                        <span
+                          className={`flex h-5 w-5 items-center justify-center rounded-full bg-ink text-[11px] font-semibold text-page transition-transform duration-300 ${EASE} ${
+                            active === finding ? "scale-125" : ""
+                          }`}
+                        >
+                          {finding + 1}
+                        </span>
+                      ) : null}
+                    </span>
+                  );
+                }),
+              )}
+            </div>
+            <span className="self-start text-right text-[11px] font-semibold text-body">{heatmap.likelihood}</span>
+            <div className="mt-1.5 grid grid-cols-4 gap-1">
+              {heatmap.impactLevels.map((level) => (
+                <span key={level} className="text-center text-[11px] leading-tight text-body">
+                  {level}
+                </span>
+              ))}
+            </div>
+            <span />
+            <span className="mt-0.5 text-center text-[11px] font-semibold text-body">{heatmap.impact}</span>
+          </div>
+        </div>
+
+        {/* the findings, worst first: what, how bad, and when to fix it */}
+        <ol className="grid content-start gap-1 border-t border-line pt-4 @[760px]:border-l @[760px]:border-t-0 @[760px]:pl-10 @[760px]:pt-0">
+          {findings.map((f, i) => (
+            <li
+              key={f.label}
+              tabIndex={0}
+              onMouseEnter={() => setActive(i)}
+              onFocus={() => setActive(i)}
+              onBlur={() => setActive(null)}
+              className={`grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 rounded-lg px-2 py-2.5 transition-colors duration-200 ${FOCUS} ${active === i ? TINT : TINT_HOVER}`}
+            >
+              <span className="mt-px flex h-5 w-5 items-center justify-center rounded-full bg-ink text-[11px] font-semibold text-page">{i + 1}</span>
+              {/* title and severity share a line when there is room, else the severity wraps under */}
+              <div className="flex min-w-0 flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <p className="text-[14px] font-medium leading-[1.35] text-ink">{f.label}</p>
+                <p className="flex items-center gap-3 text-[12px] text-body">
+                  <span className="flex items-center gap-1.5">
+                    <span aria-hidden="true" className="h-2 w-2 rounded-full" style={{ backgroundColor: BAND_DOT[f.band] }} />
+                    {f.band}
+                  </span>
+                  <span>
+                    {heatmap.priorityLabel} {f.priority.toLowerCase()}
+                  </span>
+                </p>
+              </div>
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
-      <div className="mt-4 grid grid-cols-[auto_auto_minmax(0,1fr)] gap-x-2.5">
-        <span className="rotate-180 self-center text-[11px] font-semibold text-body [writing-mode:vertical-rl]">{heatmap.likelihood}</span>
-        <div className="grid grid-rows-4 gap-1">
-          {[...heatmap.likelihoodLevels].reverse().map((level) => (
-            <span key={level} className="flex items-center justify-end text-right text-[11px] leading-tight text-body">
-              {level}
-            </span>
-          ))}
-        </div>
-        <div className="grid grid-cols-4 grid-rows-4 gap-1">
-          {[4, 3, 2, 1].flatMap((likelihood) =>
-            [1, 2, 3, 4].map((impact) => {
-              const band = bandOf(likelihood * impact);
-              const finding = findingAt(likelihood, impact);
-              const dim = active !== null && finding !== active;
-              return (
-                <span
-                  key={`${likelihood}-${impact}`}
-                  title={`${heatmap.likelihoodLevels[likelihood - 1]} likelihood, ${heatmap.impactLevels[impact - 1].toLowerCase()} impact: ${band}`}
-                  onMouseEnter={finding >= 0 ? () => setActive(finding) : undefined}
-                  className={`flex h-10 items-center justify-center rounded-md transition-opacity duration-300 sm:h-11 ${dim ? "opacity-40" : "opacity-100"}`}
-                  style={{ backgroundColor: BAND_FILL[band] }}
-                >
-                  {finding >= 0 ? (
-                    <span
-                      className={`flex h-6 w-6 items-center justify-center rounded-full bg-ink text-[12px] font-semibold text-page ring-2 ring-page transition-transform duration-300 ${EASE} ${
-                        active === finding ? "scale-110" : ""
-                      }`}
-                    >
-                      {finding + 1}
-                    </span>
-                  ) : null}
-                </span>
-              );
-            }),
-          )}
-        </div>
-        <div className="col-start-3 mt-1.5 grid grid-cols-4 gap-1">
-          {heatmap.impactLevels.map((level) => (
-            <span key={level} className="text-center text-[11px] leading-tight text-body">
-              {level}
-            </span>
-          ))}
-        </div>
-        <span className="col-start-3 mt-0.5 text-center text-[11px] font-semibold text-body">{heatmap.impact}</span>
-      </div>
-
-      {/* the findings, worst first: what, how bad, and when to fix it */}
-      <ol className="mt-5 grid border-t border-line pt-2">
-        {findings.map((f, i) => (
-          <li
-            key={f.label}
-            tabIndex={0}
-            onMouseEnter={() => setActive(i)}
-            onFocus={() => setActive(i)}
-            onBlur={() => setActive(null)}
-            className={`flex items-center gap-3 rounded-lg px-2 py-2 transition-colors duration-200 ${FOCUS} ${active === i ? TINT : TINT_HOVER}`}
-          >
-            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ink text-[12px] font-semibold text-page">{i + 1}</span>
-            <span className="min-w-0 flex-1 text-[14px] font-medium leading-[1.35] text-ink">{f.label}</span>
-            <span
-              className="shrink-0 rounded-full px-2 py-0.5 text-[12px] font-semibold text-ink"
-              style={{ backgroundColor: BAND_FILL[f.band] }}
-            >
-              {f.band}
-            </span>
-            <span className="hidden w-[118px] shrink-0 text-right text-[13px] text-body sm:block">
-              {heatmap.priorityLabel} <span className="font-semibold text-ink">{f.priority.toLowerCase()}</span>
-            </span>
-          </li>
-        ))}
-      </ol>
     </figure>
   );
 }

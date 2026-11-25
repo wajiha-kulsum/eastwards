@@ -4,8 +4,8 @@
    long-term), and the spaced dashes between a term and its text become the
    title/body split. Rendering lives in components/about.
 
-   Photos are from Unsplash, free license (no credit required); the comment
-   above each names the photographer and source. */
+   Photos are licensed from 123RF (Standard licence); the comment above
+   each gives the 123RF image number. */
 
 type Photo = { src: string; alt: string };
 
@@ -33,9 +33,9 @@ export const about = {
     },
     photo: {
       src: "/images/people.jpg",
-      alt: "Eastwards team working together around a table",
-      width: 1594,
-      height: 1054,
+      alt: "Colleagues talking around a table with laptops in a bright office",
+      width: 2508,
+      height: 1673,
     },
   },
   mission: {
@@ -68,20 +68,20 @@ export const about = {
           {
             title: "Application Development & Product Engineering",
             body: "Cloud-native web and mobile platforms, from discovery to continuous delivery.",
-            // Balázs Kétyi, https://unsplash.com/photos/sScmok4Iq1o
-            image: { src: "/images/about-app-development.jpg", alt: "A hand holding a phone with a mobile app dashboard" },
+            // 123RF image 151299123, Standard licence
+            image: { src: "/images/about-app-development.jpg", alt: "A developer holding a phone with code on screen beside a laptop" },
           },
           {
             title: "Quantum Computing Advisory",
             body: "Feasibility studies and strategic roadmaps for organizations exploring quantum advantage.",
-            // Brecht Corbeel, https://unsplash.com/photos/hEoOAYIo0oU
-            image: { src: "/images/about-quantum.jpg", alt: "A processor chip inside a glowing golden ring" },
+            // 123RF image 263632553, Standard licence
+            image: { src: "/images/about-quantum.jpg", alt: "The gold chandelier of a quantum computer" },
           },
           {
             title: "Data & Artificial Intelligence",
             body: "Data engineering, analytics, and ML operationalization to turn information into strategic assets.",
-            // Carlos Muza, https://unsplash.com/photos/hpjSkU2UYSU
-            image: { src: "/images/about-data-ai.jpg", alt: "A laptop showing an analytics dashboard with charts" },
+            // 123RF image 324145555, Standard licence
+            image: { src: "/images/about-data-ai.jpg", alt: "Analytics charts rising from a laptop keyboard" },
           },
         ],
       },
@@ -93,20 +93,20 @@ export const about = {
           {
             title: "Cybersecurity Services",
             body: "Risk assessments, security engineering, and compliance built into delivery.",
-            // Adi Goldstein, https://unsplash.com/photos/EUsVwEOsblE
-            image: { src: "/images/about-cybersecurity.jpg", alt: "A circuit board lit in teal" },
+            // 123RF image 147736566, Standard licence
+            image: { src: "/images/about-cybersecurity.jpg", alt: "An analyst working late in front of several screens" },
           },
           {
             title: "Infrastructure & Cloud",
             body: "Resilient migrations, hybrid architectures, and cost optimization.",
-            // Taylor Vick, https://unsplash.com/photos/M5tzZtFCOfs
-            image: { src: "/images/about-cloud.jpg", alt: "Server racks with network cables in a data center" },
+            // 123RF image 329458338, Standard licence
+            image: { src: "/images/about-cloud.jpg", alt: "A technician working with a tablet in a server room" },
           },
           {
             title: "Modern Device Management",
             body: "Secure remote work enablement and unified endpoint management.",
-            // Firmbee.com, https://unsplash.com/photos/2mc2B5iX6as
-            image: { src: "/images/about-devices.jpg", alt: "A laptop, a tablet and a phone side by side on a desk" },
+            // 123RF image 166066550, Standard licence
+            image: { src: "/images/about-devices.jpg", alt: "A laptop and a phone side by side on a dark desk" },
           },
         ],
       },
@@ -118,20 +118,20 @@ export const about = {
           {
             title: "Projects & Professional Services",
             body: "Program management and solution architecture to ensure projects land on time and on budget.",
-            // Memento Media, https://unsplash.com/photos/2pPw5Glro5I
-            image: { src: "/images/about-projects.jpg", alt: "A project team meeting around a conference table" },
+            // 123RF image 117980276, Standard licence
+            image: { src: "/images/about-projects.jpg", alt: "A project team working together at an office desk" },
           },
           {
             title: "IT Staffing Services",
             body: "Flexible access to vetted technical talent for specialized or long-term needs.",
-            // Resume Genius, https://unsplash.com/photos/IESB4iFVuzA
-            image: { src: "/images/about-staffing.jpg", alt: "A candidate shaking hands with a hiring manager after an interview" },
+            // 123RF image 332262756, Standard licence
+            image: { src: "/images/about-staffing.jpg", alt: "An applicant shaking hands with a hiring manager after an interview" },
           },
           {
             title: "Digital Support Services",
             body: "24/7 managed services and UX operations to keep systems reliable and user experiences consistent.",
-            // Petr Macháček, https://unsplash.com/photos/BeVGrXEktIk
-            image: { src: "/images/about-support.jpg", alt: "A support headset resting beside a laptop" },
+            // 123RF image 214474664, Standard licence
+            image: { src: "/images/about-support.jpg", alt: "Support staff wearing headsets helping a customer at a screen" },
           },
         ],
       },
@@ -176,14 +176,14 @@ export const about = {
         body: "We embed with your teams to transfer knowledge and build long-term capability.",
       },
     ],
-    // Kaleidico, https://unsplash.com/photos/3V8xo5Gbusk
-    image: { src: "/images/about-approach.jpg", alt: "Two colleagues working through a plan on a whiteboard" },
+    // 123RF image 309008617, Standard licence
+    image: { src: "/images/about-approach.jpg", alt: "A team planning ideas together on a whiteboard" },
   },
   // each step opens the contact form, with the matching requirement chosen where one exists
   nextStep: {
     title: "Take the Next Step.",
-    // Amy Hirschi, https://unsplash.com/photos/JaoVGh5aJ3E
-    image: { src: "/images/about-next-step.jpg", alt: "Two colleagues talking through a plan over a laptop" },
+    // 123RF image 196387655, Standard licence
+    image: { src: "/images/about-next-step.jpg", alt: "Two colleagues reviewing a plan on paper beside a laptop" },
     items: [
       {
         title: "Book a Quantum Readiness Review",

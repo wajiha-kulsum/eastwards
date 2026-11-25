@@ -91,10 +91,6 @@ export function Hero() {
             aria-hidden="true"
           />
           <div className="relative flex h-full flex-col items-start px-6 pt-10 sm:px-[50px] sm:pt-14 md:pt-16 lg:px-[60px] lg:pt-[72px] xl:pt-[88px]">
-            <p className="mb-3 text-small font-medium text-ink sm:mb-4">
-              <span className="text-body">/</span> IT solutions{" "}
-              <span className="text-body">/</span>
-            </p>
             <h1 className="max-w-[950px] text-balance text-display font-bold leading-[1.04] tracking-tight text-ink md:text-[64px] xl:text-display">
               Technology that moves
               <span className="block text-primary">business forward</span>
