@@ -214,9 +214,9 @@ export const aiSecurity = {
 
   quickScan: {
     title: "The AI Security Quick Scan",
-    body: "A fast first engagement. In 3 to 5 business days you know where your AI is exposed, what to fix first and what it will take.",
+    body: "A fast first engagement. In one week you know where your AI is exposed, what to fix first and what it will take.",
     facts: [
-      { label: "Turnaround", value: "3 to 5 business days" },
+      { label: "Turnaround", value: "One week" },
       { label: "Starts with", value: "A 20 minute call" },
     ],
     deliverablesLabel: "What you get",
@@ -264,7 +264,7 @@ export const aiSecurity = {
       },
       {
         q: "How do we get started?",
-        a: "With a 20 minute scoping call. We learn what your AI does, agree the scope, then run the Quick Scan. Within 3 to 5 business days you have the risk heatmap, a prioritized roadmap and a framework gap summary.",
+        a: "With a 20 minute scoping call. We learn what your AI does, agree the scope, then run the Quick Scan. Within one week you have the risk heatmap, a prioritized roadmap and a framework gap summary.",
       },
       {
         q: "How is it priced?",
