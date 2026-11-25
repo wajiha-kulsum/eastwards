@@ -36,15 +36,6 @@ export const hero = {
 export const features = {
   label: "Build for what’s next",
   body: "We bring together AI, data, cloud, and digital engineering to solve complex challenges, modernize businesses, and create lasting impact.",
-  cta: "More",
-  services: [
-    { title: "Application Security", href: "/services/application-security", image: "/images/service-1-exact.jpg" },
-    { title: "Cloud Security", href: "/services/cloud-security", image: "/images/service-2-exact.jpg" },
-    { title: "Quantum Computing", href: "/services/quantum-computing", image: "/images/service-3-exact.jpg" },
-    { title: "IT Staffing Services", href: "/services/it-staffing-services", image: "/images/service-1-exact.jpg" },
-    { title: "Modern Device Management", href: "/services/modern-device-management", image: "/images/service-2-exact.jpg" },
-    { title: "Application Services", href: "/services/application-services", image: "/images/service-3-exact.jpg" },
-  ],
 } as const;
 
 export const coreValues = {
@@ -112,8 +103,7 @@ export const contact = {
       label: "Get Directions",
       href: "https://www.google.com/maps/search/?api=1&query=Chinatown+Point+133+New+Bridge+Road+Singapore+059413",
     },
-    // Anita Kieseler on Pexels, free under the Pexels License (no credit required):
-    // https://www.pexels.com/photo/view-of-the-modern-singapore-skyline-20768136/
+    // 123RF image 156993126, Standard licence
     photo: {
       src: "/images/contact-singapore.jpg",
       alt: "Singapore’s business district across Marina Bay",
@@ -233,7 +223,6 @@ export const footer = {
 export const partners = {
   title: "Partnership",
   lede: "Nobody builds alone. It takes the right people, a fresh perspective, and a shared idea to make something click.",
-  eyebrow: "/ Let’s work together /",
   statement: "Navigating Success :\nYour Strategic\nPartner",
   statementBody:
     "At Eastwards, we believe in building relationships with technology providers, industry experts, and businesses that share our approach to solving problems. Across cloud, security, data, and emerging technologies, we look for ways to combine our strengths and deliver solutions that make a real difference.",

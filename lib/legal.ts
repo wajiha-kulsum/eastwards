@@ -56,9 +56,8 @@ export const terms: LegalDoc = {
     "By accessing or using the website, you agree to these terms. If you do not agree, please do not use the website. Our [Privacy Policy](/privacy) and [Cookie Policy](/cookies) explain how we handle personal data and cookies, and form part of these terms.",
   ],
   numbered: true,
-  // Scott Graham on Unsplash, free under the Unsplash License (no credit required):
-  // https://unsplash.com/photos/man-writing-on-paper-OQMZwNd3ThU
-  image: { src: "/images/legal-terms.jpg", alt: "A person signing a printed document at a desk", width: 1600, height: 1068 },
+  // 123RF image 183998503, Standard licence
+  image: { src: "/images/legal-terms.jpg", alt: "A person filling in paperwork at a desk", width: 2507, height: 1673 },
   highlights: [
     { icon: "landmark", title: "Singapore law", text: "These terms are governed by the laws of Singapore and its courts." },
     {
@@ -315,9 +314,8 @@ export const privacy: LegalDoc = {
     "We handle personal data in line with Singapore’s Personal Data Protection Act 2012 (PDPA), its regulations, and the advisory guidelines of the Personal Data Protection Commission (PDPC). By using our website or giving us your personal data, you acknowledge that we will handle it as described here.",
   ],
   numbered: true,
-  // Philipp Katzenberger on Unsplash, free under the Unsplash License (no credit required):
-  // https://unsplash.com/photos/closeup-photo-of-turned-on-blue-and-white-laptop-computer-iIJrUoeRoCQ
-  image: { src: "/images/legal-privacy.jpg", alt: "A laptop keyboard lit in blue in a dark room", width: 1600, height: 1067 },
+  // 123RF image 176159316, Standard licence
+  image: { src: "/images/legal-privacy.jpg", alt: "A padlock on a cable connected to a laptop", width: 2509, height: 1672 },
   highlights: [
     {
       icon: "ban",
@@ -734,9 +732,8 @@ export const cookiePolicy: LegalDoc = {
     "Singapore does not have a separate cookie law. Where cookies collect personal data, the Personal Data Protection Act 2012 (PDPA) applies, and we follow the Personal Data Protection Commission’s guidance on online activities. Please read this policy together with our [Privacy Policy](/privacy).",
   ],
   numbered: false,
-  // Burst on Unsplash, free under the Unsplash License (no credit required):
-  // https://unsplash.com/photos/person-typing-on-silver-macbook-kUqqaRjJuw0
-  image: { src: "/images/legal-cookies.jpg", alt: "A person typing on a laptop at a bright desk", width: 1600, height: 1067 },
+  // 123RF image 167287103, Standard licence
+  image: { src: "/images/legal-cookies.jpg", alt: "A person using a laptop and phone at a desk", width: 2507, height: 1673 },
   highlights: [
     {
       icon: "shield",

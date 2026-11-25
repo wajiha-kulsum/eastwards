@@ -1,8 +1,7 @@
 import Image from "next/image";
-import { ArrowDown, ArrowUpRight, Check } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Check, Download } from "lucide-react";
 import {
   BODY,
-  CHIP,
   FOCUS,
   FramedPage,
   PAD,
@@ -22,6 +21,7 @@ import {
   LifecycleCards,
   ReportSheet,
 } from "./AiSecurityInteractive";
+import { JsonLd } from "@/components/SeoJsonLd";
 import { aiSecurity } from "@/lib/ai-security";
 
 /* /services/ai-security, on the frame Careers and Responsibility share. One
@@ -39,22 +39,36 @@ const ARROW_NUDGE =
   "h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5";
 
 export default function AiSecurityPage() {
-  const { hero, band, nav, risk, pillars, why, quickScan } = aiSecurity;
+  const { hero, band, nav, risk, pillars, why, quickScan, faq } = aiSecurity;
 
   return (
     <FramedPage>
       <ScrollProgress />
 
-      {/* Hero, in landscape: the headline and its case side by side, then the
-          agent run across the full width beneath them */}
-      <section className={`${PAD} pb-14 pt-2 lg:pt-6`}>
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end lg:gap-14">
-          <div>
+      {/* Hero, as on About: the photo first with the logo arrow and headline
+          on it (bottom left), then the case and both actions below it, then
+          the agent run across the full width */}
+      <section className={`${PAD} pb-14 pt-2 lg:pt-4`}>
+        <div className="relative overflow-hidden rounded-3xl bg-ink">
+          <Image
+            src={hero.image.src}
+            alt={hero.image.alt}
+            width={hero.image.width}
+            height={hero.image.height}
+            priority
+            sizes="(min-width: 2000px) 1900px, 95vw"
+            className="about-hero-settle aspect-[4/5] h-auto w-full object-cover object-[72%_50%] sm:aspect-[3/2] lg:aspect-[12/5]"
+          />
+          {/* scrim behind the headline: from the bottom on phones, from the bottom-left corner on wide screens */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent lg:bg-gradient-to-tr lg:from-black/80 lg:via-black/25 lg:to-transparent"
+          />
+          <div className="absolute inset-x-5 bottom-6 flex flex-col items-start sm:inset-x-8 sm:bottom-8 lg:inset-x-12 lg:bottom-12 lg:right-auto">
             <BlurFade className="reveal-fallback">
-              <span className={CHIP}>{hero.tag}</span>
+              <ArrowMark className="h-9 w-auto text-primary sm:h-11 lg:h-14 [&_path]:fill-current" />
             </BlurFade>
-            {/* sized to its column so each line of the headline stays on one line */}
-            <h1 className="reveal-fallback mt-6 font-display text-display font-bold leading-[1.02] tracking-[-0.03em] text-ink lg:text-[clamp(56px,5.4vw,104px)]">
+            <h1 className="reveal-fallback mt-5 font-display text-display font-bold leading-[1.02] tracking-[-0.03em] text-white lg:mt-7 lg:text-[clamp(56px,5.4vw,104px)]">
               <TextAnimate
                 as="span"
                 by="word"
@@ -62,11 +76,12 @@ export default function AiSecurityPage() {
                 startOnView={false}
                 once
                 duration={0.35}
-                delay={0.05}
+                delay={0.1}
                 className="block"
               >
                 {hero.title}
               </TextAnimate>
+              {/* the brand blue, lifted so it holds its contrast on the dark photo */}
               <TextAnimate
                 as="span"
                 by="word"
@@ -74,15 +89,22 @@ export default function AiSecurityPage() {
                 startOnView={false}
                 once
                 duration={0.4}
-                delay={0.3}
-                className="block text-primary"
+                delay={0.35}
+                className="block text-[color-mix(in_oklab,var(--color-primary)_62%,white)]"
               >
                 {hero.highlight}
               </TextAnimate>
             </h1>
           </div>
-          <BlurFade delay={0.6} className="reveal-fallback lg:pb-2">
-            <p className="max-w-[52ch] text-pretty text-small leading-[1.65] text-ink">
+        </div>
+
+        {/* the case and both actions on the left, the frameworks we map to on the right */}
+        <BlurFade
+          delay={0.45}
+          className="reveal-fallback mt-8 grid gap-6 sm:mt-10 lg:grid-cols-12 lg:items-end lg:gap-10"
+        >
+          <div className="lg:col-span-7">
+            <p className="max-w-[56ch] text-pretty text-[clamp(18px,1.5vw,22px)] leading-[1.55] text-ink">
               {hero.lede}
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
@@ -104,8 +126,11 @@ export default function AiSecurityPage() {
                 />
               </a>
             </div>
-          </BlurFade>
-        </div>
+          </div>
+          <p className="max-w-[48ch] text-pretty text-[15px] leading-[1.6] text-body lg:col-span-5 lg:pb-3">
+            {hero.frameworks}
+          </p>
+        </BlurFade>
         <BlurFade
           delay={0.3}
           direction="up"
@@ -113,11 +138,6 @@ export default function AiSecurityPage() {
           className="reveal-fallback mt-10 lg:mt-12"
         >
           <AgentTrace />
-        </BlurFade>
-        <BlurFade delay={0.7} className="reveal-fallback">
-          <p className="mt-6 max-w-[100ch] text-pretty text-[15px] leading-[1.6] text-body">
-            {hero.frameworks}
-          </p>
         </BlurFade>
       </section>
 
@@ -144,7 +164,7 @@ export default function AiSecurityPage() {
       </section>
 
       <div className="mt-6">
-        <PillarNav label={nav.label} items={nav.items} />
+        <PillarNav label={nav.label} items={nav.items} action={nav.action} />
 
         {/* The risk: the case, then where an agent gets attacked */}
         <section
@@ -257,10 +277,9 @@ export default function AiSecurityPage() {
           className={`mt-4 grid scroll-mt-12 items-center gap-10 overflow-hidden rounded-3xl ${PAD} py-10 sm:mx-6 sm:px-10 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:py-6 lg:gap-12 lg:px-12 ${TINT}`}
         >
           <div>
-            <span className={`${CHIP} bg-page`}>{quickScan.tag}</span>
             <h2
               id="quick-scan-heading"
-              className={`mt-3 ${DISPLAY_H2} lg:text-[clamp(30px,2.8vw,48px)]`}
+              className={`${DISPLAY_H2} lg:text-[clamp(30px,2.8vw,48px)]`}
             >
               {quickScan.title}
             </h2>
@@ -293,15 +312,95 @@ export default function AiSecurityPage() {
                 </li>
               ))}
             </ul>
-            <PrimaryButton
-              href={quickScan.primary.href}
-              className="group mt-6 min-h-12 gap-2 px-7 text-small active:scale-[0.97]"
-            >
-              {quickScan.primary.label}
-              <ArrowUpRight className={ARROW_NUDGE} aria-hidden="true" />
-            </PrimaryButton>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <PrimaryButton
+                href={quickScan.primary.href}
+                className="group min-h-12 gap-2 px-7 text-small active:scale-[0.97]"
+              >
+                {quickScan.primary.label}
+                <ArrowUpRight className={ARROW_NUDGE} aria-hidden="true" />
+              </PrimaryButton>
+              <a
+                href={quickScan.whitepaper.href}
+                download
+                className={`group inline-flex min-h-12 items-center gap-2 rounded-full bg-page px-6 text-small font-semibold text-ink ring-1 ring-inset ring-line-strong transition-[box-shadow,transform] duration-200 hover:ring-ink/40 active:scale-[0.97] ${FOCUS}`}
+              >
+                {quickScan.whitepaper.label}
+                <Download
+                  className="h-4 w-4 transition-transform duration-200 group-hover:translate-y-0.5"
+                  aria-hidden="true"
+                />
+              </a>
+            </div>
           </div>
           <ReportSheet />
+        </section>
+
+        {/* The questions buyers ask before booking, beside one last way in */}
+        <section
+          id="faq"
+          aria-labelledby="faq-heading"
+          className={`grid scroll-mt-12 gap-10 ${PAD} py-12 sm:py-16 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14`}
+        >
+          <JsonLd
+            data={{
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: faq.items.map((item) => ({
+                "@type": "Question",
+                name: item.q,
+                acceptedAnswer: { "@type": "Answer", text: item.a },
+              })),
+            }}
+          />
+          <div className="lg:sticky lg:top-40 lg:self-start">
+            <h2 id="faq-heading" className={DISPLAY_H2}>
+              {faq.lead}
+              <span className="text-body"> {faq.rest}</span>
+            </h2>
+            <PrimaryButton
+              href={faq.cta.href}
+              className="group mt-8 min-h-12 gap-2 px-7 text-small active:scale-[0.97]"
+            >
+              {faq.cta.label}
+              <ArrowUpRight className={ARROW_NUDGE} aria-hidden="true" />
+            </PrimaryButton>
+            <p className="mt-4 max-w-[40ch] text-[15px] leading-[1.6] text-body">
+              {faq.ctaNote}
+            </p>
+          </div>
+          {/* native disclosure: works without scripts and with the keyboard */}
+          <div className="grid gap-2">
+            {faq.items.map((item, i) => (
+              <details
+                key={item.q}
+                open={i === 0}
+                className={`group rounded-2xl transition-colors duration-200 open:bg-[color-mix(in_oklab,var(--color-ink)_4%,var(--color-page))] ${TINT_HOVER}`}
+              >
+                <summary
+                  className={`flex cursor-pointer list-none items-center justify-between gap-6 rounded-2xl px-5 py-4 text-small font-semibold text-ink sm:px-6 [&::-webkit-details-marker]:hidden ${FOCUS}`}
+                >
+                  {item.q}
+                  <span
+                    aria-hidden="true"
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-page text-link transition-transform duration-300 group-open:rotate-45"
+                  >
+                    <svg viewBox="0 0 16 16" className="h-3.5 w-3.5">
+                      <path
+                        d="M8 3v10M3 8h10"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </span>
+                </summary>
+                <p className={`max-w-[62ch] px-5 pb-5 sm:px-6 ${BODY}`}>
+                  {item.a}
+                </p>
+              </details>
+            ))}
+          </div>
         </section>
       </div>
     </FramedPage>

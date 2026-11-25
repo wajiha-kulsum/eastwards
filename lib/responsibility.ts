@@ -14,9 +14,7 @@ export type Pillar = {
   subtitle?: string;
   intro: string;
   items: readonly { term: string; body: string; icon: ItemIcon }[];
-  /* Section photo. The files are placeholders from Unsplash (free license,
-     no credit required) until the client's 123RF Pro picks replace them:
-     save the new photo over the same file name and nothing else changes. */
+  /* Section photo, licensed from 123RF (Standard licence). */
   image: { src: string; alt: string };
 };
 
@@ -38,8 +36,8 @@ export const responsibility = {
   pillars: [
     {
       id: "environmental-stewardship",
-      // Sasun Bughdaryan, https://unsplash.com/photos/SFNUwmLEOis
-      image: { src: "/images/csr-environment.jpg", alt: "Rows of solar panels under a bright blue sky" },
+      // 123RF image 180796534, Standard licence
+      image: { src: "/images/csr-environment.jpg", alt: "Rows of solar panels across a large solar farm" },
       short: "Environment",
       title: "Environmental Stewardship.",
       subtitle: "Sustainable Engineering",
@@ -65,8 +63,8 @@ export const responsibility = {
     },
     {
       id: "bridging-the-digital-divide",
-      // Centre for Ageing Better, https://unsplash.com/photos/ukDFRP2RNA0
-      image: { src: "/images/csr-digital-access.jpg", alt: "A mentor guiding a learner through work on a laptop" },
+      // 123RF image 324682672, Standard licence
+      image: { src: "/images/csr-digital-access.jpg", alt: "A young man helping an older colleague on a laptop" },
       short: "Digital access",
       title: "Bridging the Digital Divide.",
       intro:
@@ -91,8 +89,8 @@ export const responsibility = {
     },
     {
       id: "ethical-innovation",
-      // Growtika, https://unsplash.com/photos/8zB4P0eafrs
-      image: { src: "/images/csr-ethical-ai.jpg", alt: "A glass cloud holding data, secured by a padlock" },
+      // 123RF image 149198628, Standard licence
+      image: { src: "/images/csr-ethical-ai.jpg", alt: "A robot hand reaching toward a human hand" },
       short: "Ethical AI",
       title: "Ethical Innovation & AI Responsibility.",
       intro:
@@ -112,8 +110,8 @@ export const responsibility = {
     },
     {
       id: "diversity-equity-inclusion",
-      // Vitaly Gariev, https://unsplash.com/photos/yd_RKGH_RH4
-      image: { src: "/images/csr-inclusion.jpg", alt: "A diverse team gathered around a laptop in a bright office" },
+      // 123RF image 299699676, Standard licence
+      image: { src: "/images/csr-inclusion.jpg", alt: "A diverse team smiling around a table in a bright office" },
       short: "Inclusion",
       title: "Diversity, Equity, and Inclusion.",
       intro:

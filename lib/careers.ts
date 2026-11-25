@@ -44,13 +44,12 @@ export const careers = {
     // under the tile chart: a fact from the copy, not a claim of our own
     caption: "Over 20 years of experience in global IT delivery.",
   },
-  // Annie Spratt on Unsplash, free under the Unsplash License (no credit required):
-  // https://unsplash.com/photos/group-of-people-using-laptop-computer-QckxruozjRg
+  // 123RF image 308115217, Standard licence
   photo: {
     src: "/images/careers-team.jpg",
     alt: "A team working together on laptops around a shared table",
-    width: 2000,
-    height: 1334,
+    width: 2508,
+    height: 1672,
   },
   /* Facts restated from the copy below, nothing new */
   facts: [
@@ -96,20 +95,20 @@ export const careers = {
       {
         title: "Engineering Excellence",
         body: "We don’t cut corners. We believe in automated testing, CI/CD, and clean, scalable code.",
-        // X, https://unsplash.com/photos/kwzWjTnDPLk (free license)
-        image: { src: "/images/careers-value-engineering.jpg", alt: "Two engineers working through code together on a laptop" },
+        // 123RF image 157976047, Standard licence
+        image: { src: "/images/careers-value-engineering.jpg", alt: "Two developers reviewing code together on a screen" },
       },
       {
         title: "Integrity & Transparency",
         body: "We are honest with our clients and with each other.",
-        // Brooke Cagle, https://unsplash.com/photos/-uHVRvDr7pg (free license)
-        image: { src: "/images/careers-value-integrity.jpg", alt: "Colleagues in an open, friendly conversation around a table" },
+        // 123RF image 153339119, Standard licence
+        image: { src: "/images/careers-value-integrity.jpg", alt: "Colleagues in an open, friendly conversation in the office" },
       },
       {
         title: "Continuous Growth",
         body: "The tech landscape changes weekly; we provide the resources and environment for you to keep your skills sharp.",
-        // Van Tay Media, https://unsplash.com/photos/9buwiennNqg (free license)
-        image: { src: "/images/careers-value-growth.jpg", alt: "A team sketching ideas together in a workshop" },
+        // 123RF image 169232003, Standard licence
+        image: { src: "/images/careers-value-growth.jpg", alt: "Sticky notes full of ideas on a glass wall" },
       },
     ],
   },
@@ -139,13 +138,12 @@ export const careers = {
         email: CAREERS_EMAIL,
       },
     ],
-    // Jud Mackrill on Unsplash, free under the Unsplash License (no credit required):
-    // https://unsplash.com/photos/four-coworkers-smiling-around-laptop-at-table-Of_m3hMsoAA
+    // 123RF image 216534231, Standard licence
     photo: {
       src: "/images/careers-apply.jpg",
-      alt: "Four colleagues smiling around a laptop at a shared desk",
-      width: 1400,
-      height: 933,
+      alt: "Four colleagues smiling around laptops at a shared desk",
+      width: 2508,
+      height: 1672,
     },
     company: location.company,
     address: `${location.street}, ${location.unit} ${location.building}, ${location.postalCode}`,

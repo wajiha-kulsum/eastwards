@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 
 /* Sticky pillar bar: once the visitor is past the overview it stays under
    the site header and marks the pillar being read, so it is always clear
@@ -11,7 +12,18 @@ type Item = { id: string; label: string };
 
 const FOCUS = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
-export function PillarNav({ items, label }: { items: readonly Item[]; label: string }) {
+/* An optional action sits at the right end of the bar, so a page can keep its
+   main call to action in reach the whole way down (hidden on phones, where
+   the bar needs its width for the links). */
+export function PillarNav({
+  items,
+  label,
+  action,
+}: {
+  items: readonly Item[];
+  label: string;
+  action?: { label: string; href: string };
+}) {
   const [active, setActive] = useState(items[0]?.id);
   const rail = useRef<HTMLOListElement>(null);
 
@@ -46,9 +58,9 @@ export function PillarNav({ items, label }: { items: readonly Item[]; label: str
   return (
     <nav
       aria-label={label}
-      className="sticky top-[60px] z-30 bg-page/90 backdrop-blur-sm sm:top-[68px] lg:top-[72px] print:hidden"
+      className="sticky top-[60px] z-30 flex items-center bg-page/90 backdrop-blur-sm sm:top-[68px] lg:top-[72px] print:hidden"
     >
-      <ol ref={rail} className="flex gap-2 overflow-x-auto px-6 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <ol ref={rail} className="flex min-w-0 flex-1 gap-2 overflow-x-auto px-6 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {items.map((item) => {
           const current = item.id === active;
           return (
@@ -66,6 +78,18 @@ export function PillarNav({ items, label }: { items: readonly Item[]; label: str
           );
         })}
       </ol>
+      {action ? (
+        <a
+          href={action.href}
+          className={`group mr-6 hidden min-h-10 shrink-0 items-center gap-1.5 rounded-lg bg-primary px-4 text-small font-semibold text-white transition-[filter,transform] duration-200 hover:brightness-110 active:scale-[0.97] sm:inline-flex ${FOCUS}`}
+        >
+          {action.label}
+          <ArrowUpRight
+            className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            aria-hidden="true"
+          />
+        </a>
+      ) : null}
     </nav>
   );
 }

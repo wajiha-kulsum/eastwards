@@ -22,14 +22,11 @@ export default function PartnersPage() {
     <PageShell>
       <DotHero title={partners.title} lede={partners.lede} />
 
-      {/* Split intro: eyebrow + muted statement left, relationship copy right.
-          Paper: eyebrow 25px y418, statement 60px y461, body 35px/775px y441. */}
+      {/* Split intro: muted statement left, relationship copy right.
+          Paper: statement 60px y461, body 35px/775px y441. */}
       <section className="mt-14 md:grid md:grid-cols-2 md:gap-8">
         <div>
-          <p className="text-small font-semibold tracking-[-0.04em] text-link">
-            {partners.eyebrow}
-          </p>
-          <p className="mt-5 whitespace-pre-line font-display text-lead font-medium tracking-[-0.02em] text-ink">
+          <p className="whitespace-pre-line font-display text-lead font-medium tracking-[-0.02em] text-ink">
             {partners.statement}
           </p>
         </div>
@@ -48,13 +45,14 @@ export default function PartnersPage() {
         <div className="relative mt-10">
           {/* partnership artwork strip behind the top of the cards (lg only:
               below that the strip is too short for the calibrated overlap) */}
+          {/* 123RF image 251699917, Standard licence */}
           <Image
-            src="/images/partnerhip.svg"
+            src="/images/partners-strip.jpg"
             alt=""
-            width={1547}
-            height={232}
-            unoptimized
-            className="hidden h-auto w-full lg:block"
+            width={3547}
+            height={1182}
+            sizes="(min-width: 1024px) 1400px, 100vw"
+            className="hidden aspect-[1547/232] w-full rounded-[30px] object-cover lg:block"
           />
           <div className="relative grid grid-cols-1 gap-6 sm:grid-cols-2 lg:-mt-[150px] lg:grid-cols-3 lg:justify-center lg:gap-6 xl:gap-[74px]">
             {partners.why.advantages.map((advantage, index) => (
